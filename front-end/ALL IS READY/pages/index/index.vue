@@ -1,5 +1,5 @@
 <template>
-
+	<view>{{title}}</view>
 </template>
 
 <script>
