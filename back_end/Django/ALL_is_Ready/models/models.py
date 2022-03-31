@@ -31,14 +31,15 @@ class User(models.Model):
     Header=models.ImageField(verbose_name="用户头像",upload_to='userHeader',default='/static/img/header_default.png')
     EXP=models.IntegerField(verbose_name="用户经验值",default=0)
 
-class Shedule(models.Model):
+class Schedule(models.Model):
     class Meta:
-        db_table = 'Shedule'
+        db_table = 'Schedule'
         verbose_name = '课程表'
         verbose_name_plural = '课程表'
 
-    SheduleID = models.AutoField(verbose_name="所属用户ID", primary_key=True)
+    ScheduleID = models.AutoField(verbose_name="ID", primary_key=True)
     UID = models.IntegerField(verbose_name="所属用户ID")
+    OrgID = models.IntegerField(verbose_name="所属组织ID",default=-1)
     DurationStart=models.IntegerField(verbose_name="课程开始相对时间")
     DurationEnd = models.IntegerField(verbose_name="课程结束相对时间")
     Repeat=models.IntegerField(verbose_name="课程日期")
@@ -65,7 +66,7 @@ class File(models.Model):
         verbose_name = '课程文件'
         verbose_name_plural = '课程文件'
 
-
+    UID=models.IntegerField(verbose_name="所属用户ID",default=-1)
     FID=models.AutoField(verbose_name="文件ID", primary_key=True)
     Fname=models.CharField(max_length=256,verbose_name="文件名")
     Uri=models.CharField(max_length=256,verbose_name="文件相对地址")
@@ -110,7 +111,7 @@ class CommunityTopic(models.Model):
         verbose_name = '社区主题'
         verbose_name_plural = '社区主题'
 
-
+    CommunityID = models.IntegerField(verbose_name="所属社区ID")
     TopicID = models.AutoField(verbose_name="社区主题ID", primary_key=True)
     Creator=models.IntegerField(verbose_name="创建者ID")
     Time=models.DateTimeField(verbose_name="创建时间")
