@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Helvetica; color: #090909; min-height: 16.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #090909}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #090909; min-height: 16.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #797979}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #797979; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #001da4}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #116d12; min-height: 16.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #116d12}
+    span.s1 {color: #001da4}
+    span.s2 {color: #000000}
+    span.s3 {color: #090909}
+    span.s4 {color: #116d12}
+    span.s5 {font: 13.0px 'PingFang SC'; color: #116d12}
+    span.s6 {color: #520087}
+    span.s7 {color: #1233e6}
+    span.s8 {font: 13.0px 'PingFang SC'}
+  </style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p2"><span class="s1">from </span>django.db <span class="s1">import </span>models</p>
+<p class="p3"><br></p>
+<p class="p4"><i># Create your models here.</i></p>
+<p class="p5"><i></i><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">Organization</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table=<span class="s4">'Organization'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">组织</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">组织</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>OrgID=models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">组织</span><span class="s4">ID"</span>,<span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>OrgName=models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">组织名称</span><span class="s4">"</span>,<span class="s6">max_length</span>=<span class="s7">25</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>MonitorID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">班长</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Description=models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">描述</span><span class="s4">"</span>,<span class="s6">max_length</span>=<span class="s7">200</span>)</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">User</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table=<span class="s4">'User'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">用户</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">用户</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>UID = models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">用户</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Uname = models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">用户名</span><span class="s4">"</span>, <span class="s6">max_length</span>=<span class="s7">20</span>, <span class="s6">default</span>=<span class="s4">'unnamed'</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Passwd=models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">密码</span><span class="s4">"</span>,<span class="s6">max_length</span>=<span class="s7">25</span>,<span class="s6">default</span>=<span class="s4">'password-not-set'</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>OrgID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">组织</span><span class="s4">ID"</span>,<span class="s6">default</span>=-<span class="s7">1</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>STUID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">学号</span><span class="s4">"</span>,<span class="s6">default</span>=-<span class="s7">1</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Rank=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">等级</span><span class="s4">"</span>,<span class="s6">default</span>=<span class="s7">0</span>)</p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span>Header=models.ImageField(</span><span class="s6">verbose_name</span><span class="s3">=</span>"<span class="s8">用户头像</span>"<span class="s3">,</span><span class="s6">upload_to</span><span class="s3">=</span>'userHeader'<span class="s3">,</span><span class="s6">default</span><span class="s3">=</span>'/static/img/header_default.png'<span class="s3">)</span></p>
+<p class="p2"><span class="Apple-converted-space">    </span>EXP=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">用户经验值</span><span class="s4">"</span>,<span class="s6">default</span>=<span class="s7">0</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">Schedule</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'Schedule'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">课程表</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">课程表</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>ScheduleID = models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>UID = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属用户</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>OrgID = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属组织</span><span class="s4">ID"</span>,<span class="s6">default</span>=-<span class="s7">1</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>DurationStart=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">课程开始相对时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>DurationEnd = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">课程结束相对时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Repeat=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">课程日期</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>CurName=models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">课程名称</span><span class="s4">"</span>,<span class="s6">max_length</span>=<span class="s7">20</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Tag=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">标签颜色</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">ToDoList</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'ToDoList'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">提醒事项</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">提醒事项</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>ID=models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">事项</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>OrgID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">组织</span><span class="s4">ID"</span>,<span class="s6">default</span>=-<span class="s7">1</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>UID = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属用户</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>ItemName=models.CharField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">计划名称</span><span class="s4">"</span>,<span class="s6">max_length</span>=<span class="s7">20</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Time=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">提醒时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Status=models.BooleanField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">当前状态</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Tag = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">标签颜色</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">File</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'File'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">课程文件</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">课程文件</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>UID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属用户</span><span class="s4">ID"</span>,<span class="s6">default</span>=-<span class="s7">1</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>FID=models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">文件</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Fname=models.CharField(<span class="s6">max_length</span>=<span class="s7">256</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">文件名</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Uri=models.CharField(<span class="s6">max_length</span>=<span class="s7">256</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">文件相对地址</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Theme=models.CharField(<span class="s6">max_length</span>=<span class="s7">15</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">分类名称</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Renewal=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">最后访问时间</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">OrgTask</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'OrhTask'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">班级任务</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">班级任务</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>TaskID=models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">任务</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>OrgID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">组织</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>CID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">绑定课程</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>TimeStart=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">任务开始时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>TimeDue=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">任务到期时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Status=models.BooleanField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">当前状态</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Description=models.CharField(<span class="s6">max_length</span>=<span class="s7">256</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">任务描述</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>TaskName=models.CharField(<span class="s6">max_length</span>=<span class="s7">30</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">任务标题</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Creator=models.CharField(<span class="s6">max_length</span>=<span class="s7">20</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">创建者</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>AckCount=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">已知人数</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">Community</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'Community'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">社区名称</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">社区名称</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>CommunityID = models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">社区</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>CommunityName=models.CharField(<span class="s6">max_length</span>=<span class="s7">20</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">社区名称</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>PostCount=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">帖子数</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>AdministratorID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">管理用户</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Renewal=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">最后更新时间</span><span class="s4">"</span>)</p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span>Poster=models.ImageField(</span><span class="s6">verbose_name</span><span class="s3">=</span>"<span class="s8">社区封面图像</span>"<span class="s3">,</span><span class="s6">upload_to</span><span class="s3">=</span>'communityHeader'<span class="s3">,</span><span class="s6">default</span><span class="s3">=</span>'/static/img/header_default.png'<span class="s3">)</span></p>
+<p class="p2"><span class="Apple-converted-space">    </span>Description = models.CharField(<span class="s6">max_length</span>=<span class="s7">256</span>, <span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">社区简介</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">CommunityTopic</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'CommunityTopic'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">社区主题</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">社区主题</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>CommunityID = models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属社区</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>TopicID = models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">社区主题</span><span class="s4">ID"</span>, <span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Creator=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">创建者</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Time=models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">创建时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>HasImage=models.BooleanField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">是否含有图片</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Title=models.CharField(<span class="s6">max_length</span>=<span class="s7">35</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">主题标题</span><span class="s4">"</span>)</p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span>ImageUri=models.ImageField(</span><span class="s6">verbose_name</span><span class="s3">=</span>"<span class="s8">话题封面图像</span>"<span class="s3">,</span><span class="s6">upload_to</span><span class="s3">=</span>'TopicHeader'<span class="s3">,</span><span class="s6">default</span><span class="s3">=</span>'/static/img/header_default.png'<span class="s3">)</span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">TopicPost</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'TopicPost'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">主题帖子</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">主题帖子</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>PostID=models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">主题帖子</span><span class="s4">ID"</span>,<span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>TopicID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">社区主题</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>UID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">用户</span><span class="s4">ID"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Time = models.DateTimeField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">创建时间</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>HasImage = models.BooleanField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">是否含有图片</span><span class="s4">"</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>Content=models.CharField(<span class="s6">max_length</span>=<span class="s7">300</span>,<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">帖子内容</span><span class="s4">"</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">class </span><span class="s2">PostImage</span>(models.Model):</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>class <span class="s2">Meta</span><span class="s3">:</span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>db_table = <span class="s4">'PostImage'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name = <span class="s4">'</span><span class="s5">帖子图片</span><span class="s4">'</span></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">        </span></span>verbose_name_plural = <span class="s4">'</span><span class="s5">帖子图片</span><span class="s4">'</span></p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span>ID = models.AutoField(<span class="s6">verbose_name</span>=<span class="s4">"ID"</span>,<span class="s6">primary_key</span>=<span class="s1">True</span>)</p>
+<p class="p2"><span class="Apple-converted-space">    </span>PostID=models.IntegerField(<span class="s6">verbose_name</span>=<span class="s4">"</span><span class="s5">所属帖子</span><span class="s4">ID"</span>)</p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span>Uri=models.ImageField(</span><span class="s6">verbose_name</span><span class="s3">=</span>"<span class="s8">帖子图像</span>"<span class="s3">,</span><span class="s6">upload_to</span><span class="s3">=</span>'PostImage'<span class="s3">,</span><span class="s6">default</span><span class="s3">=</span>'/static/img/header_default.png'<span class="s3">)</span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+</body>
+</html>
