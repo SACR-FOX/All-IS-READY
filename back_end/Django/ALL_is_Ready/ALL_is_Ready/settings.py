@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'UserProfile',
     'models',
-    'rest_framework'
+    'rest_framework',
+    'Schedule',
+    'experiment'
 ]
 
 MIDDLEWARE = [

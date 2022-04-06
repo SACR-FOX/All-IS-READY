@@ -38,13 +38,14 @@ class Schedule(models.Model):
         verbose_name_plural = '课程表'
 
     ScheduleID = models.AutoField(verbose_name="ID", primary_key=True)
-    UID = models.IntegerField(verbose_name="所属用户ID")
+    UID = models.IntegerField(verbose_name="所属用户ID",default=-1)
     OrgID = models.IntegerField(verbose_name="所属组织ID",default=-1)
     DurationStart=models.IntegerField(verbose_name="课程开始相对时间")
     DurationEnd = models.IntegerField(verbose_name="课程结束相对时间")
-    Repeat=models.IntegerField(verbose_name="课程日期")
+    Day=models.IntegerField(verbose_name="课程日期")
     CurName=models.CharField(verbose_name="课程名称",max_length=20)
     Tag=models.IntegerField(verbose_name="标签颜色")
+    Location=models.CharField(verbose_name="上课地点",max_length=20,default="")
 
 class ToDoList(models.Model):
     class Meta:
@@ -58,7 +59,7 @@ class ToDoList(models.Model):
     ItemName=models.CharField(verbose_name="计划名称",max_length=20)
     Time=models.DateTimeField(verbose_name="提醒时间")
     Status=models.BooleanField(verbose_name="当前状态")
-    Tag = models.IntegerField(verbose_name="标签颜色")
+    Tag = models.IntegerField(verbose_name="标签颜色",default=0)
 
 class File(models.Model):
     class Meta:

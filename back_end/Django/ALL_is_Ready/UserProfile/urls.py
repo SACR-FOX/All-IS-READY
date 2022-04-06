@@ -4,7 +4,7 @@ from rest_framework import routers
 
 router=routers.SimpleRouter()
 router.register('Detail',views.UserDetail,basename="UserDetail")
-router.register('Action',views.UserDetail,basename="UserAction")
+# router.register('Action',views.UserDetail,basename="UserAction")
 
 
 
