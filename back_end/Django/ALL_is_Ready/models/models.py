@@ -46,6 +46,7 @@ class Schedule(models.Model):
     CurName=models.CharField(verbose_name="课程名称",max_length=20)
     Tag=models.IntegerField(verbose_name="标签颜色")
     Location=models.CharField(verbose_name="上课地点",max_length=20,default="")
+    UUID=models.UUIDField(verbose_name="uuid",default="51a5e3e7-d30f-4b43-9c84-bf01632c6022")
 
 class ToDoList(models.Model):
     class Meta:
@@ -57,9 +58,10 @@ class ToDoList(models.Model):
     OrgID=models.IntegerField(verbose_name="组织ID",default=-1)
     UID = models.IntegerField(verbose_name="所属用户ID")
     ItemName=models.CharField(verbose_name="计划名称",max_length=20)
-    Time=models.DateTimeField(verbose_name="提醒时间")
+    Time=models.IntegerField(verbose_name="提醒时间",default=0)
     Status=models.BooleanField(verbose_name="当前状态")
     Tag = models.IntegerField(verbose_name="标签颜色",default=0)
+    UUID = models.UUIDField(verbose_name="uuid",default="51a5e3e7-d30f-4b43-9c84-bf01632c6022")
 
 class File(models.Model):
     class Meta:

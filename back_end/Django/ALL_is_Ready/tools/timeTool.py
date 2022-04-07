@@ -20,5 +20,9 @@ class switcher:
         return past
 
     def due(self,end):
-       return (end-int(time.time()))
+        return (end-self.secFrom0())
 
+    def daySec(self):
+        now = int(time.time())
+        day_time = now - now % 86400 + time.timezone
+        return int(day_time)

@@ -11,9 +11,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.views import APIView
 from datetime import datetime
-from tools.scheduleTool import switcher
+from tools.timeTool import switcher
 from django.core.cache import cache
-
+import uuid
 
 
 class Schedule_today(ModelViewSet):
@@ -34,7 +34,6 @@ class Schedule_today(ModelViewSet):
             Dict["CurName"]=i.CurName
             Dict["Location"]=i.Location
             Dict["Tag"]=i.Tag
-            Dict["Day"]=i.Day
             Dict["Start"]=Switcher.sec2hm(i.DurationStart)
             Dict["End"] =Switcher.sec2hm(i.DurationEnd)
             data.append(Dict)
@@ -49,13 +48,13 @@ class Schedule_next(ModelViewSet):
     @action(methods=['get'], detail=True, url_path="next")
     def Next(self, request, UID):
         token =  "ScheduleNext"+str(UID)
-        print(token)
 
         try:
-            data = json.load(cache.get(token))
-            print(data)
+            data = cache.get(token)
             if data:
-                return Response(data)
+                # print("hit")
+                return Response(json.loads(data))
+
         except Exception as e:
             print(e)
 
@@ -69,6 +68,7 @@ class Schedule_next(ModelViewSet):
         Dict["Location"] = self.queryset.first().Location
         Dict["Tag"] = self.queryset.first().Tag
         data.append(Dict)
+
         try:
             cache.set(token,json.dumps(data),Switcher.due(self.queryset.first().DurationEnd))
         except Exception as e:
@@ -104,14 +104,18 @@ class GroupImport(APIView):  #按组织批量导入
 
         orgID = request.data.get("OrgID")
         UID = request.data.get("UID")
-        print(orgID)
         try:
             sc=Schedule.objects.filter(Q(OrgID__exact=orgID),Q(UID__exact=-1))
             for i in sc:
-                Schedule.objects.create(UID=UID,OrgID=orgID,DurationStart=i.DurationStart,
-                                        DurationEnd = i.DurationEnd,Repeat=i.Repeat,CurName=i.CurName,
-                                        Tag=i.Tag
-                                        )
+
+                check=Schedule.objects.filter(Q(UUID__exact=i.UUID),Q(UID__exact=UID))
+                if check.exists():
+                    print("exists")
+                else:
+                    Schedule.objects.create(UID=UID,OrgID=orgID,DurationStart=i.DurationStart,
+                                            DurationEnd = i.DurationEnd,Day=i.Day,CurName=i.CurName,
+                                            Tag=i.Tag,UUID=i.UUID,Location=i.Location
+                                            )
 
         except Exception as e:
             print(e)

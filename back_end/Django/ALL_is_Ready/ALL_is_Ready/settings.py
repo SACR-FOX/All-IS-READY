@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'models',
     'rest_framework',
     'Schedule',
-    'experiment'
+    'experiment',
+    'ToDoList',
+
 ]
 
 MIDDLEWARE = [
