@@ -1,6 +1,88 @@
 <template>
 	<view>
-		<u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
+		<view class="card_top" style="display: flex; margin-top: 40rpx;">
+			<u-avatar src="../../static/avatar.jpg" style="margin-left: 50rpx; margin-top: 30rpx;"></u-avatar>
+			<view style="">
+				<view style="text-align: right; margin-left: 170px;display: flex;">
+					<view style="margin-top: 30rpx;">今天学习了:</view>
+					<view style="font-size: 60rpx;">6</view>
+					<view style="margin-top: 30rpx;">小时</view>
+				</view>
+				<view style="text-align: right;">TOP:10%</view>
+			</view>
+		</view>
+		
+		<view class="content">
+			<view class="col">
+				<view class="card">
+					<view style="color: #E456z56;">星期四</view>
+					<view style="font-size: 50px;">10</view>
+					<view style="">今天有一项待做</view>
+				</view>
+				
+				<view class="card">
+					<view>下一节</view>
+					<view style="font-size: 40rpx; font-weight: bold; margin-top: 30rpx;">操作系统</view>
+					<view style="font-weight: bold; margin-top: 30rpx;">C308 13:40</view>
+				</view>
+				
+			</view>
+		</view>
+		
+		<view class="content">
+			<view class="col">
+				<view class="card">
+					<image src="../../static/jidnutiao.png" style="width: 270rpx; height: 270rpx; margin-top: 15rpx;"></image>
+				</view>
+				
+				<view class="card">
+					<view style="margin-top: 30rpx;">班级动态</view>
+					<view style="margin-top: 60rpx; font-size: 50rpx; font-weight: bold;">无事发生</view>
+				</view>
+				
+			</view>
+		</view>
+		
+		<view class="card_bottom">
+			<scroll-view scroll-x="true" style="flex-direction: row; white-space: nowrap;">
+				<view class="card_doc">
+					<image src="../../static/pdf_icon.png" 
+					style="width: 170rpx; height: 170rpx;"
+					mode="scaleToFill"></image>
+					<view style="font-weight: bolder;">编译原理原书</view>
+					<view style="font-weight: bolder;">1.0M</view>
+				</view>
+				<view class="card_doc">
+					<image src="../../static/pdf_icon.png" 
+					style="width: 170rpx; height: 170rpx;"
+					mode="scaleToFill"></image>
+					<view style="font-weight: bolder;">编译原理原书</view>
+					<view style="font-weight: bolder;">1.0M</view>
+				</view>
+				<view class="card_doc">
+					<image src="../../static/pdf_icon.png" 
+					style="width: 170rpx; height: 170rpx;"
+					mode="scaleToFill"></image>
+					<view style="font-weight: bolder;">编译原理原书</view>
+					<view style="font-weight: bolder;">1.0M</view>
+				</view>
+				<view class="card_doc">
+					<image src="../../static/pdf_icon.png" 
+					style="width: 170rpx; height: 170rpx;"
+					mode="scaleToFill"></image>
+					<view style="font-weight: bolder;">编译原理原书</view>
+					<view style="font-weight: bolder;">1.0M</view>
+				</view>
+				<view class="card_doc">
+					<image src="../../static/pdf_icon.png" 
+					style="width: 170rpx; height: 170rpx;"
+					mode="scaleToFill"></image>
+					<view style="font-weight: bolder;">编译原理原书</view>
+					<view style="font-weight: bolder;">1.0M</view>
+				</view>
+			</scroll-view>
+		</view>
+		
 	</view>
 </template>
 
@@ -8,12 +90,8 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
-				keyword: '遥看瀑布挂前川'
-				}
-		},
-		onLoad() {
 
+				}
 		},
 		methods: {
 
@@ -22,5 +100,54 @@
 </script>
 
 <style lang="scss">
-
+	.content{
+		width: 100%;
+		height: auto;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 0;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		
+	}
+	.col{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin-top: 30px;
+	}
+	.card {
+		width: 300rpx;
+		height: 300rpx;
+		margin: 15px;
+		background-color: rgba(241, 238, 236, 0.8);
+		border-radius: 15px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.card_top{
+		background-color: rgba(241, 238, 236, 0.8);
+		border-radius: 30rpx;
+	}
+	.card_bottom{
+		width: 700rpx;
+		height: 300rpx;
+		margin: 10px;
+		background-color: rgba(241, 238, 236, 0.8);
+		border-radius: 15px;
+	}
+	.card_doc{
+		width: 260rpx;
+		height: 260rpx;
+		margin-top: 25rpx;
+		margin-left: 25rpx;
+		display: inline-block;
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 30rpx;
+	}
 </style>
