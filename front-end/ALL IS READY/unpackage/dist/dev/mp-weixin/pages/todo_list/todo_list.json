@@ -4,9 +4,7 @@
   "usingComponents": {
     "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
     "u-text": "/uni_modules/uview-ui/components/u-text/u-text",
-    "u-list": "/uni_modules/uview-ui/components/u-list/u-list",
     "uni-swipe-action": "/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action",
-    "uni-swipe-action-item": "/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item",
-    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+    "uni-swipe-action-item": "/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item"
   }
 }

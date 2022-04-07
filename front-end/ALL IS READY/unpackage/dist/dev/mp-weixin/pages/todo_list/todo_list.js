@@ -101,17 +101,11 @@ try {
     uText: function() {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-text/u-text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-text/u-text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-text/u-text.vue */ 181))
     },
-    uList: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list/u-list.vue */ 192))
-    },
     uniSwipeAction: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action */ "uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue */ 200))
     },
     uniSwipeActionItem: function() {
       return Promise.all(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue */ 205))
-    },
-    uButton: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-button/u-button.vue */ 218))
     }
   }
 } catch (e) {
@@ -226,6 +220,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -239,13 +237,22 @@ var _default =
       {
         text: "删除",
         style: {
-          backgroundColor: 'rgba(255,58,49,0.8)' } }]
+          backgroundColor: 'rgba(255,58,49,0.8)' } }],
 
 
 
 
-      // "show" : false,
-    };
+
+      //分类菜单显示控制
+      "show": false,
+      "classify_list": ['第一类', '第二类', '第三类'],
+
+      //分类控制变量
+      // "classify" : -1
+
+      //控制加载
+      "load": false };
+
   },
   methods: {
 
@@ -278,24 +285,52 @@ var _default =
     // 	}, 1000)
     // },
 
+    showDetial: function showDetial(index) {
+      var that = this;
+      uni.navigateTo({
+        url: "./list_detial?id=" + that.list[index].toString() });
+
+
+    },
+
     addItem: function addItem() {
       var that = this;
+      that.load = true;
+
       uni.request({
         url: "http://127.0.0.1:8080",
         success: function success(res) {
           console.log("success");
+          that.load = false;
           var num = that.list.length;
           var item = num + 1;
           that.list.splice(0, 0, item);
         },
         fail: function fail(res) {
           console.log("fail");
+          console.log("success");
+          that.load = false;
+          var num = that.list.length;
+          var item = num + 1;
+          that.list.splice(0, 0, item);
         } });
 
 
     },
 
     classify: function classify() {
+      var that = this;
+      // that.show = true
+
+      uni.showActionSheet({
+        itemList: that.classify_list,
+        success: function success(res) {
+          console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+        },
+        fail: function fail(res) {
+          console.log(res.errMsg);
+        } });
+
       console.log("分类");
     } },
 

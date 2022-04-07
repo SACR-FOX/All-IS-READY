@@ -7,9 +7,9 @@
 					<view class="icon_bac" style="background-color: #3C9CFF;">
 						<u-icon name="calendar" color="#FFFFFF"size="23"> </u-icon>
 					</view>
-					<u-text bold="" :text="today" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;" ></u-text>
+					<u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text>
 				</view>
-				<u-text text="今天" size="18px" type="" bold style="margin-left: 13px; margin-bottom: 10px;"></u-text>
+				<u-text text="今天" size="18px" type="" bold style="margin-left: 15px; margin-bottom: 10px;"></u-text>
 			</view>
 			<view class="top_button">
 				<view class="topB_icon">
@@ -28,8 +28,8 @@
 				<u-icon name="list" style="margin-right: 20px;" size="25px" bold @click="classify()" ></u-icon>
 			</view>
 			<view  style="display: flex; flex-direction: column;justify-content: center;">
-				<u-list style=" height: 640px;" >
-					<uni-swipe-action style="margin-left: 0px; height: 640px;">
+				<scroll-view style=" height: 615px;"  :scroll-top="scrollTop" scroll-y="true">
+					<uni-swipe-action style="margin-left: 0px; height: 615px;">
 						<uni-swipe-action-item  class="list_item"
 												v-for="(item,index) in list" 
 												:right-options="options"
@@ -40,16 +40,20 @@
 							</view>
 						</uni-swipe-action-item>
 					</uni-swipe-action>
-				</u-list>
+				</scroll-view>
 				
 			</view>
 		</view>
 		<!-- 添加按钮 -->
 		<view class="buttom" >
-			<u-button text="添加事项" plain="" shape="circle" 
-			style="width: 360px; height: 55px;" size="50px"
+<!-- 			<u-button text="添加事项" plain="" shape="circle" 
+			style="width: 360px; height: 55px;" size="250px"
 			@click="addItem()"
-			></u-button>
+			></u-button> -->
+			<button type="default"
+			style="width: 360px; height: 55px; align-items: center;" size="200px"
+			@click="addItem()" :loading="load" >添加事项</button>
+			
 		</view>
 	</view>
 	
@@ -74,7 +78,16 @@
 					}
 				],
 				
-				// "show" : false,
+				
+				//分类菜单显示控制
+				 "show" : false,
+				 "classify_list" : ['第一类', '第二类', '第三类'],
+				 
+				 //分类控制变量
+				 // "classify" : -1
+				 
+				 //控制加载
+				 "load" : false 
 			}
 		},
 		methods: {
@@ -118,22 +131,42 @@
 			
 			addItem(){
 				let that = this
+				that.load = true
+				
 				uni.request({
 					url:"http://127.0.0.1:8080",
 					success(res)  {
 						console.log("success")
+						that.load = false
 						var num = that.list.length
 						var item = num+1;
 						that.list.splice(0,0,item)
 					},
 					fail(res) {
 						console.log("fail")
+						console.log("success")
+						that.load = false
+						var num = that.list.length
+						var item = num+1;
+						that.list.splice(0,0,item)
 					}
 				})
 				
 			},
 			
 			classify(){
+				let that = this;
+				// that.show = true
+
+				uni.showActionSheet({
+					itemList: that.classify_list,
+						success: function (res) {
+							console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+						},
+						fail: function (res) {
+							console.log(res.errMsg);
+						}
+				})
 				console.log("分类")
 			}
 		},
@@ -159,7 +192,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		margin-top: 10px;
+		margin-top: 40px;
 	}
 	.top_button{
 		height: 80px;
