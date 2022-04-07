@@ -2,6 +2,6 @@
   "navigationBarTitleText": "uni-app",
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-search": "/uni_modules/uview-ui/components/u-search/u-search"
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
   }
 }
