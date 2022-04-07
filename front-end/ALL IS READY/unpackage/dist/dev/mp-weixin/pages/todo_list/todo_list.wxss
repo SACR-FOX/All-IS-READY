@@ -1,0 +1,76 @@
+
+.background{
+	height: 100%;
+	width: 100%;
+	background-color: #F1F1F1 ;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.topbar{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+}
+.top_button{
+	height: 80px;
+	width: 180px;
+	background-color: #FFFFFF;
+	margin: 10px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+.icon_bac{
+	width: 30px;
+	height: 30px;
+	border-radius: 90%;
+	margin: 17px;
+	margin-top: 10px;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+.topB_icon{
+	display: flex;
+	flex-direction: row;
+}
+.list{
+}
+.center_top{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 15px;
+	justify-content: center;
+}
+.list_item{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #FFFFFF;
+	width: 370px;
+	height: 60px;
+	border-radius: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.tag{
+	background-color: #3C9CFF;
+	height: 26px;
+	width: 26px;
+	margin: 10px;
+	margin-left: 15px;
+	border-radius: 90%;
+	border: 3px solid #F1F1F1;
+}
+.buttom{
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+

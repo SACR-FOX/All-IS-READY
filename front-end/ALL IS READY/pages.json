@@ -8,19 +8,44 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"app-plus": {
-								"titleNView": false
-							}
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
 			}
-		},
-		{
-			"path":"pages/classSchedule/classSchedule"
 		}
-	],
+	    ,{
+            "path" : "pages/todo_list/todo_list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/text/text",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/todo_list/list_detial",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		// "navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle":"custom"
 	}
 }
