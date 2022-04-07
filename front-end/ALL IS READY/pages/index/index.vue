@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
+		<button @click="click()" >aaaaaaaa</button>
 	</view>
 </template>
 
@@ -13,10 +14,15 @@
 				}
 		},
 		onLoad() {
-
+			
 		},
 		methods: {
-
+			click(){
+				uni.navigateTo({
+					url:"../todo_list/todo_list"
+				})
+			}
+			
 		}
 	}
 </script>
