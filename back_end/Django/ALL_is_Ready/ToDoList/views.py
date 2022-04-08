@@ -17,26 +17,21 @@ import uuid
 
 Switcher=switcher()
 
-class ListAction(ModelViewSet):# 增删
+class ListAction(ModelViewSet):# 增删改
 
-    queryset = ToDoList.objects.all()
-    serializer_class = ToDoListSerializer
-    lookup_field = "UID"
-
-
-class ListModify(ModelViewSet):
-    #改
     queryset = ToDoList.objects.all()
     serializer_class = ToDoListSerializer
     lookup_field = "ID"
 
-    @action(methods=['put'],detail=True,url_path="Modify")
-    def Modify(self,request,ID):
-        TDL=ToDoList.objects.get(ID__exact=ID)
-        ser=ToDoListSerializer(instance=TDL,data=request.data,partial=True)
+    @action(methods=['put'], detail=True, url_path="Modify")
+    def Modify(self, request, ID):
+        TDL = ToDoList.objects.get(ID__exact=ID)
+        ser = ToDoListSerializer(instance=TDL, data=request.data, partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
         return Response(ser.data)
+
+
 
 class ListAll(APIView):
 

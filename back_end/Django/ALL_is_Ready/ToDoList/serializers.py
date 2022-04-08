@@ -30,6 +30,12 @@ class ToDoListSerializer(serializers.ModelSerializer):
             "UUID": {
                 "required": True,
                 'write_only': True
+            },
+            "ItemName":{
+                "required": True,
+                "allow_null": False,
+                "allow_blank": False,
+                "max_length": 20
             }
         }
 

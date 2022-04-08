@@ -1,6 +1,5 @@
 import json
 import time
-
 from django.db.models import Q
 
 from models.models import Schedule,User
@@ -78,14 +77,7 @@ class Schedule_next(ModelViewSet):
 
 
 class ScheduleAction(ModelViewSet):
- #增删查
-    queryset = Schedule.objects.all()
-    serializer_class = ScheduleSerializer
-    lookup_field = "ScheduleID"
-
-class ScheduleModify(ModelViewSet):
-    #改
-
+ #增删改
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
     lookup_field = "ScheduleID"
@@ -97,6 +89,8 @@ class ScheduleModify(ModelViewSet):
         ser.is_valid(raise_exception=True)
         ser.save()
         return Response(ser.data)
+
+
 
 class GroupImport(APIView):  #按组织批量导入
 

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Schedule',
     'experiment',
     'ToDoList',
+    'Organization'
 
 ]
 

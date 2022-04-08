@@ -4,7 +4,6 @@ from rest_framework import routers
 
 router=routers.SimpleRouter()
 router.register('Action',views.ScheduleAction,basename="ScheduleAction")
-router.register('',views.ScheduleModify,basename="ScheduleModify")
 router.register('',views.Schedule_today,basename="Today")
 router.register('',views.Schedule_next,basename="Next")
 urlpatterns = [

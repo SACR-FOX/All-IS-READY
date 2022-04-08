@@ -4,9 +4,7 @@ from rest_framework import routers
 
 router=routers.SimpleRouter()
 router.register('Action',views.ListAction,basename="ListAction")
-router.register('',views.ListModify,basename="ListModify")
 
-# router.register('',views.Schedule_next,basename="Next")
 urlpatterns = [
 
     path('All',views.ListAll.as_view(),name="所有计划"),
