@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/Schedule/',include('Schedule.urls')),
     path('test/',include('experiment.urls')),
     path('api/ToDoList/',include('ToDoList.urls')),
-    path('api/Organization/',include('Organization.urls'))
+    path('api/Organization/',include('Organization.urls')),
+    path('api/Community/', include('Community.urls'))
 ]

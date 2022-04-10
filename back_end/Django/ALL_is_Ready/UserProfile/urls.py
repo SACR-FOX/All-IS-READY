@@ -4,13 +4,13 @@ from rest_framework import routers
 
 router=routers.SimpleRouter()
 router.register('Detail',views.UserDetail,basename="UserDetail")
-# router.register('Action',views.UserDetail,basename="UserAction")
+# router.register('Login',views.UserLogin,basename="UserLogin")
 
 
 
 
 urlpatterns = [
 
-    # path('register/<UID>',views.UserAPI.as_view(),name="用户注册"),
+    path('Login',views.UserLogin.as_view(),name="用户登录"),
 
 ]+router.urls

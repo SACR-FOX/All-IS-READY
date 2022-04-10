@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'Schedule',
     'experiment',
     'ToDoList',
-    'Organization'
+    'Organization',
+    'Community'
 
 ]
 
@@ -161,4 +162,7 @@ CACHES = {
             # "PASSWORD": "123",
         }
     }
+}
+REST_FRAMEWORK={
+    "DEFAULT_AUTHENTICATION_CLASSES":['tools.verify.JWT_verify']
 }
