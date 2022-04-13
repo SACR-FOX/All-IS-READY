@@ -9,3 +9,7 @@ class test(APIView):
         days=request.data.get('days').split(",")
         print(days[3])
         return Response("ok")
+
+    def get(self,request):
+        print(request.user['Uname'])
+        return Response({"result":"ok"})

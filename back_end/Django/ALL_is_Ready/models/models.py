@@ -110,9 +110,9 @@ class Community(models.Model):
 
     CommunityID = models.AutoField(verbose_name="社区ID", primary_key=True)
     CommunityName=models.CharField(max_length=20,verbose_name="社区名称")
-    PostCount=models.IntegerField(verbose_name="帖子数")
+    PostCount=models.IntegerField(verbose_name="帖子数",default=0)
     AdministratorID=models.IntegerField(verbose_name="管理用户ID")
-    Renewal=models.IntegerField(verbose_name="最后更新时间")
+    Renewal=models.IntegerField(verbose_name="最后更新时间",default=0)
     Poster=models.ImageField(verbose_name="社区封面图像",upload_to='communityHeader',default='/static/img/header_default.png')
     Description = models.CharField(max_length=256, verbose_name="社区简介")
 
@@ -125,8 +125,8 @@ class CommunityTopic(models.Model):
     CommunityID = models.IntegerField(verbose_name="所属社区ID")
     TopicID = models.AutoField(verbose_name="社区主题ID", primary_key=True)
     Creator=models.IntegerField(verbose_name="创建者ID")
-    Time=models.DateTimeField(verbose_name="创建时间")
-    HasImage=models.BooleanField(verbose_name="是否含有图片")
+    Time=models.IntegerField(verbose_name="创建时间")
+    HasImage=models.BooleanField(verbose_name="是否含有图片",default=False)
     Title=models.CharField(max_length=35,verbose_name="主题标题")
     ImageUri=models.ImageField(verbose_name="话题封面图像",upload_to='TopicHeader',default='/static/img/header_default.png')
 
@@ -139,7 +139,7 @@ class TopicPost(models.Model):
     PostID=models.AutoField(verbose_name="主题帖子ID",primary_key=True)
     TopicID=models.IntegerField(verbose_name="社区主题ID")
     UID=models.IntegerField(verbose_name="用户ID")
-    Time = models.DateTimeField(verbose_name="创建时间")
+    Time = models.IntegerField(verbose_name="创建时间")
     HasImage = models.BooleanField(verbose_name="是否含有图片")
     Content=models.CharField(max_length=300,verbose_name="帖子内容")
 

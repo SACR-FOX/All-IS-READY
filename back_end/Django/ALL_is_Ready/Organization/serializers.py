@@ -25,6 +25,14 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
         }
 
+    def validate_OrgName(self, data):
+        try:
+            Organization.objects.get(OrgName=data)
+        except Exception:
+            return data
+
+        raise serializers.ValidationError(detail="组织名已存在")
+
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrgTask
