@@ -1,5 +1,32 @@
 <template>
 	<view class="background" >
+		<!-- 弹出组件 -->
+		
+		<u-popup @close="closePop()" @open="openPop()"
+		:show="popupShow" mode="bottom" :round="10" closeable closeOnClickOverlay>
+			<view class="popBac">
+				<view class="input_item" >
+					<u--input clearable placeholder="计划名称"></u--input>
+				</view>
+				<view class="date_picker" @click="datePickerShow()">
+					<!-- <u--input clearable></u--input> -->
+					<text v-if="date_flag">{{date_value | timeStamp}}</text>
+					<text v-if="!date_flag">请选择时间</text>
+					<u-datetime-picker :show="date_picker_show" v-model="date_value"
+									   :minDate="time"  @confirm="datePickerConfirm()"
+										@cancel="datePickerClose()" :closeOnClickOverlay="true"></u-datetime-picker>
+				</view>
+				<view class="input_item" @click="tag_picker_show = true">
+					<text v-if="picker_tag == 0" >请选择类型</text>
+					<text v-else>第{{picker_tag}}类</text>
+					<u-picker :columns="columns"  @cancel = "tag_picker_show = false"
+							@confirm=""
+							:show = "tag_picker_show" v-model="picker_tag"></u-picker>
+				</view>
+			</view>
+			<u-button text="确定"></u-button>
+		</u-popup>
+		
 		<!-- 上部组件，显示今日和计划列表 -->
 		<view class="topbar">
 			<view class="top_button">
@@ -31,12 +58,35 @@
 				<scroll-view style=" height: 615px;"  :scroll-top="scrollTop" scroll-y="true">
 					<uni-swipe-action style="margin-left: 0px; height: 615px;">
 						<uni-swipe-action-item  class="list_item"
-												v-for="(item,index) in list" 
+												v-for="(item,index) in tagFilter(list)"
 												:right-options="options"
-												@click = "delItem(index)">
-							<view class="list_item" @click="showDetial(index)">
-								<view class="tag"></view>
-								<u-text :text="item" size="20px" bold="" type=""></u-text>
+												@click = "delItem(index)"
+												v-if = "item.Status">
+							<view class="list_item" @click="showDetial(item.ID)">
+								<view v-if="item.tag == '1'" class="tag" style="background-color: #3C9CFF;">
+								</view>
+								<view v-if="item.tag == '2'" class="tag" style="background-color: #F0AD4E;">
+								</view>
+								<view v-if="item.tag == '3'" class="tag" style="background-color: #DD524D;">
+								</view>
+								<u-text :text="item.itemName" size="20px" bold="" type=""></u-text>
+								<view style="background-color: #A9E08F; height: 15px; width: 15px; margin-right: 15px; border-radius: 90%;"></view>
+							</view>
+						</uni-swipe-action-item>
+						<uni-swipe-action-item  class="list_item"
+												v-for="(item,index) in tagFilter(list)" 
+												:right-options="options"
+												@click = "delItem(index)"
+												v-if = "!item.Status">
+							<view class="list_item" @click="showDetial(item.ID)">
+								<view v-if="item.tag == '1'" class="tag" style="background-color: #3C9CFF;">
+								</view>
+								<view v-if="item.tag == '2'" class="tag" style="background-color: #F0AD4E;">
+								</view>
+								<view v-if="item.tag == '3'" class="tag" style="background-color: #DD524D;">
+								</view>
+								<u-text :text="item.itemName" size="20px" bold="" type=""></u-text>
+								<view style="background-color: #F56C6C; height: 15px; width: 15px; margin-right: 15px; border-radius: 90%;"></view>
 							</view>
 						</uni-swipe-action-item>
 					</uni-swipe-action>
@@ -52,7 +102,7 @@
 			></u-button> -->
 			<button type="default"
 			style="width: 360px; height: 55px; align-items: center;" size="200px"
-			@click="addItem()" :loading="load" >添加事项</button>
+			@click="showPopup()" :loading="load" >aaa</button>
 			
 		</view>
 	</view>
@@ -68,6 +118,7 @@
 				"order" : 0,
 				//list数组，后端获得
 				"list" : [],
+				"list_classify" : [],
 				//左滑菜单
 				"options" : [
 					{
@@ -81,16 +132,56 @@
 				
 				//分类菜单显示控制
 				 "show" : false,
-				 "classify_list" : ['第一类', '第二类', '第三类'],
+				 "classify_list" : ['第一类', '第二类', '第三类',"未完成","已完成","取消分类"],
 				 
 				 //分类控制变量
-				 // "classify" : -1
+				 "tag" : -1,
 				 
 				 //控制加载
-				 "load" : false 
+				 "load" : false ,
+
+				 //弹出组件控制
+				 "popupShow" : false,
+				
+				//date选择控制
+				"date_picker_show" : false,
+				"time" : 1649389163,
+				 "date_value" : Number(new Date()),
+				 "date_flag" : false, //是否选择时间 
+				 
+				 //tag选择器控制
+				"tag_picker_show" : false,
+				"columns": [['第一类', '第二类', '第三类']],
+				"picker_tag" : 0
 			}
 		},
 		methods: {
+			
+			//显示时间选择器
+			datePickerShow(){
+				// this.getTimeNow()
+				this.date_picker_show = true
+				
+			},
+			//关闭时间选择器
+			datePickerClose(){
+				this.date_picker_show = false
+			},
+			//点击确定按钮获取时间
+			datePickerConfirm(){
+				this.date_flag = true
+				this.date_picker_show = false;
+			},
+			//获取当前时间
+			getTimeNow(){
+				var value = this.date_value
+				var date = new Date(parseInt(value)); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				this.yearN = date.getFullYear();
+				this.monN = ("0" + (date.getMonth() + 1)).slice(-2);
+				this.dayN = ("0" + date.getDate()).slice(-2);
+				this.hourN = ("0" + date.getHours()).slice(-2);
+				this.minN = ("0" + date.getMinutes()).slice(-2);
+			},
 			
 			//删除列表
 			delItem(index){
@@ -100,6 +191,7 @@
 					success: res => {
 						if (res.confirm) {
 							this.list.splice(index, 1);
+						
 						} else if (res.cancel) {	
 							console.log('用户点击取消');
 						}
@@ -107,53 +199,73 @@
 				});
 			},
 			
+			//获取UUID
+			getUUID() {
+				return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+					var r = Math.random() * 16 | 0,
+						v = c == 'x' ? r : (r & 0x3 | 0x8);
+					return v.toString(16);
+					});
+			},
 			
-			// //删除事件
-			// showModal() {
-			// 			this.show = true;
-			// 		},
-			// confirm(index) {
-			// 	setTimeout(() => {
-			// 		// 3秒后自动关闭
-			// 		//请求接口成功后回调
-			// 		this.list.splice(index, 1);
-			// 		this.show = false;
-			// 	}, 1000)
-			// },
 			
-			showDetial(index){
+			
+			//点击跳转
+			showDetial(UID){
 				let that = this
 				uni.navigateTo({
-					url:"./list_detial?id=" + that.list[index].toString()
-					
+					url:"./list_detial?id=" + UID.toString()
 				})
 			},
 			
-			addItem(){
+			
+			//显示添加界面
+			showPopup(){
+				this.date_flag = false
 				let that = this
 				that.load = true
-				
-				uni.request({
-					url:"http://127.0.0.1:8080",
-					success(res)  {
-						console.log("success")
-						that.load = false
-						var num = that.list.length
-						var item = num+1;
-						that.list.splice(0,0,item)
-					},
-					fail(res) {
-						console.log("fail")
-						console.log("success")
-						that.load = false
-						var num = that.list.length
-						var item = num+1;
-						that.list.splice(0,0,item)
-					}
-				})
-				
+				that.popupShow = true
+			},
+			//关闭添加界面
+			closePop() {
+					this.popupShow = false
+			    // console.log('close');
 			},
 			
+			
+			
+			//点击确定按钮后
+			//调用接口
+			addItem(){
+				let that = this
+				// uni.request({
+				// 	url:"http://127.0.0.1:8080",
+				// 	success(res)  {
+				// 		console.log("success")
+				// 		that.load = false
+				// 		var num = that.list.length
+				// 		var item = num+1;
+				// 		that.list.splice(0,0,item)
+				// 	},
+				// 	fail(res) {
+				// 		console.log("fail")
+				// 		console.log("success")
+				// 		that.load = false
+				// 		var num = that.list.length
+				// 		var item = num+1;
+				// 		that.list.splice(0,0,item)
+				// 	}
+				// })
+				
+				let tag = Math.ceil(Math.random()*3);
+				let item = {"ID":Math.ceil(Math.random()*100),"itemName": "DEMO","OrgId":1,"Status":true,"time":"2022.1.1","tag" : tag,"UUID": ""}
+				that.list.splice(0,0,item)
+				that.list_classify = that.list
+				that.load = false
+			},
+			
+			
+			//点击分类按钮
 			classify(){
 				let that = this;
 				// that.show = true
@@ -161,24 +273,112 @@
 				uni.showActionSheet({
 					itemList: that.classify_list,
 						success: function (res) {
-							console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+							that.tag = res.tapIndex+1
 						},
 						fail: function (res) {
 							console.log(res.errMsg);
 						}
 				})
-				console.log("分类")
-			}
+				// console.log("分类")
+			},
+			
+			tagFilter(list) {
+				let that = this
+				var result = []
+				if( that.tag <= 3 && that.tag > 0){
+					 result = list.filter(item =>{
+						return item.tag == that.tag
+					})
+				}else if( that.tag == 4){
+					result = list.filter(item =>{
+						return !item.Status
+					})
+				}else if( that.tag == 5){
+					result = list.filter(item =>{
+						return item.Status
+					})
+				}else{
+					result = list
+				}
+				
+				return result;
+			},
+
 		},
+	
+		
 		onLoad() {
 			let that = this;
+			for(var i = 1;i <= 10 ; i++){
+				let tag = Math.ceil(Math.random()*3);
+				let item = {"ID":i,"itemName": "DEMO","OrgId":1,"Status":false,"time":"2022.1.1","tag" : tag,"UUID" : ""}
+				that.list.splice(0,0,item)
+			}
+			that.list_classify = that.list
 			//请求接口获得
-			that.list = [1,2,3,4,5,6,7,8,9,0,1,2,3,4]
+			
+			//时间戳获取
+			var timestamp=Math.ceil((new Date().getTime()))
+			that.time = timestamp
+			// console.log(timestamp)
+			
+			// console.log("UUID")
+			// console.log(this.uuidv4())
+			
+
+			
+		},
+		filters:{
+			timeStamp: function(value) {
+				var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				var year = date.getFullYear();
+				var month = ("0" + (date.getMonth() + 1)).slice(-2);
+				var sdate = ("0" + date.getDate()).slice(-2);
+				var hour = ("0" + date.getHours()).slice(-2);
+				var minute = ("0" + date.getMinutes()).slice(-2);
+				// var second = ("0" + date.getSeconds()).slice(-2);
+				// 拼接
+				var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute ;
+				// 返回
+				console.log(result)
+				return result;
+			},
+			
 		}
 	}
 </script>
 
 <style>
+	
+		
+	.input_item{
+		height: 50px;
+		width: 350px;
+		margin-top: 20px;
+		/* margin-bottom: 20px; */
+	}
+	.date_picker{
+		display: flex;
+		flex-direction: row;
+		height: 50px;
+		width: 350px;
+		margin-top: 20px;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.popBac{
+		display: flex;
+		flex-direction: column;
+		height: 300px;
+		align-items: center;
+		justify-content: center;
+	}
+	.input{
+		width: 150px;
+		
+	}
+	
 	.background{
 		height: 100%;
 		width: 100%;
@@ -254,4 +454,5 @@
 		justify-content: center;
 		margin-bottom: 10px;
 	}
+	
 </style>

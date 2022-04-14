@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<text>{{list_id}}</text>
-		<button @click="click()">aaaa</button>
+		<button @click="click()">{{list_id}}</button>
 	</view>
 </template>
 

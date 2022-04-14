@@ -1,1 +1,1 @@
-<view><text>{{list_id}}</text><button data-event-opts="{{[['tap',[['click']]]]}}" bindtap="__e">aaaa</button></view>
+<view><text>{{list_id}}</text><button data-event-opts="{{[['tap',[['click']]]]}}" bindtap="__e">{{list_id}}</button></view>
