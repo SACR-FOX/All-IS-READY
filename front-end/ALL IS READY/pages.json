@@ -39,7 +39,31 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path":"pages/classSchedule/classSchedule",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path":"pages/file/file",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path":"pages/leaderBoard/leaderBoard",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

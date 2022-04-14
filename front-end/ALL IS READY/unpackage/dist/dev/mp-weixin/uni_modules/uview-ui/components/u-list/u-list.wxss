@@ -34,9 +34,7 @@ view.data-v-27d76bae, scroll-view.data-v-27d76bae, swiper-item.data-v-27d76bae {
   align-content: flex-start;
 }
 .u-list.data-v-27d76bae {
-
   display: flex;
-
   flex-direction: column;
 }
 

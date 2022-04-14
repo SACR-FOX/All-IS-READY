@@ -31,8 +31,15 @@
 		
 		<view class="content">
 			<view class="col">
+				
 				<view class="card">
-					<image src="../../static/jidnutiao.png" style="width: 270rpx; height: 270rpx; margin-top: 15rpx;"></image>
+					<view style="margin-top: 30rpx;">
+						<circle-progress-bar :pro="pro" :size="230" :border_width="20" :animate="true">
+							<view style="font-size: 46upx;">
+								{{pro * 100}}%
+							</view>
+						</circle-progress-bar>
+					</view>
 				</view>
 				
 				<view class="card">
@@ -90,7 +97,7 @@
 	export default {
 		data() {
 			return {
-
+					pro:0.6
 				}
 		},
 		methods: {
@@ -150,4 +157,44 @@
 		background-color: rgba(255, 255, 255, 0.8);
 		border-radius: 30rpx;
 	}
+	
+	
+	// .circleprogress{
+	// 	width: 100%;
+	// 	height: 200px;
+	// 	display: flex;
+	// 	justify-content: center;
+		
+	// }
+	// .circleprogress .progresstext{
+	// 	position: absolute;
+	// 	font-size: 40px;
+	// 	width: 200px;
+	// 	height: 200px; 
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// 	z-index: 10;
+	// 	color: #008000;
+	// }
+	// .circleprogress .wrapper{
+	// 	width: 100px;
+	// 	height: 200px;
+	// 	overflow: hidden;
+	// }
+	// .circleprogress .leftprogress,.rightprogress{
+	// 	width: 160px;
+	// 	height: 160px;
+	// 	border:20px solid green;
+	// 	border-bottom:20px solid #7ef22e;
+	// 	border-radius: 50%;
+		
+	// }
+	// .circleprogress .leftprogress{
+	// 	border-right:20px solid #7ef22e;
+	// }
+	// .circleprogress .rightprogress{
+	// 	border-left:20px solid #7ef22e;
+	// 	margin-left: -100px;
+	// }
 </style>
