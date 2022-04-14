@@ -2,6 +2,7 @@
   "navigationBarTitleText": "uni-app",
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "circle-progress-bar": "/components/circle-progress-bar/circle-progress-bar"
   }
 }

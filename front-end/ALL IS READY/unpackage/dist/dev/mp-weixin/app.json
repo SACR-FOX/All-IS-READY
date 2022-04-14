@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/todo_list/todo_list",
     "pages/text/text",
-    "pages/todo_list/list_detial"
+    "pages/todo_list/list_detial",
+    "pages/classSchedule/classSchedule",
+    "pages/file/file",
+    "pages/leaderBoard/leaderBoard"
   ],
   "subPackages": [],
   "window": {
