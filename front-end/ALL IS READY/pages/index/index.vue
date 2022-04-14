@@ -14,7 +14,7 @@
 		
 		<view class="content">
 			<view class="col">
-				<view class="card">
+				<view class="card" @click="toTodolist()">
 					<view style="color: #E456z56;">星期四</view>
 					<view style="font-size: 50px;">10</view>
 					<view style="">今天有一项待做</view>
@@ -101,7 +101,18 @@
 				}
 		},
 		methods: {
-
+			toTodolist(){
+				uni.navigateTo({
+					url:"../todo_list/todo_list"
+				})
+			}
+		},
+		onLoad() {
+			uni.getSystemInfo({
+				success: (res) => {
+					console.log(res.deviceId)
+				}
+			})
 		}
 	}
 </script>

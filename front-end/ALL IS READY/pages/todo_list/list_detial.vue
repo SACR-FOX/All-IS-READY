@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<text>{{list_id}}</text>
+		<button @click="click()">{{list_id}}</button>
 	</view>
 </template>
 
@@ -12,7 +13,13 @@
 			}
 		},
 		methods: {
-			
+			click(){
+				uni.vibrateLong({
+					success: (res) => {
+						console.log("success")
+					}
+				})
+			}
 		},
 		onLoad(obj){
 			this.list_id = obj.id
