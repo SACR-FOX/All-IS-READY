@@ -102,7 +102,7 @@
 			></u-button> -->
 			<button type="default"
 			style="width: 360px; height: 55px; align-items: center;" size="200px"
-			@click="showPopup()" :loading="load" >aaa</button>
+			@click="showPopup()" :loading="load" >添加事项</button>
 			
 		</view>
 	</view>

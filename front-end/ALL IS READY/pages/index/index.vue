@@ -20,7 +20,7 @@
 					<view style="">今天有一项待做</view>
 				</view>
 				
-				<view class="card">
+				<view class="card" @click="toClassSche()"> 
 					<view>下一节</view>
 					<view style="font-size: 40rpx; font-weight: bold; margin-top: 30rpx;">操作系统</view>
 					<view style="font-weight: bold; margin-top: 30rpx;">C308 13:40</view>
@@ -32,7 +32,7 @@
 		<view class="content">
 			<view class="col">
 				
-				<view class="card">
+				<view class="card" @click="toTimer()">
 					<view style="margin-top: 30rpx;">
 						<circle-progress-bar :pro="pro" :size="230" :border_width="20" :animate="true">
 							<view style="font-size: 46upx;">
@@ -42,7 +42,7 @@
 					</view>
 				</view>
 				
-				<view class="card">
+				<view class="card" @click="toLeaderB()">
 					<view style="margin-top: 30rpx;">班级动态</view>
 					<view style="margin-top: 60rpx; font-size: 50rpx; font-weight: bold;">无事发生</view>
 				</view>
@@ -50,7 +50,7 @@
 			</view>
 		</view>
 		
-		<view class="card_bottom">
+		<view class="card_bottom" @click="toFile()">
 			<scroll-view scroll-x="true" style="flex-direction: row; white-space: nowrap;">
 				<view class="card_doc">
 					<image src="../../static/pdf_icon.png" 
@@ -104,6 +104,26 @@
 			toTodolist(){
 				uni.navigateTo({
 					url:"../todo_list/todo_list"
+				})
+			},
+			toClassSche(){
+				uni.navigateTo({
+					url:"../classSchedule/classSchedule"
+				})
+			},
+			toTimer(){
+				uni.navigateTo({
+					url:"../timer/timer"
+				})
+			},
+			toLeaderB(){
+				uni.navigateTo({
+					url:"../leaderBoard/leaderBoard"
+				})
+			},
+			toFile(){
+				uni.navigateTo({
+					url:"../file/file"
 				})
 			}
 		},
