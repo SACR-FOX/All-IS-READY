@@ -32,7 +32,7 @@
 			<view class="top_button">
 				<view class="topB_icon">
 					<view class="icon_bac" style="background-color: #3C9CFF;">
-						<u-icon name="calendar" color="#FFFFFF"size="23"> </u-icon>
+						<u-icon name="calendar" color="#FFFFFF" size="23"> </u-icon>
 					</view>
 					<u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text>
 				</view>

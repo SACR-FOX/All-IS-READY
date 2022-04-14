@@ -40,6 +40,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/timer/timer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
