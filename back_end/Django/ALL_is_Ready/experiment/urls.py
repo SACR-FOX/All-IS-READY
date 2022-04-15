@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
 
-    path('sday',views.test.as_view(),name="批量导入"),
+    path('oss',views.test.as_view(),name="oss上传"),
 
 ]

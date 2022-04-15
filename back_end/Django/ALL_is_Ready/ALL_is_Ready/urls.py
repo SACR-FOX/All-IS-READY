@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('test/',include('experiment.urls')),
     path('api/ToDoList/',include('ToDoList.urls')),
     path('api/Organization/',include('Organization.urls')),
-    path('api/Community/', include('Community.urls'))
+    path('api/Community/', include('Community.urls')),
+    path('docs/',include_docs_urls(title="All Is Ready 接口文档"))
 ]
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'experiment',
     'ToDoList',
     'Organization',
-    'Community'
+    'Community',
+    'coreapi'
 
 ]
 
@@ -164,5 +165,6 @@ CACHES = {
     }
 }
 REST_FRAMEWORK={
-    "DEFAULT_AUTHENTICATION_CLASSES":['tools.verify.JWT_verify']
+    "DEFAULT_AUTHENTICATION_CLASSES":['tools.verify.JWT_verify'],
+    "DEFAULT_SCHEMA_CLASS":'rest_framework.schemas.AutoSchema'
 }
