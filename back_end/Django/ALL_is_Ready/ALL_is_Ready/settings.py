@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'ToDoList',
     'Organization',
     'Community',
-    'coreapi'
+    'coreapi',
+    'Files'
 
 ]
 

@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/ToDoList/',include('ToDoList.urls')),
     path('api/Organization/',include('Organization.urls')),
     path('api/Community/', include('Community.urls')),
-    path('docs/',include_docs_urls(title="All Is Ready 接口文档"))
+    path('docs/',include_docs_urls(title="All Is Ready 接口文档")),
+    path('api/Files/', include('Files.urls')),
 ]
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

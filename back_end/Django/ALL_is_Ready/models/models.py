@@ -60,18 +60,7 @@ class ToDoList(models.Model):
     Tag = models.IntegerField(verbose_name="标签颜色",default=0)
     UUID = models.UUIDField(verbose_name="uuid",default="51a5e3e7-d30f-4b43-9c84-bf01632c6022")
 
-class File(models.Model):
-    class Meta:
-        db_table = 'File'
-        verbose_name = '课程文件'
-        verbose_name_plural = '课程文件'
 
-    UID=models.IntegerField(verbose_name="所属用户ID",default=-1)
-    FID=models.AutoField(verbose_name="文件ID", primary_key=True)
-    Fname=models.CharField(max_length=256,verbose_name="文件名")
-    Uri=models.CharField(max_length=256,verbose_name="文件相对地址")
-    Theme=models.CharField(max_length=15,verbose_name="分类名称")
-    Renewal=models.DateTimeField(verbose_name="最后访问时间")
 
 class OrgTask(models.Model):
     class Meta:
@@ -149,5 +138,18 @@ class PostImage(models.Model):
     ID = models.AutoField(verbose_name="ID",primary_key=True)
     PostID=models.IntegerField(verbose_name="所属帖子ID")
     Uri=models.ImageField(verbose_name="帖子图像",upload_to='PostImage',default='/static/img/header_default.png')
+
+class FileModel(models.Model):
+    class Meta:
+        db_table = 'FileModel'
+        verbose_name = '文件管理'
+        verbose_name_plural = '文件管理'
+
+    ID = models.AutoField(verbose_name="ID",primary_key=True)
+    UID= models.IntegerField(verbose_name="所属用户ID",default=-1)
+    OrgID=models.IntegerField(verbose_name="所属组织ID",default=-1)
+    FolderName=models.CharField(verbose_name="归类主题名",max_length=15,default="untitled fold")
+    FileName=models.CharField(verbose_name="文件名",max_length=50,default="untitled file")
+    Renewal = models.IntegerField(verbose_name="最后访问时间",default=0)
 
 
