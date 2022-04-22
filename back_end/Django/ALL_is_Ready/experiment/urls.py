@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
 
-    path('oss',views.test.as_view(),name="oss上传"),
+    path('oss', views.OSStest.as_view(), name="oss上传"),
+    path('request',views.requestTest.as_view(),name="请求测试")
 
 ]

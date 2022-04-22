@@ -14,7 +14,7 @@ auth = oss2.Auth('LTAI5tNtrJxgmQ5pgAMjGoH2', 'BlKZ0n8As55Jqgju1RObVCOsaT1705')
 bucket = oss2.Bucket(auth, 'oss-cn-hangzhou.aliyuncs.com', 'all-is-ready-file-storage')
 
 cachePath='/Users/lishengdi/lib/oss_test'
-class test(APIView):
+class OSStest(APIView):
     authentication_classes = []
     def post(self,request):
         f=request.FILES.get('book')
@@ -63,3 +63,20 @@ class test(APIView):
         url=bucket.sign_url('GET',obj,3600,slash_safe=True)
         print(url)
         return Response(url)
+
+
+class requestTest(APIView):
+    authentication_classes = []
+    def post(self,requst):
+        try:
+
+            if not requst.data.get('null'):
+                print("unset")
+            else:
+                print(requst.data.get('null'))
+
+        except Exception as e:
+            print(e)
+            return Response("raised")
+
+        return Response("empty")

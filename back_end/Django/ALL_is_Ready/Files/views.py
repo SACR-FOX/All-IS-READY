@@ -40,23 +40,34 @@ class Upload(APIView):
             if not Organization.objects.filter(OrgID=orgID):
                 raise rest_framework.exceptions.NotFound
 
-        tmp['OrgID']=request.data.get('OrgID')
+        tmp['OrgID']=orgID
         tmp['FolderName']=request.data.get('FolderName')
-        tmp['FileName'] = request.data.get('FileName')
+
+        f = request.FILES.get('book')
+        if not f:
+            return Response({"result":"no file detect"},status=status.HTTP_400_BAD_REQUEST)
+
+        #如果没有文件名，则使用上传的文件默认名称
+        if not request.data.get('FileName'):
+            tmp['FileName'] = f.name
+        else:
+            tmp['FileName'] = request.data.get('FileName')
 
         ser=FileSerializers(data=tmp)
         ser.is_valid(raise_exception=True)
 
-        f = request.FILES.get('book')
-        if not f:
-            return Response({"no file detect"})
 
-        oss_upload_path = 'userPDF/' + str(ser.data.get('UID')) + '/' + str(ser.data.get('FolderName')) + '/' +str(ser.data.get('FileName'))
+        if int(orgID) != -1:
+            oss_upload_path = 'OrgPDF/' + str(ser.validated_data.get('OrgID')) + '/' + str(
+                ser.validated_data.get('FolderName')) + '/' + str(ser.validated_data.get('FileName'))
+        else:
+            oss_upload_path = 'userPDF/' + str(ser.validated_data.get('UID')) + '/' + str(ser.validated_data.get('FolderName')) + '/' +str(ser.validated_data.get('FileName'))
+
         tmp_cache_path = os.path.join(FILE_UPLOAD_CACHE_PATH, f.name)
 
 
         #check repeat file
-        check=FileModel.objects.filter(Q(UID__exact=ser.data.get('UID')),Q(FileName=ser.data.get('FileName')),Q(FoldName=ser.data.get('FolderName'))).first()
+        check=FileModel.objects.filter(Q(UID__exact=ser.validated_data.get('UID')),Q(FileName=ser.validated_data.get('FileName')),Q(FolderName=ser.validated_data.get('FolderName'))).first()
         if check:
             check.Renewal=int(time.time())
             check.save()
@@ -68,7 +79,7 @@ class Upload(APIView):
             self.uploadFile(f, tmp_cache_path, oss_upload_path)
 
 
-        return Response(ser.data,status=status.HTTP_200_OK)
+        return Response(ser.validated_data,status=status.HTTP_200_OK)
 
 
 
@@ -84,34 +95,66 @@ class Upload(APIView):
             bucket.put_object_from_file(OSS_PATH, TMP_PATH)
         except Exception as e:
             print(e)
-            return Response({'result', "oss upload failed"})
+            os.remove(TMP_PATH)
+            return Response({'result', "oss upload failed"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        os.remove(TMP_PATH)
 
 
 class Detail(ModelViewSet):
 
-    @action(methods=['get'], detail=False, url_path="FoldList")
+    @action(methods=['get'], detail=False, url_path="FolderList")
     def get_fold_list(self,request):
         UID=request.user['UID']
-        data=FileModel.objects.filter(UID__exact=UID).values('FolderName').distinct().order_by('FolderName')
-        return Response(data,status=status.HTTP_200_OK)
+        OrgID=request.data.get('OrgID')
+        if not OrgID:
+            data = FileModel.objects.filter(Q(UID=UID),Q(OrgID=-1)).values('FolderName').distinct().order_by('FolderName')
+        else:
+            data = FileModel.objects.filter(OrgID=OrgID).values('FolderName').distinct().order_by('FolderName')
+
+        Folders={}
+        Folders['list']=data
+
+        return Response(Folders,status=status.HTTP_200_OK)
 
     @action(methods=['get'], detail=False, url_path="FileList")
     def get_file_list(self,request):
         UID=request.user['UID']
         Folder=request.data.get('Folder')
-        data=FileModel.objects.filter(Q(UID__exact=UID),Q(FolderName__exact=Folder)).order_by('FileName')
-        return Response(data, status=status.HTTP_200_OK)
+        OrgID = request.data.get('OrgID')
+        if not OrgID:
+            data=FileModel.objects.filter(Q(UID__exact=UID),Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
+        else:
+            data = FileModel.objects.filter(Q(OrgID=OrgID), Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
+
+        FileList = {}
+        FileList['list'] = data
+        return Response(FileList, status=status.HTTP_200_OK)
 
     @action(methods=['get'], detail=False, url_path="OnlinePreview")
     def get_preview_url(self,request):
         FileID = request.data.get('FileID')
         UID = request.user['UID']
-        data=FileModel.objects.filter(Q(UID=UID),Q(ID=FileID)).first()
-        if not data:
-            return Response({'result':'no such file'},status=status.HTTP_204_NO_CONTENT)
 
-        obj_path = "userPDF/"+str(UID)+"/"+data.FolderName+"/"+data.FileName
-        url = bucket.sign_url('GET', obj_path, 7200, slash_safe=True)
+        OrgID = request.data.get('OrgID')
+        if not OrgID:
+            data=FileModel.objects.filter(Q(UID=UID),Q(ID=FileID)).first()
+            obj_path = "userPDF/" + str(UID) + "/" + data.FolderName + "/" + data.FileName
+            print(obj_path)
+        else:
+            data = FileModel.objects.filter(Q(OrgID=OrgID), Q(ID=FileID)).first()
+            obj_path = "OrgPDF/" + str(OrgID) + "/" + data.FolderName + "/" + data.FileName
+            print(obj_path)
+        if not data:
+            return Response({"result":'no such file'},status=status.HTTP_204_NO_CONTENT)
+
+
+        try:
+            url = bucket.sign_url('GET', obj_path, 7200, slash_safe=True)
+        except Exception as e:
+            print(e)
+            return Response({"result":"OSS sign err"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         return Response({'url':url},status=status.HTTP_200_OK)
 
 
