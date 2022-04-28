@@ -67,15 +67,16 @@ class UserLogin(APIView):  #登录
             return Response({'result':'用户名或密码错误','code':status.HTTP_401_UNAUTHORIZED})
 
         token=tokenCreator.create(usr,180)
+
         return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID})
 
 
 class Rank(APIView):
 
     def get(self,request):
-        OrgID=request.data.get("OrgID")
+        OrgID=request.user['OrgID']
         try:
-            usrs=User.objects.filter(OrgID=OrgID).order_by('-EXP','-Rank')[:10]
+            usrs=User.objects.filter(OrgID=OrgID).order_by('-Accumulation','-EXP')[:10]
             date={}
             date['result']="ok"
             usrList=[]
@@ -84,7 +85,7 @@ class Rank(APIView):
                 item['Uname']=u.Uname
                 item['header']=common.HOST_PREFIX+u.Header.url
                 item['Rank']=u.Rank
-                item['EXP']=u.EXP
+                item['Accumulation']=u.Accumulation
                 usrList.append(item)
 
             date['data']=usrList

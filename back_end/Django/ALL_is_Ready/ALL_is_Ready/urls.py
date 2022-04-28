@@ -30,5 +30,6 @@ urlpatterns = [
     path('api/Community/', include('Community.urls')),
     path('docs/',include_docs_urls(title="All Is Ready 接口文档")),
     path('api/Files/', include('Files.urls')),
+    path('api/Reward/',include('RewardSystem.urls'))
 ]
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

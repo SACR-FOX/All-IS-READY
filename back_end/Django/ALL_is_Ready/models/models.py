@@ -27,6 +27,7 @@ class User(models.Model):
     Rank=models.IntegerField(verbose_name="等级",default=0)
     Header=models.ImageField(verbose_name="用户头像",upload_to='userHeader',default='/static/img/header_default.png')
     EXP=models.IntegerField(verbose_name="用户经验值",default=0)
+    Accumulation=models.IntegerField(verbose_name="积累学习时长（秒）",default=0)
 
 class Schedule(models.Model):
     class Meta:
@@ -110,11 +111,12 @@ class CommunityTopic(models.Model):
 
     CommunityID = models.IntegerField(verbose_name="所属社区ID")
     TopicID = models.AutoField(verbose_name="社区主题ID", primary_key=True)
-    Creator=models.IntegerField(verbose_name="创建者ID")
+    UID=models.IntegerField(verbose_name="创建者ID")
     Time=models.IntegerField(verbose_name="创建时间")
     HasImage=models.BooleanField(verbose_name="是否含有图片",default=False)
     Title=models.CharField(max_length=35,verbose_name="主题标题")
     ImageUri=models.ImageField(verbose_name="话题封面图像",upload_to='TopicHeader',default='/static/img/header_default.png')
+    Stars = models.IntegerField(default=0, verbose_name="点赞数")
 
 class TopicPost(models.Model):
     class Meta:
@@ -128,6 +130,7 @@ class TopicPost(models.Model):
     Time = models.IntegerField(verbose_name="创建时间")
     HasImage = models.BooleanField(verbose_name="是否含有图片")
     Content=models.CharField(max_length=300,verbose_name="帖子内容")
+    Stars=models.IntegerField(default=0,verbose_name="点赞数")
 
 class PostImage(models.Model):
     class Meta:
@@ -151,5 +154,16 @@ class FileModel(models.Model):
     FolderName=models.CharField(verbose_name="归类主题名",max_length=15,default="untitled fold")
     FileName=models.CharField(verbose_name="文件名",max_length=50,default="untitled file")
     Renewal = models.IntegerField(verbose_name="最后访问时间",default=0)
+
+
+class CommunityStars(models.Model):
+    class Meta:
+        db_table = 'CommunityStars'
+        verbose_name = '社区点赞'
+        verbose_name_plural = '社区点赞'
+
+    type=models.IntegerField(verbose_name="点赞类型 0 主题 1 帖子",default=-1)
+    UID=models.IntegerField(verbose_name="点赞者ID",default=-1)
+    TargetID=models.IntegerField(verbose_name="点赞对象ID",default=-1)
 
 

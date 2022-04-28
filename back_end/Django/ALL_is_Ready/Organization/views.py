@@ -13,6 +13,7 @@ from datetime import datetime
 from tools.timeTool import switcher
 from django.core.cache import cache
 import uuid
+from tools import common as CommonTools
 
 class OrgAction(ModelViewSet):
     queryset = Organization.objects.all()
@@ -55,7 +56,7 @@ class OrgTaskAll(APIView):
 class ACK(APIView):
 
     def post(self,request):
-        UID=request.data.get("UID")
+        UID=request.user['UID']
         TaskID=request.data.get("TaskID")
         Tsk = OrgTask.objects.get(TaskID=TaskID)
         Usr=User.objects.get(UID=UID)
@@ -77,6 +78,8 @@ class ACK(APIView):
             Tsk.AckCount+=1
             Tsk.save()
             TaskAck.objects.create(UID=UID,TaskID=TaskID)
+            CommonTools.addEXP(Usr, 5)
+            # CommonTools.EXP2Rank(Usr.EXP)
             return Response(dataFinish, status=status.HTTP_200_OK)
 
     def get(self,request):

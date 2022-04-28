@@ -1,5 +1,9 @@
+from models.models import User
+from django.db.models import F
+
 HOST_PREFIX="http://127.0.0.1:8000"
 FILE_UPLOAD_CACHE_PATH="/Users/lishengdi/lib/oss_test/"
+
 
 def EXP2Rank(exp):
     if exp<81:
@@ -24,6 +28,35 @@ def EXP2Rank(exp):
 def addEXP(usr,exp):
     usr.EXP+=exp
     usr.save()
+    usr.Rank=EXP2Rank(usr.Rank)
+    usr.save()
+
+
+def daily_jobs():
+
+    # 每日 0：00 积累学习时长清零
+
+    try:
+        usr_set = User.objects.all().update(Accumulation=0)
+    except Exception as e:
+        print(e)
+
+    # 每日 0：00 留在排行榜的用户获得经验值
+    orgs = User.objects.values('OrgID').distinct().order_by('OrgID')
+    OrgID_list = []
+    for i in orgs:
+        if i['OrgID'] != -1:
+            OrgID_list.append(i['OrgID'])
+
+    for each in OrgID_list:
+        Award_usrs_pre5 = User.objects.filter(OrgID=each).order_by('-Accumulation', '-EXP')[:5].update(EXP=F('EXP')+50)
+        Award_usrs_6to10 = User.objects.filter(OrgID=each).order_by('-Accumulation', '-EXP')[5:10].update(EXP=F('EXP') + 25)
+        for u in Award_usrs_pre5:
+            u.Rank=EXP2Rank(u.EXP)
+            u.save()
+        for u in Award_usrs_6to10:
+            u.Rank = EXP2Rank(u.EXP)
+            u.save()
 
 
 

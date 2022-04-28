@@ -14,7 +14,7 @@ from datetime import datetime
 from tools.timeTool import switcher
 from django.core.cache import cache
 import uuid
-
+from tools import common as CommonTools
 Switcher=switcher()
 
 class ListAction(ModelViewSet):# 增删改
@@ -31,6 +31,15 @@ class ListAction(ModelViewSet):# 增删改
         ser.save()
         return Response(ser.data)
 
+
+    @action(methods=['put'], detail=True, url_path="Done")
+    def Done(self,request,ID):
+        TDL = ToDoList.objects.get(ID__exact=ID)
+        TDL.Status=True
+        TDL.save()
+        usr=User.objects.get(UID=request.user['UID'])
+        CommonTools.addEXP(usr, 10)
+        # CommonTools.EXP2Rank(usr.EXP)
 
 
 class ListAll(APIView):

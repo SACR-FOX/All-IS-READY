@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+# from tools import common
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'UserProfile',
     'models',
     'rest_framework',
@@ -48,7 +49,8 @@ INSTALLED_APPS = [
     'Organization',
     'Community',
     'coreapi',
-    'Files'
+    'Files',
+    'django_crontab'
 
 ]
 
@@ -169,3 +171,11 @@ REST_FRAMEWORK={
     "DEFAULT_AUTHENTICATION_CLASSES":['tools.verify.JWT_verify'],
     "DEFAULT_SCHEMA_CLASS":'rest_framework.schemas.AutoSchema'
 }
+
+CRONTAB_COMMAND_PREFIX = 'LANG_ALL=zh_cn.UTF-8'
+CRONTAB_LOG_PATH="/Users/lishengdi/lib/oss_test/crontab.log"
+
+CRONJOBS = [
+    ('0 0 * * *', 'tools.common.daily_jobs', ' >>'+CRONTAB_LOG_PATH),
+]
+

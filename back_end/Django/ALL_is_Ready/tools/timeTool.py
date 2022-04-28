@@ -26,3 +26,13 @@ class switcher:
         now = int(time.time())
         day_time = now - now % 86400 + time.timezone
         return int(day_time)
+
+    def ifSameDay(self,last):
+        now = int(time.time())
+        day_start_time = now - now % 86400 + time.timezone
+
+        if last < day_start_time:
+            return False
+        else :
+            return True
+

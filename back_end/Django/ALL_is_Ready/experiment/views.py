@@ -3,9 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from models.models import User
 import oss2
-import os
+import os\
 
  # 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
 auth = oss2.Auth('LTAI5tNtrJxgmQ5pgAMjGoH2', 'BlKZ0n8As55Jqgju1RObVCOsaT1705')
@@ -67,16 +67,12 @@ class OSStest(APIView):
 
 class requestTest(APIView):
     authentication_classes = []
-    def post(self,requst):
-        try:
+    def get(self,requst):
+        org_list = User.objects.values('OrgID').distinct().order_by('OrgID')
+        load=[]
+        for i in org_list:
+            if i['OrgID']!=-1:
+                load.append(i['OrgID'])
 
-            if not requst.data.get('null'):
-                print("unset")
-            else:
-                print(requst.data.get('null'))
-
-        except Exception as e:
-            print(e)
-            return Response("raised")
-
-        return Response("empty")
+        print(load)
+        return Response(load)

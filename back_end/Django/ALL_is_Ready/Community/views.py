@@ -2,7 +2,7 @@ import json
 import time
 from django.db.models import Q
 
-from models.models import Community,CommunityTopic,TopicPost,PostImage
+from models.models import Community,CommunityTopic,TopicPost,PostImage,User,CommunityStars
 from . serializers import CommunitySerializer,TopicSerializers,PostSerializers
 from rest_framework import status
 from rest_framework.response import Response
@@ -14,6 +14,7 @@ from tools.timeTool import switcher
 from django.core.cache import cache
 import uuid
 from tools import common as utils
+from tools import common as CommonTools
 
 class CommAction(ModelViewSet):
     #增删改
@@ -31,7 +32,7 @@ class CommAction(ModelViewSet):
 
 
 class TopicAction(ModelViewSet):
-    queryset = CommunityTopic.objects.all()
+    queryset = CommunityTopic.objects.all().order_by('-Stars')
     serializer_class = TopicSerializers
     lookup_field = "TopicID"
 
@@ -43,30 +44,34 @@ class TopicAction(ModelViewSet):
         if not check:
             return Response({"result":"社区ID错误"},status=status.HTTP_400_BAD_REQUEST)
 
-        Creator=request.user['UID']
+        UID=request.user['UID']
         Time=int(time.time())
         HasImage=request.data.get('HasImage')
         Title=request.data.get('Title')
         if HasImage=="True":
             try:
                 img=request.FILES.get('TopicPic')
-                CommunityTopic.objects.create(CommunityID=CommunityID, Creator=Creator,
+                CommunityTopic.objects.create(CommunityID=CommunityID, UID=UID,
                                               Time=Time, HasImage=True, Title=Title, ImageUri=img)
             except Exception as e:
                 print(e)
                 return Response({"result":"save image faild"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-            return Response({"result": "ok"},status=status.HTTP_200_OK)
 
         else:
             try:
-                CommunityTopic.objects.create(CommunityID=CommunityID,Creator=Creator,
+                CommunityTopic.objects.create(CommunityID=CommunityID,Creator=UID,
                                               Time=Time,HasImage=False,Title=Title)
             except Exception as e:
                 print(e)
                 return Response({"result": "internal error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-            return Response({"result":"ok"},status=status.HTTP_200_OK)
+        # EXP
+        usr = User.objects.get(UID=UID)
+        CommonTools.addEXP(usr, 5)
+        # CommonTools.EXP2Rank(usr.EXP)
+
+        return Response({"result": "ok"}, status=status.HTTP_200_OK)
 
 
     @action(methods=['put'], detail=True, url_path="Modify")
@@ -77,11 +82,38 @@ class TopicAction(ModelViewSet):
         ser.save()
         return Response(ser.data)
 
+    @action(methods=['post'],detail=True,url_path="Star")
+    def Star(self,request,TopicID):
+        topic = CommunityTopic.objects.get(TopicID=TopicID)
+
+        #if repeat
+        check=CommunityStars.objects.filter(Q(UID=request.user['UID']),Q(TargetID=topic.TopicID),Q(type=0))
+
+        if not check:
+            #add star record
+            try:
+                CommunityStars.objects.create(TargetID=topic.TopicID,UID=request.user['UID'],type=0)
+                topic.Stars+=1
+                topic.save()
+
+            # add EXP
+                auth=User.objects.get(UID=topic.UID)
+                CommonTools.addEXP(auth,10)
+
+            except Exception as e:
+                print(e)
+                return Response({'result':'internal err'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            return Response({'result': 'ok'}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({'result':'already thumbed'},status=status.HTTP_403_FORBIDDEN)
+
 class ShowAllTopic(APIView):
 
     def get(self, request):
         CommID = request.data.get("CommunityID")
-        topics = CommunityTopic.objects.filter(CommunityID=CommID)
+        topics = CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars')
         ser=TopicSerializers(instance=topics,many=True)
         return Response(ser.data)
 
@@ -114,7 +146,6 @@ class PostAction(ModelViewSet):
                 print(e)
                 return Response({"result": "save image faild"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-            return Response({"result": "ok"},status=status.HTTP_200_OK)
 
         else:
             try:
@@ -124,13 +155,45 @@ class PostAction(ModelViewSet):
                 print(e)
                 return Response({"result": "internal error"})
 
-            return Response({"result": "ok"},status=status.HTTP_200_OK)
+        # EXP
+        usr = User.objects.get(UID=UID)
+        CommonTools.addEXP(usr, 5)
+        # CommonTools.EXP2Rank(usr.EXP)
+
+        return Response({"result": "ok"},status=status.HTTP_200_OK)
+
+    @action(methods=['post'], detail=True, url_path="Star")
+    def Star(self, request, PostID):
+        post=TopicPost.objects.get(PostID=PostID)
+
+        # if repeat
+        check = CommunityStars.objects.filter(Q(UID=request.user['UID']), Q(TargetID=post.PostID), Q(type=1))
+
+        if not check:
+            # add star record
+            try:
+                CommunityStars.objects.create(TargetID=post.PostID, UID=request.user['UID'], type=1)
+                post.Stars+=1
+                post.save()
+
+                # add EXP
+                auth = User.objects.get(UID=post.UID)
+                CommonTools.addEXP(auth, 10)
+
+            except Exception as e:
+                print(e)
+                return Response({'result': 'internal err'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            return Response({'result': 'ok'}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({'result': 'already thumbed'}, status=status.HTTP_403_FORBIDDEN)
 
 class ShowAllPost(APIView):
 
     def get(self, request):
         TopicID = request.data.get("TopicID")
-        posts = TopicPost.objects.filter(TopicID=TopicID)
+        posts = TopicPost.objects.filter(TopicID=TopicID).order_by('-Stars')
 
         content={}
         itemList=[]

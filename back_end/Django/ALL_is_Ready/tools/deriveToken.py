@@ -11,8 +11,6 @@ def create(user,due):
         'UID':user.UID,
         'Uname':user.Uname,
         'OrgID':user.OrgID,
-        'Rank':user.Rank,
-        'EXP':user.EXP,
         #改 token 有效期 30天
         'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=due)
     }
