@@ -9,18 +9,22 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.views import APIView
+from . import pagination
 from datetime import datetime
 from tools.timeTool import switcher
 from django.core.cache import cache
 import uuid
 from tools import common as utils
 from tools import common as CommonTools
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
+
 
 class CommAction(ModelViewSet):
     #增删改
     queryset = Community.objects.all()
     serializer_class = CommunitySerializer
     lookup_field = "CommunityID"
+    pagination_class = pagination.CommunityNumberPagination
 
     @action(methods=['put'], detail=True, url_path="Modify")
     def Modify(self, request, CommunityID):
@@ -109,13 +113,15 @@ class TopicAction(ModelViewSet):
         else:
             return Response({'result':'already thumbed'},status=status.HTTP_403_FORBIDDEN)
 
-class ShowAllTopic(APIView):
+class ShowAllTopic(ModelViewSet):
+    def get_queryset(self):
+        CommID = self.request.query_params.get("CommunityID")
+        return CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars')
 
-    def get(self, request):
-        CommID = request.data.get("CommunityID")
-        topics = CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars')
-        ser=TopicSerializers(instance=topics,many=True)
-        return Response(ser.data)
+    serializer_class = TopicSerializers
+    pagination_class = pagination.TopicPageNumberPagination
+
+
 
 class PostAction(ModelViewSet):
     queryset = TopicPost.objects.all()
@@ -192,12 +198,30 @@ class PostAction(ModelViewSet):
 class ShowAllPost(APIView):
 
     def get(self, request):
-        TopicID = request.data.get("TopicID")
+        TopicID = request.query_params.get("TopicID")
+        page=request.query_params.get("page")
+        if not page:
+            page = 1
+        else:
+            page=int(page)
+
         posts = TopicPost.objects.filter(TopicID=TopicID).order_by('-Stars')
+        paginator=Paginator(posts,12)
+        Page=paginator.page(page)
 
         content={}
+        if Page.has_next():
+            content['next']=True
+        else:
+            content['next'] = False
+        if Page.has_previous():
+            content['previous'] = True
+        else:
+            content['previous'] = False
+        content['count']=paginator.count
+
         itemList=[]
-        for p in posts:
+        for p in Page.object_list:
             if p.HasImage:
                 picList=[]
                 try:
@@ -215,6 +239,7 @@ class ShowAllPost(APIView):
                 item['HasImage']=p.HasImage
                 item['Content']=p.Content
                 item['pics']=picList
+                item['Stars']=p.Stars
 
                 itemList.append(item)
 
@@ -227,11 +252,11 @@ class ShowAllPost(APIView):
                 item['Time'] = p.Time
                 item['HasImage'] = p.HasImage
                 item['Content'] = p.Content
+                item['Stars'] = p.Stars
 
                 itemList.append(item)
 
-        content['data']=itemList
-        print(itemList)
+        content['result']=itemList
         return Response(content, status=status.HTTP_200_OK)
 
 

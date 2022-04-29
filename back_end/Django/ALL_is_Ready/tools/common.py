@@ -1,4 +1,4 @@
-from models.models import User
+from models.models import User,ToDoList
 from django.db.models import F
 
 HOST_PREFIX="http://127.0.0.1:8000"
@@ -37,7 +37,7 @@ def daily_jobs():
     # 每日 0：00 积累学习时长清零
 
     try:
-        usr_set = User.objects.all().update(Accumulation=0)
+        User.objects.all().update(Accumulation=0)
     except Exception as e:
         print(e)
 
@@ -58,5 +58,7 @@ def daily_jobs():
             u.Rank = EXP2Rank(u.EXP)
             u.save()
 
+
+    # 每日清除所有用户已完成的ToDoList项
 
 

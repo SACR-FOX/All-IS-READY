@@ -65,7 +65,7 @@ class ToDoList(models.Model):
 
 class OrgTask(models.Model):
     class Meta:
-        db_table = 'OrhTask'
+        db_table = 'OrgTask'
         verbose_name = '班级任务'
         verbose_name_plural = '班级任务'
 

@@ -14,6 +14,7 @@ from tools.timeTool import switcher
 from django.core.cache import cache
 import uuid
 from tools import common as CommonTools
+from . pagination import OrgTaskNumberPagination
 
 class OrgAction(ModelViewSet):
     queryset = Organization.objects.all()
@@ -44,13 +45,16 @@ class OrgTaskAction(ModelViewSet):
         ser.save()
         return Response(ser.data)
 
-class OrgTaskAll(APIView):
+class OrgTaskAll(ModelViewSet):
 
-    def get(self,request):
-        OrgID = request.data.get("OrgID")
-        Tsk = OrgTask.objects.filter(OrgID=OrgID)
-        ser = TaskSerializer(instance=Tsk, many=True)
-        return Response(ser.data)
+    def get_queryset(self):
+        OrgID = self.request.query_params.get("OrgID")
+        return OrgTask.objects.filter(OrgID=OrgID)
+
+    serializer_class = TaskSerializer
+    pagination_class = OrgTaskNumberPagination
+
+
 
 
 class ACK(APIView):
