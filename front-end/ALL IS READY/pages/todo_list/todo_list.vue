@@ -34,25 +34,30 @@
 					<view class="icon_bac" style="background-color: #3C9CFF;">
 						<u-icon name="calendar" color="#FFFFFF" size="23"> </u-icon>
 					</view>
-					<u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text>
+					<text class="topBarNum">{{today}}</text>
+					<!-- <u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text> -->
 				</view>
-				<u-text text="今天" size="18px" type="" bold style="margin-left: 15px; margin-bottom: 10px;"></u-text>
+				<text class="topBarText">今天</text>
+				<!-- <u-text text="今天" size="18px" type="" bold style="margin-left: 15px; margin-bottom: 10px;"></u-text> -->
 			</view>
 			<view class="top_button">
 				<view class="topB_icon">
 					<view class="icon_bac" style="background-color: #F56C6C;">
 						<u-icon name="order" color="#FFFFFF"size="23"> </u-icon>
 					</view>
-					<u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text>
+					<!-- <u-text bold="" :text="order" type="info" size="20px" style="margin-bottom: 10px; margin-left: 60px;"></u-text> -->
+					<text class="topBarNum">{{order}}</text>
 				</view>
-				<u-text text="计划" size="18px" type="" bold style="margin-left: 15px; margin-bottom: 10px;"></u-text>
+				<text class="topBarText">计划</text>
+				<!-- <u-text text="计划" size="18px" type="" bold style="margin-left: 15px; margin-bottom: 10px;"></u-text> -->
 			</view>
 		</view>
 		<!-- todoList 主体 -->
 		<view class="list">
 			<view class="center_top">
-				<u-text text="My List" style="margin-left: 23px;" bold="" size="17px"></u-text>
-				<u-icon name="list" style="margin-right: 20px;" size="25px" bold @click="classify()" ></u-icon>
+				<!-- <u-text text="My List" style="margin-left: 23px;" bold="" size="17px"></u-text> -->
+				<text style="font-size: 17px;margin-right: 280px; font-weight: bold;">My List</text>
+				<u-icon name="list" style="" size="25px" bold @click="classify()" ></u-icon>
 			</view>
 			<view  style="display: flex; flex-direction: column;justify-content: center;">
 				<scroll-view style=" height: 615px;"  :scroll-top="scrollTop" scroll-y="true">
@@ -114,17 +119,17 @@
 	export default {
 		data() {
 			return {
-				"today" : 0,
-				"order" : 0,
+				"today" : 10,
+				"order" : 1,
 				//list数组，后端获得
 				"list" : [],
 				"list_classify" : [],
 				//左滑菜单
 				"options" : [
 					{
-						text : "删除",
+						text : "完成",
 						style : {
-							backgroundColor: 'rgba(255,58,49,0.8)'
+							backgroundColor: 'rgba(255, 170, 0, 0.8)'
 						}
 					}
 				],
@@ -166,6 +171,7 @@
 			//关闭时间选择器
 			datePickerClose(){
 				this.date_picker_show = false
+				
 			},
 			//点击确定按钮获取时间
 			datePickerConfirm(){
@@ -187,11 +193,10 @@
 			delItem(index){
 				uni.showModal({
 					title: '提示',
-					content: '是否删除',
+					content: '是否已经完成此事项',
 					success: res => {
 						if (res.confirm) {
 							this.list.splice(index, 1);
-						
 						} else if (res.cancel) {	
 							console.log('用户点击取消');
 						}
@@ -315,6 +320,8 @@
 				that.list.splice(0,0,item)
 			}
 			that.list_classify = that.list
+			// let item = {"ID":i,"itemName": "DEMO1","OrgId":1,"Status":true,"time":"2022.1.1","tag" : tag,"UUID" : ""}
+			// that.list.splice(0,0,item)
 			//请求接口获得
 			
 			//时间戳获取
@@ -349,7 +356,19 @@
 </script>
 
 <style>
-	
+	.topBarNum{
+		font-size: 20px;
+		font-weight: bold;
+		color: #BBBCBE;
+		margin-left: 80px;
+		margin-top: 10px;
+	}
+	.topBarText{
+		font-size: 18px;
+		font-weight: bold;
+		margin-left: 13px;
+		margin-bottom: 7px;
+	}
 		
 	.input_item{
 		height: 50px;

@@ -1,4 +1,17 @@
 
+.topBarNum{
+	font-size: 20px;
+	font-weight: bold;
+	color: #BBBCBE;
+	margin-left: 80px;
+	margin-top: 10px;
+}
+.topBarText{
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 13px;
+	margin-bottom: 7px;
+}
 .input_item{
 	height: 50px;
 	width: 350px;

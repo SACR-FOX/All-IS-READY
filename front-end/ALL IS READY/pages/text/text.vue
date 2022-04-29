@@ -1,248 +1,258 @@
 <template>
 	<view class="container">
-		<uni-swipe-action ref="swipeAction">
-			<uni-swipe-action-item
-			    v-for="(item, index) in swipeList"
-			    :right-options="item.options"
-			    :key="item.id"
-			    @change="swipeChange($event, index)"
-			    @click="swipeClick($event, index)"
-			>
-				<view class="content-box" style="background-color: #007AFF; border-radius: 15px;">
-					<text class="content-text">{{ item.content }}</text>
-				</view>
-			</uni-swipe-action-item>
-		</uni-swipe-action>
+		<view style="height: 200px;"></view>
+		<canvas :style="{width: canvasW + 'px', height: 460 + 'rpx'}"  canvas-id="firstCanvas" id="firstCanvas" ></canvas>
 	</view>
 </template>
 
 
 <script>
+	
 	export default {
 		components: {},
 		data() {
 			return {
-				show: false,
-				isOpened: 'none',
-				swipeList: [{
-						options: [{
-							text: '添加',
-							style: {
-								backgroundColor: '#F56C6C',
-								borderRadius: '15px',
-							}
-						}],
-						id: 0,
-						content: '左滑点击添加新增一条数据'
-					},
-					{
-						id: 1,
-						options: [{
-								text: '置顶'
-							},
-							{
-								text: '删除',
-								style: {
-									backgroundColor: 'rgb(255,58,49)'
-								}
-							}
-						],
-						content: 'item2'
-					},
-					{
-						id: 2,
-						options: [{
-								text: '置顶'
-							},
-							{
-								text: '标记为已读',
-								style: {
-									backgroundColor: 'rgb(254,156,1)'
-								}
-							},
-							{
-								text: '删除',
-								style: {
-									backgroundColor: 'rgb(255,58,49)'
-								}
-							}
-						],
-						content: 'item3'
-					}
-				]
+				src : null,
+				canvasW:0, // 画布宽
+				canvasH:0, // 画布高
+				
+				leftImg : {}, //做图
+				profileImg : {}, //头像
+				logoImg : {}, //商大logo
+				qrImag : {}, //二维码
+				
+				leftImgSrc : 'https://s2.loli.net/2022/04/24/e4qk2aD6Hj3RmBT.jpg', //做图
+				profileImgSrc : '../../static/avatar.jpg', //头像
+				logoImgSrc : 'https://s2.loli.net/2022/04/24/uGFO6zTxnAY39pE.png', //商大logo
+				qrImagSrc : 'https://s2.loli.net/2022/04/20/Od26AZyTq9LtNcb.jpg', //二维码
+				
+				SystemInfo : {}, //设备信息
+				
+				lineOne : '忆往昔，墨湖畔',
+				lineTwo : '湖光柳影  潋滟水波',
+				lineThree : '倒映出你最  美的青春年华',
+				
+				w : 0 //px 转 rpx 转换率
+				
 			};
 		},
-		onReady() {
-			// 模拟延迟赋值
-			setTimeout(() => {
-				this.isOpened = 'right';
-			}, 1000);
+		
+		async onLoad(){
+			let that = this
 			
-			uni.$on('update',res=>{
-				console.log(111);
-				this.swipeClick({
-					content:{
-						text:'添加'
-					}
-				})
-			})
+			//获取设备信息
+			this.SystemInfo = await this.getSystemInfo();
+			
+			
+			//获取W rpx*w = px
+			this.w = this.SystemInfo.windowWidth/750
+			console.log(this.w)
+			
+			let w = that.w
+			
+			// :style="{'height': canvasW*w},{'weight':canvasH*w}"
+			
+	
+			
+			//获取图片缓存
+			this.leftImg = await this.ImageInfo(this.leftImgSrc)
+			this.logoImg = await this.ImageInfo(this.logoImgSrc)
+			// this.profileImg = await this.ImageInfo(this.profileImgSrc)
+			this.qrImag = await this.ImageInfo(this.qrImagSrc)
+			 
+			/*
+			...
+			*/
+		   
+		   //获取画布宽高
+		    this.canvasW = this.SystemInfo.windowWidth; // 画布宽度
+		    this.canvasH = this.leftImg.height //画布高度，依照左图高度
+			
+
+			
+			console.log(200*w)
+		   
+		    if(this.leftImg.errMsg == 'getImageInfo:ok'  
+			   && this.SystemInfo.errMsg == 'getSystemInfo:ok'
+			    ){
+			    console.log('ok')
+				setTimeout(()=>{
+					
+					var ctx = uni.createCanvasContext("firstCanvas") //引号里自定义
+					
+					ctx.weight = 0
+					
+					ctx.setFillStyle("#f9f9f9")
+					ctx.fillRect(0,0,that.canvasW,460*w)
+					
+					
+					//左图设置
+					ctx.drawImage(that.leftImg.path,0,0,450*w,460*w)
+				
+					
+					// //渐变
+					// const grd = ctx.createLinearGradient(0, 0, 420*w, 0)
+					// grd.addColorStop(0,'rgba(255,255,255,0)')
+					// grd.addColorStop(1,'rgba(255,255,255,1)')
+					// ctx.setFillStyle(grd)
+					// ctx.fillRect(0,0,450*w,480*w)
+					
+					//logo
+					ctx.drawImage(that.logoImg.path,450*w,0,(that.canvasW-450*w),90*w)
+					//To:
+					ctx.setFontSize(18)
+					ctx.setFillStyle('#333');
+					ctx.fillText('To:',460*w,140*w)
+					//from
+					ctx.setFontSize(11)
+					ctx.setFillStyle('#000000');
+					ctx.fillText("From:",460*w,420*w)
+					ctx.fillText("浙江工商大学校友会",460*w,450*w)
+					//QR
+					ctx.drawImage(that.qrImag.path,(that.canvasW - 90*w),(460*w - 90*w),90*w,90*w)
+					//邮编
+					ctx.setStrokeStyle('#ffffff')
+					ctx.strokeRect(20*w,20*w,25*w,25*w)
+					ctx.strokeRect(55*w,20*w,25*w,25*w)
+					ctx.strokeRect(90*w,20*w,25*w,25*w)
+					ctx.strokeRect(125*w,20*w,25*w,25*w)
+					ctx.strokeRect(160*w,20*w,25*w,25*w)
+					ctx.strokeRect(195*w,20*w,25*w,25*w)
+
+					//头像
+					//蒙版
+					ctx.save()
+					ctx.beginPath()
+					ctx.arc(603*w,148*w,38*w,0,2 * Math.PI)
+					ctx.clip()
+					ctx.drawImage(that.profileImgSrc,565*w,110*w,76*w,76*w)
+					ctx.restore()
+					
+					// ctx.arc(603*w,153*w,91.65/2*w,0,2 * Math.PI )
+					// ctx.setFillStyle('#ee000b')
+					// ctx.fill()
+					
+					
+					//(730+480)*w/2 - that.lineOne.length*20*w
+					//诗
+					
+					console.log((730+480)*w/2 - that.lineOne.length*20*w)
+					
+					ctx.setFontSize(19*w)
+					ctx.setFillStyle('#3a3a3a');
+					console.log(that.lineOne.length)
+					//ctx.fillText(that.lineOne,(730+480)*w/2 - ((that.lineOne.length-that.getBlockNum(that.lineOne))+(that.getBlockNum(that.lineOne)/2))/2*19*w,233*w)
+					ctx.fillText(that.lineOne,(730+480)*w/2 - ((that.lineOne.length-that.getBlockNum(that.lineOne))+(that.getBlockNum(that.lineOne)/2))/2*19*w,233*w)
+					ctx.fillText(that.lineTwo,(730+480)*w/2 - ((that.lineTwo.length-that.getBlockNum(that.lineTwo))+(that.getBlockNum(that.lineTwo)/2))/2*19*w,278*w)
+					
+					ctx.fillText(that.lineThree,(730+480)*w/2 - ((that.lineThree.length-that.getBlockNum(that.lineThree))+(that.getBlockNum(that.lineThree)/2))/2*19*w,323*w)
+					
+					//线
+					
+					ctx.beginPath()
+
+					ctx.moveTo(480*w, 245*w)
+					ctx.lineTo(730*w, 245*w)
+					ctx.moveTo(480*w, 290*w)
+					ctx.lineTo(730*w, 290*w)
+					ctx.moveTo(480*w, 335*w)
+					ctx.lineTo(730*w, 335*w)
+					ctx.setStrokeStyle('#818181')
+					ctx.stroke()
+				
+					
+					
+					
+					ctx.draw(true,(rej) =>{
+						uni.canvasToTempFilePath({ // 保存canvas为图片
+							canvasId:'firstCanvas',
+							quality:1,
+							destWidth:that.canvasW/(w*w),
+							destHeight: 460/w,
+							fileType:'jpg',
+							complete: (res) => {
+								console.log(res.tempFilePath)
+								//调用这个函数保存到相册
+								// uni.saveImageToPhotosAlbum({
+								// 	filePath:res.tempFilePath,
+									
+								// 	complete: (res) => {
+								// 		console.log("success")
+								// 	}
+								// })
+							}
+						})
+					})
+				},1000)
+		    }else{
+			    console.log('err')
+		    }
+		
+			
+			// ctx.setFillStyle('#f10040');
+		
+		
+			
+			
+		},
+		onReady() {
+			
 		},
 		methods: {
-			contentClick(){
-				console.log('点击内容');
-				uni.showToast({
-					title:'点击内容',
-					icon:'none'
+			canvasIdErrorCallback: function (e) {
+						console.error(e.detail.errMsg)
+			},
+			
+			//缓存
+			// image : 图片地址
+			 ImageInfo(image){
+				return new Promise((req,rej) =>{
+					uni.getImageInfo({
+						src: image,
+						success: (res) => {
+							req(res)
+							
+						}
+					})
 				})
 			},
-			bindClick(e) {
-				console.log(e);
-				uni.showToast({
-					title: `点击了${e.position === 'left' ? '左侧' : '右侧'} ${e.content.text}按钮`,
-					icon: 'none'
-				});
-			},
-			setOpened() {
-				if (this.isOpened === 'none') {
-					this.isOpened = 'left';
-					return;
-				}
-				if (this.isOpened === 'left') {
-					this.isOpened = 'right';
-					return;
-				}
-				if (this.isOpened === 'right') {
-					this.isOpened = 'none';
-					return;
-				}
-			},
-			change(e) {
-				this.isOpened = e;
-				console.log('返回：', e);
-			},
-			swipeChange(e, index) {
-				console.log('返回：', e);
-				console.log('当前索引：', index);
-			},
-			swipeClick(e, index) {
-				let {
-					content
-				} = e;
-				if (content.text === '删除') {
-					uni.showModal({
-						title: '提示',
-						content: '是否删除',
-						success: res => {
-							if (res.confirm) {
-								this.swipeList.splice(index, 1);
-							} else if (res.cancel) {
-								console.log('用户点击取消');
-							}
+			
+			// 获取设备信息
+			getSystemInfo(){
+				return new Promise((req, rej) => {
+					uni.getSystemInfo({
+						success: function (res) {
+							req(res)
 						}
 					});
-				} else if (content.text === '添加') {
-					if (this.swipeList.length < 10) {
-						this.swipeList.push({
-							id: new Date().getTime(),
-							options: [{
-									text: '置顶'
-								},
-								{
-									text: '标记为已读',
-									style: {
-										backgroundColor: 'rgb(254,156,1)'
-									}
-								},
-								{
-									text: '删除',
-									style: {
-										backgroundColor: 'rgb(255,58,49)'
-									}
-								}
-							],
-							content: '新增' + new Date().getTime()
-						});
-						uni.showToast({
-							title: `添加了一条数据`,
-							icon: 'none'
-						});
-					} else {
-						uni.showToast({
-							title: `最多添加十条数据`,
-							icon: 'none'
-						});
-					}
-				} else {
-					uni.showToast({
-						title: `点击了${e.content.text}按钮`,
-						icon: 'none'
-					});
+				})
+			},
+			
+			getBlockNum(str){
+				var strS =  str.match(/ /g)
+				if(strS == null ){
+					return 0
+				}else{
+					let kongge = str.match(/ /g).length // 空格 6
+					
+					return kongge
 				}
+				
 			}
-		}
+	
+		},
+		
+		
+		
+
 	};
+	
+	
 </script>
 
 
 <style lang="scss">
-	.content-box {
-		flex: 1;
-		/* #ifdef APP-NVUE */
-		justify-content: center;
-		/* #endif */
-		height: 44px;
-		line-height: 44px;
-		padding: 0 15px;
-		position: relative;
-		background-color: #fff;
-		border-bottom-color: #f5f5f5;
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
-	}
-
-	.content-text {
-		font-size: 15px;
-	}
-
-	.example-body {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: center;
-		padding: 10px 0;
-		background-color: #fff;
-	}
-
-	.button {
-		border-color: #e5e5e5;
-		border-style: solid;
-		border-width: 1px;
-		padding: 4px 8px;
-		border-radius: 4px;
-	}
-
-	.button-text {
-		font-size: 15px;
-	}
-
-	.slot-button {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		height: 100%;
-		/* #endif */
-		flex: 1;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding: 0 20px;
-		background-color: #ff5a5f;
-	}
-
-	.slot-button-text {
-		color: #ffffff;
-		font-size: 14px;
-	}
+	
 </style>
 
 

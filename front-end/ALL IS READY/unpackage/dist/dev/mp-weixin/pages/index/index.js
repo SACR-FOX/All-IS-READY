@@ -96,7 +96,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 166))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 196))
+    },
+    circleProgressBar: function() {
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 204))
     }
   }
 } catch (e) {
@@ -241,17 +244,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
-    return {};
-
+    return {
+      pro: 0.6 };
 
   },
   methods: {
     toTodolist: function toTodolist() {
       uni.navigateTo({
         url: "../todo_list/todo_list" });
+
+    },
+    toClassSche: function toClassSche() {
+      uni.navigateTo({
+        url: "../classSchedule/classSchedule" });
+
+    },
+    toTimer: function toTimer() {
+      uni.navigateTo({
+        url: "../timer/timer" });
+
+    },
+    toLeaderB: function toLeaderB() {
+      uni.navigateTo({
+        url: "../leaderBoard/leaderBoard" });
+
+    },
+    toFile: function toFile() {
+      uni.navigateTo({
+        url: "../file/file" });
+
+    },
+    toTest: function toTest() {
+      uni.navigateTo({
+        url: "../text/text" });
 
     } },
 

@@ -24,6 +24,14 @@
 		onLoad(obj){
 			this.list_id = obj.id
 			console.log(obj.id)
+			
+			uni.getImageInfo({
+				src : "https://s2.loli.net/2022/04/24/uGFO6zTxnAY39pE.png",
+				success: (res) => {
+					console.log(res.path)
+					console.log("success")
+				}
+			})
 		}
 	}
 </script>
@@ -31,3 +39,6 @@
 <style>
 
 </style>
+
+ 
+ 

@@ -125,7 +125,7 @@
 				uni.navigateTo({
 					url:"../file/file"
 				})
-			}
+			},
 		},
 		onLoad() {
 			uni.getSystemInfo({

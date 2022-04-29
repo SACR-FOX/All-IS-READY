@@ -12,8 +12,7 @@
 	background-color: #3C9CFF;
 	height: 30px;
 	width: 30px;
-	margin-top: -20rpx;
-	margin-left: 60rpx;
+	margin-left: 50rpx;
 	border-radius: 90%;
 	border: 3px solid #F1F1F1;
 }
@@ -42,5 +41,10 @@
 .exp_text{
 	text-align: right;
 	margin-top: 30rpx;
+}
+.top_rank_text{
+	margin-left: 17rpx;
+	font-size: 40rpx;
+	color: #ffffff;
 }
 

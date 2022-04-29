@@ -24,11 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
 view.data-v-48634e29, scroll-view.data-v-48634e29, swiper-item.data-v-48634e29 {
-=======
-view.data-v-113bc24f, scroll-view.data-v-113bc24f, swiper-item.data-v-113bc24f {
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -37,85 +33,39 @@ view.data-v-113bc24f, scroll-view.data-v-113bc24f, swiper-item.data-v-113bc24f {
   align-items: stretch;
   align-content: flex-start;
 }
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
 .u-tabs__wrapper.data-v-48634e29 {
-=======
-.u-input.data-v-113bc24f {
 
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   display: flex;
+
   flex-direction: row;
   align-items: center;
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
 }
 .u-tabs__wrapper__scroll-view-wrapper.data-v-48634e29 {
-=======
-  justify-content: space-between;
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   flex: 1;
   overflow: auto hidden;
 }
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
 .u-tabs__wrapper__scroll-view.data-v-48634e29 {
-=======
-.u-input--radius.data-v-113bc24f, .u-input--square.data-v-113bc24f {
-  border-radius: 4px;
-}
-.u-input--no-radius.data-v-113bc24f {
-  border-radius: 0;
-}
-.u-input--circle.data-v-113bc24f {
-  border-radius: 100px;
-}
-.u-input__content.data-v-113bc24f {
-  flex: 1;
 
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   display: flex;
+
   flex-direction: row;
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
   flex: 1;
 }
 .u-tabs__wrapper__nav.data-v-48634e29 {
-=======
-  align-items: center;
-  justify-content: space-between;
-}
-.u-input__content__field-wrapper.data-v-113bc24f {
-  position: relative;
 
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   display: flex;
+
   flex-direction: row;
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
   position: relative;
 }
 .u-tabs__wrapper__nav__item.data-v-48634e29 {
   padding: 0 11px;
-=======
-  margin: 0;
-  flex: 1;
-}
-.u-input__content__field-wrapper__field.data-v-113bc24f {
-  line-height: 26px;
-  text-align: left;
-  color: #303133;
-  height: 24px;
-  font-size: 15px;
-  flex: 1;
-}
-.u-input__content__clear.data-v-113bc24f {
-  width: 20px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: #c6c7cb;
 
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-tabs/u-tabs.wxss
 }
 .u-tabs__wrapper__nav__item--disabled.data-v-48634e29 {
   cursor: not-allowed;
@@ -138,16 +88,5 @@ view.data-v-113bc24f, scroll-view.data-v-113bc24f, swiper-item.data-v-113bc24f {
   transition-property: transform;
   transition-property: transform, -webkit-transform;
   transition-duration: 300ms;
-=======
-  -webkit-transform: scale(0.82);
-          transform: scale(0.82);
-  margin-left: 4px;
-}
-.u-input__content__subfix-icon.data-v-113bc24f {
-  margin-left: 4px;
-}
-.u-input__content__prefix-icon.data-v-113bc24f {
-  margin-right: 4px;
->>>>>>> 509cec73c75ae12deaddb973ff424b45b281e56a:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-input/u-input.wxss
 }
 
