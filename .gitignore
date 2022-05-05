@@ -5,3 +5,5 @@ npm-debug.log*
 *.pptx
 *.ppt
 *.drawio
+.idea
+/media

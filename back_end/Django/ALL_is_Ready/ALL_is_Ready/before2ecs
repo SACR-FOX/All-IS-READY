@@ -1,0 +1,20 @@
+修改 tools/common.py 中的各项自定义属性
+修改 settings 中 crontab log 存放路径
+
+
+
+
+待完善功能：
+
+课程社区点赞功能
+积累时长定时清零
+班级排行榜
+
+
+包：
+pymysql
+oss2
+pyjwt
+django-crontab
+
+
