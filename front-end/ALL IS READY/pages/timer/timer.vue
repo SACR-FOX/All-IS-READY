@@ -135,15 +135,18 @@
 			
 			//倒计时
 			counter(){
-				
+				this.date = this.poject_now.date/(this.poject_now.percent/100)
+				console.log(this.date)
 				let that = this
+				let per = that.poject_now.percent
+				console.log(per)
 				// console.log(this.poject_now.date)
 				if(that.poject_now.date == 0 || !that.timer_flag){
 					clearTimeout(this.timer)
 				}else{
 					
 					this.poject_now.date = this.poject_now.date -1
-					this.poject_now.percent = Math.round((this.poject_now.date/that.date)*100)
+					this.poject_now.percent = Math.round((this.poject_now.date/(that.date))*100)
 					setTimeout(that.counter,1000)
 				}
 			},
@@ -235,7 +238,7 @@
 			}
 		},
 		onLoad() {
-			this.date = this.poject_now.date
+			
 			//
 			
 		},
