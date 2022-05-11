@@ -31,6 +31,21 @@ class ScheduleSerializer(serializers.ModelSerializer):
             "Loaction":{
                 "required":False,
                 "max_length": 20,
-                "default":""
+                "default":"未设置教室位置"
+            },
+            "UID":{
+                "required":True,
+                "allow_null": False,
+                "write_only":True
+            },
+            "OrgID": {
+                "required": False,
+                "default":-1,
+                "write_only": True
+            },
+            "UUID":{
+                "required":True,
+                "write_only":True
             }
+
         }

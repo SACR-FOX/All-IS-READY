@@ -25,7 +25,7 @@ class UserDetail (ModelViewSet): #用户属性方法 查询/修改信息
         ser=UserSerializers(instance=user,data=request.data,partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
-        return Response(data=ser.data)
+        return Response(data=ser.data,status=status.HTTP_200_OK)
 
 class UserRegister(APIView):
 
@@ -71,28 +71,28 @@ class UserLogin(APIView):  #登录
         return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID})
 
 
-class Rank(APIView):
-
-    def get(self,request):
-        OrgID=request.user['OrgID']
-        try:
-            usrs=User.objects.filter(OrgID=OrgID).order_by('-Accumulation','-EXP')[:10]
-            date={}
-            date['result']="ok"
-            usrList=[]
-            for u in usrs:
-                item={}
-                item['Uname']=u.Uname
-                item['header']=common.HOST_PREFIX+u.Header.url
-                item['Rank']=u.Rank
-                item['Accumulation']=u.Accumulation
-                usrList.append(item)
-
-            date['data']=usrList
-            return Response(date,status=status.HTTP_200_OK)
-
-        except Exception as e:
-            print(e)
-            return Response({"result":"internal error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+# class Rank(APIView):
+#
+#     def get(self,request):
+#         OrgID=request.user['OrgID']
+#         try:
+#             usrs=User.objects.filter(OrgID=OrgID).order_by('-Accumulation','-EXP')[:10]
+#             date={}
+#             date['result']="ok"
+#             usrList=[]
+#             for u in usrs:
+#                 item={}
+#                 item['Uname']=u.Uname
+#                 item['header']=common.HOST_PREFIX+u.Header.url
+#                 item['Rank']=u.Rank
+#                 item['Accumulation']=u.Accumulation
+#                 usrList.append(item)
+#
+#             date['data']=usrList
+#             return Response(date,status=status.HTTP_200_OK)
+#
+#         except Exception as e:
+#             print(e)
+#             return Response({"result":"internal error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

@@ -15,44 +15,42 @@ from django.core.cache import cache
 import uuid
 
 
-class Schedule_today(ModelViewSet):
-    queryset = Schedule.objects.all()
-    serializer_class = ScheduleSerializer
-    lookup_field = "UID"
+class Schedule_today(APIView):
 
-    @action(methods=['get'],detail=True,url_path="today")
-    def Today(self,request,UID):
-
-
+    def get(self,request):
+        UID = request.user['UID']
         weekNum=datetime.today().isoweekday()
-        self.queryset=self.queryset.filter(Q(Day=weekNum),Q(UID__exact=UID)).order_by("DurationStart")
+        datalist=Schedule.objects.filter(Q(Day=weekNum),Q(UID__exact=UID)).order_by("DurationStart")
         Switcher = switcher()
-        data=[]
-        for i in self.queryset:
+
+        result={}
+        content=[]
+        for i in datalist:
             Dict={}
+            Dict['ScheduleID'] = i.ScheduleID
             Dict["CurName"]=i.CurName
             Dict["Location"]=i.Location
             Dict["Tag"]=i.Tag
             Dict["Start"]=Switcher.sec2hm(i.DurationStart)
             Dict["End"] =Switcher.sec2hm(i.DurationEnd)
-            data.append(Dict)
 
-        return Response(data)
+            content.append(Dict)
 
-class Schedule_next(ModelViewSet):
-    queryset = Schedule.objects.all()
-    serializer_class = ScheduleSerializer
-    lookup_field = "UID"
+        result['content']=content
+        result['result']='ok'
+        return Response(result,status=status.HTTP_200_OK)
 
-    @action(methods=['get'], detail=True, url_path="next")
-    def Next(self, request, UID):
+class Schedule_next(APIView):
+
+    def get(self, request):
+        UID=request.user['UID']
         token =  "ScheduleNext"+str(UID)
 
         try:
             data = cache.get(token)
             if data:
                 # print("hit")
-                return Response(json.loads(data))
+                return Response(json.loads(data),status=status.HTTP_200_OK)
 
         except Exception as e:
             print(e)
@@ -60,20 +58,19 @@ class Schedule_next(ModelViewSet):
 
         weekNum = datetime.today().isoweekday()
         Switcher = switcher()
-        self.queryset = self.queryset.filter(Q(Day=weekNum), Q(UID__exact=UID),Q(DurationEnd__gte=Switcher.secFrom0())).order_by("DurationStart")
-        data = []
+        match= Schedule.objects.filter(Q(Day=weekNum), Q(UID__exact=UID),Q(DurationEnd__gte=Switcher.secFrom0())).order_by("DurationStart").first()
         Dict = {}
-        Dict["CurName"] = self.queryset.first().CurName
-        Dict["Location"] = self.queryset.first().Location
-        Dict["Tag"] = self.queryset.first().Tag
-        data.append(Dict)
+        Dict["CurName"] = match.CurName
+        Dict["Location"] = match.Location
+        Dict["Tag"] = match.Tag
 
         try:
-            cache.set(token,json.dumps(data),Switcher.due(self.queryset.first().DurationEnd))
+            cache.set(token,json.dumps(Dict),Switcher.due(match.DurationEnd))
         except Exception as e:
             print(e)
+            return Response({"result":"internal error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response(data)
+        return Response(Dict,status=status.HTTP_200_OK)
 
 
 class ScheduleAction(ModelViewSet):
@@ -88,7 +85,7 @@ class ScheduleAction(ModelViewSet):
         ser=ScheduleSerializer(instance=sc,data=request.data,partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
-        return Response(ser.data)
+        return Response(ser.data,status=status.HTTP_200_OK)
 
 
 
@@ -97,24 +94,26 @@ class GroupImport(APIView):  #按组织批量导入
     def post(self,request):
 
         orgID = request.data.get("OrgID")
-        UID = request.data.get("UID")
+        UID = request.user['UID']
         try:
             sc=Schedule.objects.filter(Q(OrgID__exact=orgID),Q(UID__exact=-1))
-            for i in sc:
+            if sc:
+                for i in sc:
 
-                check=Schedule.objects.filter(Q(UUID__exact=i.UUID),Q(UID__exact=UID))
-                if check.exists():
-                    print("exists")
-                else:
-                    Schedule.objects.create(UID=UID,OrgID=orgID,DurationStart=i.DurationStart,
-                                            DurationEnd = i.DurationEnd,Day=i.Day,CurName=i.CurName,
-                                            Tag=i.Tag,UUID=i.UUID,Location=i.Location
-                                            )
+                    check=Schedule.objects.filter(Q(UUID__exact=i.UUID),Q(UID__exact=UID))
+                    if check.exists():
+                        # print("exists")
+                        pass
+                    else:
+                        Schedule.objects.create(UID=UID,OrgID=orgID,DurationStart=i.DurationStart,
+                                                DurationEnd = i.DurationEnd,Day=i.Day,CurName=i.CurName,
+                                                Tag=i.Tag,UUID=i.UUID,Location=i.Location
+                                                )
 
         except Exception as e:
             print(e)
-            return Response("{'result':'err'}",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'result':'internal error'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response("{'result':'ok'}",status=status.HTTP_200_OK)
+        return Response({'result':'ok'},status=status.HTTP_200_OK)
 
 

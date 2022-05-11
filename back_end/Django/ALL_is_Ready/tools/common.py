@@ -28,7 +28,7 @@ def EXP2Rank(exp):
 def addEXP(usr,exp):
     usr.EXP+=exp
     usr.save()
-    usr.Rank=EXP2Rank(usr.Rank)
+    usr.Rank=EXP2Rank(usr.EXP)
     usr.save()
 
 
@@ -60,5 +60,9 @@ def daily_jobs():
 
 
     # 每日清除所有用户已完成的ToDoList项
+    DoneList=ToDoList.objects.filter(Status=True)
+    DoneList.delete()
+
+    #每日检查和更新组织任务
 
 

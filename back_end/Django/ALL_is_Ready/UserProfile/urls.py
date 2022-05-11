@@ -12,7 +12,7 @@ router.register('Detail',views.UserDetail,basename="UserDetail")
 urlpatterns = [
 
     path('Login',views.UserLogin.as_view(),name="用户登录"),
-    path('Rank',views.Rank.as_view(),name="经验值排名"),
+    # path('Rank',views.Rank.as_view(),name="经验值排名"),
     path('Register',views.UserRegister.as_view(),name="用户注册"),
 
 ]+router.urls

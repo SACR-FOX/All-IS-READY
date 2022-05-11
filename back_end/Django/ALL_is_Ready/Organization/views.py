@@ -15,6 +15,8 @@ from django.core.cache import cache
 import uuid
 from tools import common as CommonTools
 from . pagination import OrgTaskNumberPagination
+from django.core.paginator import Paginator
+sw=switcher()
 
 class OrgAction(ModelViewSet):
     queryset = Organization.objects.all()
@@ -45,17 +47,56 @@ class OrgTaskAction(ModelViewSet):
         ser.save()
         return Response(ser.data)
 
-class OrgTaskAll(ModelViewSet):
+class OrgTaskAll(APIView):
 
-    def get_queryset(self):
-        OrgID = self.request.query_params.get("OrgID")
-        return OrgTask.objects.filter(OrgID=OrgID)
+    def get(self,request):
+        OrgID = request.user['OrgID']
+        TaskLisk=OrgTask.objects.filter(OrgID=OrgID)
+        page = request.query_params.get("page")
+        if not page:
+            page = 1
+        else:
+            page = int(page)
 
-    serializer_class = TaskSerializer
-    pagination_class = OrgTaskNumberPagination
+
+        result={}
+        dataList=[]
+        #check
 
 
+        paginator = Paginator(TaskLisk,12)
+        Page=paginator.page(page)
+        if Page.has_next():
+            result['next'] = True
+        else:
+            result['next'] = False
+        if Page.has_previous():
+            result['previous'] = True
+        else:
+            result['previous'] = False
+        result['count'] = paginator.count
 
+        for i in Page.object_list:
+            item = {}
+            item['TaskID'] = i.TaskID
+            item['TaskName'] = i.TaskName
+            if sw.ifPass(i.TimeDue):
+                i.Status = False
+                i.save()
+                item['Status'] = i.Status
+            else:
+                item['Status'] = i.Status
+
+            item['TimeStart'] = i.TimeStart
+            item['TimeDue'] = i.TimeDue
+            # item['Description'] = i.Description
+            # item['Creator'] = i.Creator
+            # item['AckCount'] = i.AckCount
+            # item['CID'] = i.CID
+            dataList.append(item)
+
+        result['data']=dataList
+        return Response(result,status=status.HTTP_200_OK)
 
 class ACK(APIView):
 
@@ -71,6 +112,7 @@ class ACK(APIView):
         dataFailed={
             "result":"sanction denied"
         }
+
         if Usr.OrgID != Tsk.OrgID:
             return Response(dataFailed,status=status.HTTP_403_FORBIDDEN)
 
@@ -79,6 +121,8 @@ class ACK(APIView):
             return Response(dataFinish,status=status.HTTP_200_OK)
 
         else:
+            if Tsk.Status==False:
+                return Response({"result":"Task Due"},status=status.HTTP_403_FORBIDDEN)
             Tsk.AckCount+=1
             Tsk.save()
             TaskAck.objects.create(UID=UID,TaskID=TaskID)

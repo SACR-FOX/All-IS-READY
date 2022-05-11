@@ -36,3 +36,9 @@ class switcher:
         else :
             return True
 
+    def ifPass(self,due):
+        now = int(time.time())
+        if due >= now:
+            return False
+        if due <now:
+            return True

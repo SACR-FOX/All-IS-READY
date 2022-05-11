@@ -22,7 +22,7 @@ import os
 from tools.common import FILE_UPLOAD_CACHE_PATH
 
 # 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
-auth = oss2.Auth('LTAI5tNtrJxgmQ5pgAMjGoH2', 'BlKZ0n8As55Jqgju1RObVCOsaT1705')
+auth = oss2.Auth('', '')
 # yourEndpoint填写Bucket所在地域对应的Endpoint。以华东1（杭州）为例，Endpoint填写为https://oss-cn-hangzhou.aliyuncs.com。
 # 填写Bucket名称。
 bucket = oss2.Bucket(auth, 'oss-cn-hangzhou.aliyuncs.com', 'all-is-ready-file-storage')
@@ -107,6 +107,7 @@ class Detail(ModelViewSet):
     def get_fold_list(self,request):
         UID=request.user['UID']
         OrgID=request.data.get('OrgID')
+        print(OrgID)
         if not OrgID:
             data = FileModel.objects.filter(Q(UID=UID),Q(OrgID=-1)).values('FolderName').distinct().order_by('FolderName')
         else:

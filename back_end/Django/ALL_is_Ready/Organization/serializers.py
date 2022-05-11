@@ -54,7 +54,8 @@ class TaskSerializer(serializers.ModelSerializer):
             },
             "Status": {
                 "required": False,
-                "default": False
+                "default": True,
+                "read_only":True
             },
             "CID":{
                 "required": False,
@@ -76,7 +77,8 @@ class TaskSerializer(serializers.ModelSerializer):
             },
             "AckCount":{
                 "required": False,
-                "default": 0
+                "default": 0,
+                "read_only":True
             }
         }
 

@@ -74,7 +74,7 @@ class OrgTask(models.Model):
     CID=models.IntegerField(verbose_name="绑定课程ID")
     TimeStart=models.IntegerField(verbose_name="任务开始时间")
     TimeDue=models.IntegerField(verbose_name="任务到期时间")
-    Status=models.BooleanField(verbose_name="当前状态")
+    Status=models.BooleanField(verbose_name="当前状态",default=True)
     Description=models.CharField(max_length=256,verbose_name="任务描述")
     TaskName=models.CharField(max_length=30,verbose_name="任务标题")
     Creator=models.CharField(max_length=20,verbose_name="创建者")
