@@ -17,13 +17,22 @@
 		    </u-navbar>
 		</view>
 		
-		<u-tabs :list="list1" style="margin-top: 70rpx;"></u-tabs>
+		<u-tabs :list="list1"
+			style="margin-top: 70rpx;"
+			@click="change":current="0"
+			>
+			<view v-if="current==0">
+				<view class="course" v-for="(item,index) in list2" :style="{backgroundColor:item.Tag}">
+					<text class="time">{{item.Time}}</text>
+					<text class="curName">{{item.curName}}</text>
+					<text class="room">{{item.room}}</text>
+					<view>1111</view>
+				</view>
+			</view>
+		</u-tabs>
 		
-		<view class="course" v-for="(item,index) in list2" :style="{backgroundColor:item.Tag}">
-			<text class="time">{{item.Time}}</text>
-			<text class="curName">{{item.curName}}</text>
-			<text class="room">{{item.room}}</text>
-		</view>
+		
+		
 	</view>
 </template>
 
@@ -31,20 +40,27 @@
 	export default {
 		data() {
 			return {
-					list1: [{
+				list1: [{
                     name: '星期天',
+					currentIndex:0,
                 }, {
                     name: '星期一',
+					currentIndex:1,
                 }, {
-                    name: '星期二'
+                    name: '星期二',
+					currentIndex:2,
                 }, {
-                    name: '星期三'
+                    name: '星期三',
+					currentIndex:3,
                 }, {
-                    name: '星期四'
+                    name: '星期四',
+					currentIndex:4,
                 }, {
-                    name: '星期五'
+                    name: '星期五',
+					currentIndex:5,
                 }, {
-                    name: '星期六'
+                    name: '星期六',
+					currentIndex:6,
                 }],
 				
 					list2: [{
@@ -76,7 +92,10 @@
 				
 		},
 		methods: {
-	
+			change(item){
+				console.log('item',item)
+				this.currentIndex = item
+			}
 		}
 	}
 </script>

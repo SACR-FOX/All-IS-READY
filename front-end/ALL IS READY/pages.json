@@ -73,7 +73,24 @@
 			    "navigationBarTitleText": "",
 			    "enablePullDownRefresh": false
 			}
+		},
+		{
+			"path":"pages/community/community",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
 		}
+        ,{
+            "path" : "pages/topic/topic",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
