@@ -91,6 +91,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/communityTopic/communityTopic",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
