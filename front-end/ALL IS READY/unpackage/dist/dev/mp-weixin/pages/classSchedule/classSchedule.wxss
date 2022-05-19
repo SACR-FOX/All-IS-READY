@@ -1,0 +1,26 @@
+
+.course{
+	height: 100rpx;
+	flex-direction: row;
+	white-space: nowrap;
+	background-color: #55ff7f;
+	margin-top: 10rpx;
+}
+.time{
+	margin-left: 30rpx;
+}
+.curName{
+	margin-top: 50rpx;
+	margin-left: 50rpx;
+	font-size: 40rpx;
+	font-weight: bold;
+	align-items: center;
+	color: #ffffff;
+}
+.room{
+	margin-left: 50rpx;
+	font-size: 40rpx;
+	font-weight: bold;
+	color: #ffffff;
+}
+

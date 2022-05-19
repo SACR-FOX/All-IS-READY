@@ -1,0 +1,17 @@
+{
+    "id": "circle-progress-bar",
+    "name": "圆形进度条(纯Css)",
+    "version": "1.0.0",
+    "description": "纯css圆形进度条，不用担心canvas的兼容和各种问题啦",
+    "keywords": [
+        "圆形",
+        "圆形进度条",
+        "进度条"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
+}

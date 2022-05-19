@@ -1,0 +1,1 @@
+<view class="container"><view style="height:200px;"></view><canvas style="{{'width:'+(canvasW+'px')+';'+('height:'+(460+'rpx')+';')}}" canvas-id="firstCanvas" id="firstCanvas"></canvas></view>
