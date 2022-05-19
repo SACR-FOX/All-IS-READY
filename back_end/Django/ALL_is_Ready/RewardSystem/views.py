@@ -48,14 +48,18 @@ class Situation(APIView):
     def get(self,request):
         usr=User.objects.get(UID=request.user['UID'])
         OrgUserList=User.objects.filter(OrgID=usr.OrgID).order_by("-Accumulation")
-        print(OrgUserList.count())
         OrgRank=0
+        Accumulation=0
         for index,i in enumerate(OrgUserList):
             if i.UID == usr.UID:
-                print(index)
-                OrgRank=index
-                print(index)
-        return Response("Ok")
+                OrgRank=index+1
+                Accumulation=i.Accumulation
+        percent=format((OrgRank/OrgUserList.count())*100,'.1f')
+        data={}
+        data['percent']=float(percent)
+        data['Rank']=OrgRank
+        data['Accumulation']=Accumulation
+        return Response(data,status=status.HTTP_200_OK)
 
 
 

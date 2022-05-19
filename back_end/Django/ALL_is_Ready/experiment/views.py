@@ -76,3 +76,11 @@ class requestTest(APIView):
 
         print(load)
         return Response(load)
+
+class modify_params(APIView):
+    def post(self,request):
+        a=request.data.get('param1')
+        if a == '':
+            return Response("empty")
+        if not a:
+            return Response("false")

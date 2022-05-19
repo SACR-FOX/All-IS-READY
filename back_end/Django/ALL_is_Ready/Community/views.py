@@ -2,6 +2,7 @@ import json
 import time
 from django.db.models import Q
 
+import tools.common
 from models.models import Community,CommunityTopic,TopicPost,PostImage,User,CommunityStars
 from . serializers import CommunitySerializer,TopicSerializers,PostSerializers
 from rest_framework import status
@@ -21,22 +22,53 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, Invali
 
 class CommAction(ModelViewSet):
     #增删改
-    queryset = Community.objects.all()
+    queryset = Community.objects.all().order_by("-PostCount","-Renewal")
     serializer_class = CommunitySerializer
     lookup_field = "CommunityID"
     pagination_class = pagination.CommunityNumberPagination
 
     @action(methods=['put'], detail=True, url_path="Modify")
     def Modify(self, request, CommunityID):
-        Comm=Community.objects.get(CommunityID=CommunityID)
-        ser = CommunitySerializer(instance=Comm, data=request.data, partial=True)
+        try:
+            Comm=Community.objects.get(CommunityID=CommunityID)
+        except Exception:
+            return Response({"result":"CommunityID not match"},status=status.HTTP_404_NOT_FOUND)
+
+        if request.user['UID']!=Comm.AdministratorID:
+            return Response({"result": "Permission Denied"}, status=status.HTTP_403_FORBIDDEN)
+
+        newDict = {}
+        if request.data.get('CommunityName'):
+            newDict['CommunityName'] = request.data.get('CommunityName')
+        if request.data.get('CommunityName'):
+            newDict['Description'] = request.data.get('Description')
+        if request.data.get('AdministratorID'):
+            newID =int(request.data.get('AdministratorID'))
+            try:
+                User.objects.get(UID=newID)
+            except Exception:
+                return Response({"result":"user not exit"},status=status.HTTP_404_NOT_FOUND)
+            newDict['AdministratorID']=newID
+
+
+        try:
+            img = request.FILES.get('Poster')
+        except Exception :
+            return Response({"result": "get pic failed"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if img:
+            Comm.Poster.delete()
+            newDict['Poster'] = img
+
+
+        ser = CommunitySerializer(instance=Comm, data=newDict, partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
         return Response(ser.data)
 
 
 class TopicAction(ModelViewSet):
-    queryset = CommunityTopic.objects.all().order_by('-Stars')
+    queryset = CommunityTopic.objects.all().order_by('-Stars','-Time')
     serializer_class = TopicSerializers
     lookup_field = "TopicID"
 
@@ -48,6 +80,8 @@ class TopicAction(ModelViewSet):
         if not check:
             return Response({"result":"社区ID错误"},status=status.HTTP_400_BAD_REQUEST)
 
+        Comm = Community.objects.get(CommunityID=CommunityID)
+
         UID=request.user['UID']
         Time=int(time.time())
         HasImage=request.data.get('HasImage')
@@ -56,7 +90,7 @@ class TopicAction(ModelViewSet):
             try:
                 img=request.FILES.get('TopicPic')
                 CommunityTopic.objects.create(CommunityID=CommunityID, UID=UID,
-                                              Time=Time, HasImage=True, Title=Title, ImageUri=img)
+                                              Time=Time, HasImage=True, Title=Title, ImageUri=img,Stars=0)
             except Exception as e:
                 print(e)
                 return Response({"result":"save image faild"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -65,7 +99,7 @@ class TopicAction(ModelViewSet):
         else:
             try:
                 CommunityTopic.objects.create(CommunityID=CommunityID,Creator=UID,
-                                              Time=Time,HasImage=False,Title=Title)
+                                              Time=Time,HasImage=False,Title=Title,Stars=0)
             except Exception as e:
                 print(e)
                 return Response({"result": "internal error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -75,20 +109,60 @@ class TopicAction(ModelViewSet):
         CommonTools.addEXP(usr, 5)
         # CommonTools.EXP2Rank(usr.EXP)
 
+        # update community renewal
+        Comm.Renewal=Time
+        Comm.PostCount+=1
+        Comm.save()
+
         return Response({"result": "ok"}, status=status.HTTP_200_OK)
 
 
     @action(methods=['put'], detail=True, url_path="Modify")
     def Modify(self, request, TopicID):
-        topic = CommunityTopic.objects.get(TopicID=TopicID)
-        ser = TopicSerializers(instance=topic, data=request.data, partial=True)
+
+        try:
+            topic = CommunityTopic.objects.get(TopicID=TopicID)
+
+        except Exception as e:
+            print(e)
+            return Response({"result":"ID not Match"},status=status.HTTP_404_NOT_FOUND)
+
+        if request.user['UID'] != topic.UID:
+            return Response({"result": "Permission Denied"}, status=status.HTTP_403_FORBIDDEN)
+
+        newDict={}
+        if request.data.get('Title'):
+            newDict['Title'] = request.data.get('Title')
+        if request.data.get('HasImage')=='False':
+            newDict['HasImage']=True
+        elif request.data.get('HasImage')=='True':
+            try:
+                img = request.FILES.get('TopicPic')
+
+            except Exception as e:
+                print(e)
+                return Response({"result":"get pic failed"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            if img:
+                topic.ImageUri.delete()
+                newDict['HasImage']=True
+                newDict['ImageUri']=img
+            else:
+                topic.ImageUri.delete()
+                newDict['HasImage'] = False
+                newDict['ImageUri'] = CommonTools.HOST_PREFIX+CommonTools.DEFAULT_PIC
+
+        ser = TopicSerializers(instance=topic, data=newDict, partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
         return Response(ser.data)
 
     @action(methods=['post'],detail=True,url_path="Star")
     def Star(self,request,TopicID):
-        topic = CommunityTopic.objects.get(TopicID=TopicID)
+        try:
+            topic = CommunityTopic.objects.get(TopicID=TopicID)
+        except Exception :
+            return Response({"result": "TopicID don't match"}, status=status.HTTP_404_NOT_FOUND)
+
 
         #if repeat
         check=CommunityStars.objects.filter(Q(UID=request.user['UID']),Q(TargetID=topic.TopicID),Q(type=0))
@@ -116,7 +190,7 @@ class TopicAction(ModelViewSet):
 class ShowAllTopic(ModelViewSet):
     def get_queryset(self):
         CommID = self.request.query_params.get("CommunityID")
-        return CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars')
+        return CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars','-Time')
 
     serializer_class = TopicSerializers
     pagination_class = pagination.TopicPageNumberPagination
@@ -134,7 +208,7 @@ class PostAction(ModelViewSet):
         TopicID = request.data.get('TopicID')
         check = CommunityTopic.objects.filter(TopicID=TopicID)
         if not check:
-            return Response({"result": "主题ID错误"},status=status.HTTP_400_BAD_REQUEST)
+            return Response({"result": "话题ID错误"},status=status.HTTP_400_BAD_REQUEST)
 
         UID = request.user['UID']
         Time = int(time.time())
@@ -170,7 +244,10 @@ class PostAction(ModelViewSet):
 
     @action(methods=['post'], detail=True, url_path="Star")
     def Star(self, request, PostID):
-        post=TopicPost.objects.get(PostID=PostID)
+        try:
+            post=TopicPost.objects.get(PostID=PostID)
+        except Exception:
+            return Response({"result":"PostID don't match"}, status=status.HTTP_404_NOT_FOUND)
 
         # if repeat
         check = CommunityStars.objects.filter(Q(UID=request.user['UID']), Q(TargetID=post.PostID), Q(type=1))
@@ -195,6 +272,54 @@ class PostAction(ModelViewSet):
         else:
             return Response({'result': 'already thumbed'}, status=status.HTTP_403_FORBIDDEN)
 
+    @action(methods=['put'], detail=True, url_path="Modify")
+    def Modify(self, request, PostID):
+
+        try:
+            posts=TopicPost.objects.get(PostID=PostID)
+        except Exception as e:
+            print(e)
+            return Response({"result": "ID not Match"},status=status.HTTP_404_NOT_FOUND)
+
+
+        if request.data.get('HasImage')=='False':
+            newDict={}
+            newDict['HasImage']=True
+            if request.data.get('Content'):
+                newDict['Content']=request.data.get('Content')
+
+            ser = PostSerializers(instance=posts, data=newDict, partial=True)
+            ser.is_valid(raise_exception=True)
+            ser.save()
+            return Response(ser.data)
+
+        elif request.data.get('HasImage')=='True':
+            pics=PostImage.objects.filter(PostID=PostID)
+            pics.delete()
+
+            newDict = {}
+            newDict['HasImage'] = True
+            if request.data.get('Content'):
+                newDict['Content'] = request.data.get('Content')
+
+            try:
+                imgs = request.FILES.getlist('PostPic')
+                if  imgs:
+                    for f in imgs:
+                        PostImage.objects.create(PostID=PostID,Uri=f)
+                else:
+                    newDict['HasImage']=False
+
+            except Exception as e:
+                print(e)
+                return Response({"result": "save image faild"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+            ser = PostSerializers(instance=posts, data=newDict, partial=True)
+            ser.is_valid(raise_exception=True)
+            ser.save()
+            return Response(ser.data)
+
 class ShowAllPost(APIView):
 
     def get(self, request):
@@ -205,7 +330,7 @@ class ShowAllPost(APIView):
         else:
             page=int(page)
 
-        posts = TopicPost.objects.filter(TopicID=TopicID).order_by('-Stars')
+        posts = TopicPost.objects.filter(TopicID=TopicID).order_by('-Time','-Stars')
         paginator=Paginator(posts,12)
         Page=paginator.page(page)
 
@@ -258,5 +383,18 @@ class ShowAllPost(APIView):
 
         content['result']=itemList
         return Response(content, status=status.HTTP_200_OK)
+
+class CheckStarCondition(APIView):
+    def post(self,requset):
+        ID=requset.data.get('ID')
+        type=requset.data.get('type')
+        UID=requset.user['UID']
+
+        try:
+            check=CommunityStars.objects.get(TargetID=ID,type=type,UID=UID)
+            if check:
+                return Response({"result": True}, status=status.HTTP_200_OK)
+        except Exception:
+            return Response({"result":False},status=status.HTTP_200_OK)
 
 
