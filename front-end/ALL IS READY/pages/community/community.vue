@@ -1,5 +1,14 @@
 <template>
 	<view>
+		
+		<u-navbar
+		    title="社区广场"
+		    @rightClick="rightClick"
+		    :autoBack="true">
+		</u-navbar>
+		
+		<view style="margin-top: 80rpx;"></view>
+		
 		<view class="communityItem" @click="jump">
 			<view class="row">
 				<view v-if="HasImage">
@@ -80,7 +89,6 @@
 	}
 	 .communityItem{
 		 padding: 10rpx;
-		 
 		 .image{
 			 height: 90rpx;
 			 width: 90rpx;

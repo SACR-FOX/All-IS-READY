@@ -21,15 +21,14 @@
 			style="margin-top: 70rpx;"
 			@click="change":current="0"
 			>
-			<view v-if="current==0">
-				<view class="course" v-for="(item,index) in list2" :style="{backgroundColor:item.Tag}">
-					<text class="time">{{item.Time}}</text>
-					<text class="curName">{{item.curName}}</text>
-					<text class="room">{{item.room}}</text>
-					<view>1111</view>
-				</view>
-			</view>
 		</u-tabs>
+		
+		<view class="course" v-for="(item,index) in list2" :style="{backgroundColor:item.Tag}">
+				<text class="time">{{item.Time}}</text>
+				<text class="curName">{{item.curName}}</text>
+				<text class="room">{{item.room}}</text>
+			</view>
+		</view>
 		
 		
 		
@@ -112,11 +111,11 @@
 		margin-left: 30rpx;
 	}
 	.curName{
-		margin-top: 50rpx;
 		margin-left: 50rpx;
 		font-size: 40rpx;
 		font-weight: bold;
 		align-items: center;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
 		color: #ffffff;
 	}
 	.room{
@@ -124,5 +123,6 @@
 		font-size: 40rpx;
 		font-weight: bold;
 		color: #ffffff;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
 	}
 </style>
