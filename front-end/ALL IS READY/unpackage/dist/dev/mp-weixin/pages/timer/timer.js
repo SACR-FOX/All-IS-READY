@@ -96,13 +96,13 @@ var components
 try {
   components = {
     circleProgressBar: function() {
-      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 204))
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 226))
     },
     uIcon: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 252))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 274))
     },
     "u-Text": function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 288))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 310))
     }
   }
 } catch (e) {
@@ -137,12 +137,6 @@ var render = function() {
       m1: m1
     }
   })
-
-  if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      _vm.timer_flag = false
-    }
-  }
 
   _vm.$mp.data = Object.assign(
     {},
@@ -186,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -245,42 +239,45 @@ var _default =
       "history_list": [{
         "name": "阅读 Passsage 1",
         "date": 1500,
-        "percent": "0%",
+        "percent": 100,
         "color": 0 },
       {
         "name": "口语 Part 1",
         "date": 1500,
-        "percent": "0%",
+        "percent": 100,
         "color": 1 },
       {
         "name": "阅读 Passsage 1",
         "date": 120,
-        "percent": "100%",
+        "percent": 100,
         "color": 2 },
       {
         "name": "阅读 Passsage 1",
         "date": 3600,
-        "percent": "100%",
+        "percent": 100,
         "color": 1 },
       {
         "name": "阅读 Passsage 1",
         "date": 4200,
-        "percent": "100%",
+        "percent": 100,
         "color": 0 },
       {
         "name": "阅读 Passsage 1",
         "date": 60,
-        "percent": "100%",
+        "percent": 100,
         "color": 2 }],
 
 
       //显示当前的计划
       "poject_now": {
-        "name": "阅读 Passsage 1",
-        "date": 60,
-        "percent": "0%",
+        "name": "当前没有任务",
+        "date": 0,
+        "percent": 0,
         "color": 0 },
 
+
+      //当前是否有任务控制
+      work_flag: false,
 
       //计时器控制
       "fontSize": "50px",
@@ -289,38 +286,99 @@ var _default =
       "timer_flag": false, //控制暂停开始
       "timer": null,
       "date": 0,
-
+      //控制暂停icon
+      icon: ['pause-circle', 'checkmark-circle'],
+      icon_flag: 0,
+      icon_text: ['暂停', '结束'],
       //
-      "timer_color": {} };
+      "timer_color": {},
+
+
+      //开始按钮控制
+      starButton: true };
 
   },
   methods: {
 
+    //切换任务
+    workChanger: function workChanger(item) {
+      //this.counterEnd()
+      if (!this.work_flag) {
+        this.work_flag = !this.work_flag;
+        this.poject_now = item;
+        // this.pro = item.percent/100
+        this.date = this.poject_now.date;
+        console.log(item.name);
+      } else {
+        console.log("请先结束");
+      }
+
+    },
+
     //倒计时
     counter: function counter() {
-
+      this.date = this.poject_now.date / (this.poject_now.percent / 100);
+      console.log(this.date);
       var that = this;
-      console.log(this.poject_now.date);
+      var per = that.poject_now.percent;
+      console.log(per);
+      // console.log(this.poject_now.date)
       if (that.poject_now.date == 0 || !that.timer_flag) {
         clearTimeout(this.timer);
       } else {
+
         this.poject_now.date = this.poject_now.date - 1;
-        that.pro = Math.round(this.poject_now.date / this.date * 100) / 100;
+        this.poject_now.percent = Math.round(this.poject_now.date / that.date * 100);
         setTimeout(that.counter, 1000);
       }
     },
 
     counterStart: function counterStart() {
+
+      if (!this.work_flag) {
+        uni.showToast({
+          title: "请选择任务",
+          icon: "error" });
+
+        return 0;
+      }
       this.timer_flag = true;
+      this.icon_flag = 0;
       clearTimeout(this.timer);
       this.timer = null;
-      this.timer = setTimeout(this.counter(), 1000);
+      if (this.starButton) {
+        this.timer = setTimeout(this.counter(), 1000);
+        this.starButton = false;
+
+      } else {
+        uni.showToast({
+          title: "请不要重复点击",
+          icon: "error" });
+
+      }
+
     },
 
     counterEnd: function counterEnd() {
-      this.timer_flag = false;
-      clearTimeout(this.timer);
-      this.timer = null;
+      var that = this;
+      if (this.icon_flag == 0) {
+        this.timer_flag = false;
+        this.icon_flag = 1;
+        this.starButton = true;
+        // clearTimeout(this.timer)
+
+        this.timer = null;
+
+      } else {
+        this.icon_flag = 0;
+        this.work_flag = false;
+        that.poject_now = {
+          "name": "当前没有任务",
+          "date": 0,
+          "percent": 0,
+          "color": 0 };
+
+      }
     },
 
     //时间转换
@@ -344,8 +402,8 @@ var _default =
         return timeC;
       } else {
         var hour = Math.floor(time / 3600).toString();
-        var _min = Math.floor(time / 3600 / 60).toString();
-        var _sec = (time % 3600).toString();
+        var _min = Math.floor(time % 3600 / 60).toString();
+        var _sec = (time % 3600 % 60).toString();
         that.fontSize = "45px";
         if (hour.length <= 1) {
           hour = "0" + hour;
@@ -362,8 +420,8 @@ var _default =
     } },
 
   onLoad: function onLoad() {
-    this.date = this.poject_now.date;
 
+    //
 
   },
 
@@ -373,6 +431,7 @@ var _default =
   onHide: function onHide() {
 
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

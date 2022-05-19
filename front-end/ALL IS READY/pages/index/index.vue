@@ -11,7 +11,7 @@
 									font-weight: bold;">{{learnTime}}</text>
 						<text style="margin-top: 30rpx;">小时</text>
 					</view>
-					<view style="text-align: right;">TOP:10%</view>
+					<view style="text-align: right;">TOP:{{rank}}%</view>
 				</view>
 			</view>
 		</view>
@@ -22,7 +22,7 @@
 					<view style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
 						<text style="font-size: 30rpx; font-weight: bold; color: #E43D33;margin-left: 10rpx;">{{week[0]}}</text>
 						<text style="font-size: 75rpx; font-weight: bold; margin-top: 10rpx;">10</text>
-						<text style="font-size: 50rpx; font-weight: bold; margin-top: 30rpx;margin-left: 10rpx;">{{todoList}}</text>
+						<text style="font-size: 50rpx; font-weight: bold; margin-top: 30rpx;margin-left: 10rpx;">{{textFix(todoList,7)}}</text>
 					</view>
 				</view>
 				
@@ -90,10 +90,11 @@
 						week : ["星期一","星期二","星期三","星期四","星期五","星期六","星期日",],
 						week_id : -1,
 						days : -1,
-						todoList : "aaaa",
+						todoList : "aaaaaaaa",
 						
 						//学习时间
 						learnTime : 6,
+						rank : 10,
 						
 						//classSchedule
 						classSch : {
@@ -102,6 +103,7 @@
 							"room" : "信息实验室4",
 							"Tag" : "rgba(255, 190, 118,1.0)"
 						},
+						
 						//班级动态
 						classAct: "无事发生",
 						

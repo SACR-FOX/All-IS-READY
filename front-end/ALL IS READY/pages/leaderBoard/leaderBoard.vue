@@ -135,7 +135,7 @@
 		display: flex;
 		flex-direction: row;
 		white-space: nowrap;
-		background-color: #55ff7f;
+		background-color: #9bff29;
 		margin-top: 10rpx;
 	}
 	.rank_text{

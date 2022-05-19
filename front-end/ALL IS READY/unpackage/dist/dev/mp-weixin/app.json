@@ -7,7 +7,10 @@
     "pages/timer/timer",
     "pages/classSchedule/classSchedule",
     "pages/file/file",
-    "pages/leaderBoard/leaderBoard"
+    "pages/leaderBoard/leaderBoard",
+    "pages/community/community",
+    "pages/topic/topic",
+    "pages/file/file_detial"
   ],
   "subPackages": [],
   "window": {

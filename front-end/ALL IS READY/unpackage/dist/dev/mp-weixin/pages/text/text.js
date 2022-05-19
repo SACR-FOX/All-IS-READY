@@ -136,7 +136,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 
 {
@@ -160,8 +159,8 @@ var _default =
       SystemInfo: {}, //设备信息
 
       lineOne: '忆往昔，墨湖畔',
-      lineTwo: '湖光柳影 潋滟水波',
-      lineThree: '倒映出你最美的青春年华啊啊',
+      lineTwo: '湖光柳影  潋滟水波',
+      lineThree: '倒映出你最  美的青春年华',
 
       w: 0 //px 转 rpx 转换率
     };

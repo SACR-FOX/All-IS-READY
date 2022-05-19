@@ -41,21 +41,21 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 8px;
 }
 .card {
-  width: 300rpx;
-  height: 300rpx;
-  margin: 15px;
+  width: 350rpx;
+  height: 350rpx;
+  margin: 5px;
   background-color: rgba(241, 238, 236, 0.8);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .card_top {
   background-color: rgba(241, 238, 236, 0.8);
   border-radius: 30rpx;
+  height: 200rpx;
 }
 .card_bottom {
   width: 700rpx;

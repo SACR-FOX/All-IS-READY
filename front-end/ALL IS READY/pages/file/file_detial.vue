@@ -1,0 +1,22 @@
+<template>
+	<view>
+<web-view src="http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/Test2.pdf?Expires=1652794968&OSSAccessKeyId=TMP.3Kf5f8iPFKsYedkF1rfuY626RLkBAHxvSwgiB29r4ekDANRxTADkdNj5tLwPDDbaRL94dthmmHEQkqsfchB3UPuDje1wmH&Signature=h3jjKOhTf1aTOzX3CjOPeKSYD8o%3D"></web-view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style>
+
+</style>

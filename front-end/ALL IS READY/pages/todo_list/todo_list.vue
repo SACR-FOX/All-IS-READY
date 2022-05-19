@@ -18,9 +18,9 @@
 				</view>
 				<view class="input_item" @click="tag_picker_show = true">
 					<text v-if="picker_tag == 0" >请选择类型</text>
-					<text v-else>第{{picker_tag}}类</text>
+					<text v-else>{{picker_tag}}</text>
 					<u-picker :columns="columns"  @cancel = "tag_picker_show = false"
-							@confirm=""
+							@confirm="selectClass"
 							:show = "tag_picker_show" v-model="picker_tag"></u-picker>
 				</view>
 			</view>
@@ -60,7 +60,7 @@
 				<u-icon name="list" style="" size="25px" bold @click="classify()" ></u-icon>
 			</view>
 			<view  style="display: flex; flex-direction: column;justify-content: center;">
-				<scroll-view style=" height: 615px;"  :scroll-top="scrollTop" scroll-y="true">
+				<scroll-view style=" height: 615px;"  scroll-y="true">
 					<uni-swipe-action style="margin-left: 0px; height: 615px;">
 						<uni-swipe-action-item  class="list_item"
 												v-for="(item,index) in tagFilter(list)"
@@ -157,6 +157,7 @@
 				 //tag选择器控制
 				"tag_picker_show" : false,
 				"columns": [['第一类', '第二类', '第三类']],
+				"C_tag" : "null",
 				"picker_tag" : 0
 			}
 		},
@@ -237,6 +238,13 @@
 			    // console.log('close');
 			},
 			
+			//
+			selectClass(e){
+				this.tag_picker_show = false
+				this.date_flag = 1
+				this.picker_tag = e["value"]["0"]
+				console.log(e["value"]["0"])
+			},
 			
 			
 			//点击确定按钮后
@@ -268,7 +276,7 @@
 				that.list_classify = that.list
 				that.load = false
 			},
-			
+
 			
 			//点击分类按钮
 			classify(){

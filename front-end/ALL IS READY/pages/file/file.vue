@@ -1,8 +1,10 @@
 <template>
 	
 	<view>
+		
+		
 		<view>
-		    <u-navbar
+		   <u-navbar
 		        title="文件资料管理"
 		        @rightClick="rightClick"
 		        :autoBack="true"
@@ -22,58 +24,27 @@
 			
 			<view class="card_theme" @click="show()">
 				<scroll-view scroll-y="true" class="scroll">
-					<view class="col">
-						<view class="tag"></view>
-						<text class="theme_text">编译原理</text>
-					</view>
-					
-					<view class="col">
-						<view class="tag"></view>
-						<text class="theme_text">数据结构</text>
-					</view>
-					
-					<view class="col" >
-						<view class="tag"></view>
-						<text class="theme_text">C语言</text>
-					</view>
-					
-					<view class="col">
-						<view class="tag"></view>
-						<text class="theme_text">Python</text>
-					</view>
-					
+					 <view class="col" v-for="(item,index) in classfily_list">
+						 <view class="tag"></view>
+						 <text class="theme_text">{{textFix(item.classFName,5)}}</text>
+					 </view>
 				</scroll-view>
 			</view>
 			
-			<view class="card_file" @click="read()">
+			<view class="card_file">
 				<scroll-view scroll-y="true">
-					<view class="col_right">
-						<image src="../../static/pdf_icon.png" class="file_img"></image>
-						<view class="row">
-							<text class="fname_text">操作系统概念(第九版)</text>
-							<text class="renewal_text">1天前</text>
-						</view>
-					</view>
-					
-					<view class="col_right">
-						<image src="../../static/pdf_icon.png" class="file_img"></image>
-						<view class="row">
-							<text class="fname_text">计算机网络习题解答</text>
-							<text class="renewal_text">5天前</text>
-						</view>
-					</view>
-					
-					<view class="col_right">
-						<image src="../../static/pdf_icon.png" class="file_img"></image>
-						<view class="row">
-							<text class="fname_text">Qt Creator快速入门</text>
-							<text class="renewal_text">7天前</text>
-						</view>
+					<view class="col_right" v-for="(item,index) in file_list"  @click="read(index)">
+							<image src="../../static/pdf_icon.png" class="file_img"></image>
+							<view class="row">
+								<view class="col_right_text">
+									<text class="fname_text">{{textFix(item.Fname,10)}}</text>
+									<text class="renewal_text">{{item.Renewal}}天前</text>
+								</view>
+							</view>
 					</view>
 				</scroll-view>
 			</view>
 		</view>
-		
 	</view>
 	
 </template>
@@ -82,7 +53,55 @@
 	export default {
 		data() {
 			return {
+				//fileType
+				file_list: [{
+					"FID" : "asaasdas",
+					"Fname" : "aaaaaaaa",
+					"Uri" : "asdasda",
+					"Theme" : "PDF",
+					"Renewal" : "1"
+					
+				},{
+					"FID" : "aa",
+					"Fname" : "bbbbbbbbbbbb",
+					"Uri" : "asdasda",
+					"Theme" : "PDF",
+					"Renewal" : "2"
+					
+				},{
+					"FID" : "bbb",
+					"Fname" : "cccccccccccccc",
+					"Uri" : "asdasda",
+					"Theme" : "PDF",
+					"Renewal" : "3"
+					
+				},{
+					"FID" : "cccc",
+					"Fname" : "YHY的产后护理",
+					"Uri" : "asdasda",
+					"Theme" : "PDF",
+					"Renewal" : "4"
+					
+				},],
 				
+				classfily_list : [
+					{
+						"classFName" : "编译原理",
+						"classFTag" : 1
+					},{
+						"classFName" : "BBBBBBBBB",
+						"classFTag" : 1
+					},{
+						"classFName" : "CCCCCCCCCC",
+						"classFTag" : 1
+					},{
+						"classFName" : "DDDDDDDDD",
+						"classFTag" : 1
+					},{
+						"classFName" : "EEEEEEEEEE",
+						"classFTag" : 1
+					},
+				]
 			}
 		},
 		methods: {
@@ -90,8 +109,23 @@
 				console.log("点击分类名")
 			},
 			
-			read(){
-				console.log("打开PDF文件")
+			read(index){
+				console.log("打开PDF文件+++++++"+index)
+			},
+			
+			showDetial(){
+				uni.navigateTo({
+					url:'./file_detial'
+				})
+			},
+			
+			//修改过长字体
+			textFix(text,length){
+				if(text.length <= length){
+					return text
+				}else{
+					return (text.slice(0,length)+'...')
+				}
 			}
 		}
 	}
@@ -132,7 +166,22 @@
 	.col_right{
 		display: flex;
 		flex-direction: row;
-		margin-top: 25rpx;
+
+		background-color: #ffffff;
+		height: 170rpx;
+		border-radius: 15rpx;
+		align-items: center;
+		margin: 20rpx;
+	}
+	.col_right_text{
+		margin-left: 15rpx;
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		justify-content: flex-end;
+		height: 80rpx;
+		margin-top: 10rpx;
+		/* background-color: #398ADE */
 	}
 	.row{
 		display: flex;
@@ -144,8 +193,9 @@
 		margin-left: 3rpx;
 	}
 	.file_img{
-		height: 110rpx;
-		width: 110rpx;
+		height: 70rpx;
+		width: 70rpx;
+		margin-left: 20rpx;
 	}
 	.fname_text{
 		font-weight: bolder;
@@ -154,6 +204,6 @@
 	}
 	.renewal_text{
 		font-size: 10rpx;
-		color: rgba(224, 86, 253,1.0);
+		color: rgba(131, 131, 131, 1.0);
 	}
 </style>

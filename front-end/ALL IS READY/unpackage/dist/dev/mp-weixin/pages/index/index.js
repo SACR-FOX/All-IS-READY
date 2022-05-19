@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 196))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 218))
     },
     circleProgressBar: function() {
-      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 204))
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 226))
     }
   }
 } catch (e) {
@@ -123,6 +123,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var m0 = _vm.textFix(_vm.todoList, 7)
+  var m1 = _vm.textFix(_vm.classSch.curName, 3)
+  var m2 = _vm.textFix(_vm.classAct, 4)
+
+  var l0 = _vm.__map(_vm.fileList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m3 = _vm.textFix(item.name, 6)
+    return {
+      $orig: $orig,
+      m3: m3
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        m0: m0,
+        m1: m1,
+        m2: m2,
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -238,24 +263,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
     return {
-      pro: 0.6 };
+      pro: 0.6, //计时器
+
+      //todoList
+      week: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+      week_id: -1,
+      days: -1,
+      todoList: "aaaaaaaa",
+
+      //学习时间
+      learnTime: 6,
+      rank: 10,
+
+      //classSchedule
+      classSch: {
+        "curName": "移动软件开发",
+        "Time": "9:40",
+        "room": "信息实验室4",
+        "Tag": "rgba(255, 190, 118,1.0)" },
+
+
+      //班级动态
+      classAct: "无事发生",
+
+      //file
+      fileList: [
+      {
+        'type': 0,
+        "name": '编译原理白俄爱看啊阿斯顿阿萨原版书',
+        'size': 1.0 },
+
+      {
+        'type': 0,
+        "name": '编译原理原版书',
+        'size': 0.8 },
+
+      {
+        'type': 0,
+        "name": '编译原理原版书',
+        'size': 1.0 },
+
+      {
+        'type': 0,
+        "name": '编译原理原版书',
+        'size': 1.0 }] };
+
+
 
   },
   methods: {
@@ -284,10 +341,14 @@ var _default =
         url: "../file/file" });
 
     },
-    toTest: function toTest() {
-      uni.navigateTo({
-        url: "../text/text" });
 
+    //修改过长字体
+    textFix: function textFix(text, length) {
+      if (text.length <= length) {
+        return text;
+      } else {
+        return text.slice(0, length) + '...';
+      }
     } },
 
   onLoad: function onLoad() {
@@ -296,6 +357,8 @@ var _default =
         console.log(res.deviceId);
       } });
 
+
+    console.log(this.textFix("aaaaaa", 3));
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<view>
 		<view class="top">
 			<circle-progress-bar :pro="poject_now.percent/100" 
@@ -84,6 +84,11 @@
 					"date" : 60,
 					"percent" : 100,
 					"color" : 2,
+				},{
+					"name" : "阅读 Passsage 1",
+					"date" : 5,
+					"percent" : 100,
+					"color" : 2,
 				}],
 				
 				//显示当前的计划
@@ -142,6 +147,7 @@
 				console.log(per)
 				// console.log(this.poject_now.date)
 				if(that.poject_now.date == 0 || !that.timer_flag){
+					this.work_flag = false
 					clearTimeout(this.timer)
 				}else{
 					
