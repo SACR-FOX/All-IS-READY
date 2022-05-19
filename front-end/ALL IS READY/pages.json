@@ -92,7 +92,7 @@
             
         }
         ,{
-            "path" : "pages/file/file_detial",
+            "path" : "pages/communityTopic/communityTopic",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

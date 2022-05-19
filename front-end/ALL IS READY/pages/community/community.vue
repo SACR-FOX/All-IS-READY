@@ -1,38 +1,79 @@
 <template>
 	<view>
-		<view class="card" @click="jump">
-			<text class=" title">标题标题标题标题标题标题标题</text>
+		
+		<u-navbar
+		    title="社区广场"
+		    @rightClick="rightClick"
+		    :autoBack="true">
+		</u-navbar>
+		
+		<view style="margin-top: 80rpx;"></view>
+		
+		<view class="communityItem" @click="jump">
 			<view class="row">
 				<view v-if="HasImage">
-					<image src="../../static/logo.png" class="img"></image>
+					<image :src='Poster' class="image"></image>
 				</view>
-				<text class="content">
-					内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-				</text>
+				<view class="col">
+					<view class="row">
+						<text class="communityName">{{CommunityName}}</text>
+						<text class="postCount">{{PostCount}}</text>
+					</view>
+					<view class="row">
+						<text class="description">{{textFix(Description,30)}}</text>
+						<text class="renewal">{{Renewal}}</text>
+					</view>
+				</view>
 			</view>
-			<view class="bor"></view>
+		</view>
+		
+		<view class="communityItem">
 			<view class="row">
-				<text class="creator">张三</text>
-				<text class="time">5天前</text>
+				<view v-if="HasImage">
+					<image :src='Poster' class="image"></image>
+				</view>
+				<view class="col">
+					<view class="row">
+						<text class="communityName">{{CommunityName}}</text>
+						<text class="postCount">{{PostCount}}</text>
+					</view>
+					<view class="row">
+						<text class="description">{{textFix(Description,30)}}</text>
+						<text class="renewal">{{Renewal}}</text>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	
 	export default {
 		data() {
 			return {
-				HasImage : true,
+				HasImage:true,
+				Poster:'../../static/logo.png',
+				CommunityName:'操作系统',
+				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+				PostCount:'158',
+				Renewal:'2天前',
+				Renewal:'2天前',
 			}
 		},
 		methods: {
+			textFix(text,length){
+				if(text.length <= length){
+					return text
+				}else{
+					return (text.slice(0,length)+'...')
+				}
+			},
 			jump(){
 				uni.navigateTo({
-					url:'../topic/topic'
+					url:'../communityTopic/communityTopic'
 				})
 			}
+			
 		}
 	}
 </script>
@@ -42,31 +83,35 @@
 		display: flex;
 		flex-direction: row;
 	}
-	.card{
-		padding: 10rpx;
-		.title{
-			font-weight: bold;
-			font-size: 30rpx;
-			margin-bottom: 10rpx;
-		}
-		.img{
-			width: 90rpx;
-			height: 90rpx;
-		}
-		.content{
-			font-size: 30rpx;
-			margin-left: 10rpx;
-		}
-		.bor{
-			border: 1rpx solid #c7ecee;
-		}
-		.creator{
-			font-size: 25rpx;
-			width: 100rpx;
-		}
-		.time{
-			font-size: 25rpx;
-			
-		}
+	.col{
+		display: flex;
+		flex-direction: column;
 	}
+	 .communityItem{
+		 padding: 10rpx;
+		 .image{
+			 height: 90rpx;
+			 width: 90rpx;
+			 border-radius: 180rpx;
+		 }
+		 .communityName{
+			 padding: 5rpx;
+		 }
+		 .description{
+			 width: 560rpx;
+			 padding: 5rpx;
+			 font-size: 18rpx;
+			 color: #95afc0;
+		 }
+		 .renewal{
+			 padding: 5rpx;
+			 font-size: 18rpx;
+			 color: #95afc0;
+		 }
+		 .postCount{
+			 margin-top: 7rpx;
+			 font-size: 12rpx;
+			 color: #686de0;
+		 }
+	 }
 </style>
