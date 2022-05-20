@@ -55,6 +55,17 @@ class ListAll(APIView):
         ser=ToDoListSerializer(instance=data,many=True)
         return Response(ser.data,status=status.HTTP_200_OK)
 
+class ListAll_By_Tag(APIView):
+    def get(self, request):
+        UID = request.user['UID']
+        try:
+            Tag=int(request.query_params.get('Tag'))
+        except Exception:
+            return Response({"result":"bad request"},status=status.HTTP_400_BAD_REQUEST)
+        data = ToDoList.objects.filter(UID__exact=UID,Tag=Tag).order_by("Time")
+        ser = ToDoListSerializer(instance=data, many=True)
+        return Response(ser.data, status=status.HTTP_200_OK)
+
 class ListToday(APIView):
 
     def get(self,request):

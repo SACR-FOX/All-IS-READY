@@ -23,6 +23,59 @@ headingLevel: 2
 
 # UserProfile
 
+## GET 查看用户信息
+
+GET /api/User/Detail/%3CUID%3E/
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "UID": 1,
+  "Uname": "LSD",
+  "OrgID": 1,
+  "STUID": 1,
+  "Rank": 1,
+  "Header": "http://localhost:8000/media/userHeader/communitygreen_IR1YtN7.png",
+  "EXP": 3055,
+  "Accumulation": 12800
+}
+```
+
+```json
+{
+  "detail": "未找到。"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» UID|string|true|none|none|
+|» Uname|string|true|none|none|
+|» OrgID|string|true|none|none|
+|» STUID|string|true|none|暂时不用|
+|» Rank|string|true|none|none|
+|» Header|string|true|none|none|
+|» EXP|string|true|none|none|
+
 ## POST 用户注册
 
 POST /api/Register
@@ -48,17 +101,18 @@ properties:
 required:
   - username
   - password
+
 ```
 
 ### 请求参数
 
-| 名称         | 位置   | 类型             | 必选    | 说明      |
-| ---------- | ---- | -------------- | ----- | ------- |
-| body       | body | object         | false | none    |
-| » username | body | string         | true  | 用户名     |
-| » password | body | string         | true  | 密码      |
-| » stuID    | body | string         | false | 学号（可不填） |
-| » Header   | body | string(binary) | false | 头像      |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object|false|none|
+|» username|body|string|true|用户名|
+|» password|body|string|true|密码|
+|» stuID|body|string|false|学号（可不填）|
+|» Header|body|string(binary)|false|头像|
 
 > 返回示例
 
@@ -78,11 +132,85 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
+
+## POST 用户登录
+
+POST /api/User/Login
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  username:
+    type: string
+  password:
+    type: string
+required:
+  - username
+  - password
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object|false|none|
+|» username|body|string|true|none|
+|» password|body|string|true|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": "check passed",
+  "code": 200,
+  "token": "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjEsIlVuYW1lIjoiTFNEIiwiT3JnSUQiOjEsIlJhbmsiOjEwMCwiRVhQIjozNDAsImV4cCI6MTY1MDYyNzM2OX0.vbKxsjSxSIriiz0EgSLyOmzkcjXW87j8LV-5-Y4wMuA",
+  "UID": 1,
+  "OrgID": 1
+}
+```
+
+```json
+{
+  "result": "用户名或密码错误",
+  "code": 401
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|失败|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+|» code|integer|true|none|none|
+|» token|string|true|none|none|
+
+状态码 **401**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+|» code|integer|true|none|none|
+
+# ToDoList
 
 ## PUT 修改用户信息&加入组织
 
@@ -107,19 +235,20 @@ properties:
     type: string
     description: 头像
     format: binary
+
 ```
 
 ### 请求参数
 
-| 名称       | 位置    | 类型             | 必选    | 说明   |
-| -------- | ----- | -------------- | ----- | ---- |
-| token    | query | string         | true  | none |
-| body     | body  | object         | false | none |
-| » Passwd | body  | string         | false | none |
-| » Uname  | body  | string         | false | none |
-| » OrgID  | body  | string         | false | 班级ID |
-| » STUID  | body  | string         | false | 学号   |
-| » Header | body  | string(binary) | false | 头像   |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» Passwd|body|string|false|none|
+|» Uname|body|string|false|none|
+|» OrgID|body|string|false|班级ID|
+|» STUID|body|string|false|学号|
+|» Header|body|string(binary)|false|头像|
 
 > 返回示例
 
@@ -156,204 +285,76 @@ properties:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
 
-## GET 查看用户信息
+## GET 根据Tag 筛选展示
 
-GET /api/User/Detail/%3CUID%3E/
+GET /api/ToDoList/AllByTag
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|Tag|query|string|true|none|
 
 > 返回示例
 
 > 成功
 
 ```json
-{
-  "UID": 1,
-  "Uname": "LSD",
-  "OrgID": 1,
-  "STUID": 1,
-  "Rank": 1,
-  "Header": "http://localhost:8000/media/userHeader/communitygreen_IR1YtN7.png",
-  "EXP": 3055,
-  "Accumulation": 12800
-}
+[
+  {
+    "ID": 8,
+    "OrgID": 1,
+    "ItemName": "作业2",
+    "Time": 1649428986,
+    "Status": false,
+    "Tag": 6
+  },
+  {
+    "ID": 1,
+    "OrgID": -1,
+    "ItemName": "早课2",
+    "Time": 1651813726,
+    "Status": false,
+    "Tag": 6
+  },
+  {
+    "ID": 7,
+    "OrgID": 1,
+    "ItemName": "作业1",
+    "Time": 1651813726,
+    "Status": false,
+    "Tag": 6
+  }
+]
 ```
+
+> 请求有误
 
 ```json
 {
-  "detail": "未找到。"
+  "result": "bad request"
 }
 ```
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » UID    | string | true | none | none |
-| » Uname  | string | true | none | none |
-| » OrgID  | string | true | none | none |
-| » STUID  | string | true | none | 暂时不用 |
-| » Rank   | string | true | none | none |
-| » Header | string | true | none | none |
-| » EXP    | string | true | none | none |
-
-## POST 用户登录
-
-POST /api/User/Login
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  username:
-    type: string
-  password:
-    type: string
-required:
-  - username
-  - password
-```
-
-### 请求参数
-
-| 名称         | 位置   | 类型     | 必选    | 说明   |
-| ---------- | ---- | ------ | ----- | ---- |
-| body       | body | object | false | none |
-| » username | body | string | true  | none |
-| » password | body | string | true  | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": "check passed",
-  "code": 200,
-  "token": "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjEsIlVuYW1lIjoiTFNEIiwiT3JnSUQiOjEsIlJhbmsiOjEwMCwiRVhQIjozNDAsImV4cCI6MTY1MDYyNzM2OX0.vbKxsjSxSIriiz0EgSLyOmzkcjXW87j8LV-5-Y4wMuA",
-  "UID": 1,
-  "OrgID": 1
-}
-```
-
-```json
-{
-  "result": "用户名或密码错误",
-  "code": 401
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                           | 说明  | 数据模型   |
-| --- | --------------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)         | 成功  | Inline |
-| 401 | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1) | 失败  | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型      | 必选   | 约束   | 说明   |
-| -------- | ------- | ---- | ---- | ---- |
-| » result | string  | true | none | none |
-| » code   | integer | true | none | none |
-| » token  | string  | true | none | none |
-
-状态码 **401**
-
-| 名称       | 类型      | 必选   | 约束   | 说明   |
-| -------- | ------- | ---- | ---- | ---- |
-| » result | string  | true | none | none |
-| » code   | integer | true | none | none |
-
-# ToDoList
-
-## PUT 修改完成状况
-
-PUT /api/ToDoList/Action/%3CID%3E/Done/
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | 事项ID |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": "success"
-}
-```
-
-> 禁止访问
-
-```json
-{
-  "result": "user not match"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                          | 说明   | 数据模型   |
-| --- | -------------------------------------------------------------- | ---- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)        | 成功   | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3) | 禁止访问 | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
-
-## DELETE 删除事项
-
-DELETE /api/ToDoList/Action/%3CID%3E/
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
-
-> 返回示例
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                           | 说明   | 数据模型   |
-| --- | --------------------------------------------------------------- | ---- | ------ |
-| 204 | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 删除成功 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
 
 ### 返回数据结构
 
@@ -403,16 +404,16 @@ POST /http:/101.37.175.115/api/ToDoList/Action/
 
 ### 请求参数
 
-| 名称         | 位置    | 类型      | 必选    | 说明                  |
-| ---------- | ----- | ------- | ----- | ------------------- |
-| token      | query | string  | true  | none                |
-| body       | body  | object  | false | none                |
-| » OrgID    | body  | integer | true  | 个人创建 -1 ，为组织创建填组织ID |
-| » UID      | body  | string  | true  | none                |
-| » Time     | body  | string  | false | none                |
-| » ItemName | body  | string  | true  | none                |
-| » UUID     | body  | string  | true  | none                |
-| » Tag      | body  | string  | true  | none                |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» OrgID|body|integer|true|个人创建 -1 ，为组织创建填组织ID|
+|» UID|body|string|true|none|
+|» Time|body|string|false|none|
+|» ItemName|body|string|true|none|
+|» UUID|body|string|true|none|
+|» Tag|body|string|true|none|
 
 > 返回示例
 
@@ -439,17 +440,250 @@ POST /http:/101.37.175.115/api/ToDoList/Action/
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                        | 说明  | 数据模型   |
-| --- | ------------------------------------------------------------ | --- | ------ |
-| 201 | [Created](https://tools.ietf.org/html/rfc7231#section-6.3.2) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|成功|Inline|
 
 ### 返回数据结构
 
 状态码 **201**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## GET 情况统计
+
+GET /api/ToDoList/Statistics
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "today": 2,
+  "all_in_plan": 3,
+  "finished": 1
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## PUT 修改完成状况
+
+PUT /api/ToDoList/Action/%3CID%3E/Done/
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|事项ID|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": "success"
+}
+```
+
+> 禁止访问
+
+```json
+{
+  "result": "user not match"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## PUT 修改ToDoList项
+
+PUT /http:101.37.175.115/api/ToDoList/Action/%3CID%3E/Modify/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  Tag:
+    type: string
+  ItemName:
+    type: string
+  Time:
+    type: string
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|事项ID|
+|body|body|object|false|none|
+|» Tag|body|string|false|none|
+|» ItemName|body|string|false|none|
+|» Time|body|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "ID": 10,
+  "OrgID": 2,
+  "ItemName": "qd",
+  "Time": 1651890796,
+  "Status": false,
+  "Tag": 2
+}
+```
+
+```json
+{
+  "Time": [
+    "interval invalid"
+  ]
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## POST 按组织号批量导入
+
+POST /api/ToDoList/GroupImport
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  OrgID:
+    type: string
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
+|body|body|object|false|none|
+|» OrgID|body|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": "err"
+}
+```
+
+```json
+{
+  "result": "ok"
+}
+```
+
+```json
+{
+  "result": "match nothing"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## GET 列出该用户今日所有事项 
+
+GET /api/ToDoList/Today
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+
+> 返回示例
+
+> 成功
+
+```json
+[
+  {
+    "ID": 1,
+    "OrgID": -1,
+    "ItemName": "早课2",
+    "Time": 1651813726,
+    "Status": false,
+    "Tag": 6
+  },
+  {
+    "ID": 7,
+    "OrgID": 1,
+    "ItemName": "作业1",
+    "Time": 1651813726,
+    "Status": false,
+    "Tag": 2
+  }
+]
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
 
 ## GET 列出该用户所有事项
 
@@ -457,9 +691,9 @@ GET /api/ToDoList/All
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
 
 > 返回示例
 
@@ -504,199 +738,31 @@ GET /api/ToDoList/All
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
-## GET 情况统计
+## DELETE 删除事项
 
-GET /api/ToDoList/Statistics
+DELETE /api/ToDoList/Action/%3CID%3E/
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
 
 > 返回示例
 
-> 成功
-
-```json
-{
-  "today": 2,
-  "all_in_plan": 3,
-  "finished": 1
-}
-```
-
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|删除成功|Inline|
 
 ### 返回数据结构
-
-## GET 列出该用户今日所有事项
-
-GET /api/ToDoList/Today
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
-
-> 返回示例
-
-> 成功
-
-```json
-[
-  {
-    "ID": 1,
-    "OrgID": -1,
-    "ItemName": "早课2",
-    "Time": 1651813726,
-    "Status": false,
-    "Tag": 6
-  },
-  {
-    "ID": 7,
-    "OrgID": 1,
-    "ItemName": "作业1",
-    "Time": 1651813726,
-    "Status": false,
-    "Tag": 2
-  }
-]
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-## POST 按组织号批量导入
-
-POST /api/ToDoList/GroupImport
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  OrgID:
-    type: string
-```
-
-### 请求参数
-
-| 名称      | 位置    | 类型     | 必选    | 说明   |
-| ------- | ----- | ------ | ----- | ---- |
-| token   | query | string | false | none |
-| body    | body  | object | false | none |
-| » OrgID | body  | string | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": "err"
-}
-```
-
-```json
-{
-  "result": "ok"
-}
-```
-
-```json
-{
-  "result": "match nothing"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-## PUT 修改ToDoList项
-
-PUT /http:101.37.175.115/api/ToDoList/Action/%3CID%3E/Modify/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  Tag:
-    type: string
-  ItemName:
-    type: string
-  Time:
-    type: string
-```
-
-### 请求参数
-
-| 名称         | 位置    | 类型     | 必选    | 说明   |
-| ---------- | ----- | ------ | ----- | ---- |
-| token      | query | string | true  | 事项ID |
-| body       | body  | object | false | none |
-| » Tag      | body  | string | false | none |
-| » ItemName | body  | string | false | none |
-| » Time     | body  | string | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "ID": 10,
-  "OrgID": 2,
-  "ItemName": "qd",
-  "Time": 1651890796,
-  "Status": false,
-  "Tag": 2
-}
-```
-
-```json
-{
-  "Time": [
-    "interval invalid"
-  ]
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
 
 # File
 
@@ -717,16 +783,17 @@ properties:
     description: 文件ID
 required:
   - FileID
+
 ```
 
 ### 请求参数
 
-| 名称       | 位置    | 类型     | 必选    | 说明      |
-| -------- | ----- | ------ | ----- | ------- |
-| token    | query | string | true  | none    |
-| body     | body  | object | false | none    |
-| » OrgID  | body  | string | false | 查询组织则带上 |
-| » FileID | body  | string | true  | 文件ID    |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» OrgID|body|string|false|查询组织则带上|
+|» FileID|body|string|true|文件ID|
 
 > 返回示例
 
@@ -756,20 +823,20 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                                      | 说明       | 数据模型   |
-| --- | -------------------------------------------------------------------------- | -------- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功       | Inline |
-| 204 | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)            | 无内容      | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | OSS服务器错误 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|无内容|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|OSS服务器错误|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » Uri    | string | true | none | none |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» Uri|string|true|none|none|
+|» result|string|true|none|none|
 
 ## GET 显示指定文件夹下文件列表
 
@@ -787,16 +854,17 @@ properties:
     description: 若是组织文件，则加上
 required:
   - Folder
+
 ```
 
 ### 请求参数
 
-| 名称       | 位置    | 类型     | 必选    | 说明         |
-| -------- | ----- | ------ | ----- | ---------- |
-| token    | query | string | true  | none       |
-| body     | body  | object | false | none       |
-| » Folder | body  | string | true  | none       |
-| » OrgID  | body  | string | false | 若是组织文件，则加上 |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» Folder|body|string|true|none|
+|» OrgID|body|string|false|若是组织文件，则加上|
 
 > 返回示例
 
@@ -815,17 +883,17 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
 
 ## GET 显示文件夹列表
 
@@ -839,15 +907,16 @@ properties:
   OrgID:
     type: string
     description: 若是组织文件则带上
+
 ```
 
 ### 请求参数
 
-| 名称      | 位置    | 类型     | 必选    | 说明        |
-| ------- | ----- | ------ | ----- | --------- |
-| token   | query | string | true  | none      |
-| body    | body  | object | false | none      |
-| » OrgID | body  | string | false | 若是组织文件则带上 |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» OrgID|body|string|false|若是组织文件则带上|
 
 > 返回示例
 
@@ -868,23 +937,23 @@ properties:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称         | 类型       | 必选   | 约束   | 说明   |
-| ---------- | -------- | ---- | ---- | ---- |
-| » data     | [object] | true | none | none |
-| »» FID     | string   | true | none | none |
-| »» Fname   | string   | true | none | none |
-| »» Uri     | string   | true | none | none |
-| »» Theme   | string   | true | none | none |
-| »» Renewal | string   | true | none | none |
-| » result   | string   | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» data|[object]|true|none|none|
+|»» FID|string|true|none|none|
+|»» Fname|string|true|none|none|
+|»» Uri|string|true|none|none|
+|»» Theme|string|true|none|none|
+|»» Renewal|string|true|none|none|
+|» result|string|true|none|none|
 
 ## POST 上传云端
 
@@ -910,18 +979,19 @@ required:
   - "OrgID "
   - FolderName
   - book
+
 ```
 
 ### 请求参数
 
-| 名称           | 位置    | 类型             | 必选    | 说明       |
-| ------------ | ----- | -------------- | ----- | -------- |
-| token        | query | string         | true  | none     |
-| body         | body  | object         | false | none     |
-| » OrgID      | body  | string         | true  | 个人上传 填-1 |
-| » FolderName | body  | string         | true  | none     |
-| » FileName   | body  | string         | false | 重命名就加上   |
-| » book       | body  | string(binary) | true  | none     |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» OrgID|body|string|true|个人上传 填-1|
+|» FolderName|body|string|true|none|
+|» FileName|body|string|false|重命名就加上|
+|» book|body|string(binary)|true|none|
 
 > 返回示例
 
@@ -969,22 +1039,78 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 400 | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | 请求有误  | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
 
 # ClassSchedule
+
+## GET 查看下一节课程
+
+GET /api/Schedule/Next/
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "CurName": "uuid TEst",
+  "Location": "E309",
+  "Tag": 4
+}
+```
+
+```json
+{
+  "result": "internal error"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## DELETE 删除课程
+
+DELETE /api/Schedule/Action/%3CScheduleID%3E/
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+
+> 返回示例
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|删除成功|Inline|
+
+### 返回数据结构
 
 ## POST 组织批量导入课程
 
@@ -1000,15 +1126,16 @@ properties:
     description: 组织ID
 required:
   - OrgID
+
 ```
 
 ### 请求参数
 
-| 名称      | 位置    | 类型     | 必选    | 说明   |
-| ------- | ----- | ------ | ----- | ---- |
-| token   | query | string | true  | none |
-| body    | body  | object | false | none |
-| » OrgID | body  | string | true  | 组织ID |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» OrgID|body|string|true|组织ID|
 
 > 返回示例
 
@@ -1028,98 +1155,17 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明  |
-| -------- | ------ | ---- | ---- | --- |
-| » result | string | true | none | 结果  |
-
-## DELETE 删除课程
-
-DELETE /api/Schedule/Action/%3CScheduleID%3E/
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
-
-> 返回示例
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                           | 说明   | 数据模型   |
-| --- | --------------------------------------------------------------- | ---- | ------ |
-| 204 | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 删除成功 | Inline |
-
-### 返回数据结构
-
-## PUT 修改课程信息
-
-PUT /api/Schedule/Action/%3CScheduleID%3E/Modify/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  DurationStart:
-    type: string
-    description: 课程开始相对时间
-  DurationEnd:
-    type: string
-    description: 课程结束相对时间
-  Location:
-    type: string
-    description: 课程位置
-  CurName:
-    type: string
-    description: 课程名称
-  Tag:
-    type: string
-    description: 标签颜色
-```
-
-### 请求参数
-
-| 名称              | 位置    | 类型     | 必选    | 说明       |
-| --------------- | ----- | ------ | ----- | -------- |
-| \token          | query | string | false | none     |
-| body            | body  | object | false | none     |
-| » DurationStart | body  | string | false | 课程开始相对时间 |
-| » DurationEnd   | body  | string | false | 课程结束相对时间 |
-| » Location      | body  | string | false | 课程位置     |
-| » CurName       | body  | string | false | 课程名称     |
-| » Tag           | body  | string | false | 标签颜色     |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "ScheduleID": 22,
-  "DurationStart": 68400,
-  "DurationEnd": 73000,
-  "CurName": "test_by_lsd_and_hdn",
-  "Tag": 2,
-  "Location": "C423"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|结果|
 
 ## GET 查看当天课程表
 
@@ -1130,14 +1176,15 @@ GET /api/Schedule/Today/
 ```yaml
 type: object
 properties: {}
+
 ```
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | false | none |
-| body  | body  | object | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
+|body|body|object|false|none|
 
 > 返回示例
 
@@ -1169,21 +1216,50 @@ properties: {}
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
-## GET 查看下一节课程
+## PUT 修改课程信息
 
-GET /api/Schedule/Next/
+PUT /api/Schedule/Action/%3CScheduleID%3E/Modify/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  DurationStart:
+    type: string
+    description: 课程开始相对时间
+  DurationEnd:
+    type: string
+    description: 课程结束相对时间
+  Location:
+    type: string
+    description: 课程位置
+  CurName:
+    type: string
+    description: 课程名称
+  Tag:
+    type: string
+    description: 标签颜色
+
+```
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|\token|query|string|false|none|
+|body|body|object|false|none|
+|» DurationStart|body|string|false|课程开始相对时间|
+|» DurationEnd|body|string|false|课程结束相对时间|
+|» Location|body|string|false|课程位置|
+|» CurName|body|string|false|课程名称|
+|» Tag|body|string|false|标签颜色|
 
 > 返回示例
 
@@ -1191,23 +1267,20 @@ GET /api/Schedule/Next/
 
 ```json
 {
-  "CurName": "uuid TEst",
-  "Location": "E309",
-  "Tag": 4
-}
-```
-
-```json
-{
-  "result": "internal error"
+  "ScheduleID": 22,
+  "DurationStart": 68400,
+  "DurationEnd": 73000,
+  "CurName": "test_by_lsd_and_hdn",
+  "Tag": 2,
+  "Location": "C423"
 }
 ```
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
@@ -1251,22 +1324,23 @@ required:
   - DurationEnd
   - CurName
   - UUID
+
 ```
 
 ### 请求参数
 
-| 名称              | 位置    | 类型     | 必选    | 说明        |
-| --------------- | ----- | ------ | ----- | --------- |
-| token           | query | string | true  | none      |
-| body            | body  | object | false | none      |
-| » Day           | body  | string | true  | 课程所在星期    |
-| » OrgID         | body  | string | false | 组织ID      |
-| » DurationStart | body  | string | true  | 课程开始相对时间戳 |
-| » DurationEnd   | body  | string | true  | 课程结束相对时间戳 |
-| » Loaction      | body  | string | false | 上课地点      |
-| » CurName       | body  | string | true  | 课程名称      |
-| » Tag           | body  | string | false | 标签颜色      |
-| » UUID          | body  | string | true  | 课程唯一标识    |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» Day|body|string|true|课程所在星期|
+|» OrgID|body|string|false|组织ID|
+|» DurationStart|body|string|true|课程开始相对时间戳|
+|» DurationEnd|body|string|true|课程结束相对时间戳|
+|» Loaction|body|string|false|上课地点|
+|» CurName|body|string|true|课程名称|
+|» Tag|body|string|false|标签颜色|
+|» UUID|body|string|true|课程唯一标识|
 
 > 返回示例
 
@@ -1285,476 +1359,13 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                        | 说明  | 数据模型   |
-| --- | ------------------------------------------------------------ | --- | ------ |
-| 201 | [Created](https://tools.ietf.org/html/rfc7231#section-6.3.2) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|成功|Inline|
 
 ### 返回数据结构
 
 # Community
-
-## PUT 修改帖子
-
-PUT /api/Community/Post/%3CPostID%3E/Modify/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  HasImage:
-    type: string
-    description: True 修改图片 False 仅修改内容
-    example: True False
-  Content:
-    type: string
-  PostPic:
-    type: string
-    description: HasImage 为True时修改图片，带上
-    format: binary
-required:
-  - HasImage
-```
-
-### 请求参数
-
-| 名称         | 位置    | 类型             | 必选    | 说明                     |
-| ---------- | ----- | -------------- | ----- | ---------------------- |
-| token      | query | string         | true  | none                   |
-| body       | body  | object         | false | none                   |
-| » HasImage | body  | string         | true  | True 修改图片 False 仅修改内容  |
-| » Content  | body  | string         | false | none                   |
-| » PostPic  | body  | string(binary) | false | HasImage 为True时修改图片，带上 |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "PostID": 5,
-  "TopicID": 11,
-  "UID": 1,
-  "Time": 1652771706,
-  "HasImage": true,
-  "Content": "帖子修改测试2",
-  "Stars": 0
-}
-```
-
-> 记录不存在
-
-```json
-{
-  "result": "ID not Match"
-}
-```
-
-> 服务器错误
-
-```json
-{
-  "result": "save image faild"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
-
-### 返回数据结构
-
-## PUT 修改话题
-
-PUT /api/Community/Topic/%3CTopicID%3E/Modify/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  Title:
-    type: string
-  HasImage:
-    type: string
-    description: 是否修改头图
-    example: True False
-  TopicPic:
-    type: string
-    description: "HasImage=True 带上  "
-    format: binary
-required:
-  - HasImage
-```
-
-### 请求参数
-
-| 名称         | 位置    | 类型             | 必选    | 说明               |
-| ---------- | ----- | -------------- | ----- | ---------------- |
-| token      | query | string         | true  | none             |
-| body       | body  | object         | false | none             |
-| » Title    | body  | string         | false | none             |
-| » HasImage | body  | string         | true  | 是否修改头图           |
-| » TopicPic | body  | string(binary) | false | HasImage=True 带上 |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "TopicID": 12,
-  "CommunityID": 1,
-  "UID": 1,
-  "Time": 1652770187,
-  "HasImage": true,
-  "Title": "话题修改测试2",
-  "ImageUri": "/media/TopicHeader/biaoge.png",
-  "Stars": 0
-}
-```
-
-> 禁止访问
-
-```json
-{
-  "result": "Permission Denied"
-}
-```
-
-> 记录不存在
-
-```json
-{
-  "result": "ID not Match"
-}
-```
-
-> 服务器错误
-
-```json
-{
-  "result": "get pic failed"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | 禁止访问  | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
-
-### 返回数据结构
-
-## GET 显示话题下所有帖子
-
-GET /api/Community/Post_All
-
-> Body 请求参数
-
-```yaml
-type: object
-properties: {}
-```
-
-### 请求参数
-
-| 名称      | 位置    | 类型     | 必选    | 说明   |
-| ------- | ----- | ------ | ----- | ---- |
-| token   | query | string | true  | none |
-| page    | query | string | true  | none |
-| TopicID | query | string | true  | none |
-| body    | body  | object | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "next": false,
-  "previous": false,
-  "count": 2,
-  "result": [
-    {
-      "PostID": 1,
-      "TopicID": 10,
-      "UID": 1,
-      "Time": 1649816781,
-      "HasImage": false,
-      "Content": "支持一下",
-      "Stars": 0
-    },
-    {
-      "PostID": 2,
-      "TopicID": 10,
-      "UID": 1,
-      "Time": 1649817052,
-      "HasImage": true,
-      "Content": "支持一下",
-      "pics": [
-        "http://127.0.0.1:8000/media/PostImage/home2.png",
-        "http://127.0.0.1:8000/media/PostImage/jiahao.png"
-      ],
-      "Stars": 0
-    }
-  ]
-}
-```
-
-> 服务器错误
-
-```json
-{
-  "result": "internal error"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
-
-### 返回数据结构
-
-## GET 显示话题信息
-
-GET /api/Community/Topic/%3CTopicID%3E/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  PostID:
-    type: string
-```
-
-### 请求参数
-
-| 名称       | 位置    | 类型     | 必选    | 说明   |
-| -------- | ----- | ------ | ----- | ---- |
-| token    | query | string | false | none |
-| body     | body  | object | false | none |
-| » PostID | body  | string | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "TopicID": 11,
-  "CommunityID": 2,
-  "UID": 1,
-  "Time": 1649810112,
-  "HasImage": true,
-  "Title": "话题三",
-  "ImageUri": "http://localhost:8000/media/TopicHeader/communitygreen.png",
-  "Stars": 0
-}
-```
-
-> 记录不存在
-
-```json
-{
-  "detail": "未找到。"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                          | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)        | 成功    | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4) | 记录不存在 | Inline |
-
-### 返回数据结构
-
-## GET 显示所有社区
-
-GET /api/Community/Action
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
-| page  | query | string | true | 默认1  |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "count": 2,
-  "next": null,
-  "previous": null,
-  "results": [
-    {
-      "CommunityID": 1,
-      "CommunityName": "OS2022",
-      "PostCount": 0,
-      "AdministratorID": 1,
-      "Renewal": 0,
-      "Poster": "http://localhost:8000/media/communityHeader/IMG_0615_W0D3Ngq.jpg",
-      "Description": "操作系统课程社区"
-    },
-    {
-      "CommunityID": 2,
-      "CommunityName": "编译原理",
-      "PostCount": 0,
-      "AdministratorID": 2,
-      "Renewal": 0,
-      "Poster": "http://localhost:8000/media/communityHeader/IMG_3994.JPG",
-      "Description": "编译原理社区"
-    }
-  ]
-}
-```
-
-> 记录不存在
-
-```json
-{
-  "detail": "无效页面。"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                          | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)        | 成功    | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4) | 记录不存在 | Inline |
-
-### 返回数据结构
-
-## POST 查询点赞情况
-
-POST /api/Community/checkStar/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  ID:
-    type: string
-  type:
-    type: string
-    description: 点赞类型 主题:0  帖子:1
-required:
-  - ID
-  - type
-```
-
-### 请求参数
-
-| 名称     | 位置    | 类型     | 必选    | 说明              |
-| ------ | ----- | ------ | ----- | --------------- |
-| token  | query | string | true  | none            |
-| body   | body  | object | false | none            |
-| » ID   | body  | string | true  | none            |
-| » type | body  | string | true  | 点赞类型 主题:0  帖子:1 |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": false
-}
-```
-
-```json
-{
-  "result": true
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-## GET 点赞话题
-
-GET /api/Community/Topic/Star/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties: {}
-```
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | true  | none |
-| body  | body  | object | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": "ok"
-}
-```
-
-> 禁止访问
-
-```json
-{
-  "result": "already thumbed"
-}
-```
-
-> 记录不存在
-
-```json
-{
-  "result": "TopicID don't match"
-}
-```
-
-> 服务器错误
-
-```json
-{
-  "result": "internal err"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | 禁止访问  | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
-
-### 返回数据结构
 
 ## POST 点赞帖子
 
@@ -1765,14 +1376,15 @@ POST /api/Community/Post/
 ```yaml
 type: object
 properties: {}
+
 ```
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | true  | none |
-| body  | body  | object | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
 
 > 返回示例
 
@@ -1810,12 +1422,12 @@ properties: {}
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | 禁止访问  | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
 
 ### 返回数据结构
 
@@ -1830,15 +1442,16 @@ type: object
 properties:
   PostID:
     type: string
+
 ```
 
 ### 请求参数
 
-| 名称       | 位置    | 类型     | 必选    | 说明   |
-| -------- | ----- | ------ | ----- | ---- |
-| token    | query | string | true  | none |
-| body     | body  | object | false | none |
-| » PostID | body  | string | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» PostID|body|string|false|none|
 
 > 返回示例
 
@@ -1888,12 +1501,282 @@ properties:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | 禁止访问  | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | 记录不存在 | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+## PUT 修改帖子
+
+PUT /api/Community/Post/%3CPostID%3E/Modify/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  HasImage:
+    type: string
+    description: True 修改图片 False 仅修改内容
+    example: True False
+  Content:
+    type: string
+  PostPic:
+    type: string
+    description: HasImage 为True时修改图片，带上
+    format: binary
+required:
+  - HasImage
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» HasImage|body|string|true|True 修改图片 False 仅修改内容|
+|» Content|body|string|false|none|
+|» PostPic|body|string(binary)|false|HasImage 为True时修改图片，带上|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "PostID": 5,
+  "TopicID": 11,
+  "UID": 1,
+  "Time": 1652771706,
+  "HasImage": true,
+  "Content": "帖子修改测试2",
+  "Stars": 0
+}
+```
+
+> 记录不存在
+
+```json
+{
+  "result": "ID not Match"
+}
+```
+
+> 服务器错误
+
+```json
+{
+  "result": "save image faild"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+## GET 显示话题下所有帖子
+
+GET /api/Community/Post_All
+
+> Body 请求参数
+
+```yaml
+type: object
+properties: {}
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|page|query|string|true|none|
+|TopicID|query|string|true|none|
+|body|body|object|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "next": false,
+  "previous": false,
+  "count": 2,
+  "result": [
+    {
+      "PostID": 1,
+      "TopicID": 10,
+      "UID": 1,
+      "Time": 1649816781,
+      "HasImage": false,
+      "Content": "支持一下",
+      "Stars": 0
+    },
+    {
+      "PostID": 2,
+      "TopicID": 10,
+      "UID": 1,
+      "Time": 1649817052,
+      "HasImage": true,
+      "Content": "支持一下",
+      "pics": [
+        "http://127.0.0.1:8000/media/PostImage/home2.png",
+        "http://127.0.0.1:8000/media/PostImage/jiahao.png"
+      ],
+      "Stars": 0
+    }
+  ]
+}
+```
+
+> 服务器错误
+
+```json
+{
+  "result": "internal error"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+## GET 点赞话题
+
+GET /api/Community/Topic/Star/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties: {}
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": "ok"
+}
+```
+
+> 禁止访问
+
+```json
+{
+  "result": "already thumbed"
+}
+```
+
+> 记录不存在
+
+```json
+{
+  "result": "TopicID don't match"
+}
+```
+
+> 服务器错误
+
+```json
+{
+  "result": "internal err"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+## GET 显示话题信息
+
+GET /api/Community/Topic/%3CTopicID%3E/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  PostID:
+    type: string
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
+|body|body|object|false|none|
+|» PostID|body|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "TopicID": 11,
+  "CommunityID": 2,
+  "UID": 1,
+  "Time": 1649810112,
+  "HasImage": true,
+  "Title": "话题三",
+  "ImageUri": "http://localhost:8000/media/TopicHeader/communitygreen.png",
+  "Stars": 0
+}
+```
+
+> 记录不存在
+
+```json
+{
+  "detail": "未找到。"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
 
 ### 返回数据结构
 
@@ -1919,18 +1802,19 @@ properties:
     format: binary
 required:
   - HasImage
+
 ```
 
 ### 请求参数
 
-| 名称            | 位置    | 类型             | 必选    | 说明              |
-| ------------- | ----- | -------------- | ----- | --------------- |
-| token         | query | string         | true  | none            |
-| body          | body  | object         | false | none            |
-| » CommunityID | body  | string         | false | none            |
-| » HasImage    | body  | string         | true  | none            |
-| » Title       | body  | string         | false | none            |
-| » TopicPic    | body  | string(binary) | false | HasImage为True时填 |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» CommunityID|body|string|false|none|
+|» HasImage|body|string|true|none|
+|» Title|body|string|false|none|
+|» TopicPic|body|string(binary)|false|HasImage为True时填|
 
 > 返回示例
 
@@ -1958,19 +1842,381 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 400 | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | 请求有误  | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
 
 ### 返回数据结构
 
 状态码 **200**
 
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## PUT 修改话题
+
+PUT /api/Community/Topic/%3CTopicID%3E/Modify/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  Title:
+    type: string
+  HasImage:
+    type: string
+    description: 是否修改头图
+    example: True False
+  TopicPic:
+    type: string
+    description: "HasImage=True 带上  "
+    format: binary
+required:
+  - HasImage
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» Title|body|string|false|none|
+|» HasImage|body|string|true|是否修改头图|
+|» TopicPic|body|string(binary)|false|HasImage=True 带上|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "TopicID": 12,
+  "CommunityID": 1,
+  "UID": 1,
+  "Time": 1652770187,
+  "HasImage": true,
+  "Title": "话题修改测试2",
+  "ImageUri": "/media/TopicHeader/biaoge.png",
+  "Stars": 0
+}
+```
+
+> 禁止访问
+
+```json
+{
+  "result": "Permission Denied"
+}
+```
+
+> 记录不存在
+
+```json
+{
+  "result": "ID not Match"
+}
+```
+
+> 服务器错误
+
+```json
+{
+  "result": "get pic failed"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+## POST 查询点赞情况
+
+POST /api/Community/checkStar/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  ID:
+    type: string
+  type:
+    type: string
+    description: 点赞类型 主题:0  帖子:1
+required:
+  - ID
+  - type
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» ID|body|string|true|none|
+|» type|body|string|true|点赞类型 主题:0  帖子:1|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": false
+}
+```
+
+```json
+{
+  "result": true
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## GET 显示所有社区
+
+GET /api/Community/Action
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|page|query|string|true|默认1|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "CommunityID": 1,
+      "CommunityName": "OS2022",
+      "PostCount": 0,
+      "AdministratorID": 1,
+      "Renewal": 0,
+      "Poster": "http://localhost:8000/media/communityHeader/IMG_0615_W0D3Ngq.jpg",
+      "Description": "操作系统课程社区"
+    },
+    {
+      "CommunityID": 2,
+      "CommunityName": "编译原理",
+      "PostCount": 0,
+      "AdministratorID": 2,
+      "Renewal": 0,
+      "Poster": "http://localhost:8000/media/communityHeader/IMG_3994.JPG",
+      "Description": "编译原理社区"
+    }
+  ]
+}
+```
+
+> 记录不存在
+
+```json
+{
+  "detail": "无效页面。"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
+
+### 返回数据结构
+
+## POST 发帖
+
+POST /api/Community/Post/Create/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  TopicID:
+    type: string
+  HasImage:
+    type: string
+    example: True False
+  Content:
+    type: string
+    description: 文字内容
+  PostPic:
+    type: string
+    description: HasImage 为True 时 带上
+    format: binary
+required:
+  - TopicID
+  - HasImage
+  - Content
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» TopicID|body|string|true|none|
+|» HasImage|body|string|true|none|
+|» Content|body|string|true|文字内容|
+|» PostPic|body|string(binary)|false|HasImage 为True 时 带上|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "result": "ok"
+}
+```
+
+> 请求有误
+
+```json
+{
+  "result": "话题ID错误"
+}
+```
+
+> 服务器错误
+
+```json
+{
+  "result": "save image faild"
+}
+```
+
+```json
+{
+  "result": "internal error"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|服务器错误|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## POST 创建社区
+
+POST /api/Community/Action/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  CommunityName:
+    type: string
+  AdministratorID:
+    type: string
+    description: 创建者/管理者ID
+  Poster:
+    type: string
+    description: 社区头像
+    format: binary
+  Description:
+    type: string
+required:
+  - CommunityName
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object|false|none|
+|» CommunityName|body|string|true|none|
+|» AdministratorID|body|string|false|创建者/管理者ID|
+|» Poster|body|string(binary)|false|社区头像|
+|» Description|body|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "CommunityID": 3,
+  "CommunityName": "移动开发",
+  "PostCount": 0,
+  "AdministratorID": 2,
+  "Renewal": 0,
+  "Poster": "http://localhost:8000/media/communityHeader/IMG_3994_vJeOunp.JPG",
+  "Description": "社区创建测试"
+}
+```
+
+> 请求有误
+
+```json
+{
+  "CommunityName": [
+    "社区名已存在"
+  ]
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
 
 ## GET 显示所有话题
 
@@ -1985,17 +2231,18 @@ properties:
     type: string
 required:
   - CommunityID
+
 ```
 
 ### 请求参数
 
-| 名称            | 位置    | 类型     | 必选    | 说明    |
-| ------------- | ----- | ------ | ----- | ----- |
-| token         | query | string | true  | none  |
-| CommunityID   | query | string | true  | none  |
-| page          | query | string | true  | 默认第1页 |
-| body          | body  | object | false | none  |
-| » CommunityID | body  | string | true  | none  |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|CommunityID|query|string|true|none|
+|page|query|string|true|默认第1页|
+|body|body|object|false|none|
+|» CommunityID|body|string|true|none|
 
 > 返回示例
 
@@ -2041,177 +2288,16 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                          | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)        | 成功    | Inline |
-| 404 | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4) | 记录不存在 | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|记录不存在|Inline|
 
 ### 返回数据结构
-
-## POST 创建社区
-
-POST /api/Community/Action/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  CommunityName:
-    type: string
-  AdministratorID:
-    type: string
-    description: 创建者/管理者ID
-  Poster:
-    type: string
-    description: 社区头像
-    format: binary
-  Description:
-    type: string
-required:
-  - CommunityName
-```
-
-### 请求参数
-
-| 名称                | 位置   | 类型             | 必选    | 说明        |
-| ----------------- | ---- | -------------- | ----- | --------- |
-| body              | body | object         | false | none      |
-| » CommunityName   | body | string         | true  | none      |
-| » AdministratorID | body | string         | false | 创建者/管理者ID |
-| » Poster          | body | string(binary) | false | 社区头像      |
-| » Description     | body | string         | false | none      |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "CommunityID": 3,
-  "CommunityName": "移动开发",
-  "PostCount": 0,
-  "AdministratorID": 2,
-  "Renewal": 0,
-  "Poster": "http://localhost:8000/media/communityHeader/IMG_3994_vJeOunp.JPG",
-  "Description": "社区创建测试"
-}
-```
-
-> 请求有误
-
-```json
-{
-  "CommunityName": [
-    "社区名已存在"
-  ]
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                            | 说明   | 数据模型   |
-| --- | ---------------------------------------------------------------- | ---- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | 成功   | Inline |
-| 400 | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | 请求有误 | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
-
-## POST 发帖
-
-POST /api/Community/Post/Create/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  TopicID:
-    type: string
-  HasImage:
-    type: string
-    example: True False
-  Content:
-    type: string
-    description: 文字内容
-  PostPic:
-    type: string
-    description: HasImage 为True 时 带上
-    format: binary
-required:
-  - TopicID
-  - HasImage
-  - Content
-```
-
-### 请求参数
-
-| 名称         | 位置    | 类型             | 必选    | 说明                  |
-| ---------- | ----- | -------------- | ----- | ------------------- |
-| token      | query | string         | true  | none                |
-| body       | body  | object         | false | none                |
-| » TopicID  | body  | string         | true  | none                |
-| » HasImage | body  | string         | true  | none                |
-| » Content  | body  | string         | true  | 文字内容                |
-| » PostPic  | body  | string(binary) | false | HasImage 为True 时 带上 |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "result": "ok"
-}
-```
-
-> 请求有误
-
-```json
-{
-  "result": "话题ID错误"
-}
-```
-
-> 服务器错误
-
-```json
-{
-  "result": "save image faild"
-}
-```
-
-```json
-{
-  "result": "internal error"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                                      | 说明    | 数据模型   |
-| --- | -------------------------------------------------------------------------- | ----- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | 成功    | Inline |
-| 400 | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | 请求有误  | Inline |
-| 500 | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | 服务器错误 | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
 
 # Organization
 
-## PUT 修改组织任务
+## PUT 修改组织任务 
 
 PUT /api/Organization/Task/Action/%3CTaskID%3E/Modify/
 
@@ -2241,24 +2327,25 @@ required:
   - TimeDue
   - Description
   - TaskName
+
 ```
 
 ### 请求参数
 
-| 名称            | 位置    | 类型     | 必选    | 说明     |
-| ------------- | ----- | ------ | ----- | ------ |
-| TimeStart     | query | string | false | none   |
-| TimeDue       | query | string | false | none   |
-| CID           | query | string | false | none   |
-| Description   | query | string | false | none   |
-| TaskName      | query | string | false | none   |
-| Creator       | query | string | false | none   |
-| body          | body  | object | false | none   |
-| » OrgID       | body  | string | true  | 组织ID   |
-| » TimeStart   | body  | string | true  | 任务开始时间 |
-| » TimeDue     | body  | string | true  | 任务到期时间 |
-| » Description | body  | string | true  | 任务描述   |
-| » TaskName    | body  | string | true  | 任务标题   |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|TimeStart|query|string|false|none|
+|TimeDue|query|string|false|none|
+|CID|query|string|false|none|
+|Description|query|string|false|none|
+|TaskName|query|string|false|none|
+|Creator|query|string|false|none|
+|body|body|object|false|none|
+|» OrgID|body|string|true|组织ID|
+|» TimeStart|body|string|true|任务开始时间|
+|» TimeDue|body|string|true|任务到期时间|
+|» Description|body|string|true|任务描述|
+|» TaskName|body|string|true|任务标题|
 
 > 返回示例
 
@@ -2281,9 +2368,142 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## PUT 修改组织信息
+
+PUT /api/Organization/Action/%3COrgID%3E/modify/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  OrgName:
+    type: string
+  MonitorID:
+    type: string
+  Description:
+    type: string
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
+|body|body|object|false|none|
+|» OrgName|body|string|false|none|
+|» MonitorID|body|string|false|none|
+|» Description|body|string|false|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "OrgID": 2,
+  "OrgName": "操作系统2022",
+  "MonitorID": 3,
+  "Description": "修改描述测试"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## POST 确认收到任务
+
+POST /api/Organization/Task/ACK
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  TaskID:
+    type: string
+required:
+  - TaskID
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|组织ID|
+|body|body|object|false|none|
+|» TaskID|body|string|true|none|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "TaskID": "1",
+  "Status": true
+}
+```
+
+> 禁止访问
+
+```json
+{
+  "result": "sanction denied"
+}
+```
+
+```json
+{
+  "result": "Task Due"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|禁止访问|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» result|string|true|none|none|
+
+## DELETE 删除任务
+
+DELETE /api/Organization/Task/%3CTaskID%3E/
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+
+> 返回示例
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|删除成功|Inline|
 
 ### 返回数据结构
 
@@ -2322,20 +2542,21 @@ required:
   - TimeStart
   - TimeDue
   - TaskName
+
 ```
 
 ### 请求参数
 
-| 名称            | 位置   | 类型     | 必选    | 说明     |
-| ------------- | ---- | ------ | ----- | ------ |
-| body          | body | object | false | none   |
-| » OrgID       | body | string | true  | 组织ID   |
-| » TimeStart   | body | string | true  | 任务开始时间 |
-| » TimeDue     | body | string | true  | 任务到期时间 |
-| » Description | body | string | false | 描述     |
-| » TaskName    | body | string | true  | 任务标题   |
-| » Creator     | body | string | false | 创建者姓名  |
-| » CID         | body | string | false | 绑定课程ID |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object|false|none|
+|» OrgID|body|string|true|组织ID|
+|» TimeStart|body|string|true|任务开始时间|
+|» TimeDue|body|string|true|任务到期时间|
+|» Description|body|string|false|描述|
+|» TaskName|body|string|true|任务标题|
+|» Creator|body|string|false|创建者姓名|
+|» CID|body|string|false|绑定课程ID|
 
 > 返回示例
 
@@ -2358,74 +2579,11 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
-
-## POST 确认收到任务
-
-POST /api/Organization/Task/ACK
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  TaskID:
-    type: string
-required:
-  - TaskID
-```
-
-### 请求参数
-
-| 名称       | 位置    | 类型     | 必选    | 说明   |
-| -------- | ----- | ------ | ----- | ---- |
-| token    | query | string | true  | 组织ID |
-| body     | body  | object | false | none |
-| » TaskID | body  | string | true  | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "TaskID": "1",
-  "Status": true
-}
-```
-
-> 禁止访问
-
-```json
-{
-  "result": "sanction denied"
-}
-```
-
-```json
-{
-  "result": "Task Due"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                          | 说明   | 数据模型   |
-| --- | -------------------------------------------------------------- | ---- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)        | 成功   | Inline |
-| 403 | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3) | 禁止访问 | Inline |
-
-### 返回数据结构
-
-状态码 **200**
-
-| 名称       | 类型     | 必选   | 约束   | 说明   |
-| -------- | ------ | ---- | ---- | ---- |
-| » result | string | true | none | none |
 
 ## GET 查看任务详情
 
@@ -2433,9 +2591,9 @@ GET /Organization/Task/Action/%3CTaskID%3E/
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
 
 > 返回示例
 
@@ -2458,9 +2616,9 @@ GET /Organization/Task/Action/%3CTaskID%3E/
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
@@ -2470,10 +2628,10 @@ GET /api/Organization/Task/All
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| page  | query | string | false | none |
-| token | query | string | true  | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|page|query|string|false|none|
+|token|query|string|true|none|
 
 > 返回示例
 
@@ -2524,9 +2682,9 @@ GET /api/Organization/Task/All
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
@@ -2550,17 +2708,18 @@ properties:
     description: 描述
 required:
   - OrgName
+
 ```
 
 ### 请求参数
 
-| 名称            | 位置    | 类型     | 必选    | 说明      |
-| ------------- | ----- | ------ | ----- | ------- |
-| token         | query | string | true  | none    |
-| body          | body  | object | false | none    |
-| » MonitorID   | body  | string | false | 班级负责人ID |
-| » OrgName     | body  | string | true  | 组织名称    |
-| » Description | body  | string | false | 描述      |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» MonitorID|body|string|false|班级负责人ID|
+|» OrgName|body|string|true|组织名称|
+|» Description|body|string|false|描述|
 
 > 返回示例
 
@@ -2587,78 +2746,10 @@ required:
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                            | 说明   | 数据模型   |
-| --- | ---------------------------------------------------------------- | ---- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | 成功   | Inline |
-| 400 | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | 请求有误 | Inline |
-
-### 返回数据结构
-
-## DELETE 删除任务
-
-DELETE /api/Organization/Task/%3CTaskID%3E/
-
-### 请求参数
-
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
-
-> 返回示例
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                           | 说明   | 数据模型   |
-| --- | --------------------------------------------------------------- | ---- | ------ |
-| 204 | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 删除成功 | Inline |
-
-### 返回数据结构
-
-## PUT 修改组织信息
-
-PUT /api/Organization/Action/%3COrgID%3E/modify/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  OrgName:
-    type: string
-  MonitorID:
-    type: string
-  Description:
-    type: string
-```
-
-### 请求参数
-
-| 名称            | 位置    | 类型     | 必选    | 说明   |
-| ------------- | ----- | ------ | ----- | ---- |
-| token         | query | string | false | none |
-| body          | body  | object | false | none |
-| » OrgName     | body  | string | false | none |
-| » MonitorID   | body  | string | false | none |
-| » Description | body  | string | false | none |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "OrgID": 2,
-  "OrgName": "操作系统2022",
-  "MonitorID": 3,
-  "Description": "修改描述测试"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|请求有误|Inline|
 
 ### 返回数据结构
 
@@ -2670,9 +2761,9 @@ GET /http:101.37.175.115/api/Reward/Situation/
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选   | 说明   |
-| ----- | ----- | ------ | ---- | ---- |
-| token | query | string | true | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
 
 > 返回示例
 
@@ -2688,66 +2779,9 @@ GET /http:101.37.175.115/api/Reward/Situation/
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
-
-### 返回数据结构
-
-## POST 获取奖励
-
-POST /101.37.175.115:8000/api/Reward/Add/
-
-> Body 请求参数
-
-```yaml
-type: object
-properties:
-  ItemName:
-    type: string
-    description: Timer
-    example: Timer
-  Durations:
-    type: string
-    description: Timer项必填
-required:
-  - ItemName
-```
-
-### 请求参数
-
-| 名称          | 位置    | 类型     | 必选    | 说明       |
-| ----------- | ----- | ------ | ----- | -------- |
-| token       | query | string | true  | none     |
-| body        | body  | object | false | none     |
-| » ItemName  | body  | string | true  | Timer    |
-| » Durations | body  | string | false | Timer项必填 |
-
-> 返回示例
-
-> 成功
-
-```json
-{
-  "UID": 1,
-  "Uname": "LSD",
-  "Rank": 1,
-  "EXP": 3035,
-  "Accumulation": 12800
-}
-```
-
-```json
-{
-  "result": "expect Durations"
-}
-```
-
-### 返回结果
-
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
@@ -2757,9 +2791,9 @@ GET /api/Reward/Rank
 
 ### 请求参数
 
-| 名称    | 位置    | 类型     | 必选    | 说明   |
-| ----- | ----- | ------ | ----- | ---- |
-| token | query | string | false | none |
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|false|none|
 
 > 返回示例
 
@@ -2787,10 +2821,69 @@ GET /api/Reward/Rank
 
 ### 返回结果
 
-| 状态码 | 状态码含义                                                   | 说明  | 数据模型   |
-| --- | ------------------------------------------------------- | --- | ------ |
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功  | Inline |
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## POST 获取奖励
+
+POST /101.37.175.115:8000/api/Reward/Add/
+
+> Body 请求参数
+
+```yaml
+type: object
+properties:
+  ItemName:
+    type: string
+    description: Timer
+    example: Timer
+  Durations:
+    type: string
+    description: Timer项必填
+required:
+  - ItemName
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|token|query|string|true|none|
+|body|body|object|false|none|
+|» ItemName|body|string|true|Timer|
+|» Durations|body|string|false|Timer项必填|
+
+> 返回示例
+
+> 成功
+
+```json
+{
+  "UID": 1,
+  "Uname": "LSD",
+  "Rank": 1,
+  "EXP": 3035,
+  "Accumulation": 12800
+}
+```
+
+```json
+{
+  "result": "expect Durations"
+}
+```
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
 ### 返回数据结构
 
 # 数据模型
+
