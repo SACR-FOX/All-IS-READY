@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.documentation import include_docs_urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('api/ToDoList/',include('ToDoList.urls')),
     path('api/Organization/',include('Organization.urls')),
     path('api/Community/', include('Community.urls')),
-    path('docs/',include_docs_urls(title="All Is Ready 接口文档")),
+    # path('docs/',include_docs_urls(title="All Is Ready 接口文档")),
     path('api/Files/', include('Files.urls')),
     path('api/Reward/',include('RewardSystem.urls'))
 ]

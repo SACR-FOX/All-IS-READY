@@ -1,9 +1,12 @@
+import time
+
 from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from models.models import User
+from rest_framework import status
 import oss2
 import os\
 
@@ -84,3 +87,8 @@ class modify_params(APIView):
             return Response("empty")
         if not a:
             return Response("false")
+
+class print_time(APIView):
+    def get(self,request):
+        T=int(time.time())
+        return Response({"result":T},status=status.HTTP_200_OK)

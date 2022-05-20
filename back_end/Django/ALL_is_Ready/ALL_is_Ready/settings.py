@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-a-4660q57q+4@_t-9l_bnu797sp=afv9b&$ukx7f9w9f8&h8(4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','101.37.175.115']
 
 
 # Application definition
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'ToDoList',
     'Organization',
     'Community',
-    'coreapi',
+    # 'coreapi',
     'Files',
     'django_crontab'
 
@@ -173,7 +173,8 @@ REST_FRAMEWORK={
 }
 
 CRONTAB_COMMAND_PREFIX = 'LANG_ALL=zh_cn.UTF-8'
-CRONTAB_LOG_PATH="/Users/lishengdi/lib/oss_test/crontab.log"
+# CRONTAB_LOG_PATH="/Users/lishengdi/lib/oss_test/crontab.log"
+CRONTAB_LOG_PATH="/home/ALL_IS_READY_CACHE/crontab.log"
 
 CRONJOBS = [
     ('0 0 * * *', 'tools.common.daily_jobs', ' >>'+CRONTAB_LOG_PATH),

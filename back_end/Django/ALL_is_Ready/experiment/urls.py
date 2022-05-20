@@ -7,6 +7,7 @@ urlpatterns = [
 
     path('oss', views.OSStest.as_view(), name="oss上传"),
     path('ranklist',views.requestTest.as_view(),name="rank"),
-    path('modify_params',views.modify_params.as_view())
+    path('modify_params',views.modify_params.as_view()),
+    path('time',views.print_time.as_view())
 
 ]
