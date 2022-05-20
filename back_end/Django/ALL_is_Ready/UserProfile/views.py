@@ -44,7 +44,7 @@ class UserRegister(APIView):
 
         if not User.objects.filter(Uname=username):
             try:
-                User.objects.create(Uname=username,Passwd=password,Header=header)
+                User.objects.create(Uname=username,Passwd=password,Header=header,Rank=1,Accumulation=0,EXP=0)
             except Exception as e:
                 print(e)
             return Response({"result":"ok"},status=status.HTTP_201_CREATED)
@@ -64,11 +64,11 @@ class UserLogin(APIView):  #登录
 
         usr=User.objects.filter(Q(Uname=username),Q(Passwd=password)).first()
         if not usr:
-            return Response({'result':'用户名或密码错误','code':status.HTTP_401_UNAUTHORIZED})
+            return Response({'result':'用户名或密码错误','code':status.HTTP_401_UNAUTHORIZED},status=status.HTTP_401_UNAUTHORIZED)
 
         token=tokenCreator.create(usr,1440)
 
-        return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID})
+        return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID},status=status.HTTP_200_OK)
 
 
 # class Rank(APIView):
