@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="background-color: #F1F1F1">
 		<u-navbar
 		    title="学习排行榜"
 		    @rightClick="rightClick"
@@ -43,7 +43,7 @@
 			<view class="rank_item" v-for="(item,index) in list2">
 				<text class="rank_text">{{item.rank}}</text>
 				<u-avatar :src=item.Header
-					size="30" 
+					size="40" 
 					shape="circle"
 					style="margin-top: 20rpx;
 					margin-left: 20rpx;"></u-avatar>
@@ -129,28 +129,51 @@
 	.rank2{
 		display: flex;
 		flex-direction: column;
+		background-color: #ffffff;
+		height: 1000rpx;
+		margin-left: 20rpx;
+		margin-right: 20rpx;
+		border-radius: 15rpx;
 	}
 	.rank_item{
 		height: 100rpx;
 		display: flex;
 		flex-direction: row;
 		white-space: nowrap;
-		background-color: #9bff29;
-		margin-top: 10rpx;
+		background-color: #d7ff99;
+		margin-top: 20rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+		border-radius: 15rpx;
 	}
 	.rank_text{
 		width: 40rpx;
 		margin-left: 30rpx;
 		margin-top: 30rpx;
+		font-size: 40rpx;
+		font-weight: bold;
+		align-items: center;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
+		color: #ffffff;
 	}
 	.name_text{
 		width: 300rpx;
-		margin-left: 190rpx;
+		margin-left: 150rpx;
 		margin-top: 30rpx;
+		font-size: 40rpx;
+		font-weight: bold;
+		align-items: center;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
+		color: #ffffff;
 	}
 	.exp_text{
 		text-align: right;
 		margin-top: 30rpx;
+		font-size: 40rpx;
+		font-weight: bold;
+		align-items: center;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
+		color: #ffffff;
 	}
 	.top_rank_text{
 		margin-left: 17rpx;

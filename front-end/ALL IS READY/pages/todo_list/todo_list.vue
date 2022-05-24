@@ -243,7 +243,6 @@
 				this.tag_picker_show = false
 				this.date_flag = 1
 				this.picker_tag = e["value"]["0"]
-				console.log(e["value"]["0"])
 			},
 			
 			
@@ -355,7 +354,6 @@
 				// 拼接
 				var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute ;
 				// 返回
-				console.log(result)
 				return result;
 			},
 			

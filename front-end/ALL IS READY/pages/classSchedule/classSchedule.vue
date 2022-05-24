@@ -24,9 +24,10 @@
 		</u-tabs>
 		
 		<view class="course" v-for="(item,index) in list2" :style="{backgroundColor:item.Tag}">
+			<view>
 				<text class="time">{{item.Time}}</text>
 				<text class="curName">{{item.curName}}</text>
-				<text class="room">{{item.room}}</text>
+				<text class="room">{{item.room}}</text>		
 			</view>
 		</view>
 		
@@ -106,9 +107,17 @@
 		white-space: nowrap;
 		background-color: #55ff7f;
 		margin-top: 10rpx;
+		align-items: center;
+		height: 100rpx;
+
 	}
 	.time{
 		margin-left: 30rpx;
+		font-size: 40rpx;
+		font-weight: bold;
+		align-items: center;
+		text-shadow: 0 0 5px #000000,0 0 5px #000000;
+		color: #ffffff;
 	}
 	.curName{
 		margin-left: 50rpx;

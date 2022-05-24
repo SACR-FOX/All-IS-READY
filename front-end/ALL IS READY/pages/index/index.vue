@@ -2,16 +2,16 @@
 	<view>
 		<view class="card_top" style="display: flex; ">
 			<view style="display: flex;flex-direction: row;margin-top: 50rpx;">
-				<u-avatar src="../../static/avatar.jpg" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
+				<u-avatar src="../../static/avatar.jpg" :src="user.Header" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
 				<view style="">
 					<view style="text-align: right; margin-left: 170px;display: flex;">
 						<text style="margin-top: 30rpx;">今天学习了:</text>
 						<text style="font-size: 60rpx; 
 									margin-left: 15rpx;margin-right: 15rpx;
-									font-weight: bold;">{{learnTime}}</text>
-						<text style="margin-top: 30rpx;">小时</text>
+									font-weight: bold;">{{timeChange(user.Accumulation)}}</text>
+						<text style="margin-top: 30rpx;">{{timeList[timeFlag]}}</text>
 					</view>
-					<view style="text-align: right;">TOP:10%</view>
+					<view style="text-align: right;">TOP:{{Situation.percent}}%</view>
 				</view>
 			</view>
 		</view>
@@ -84,7 +84,23 @@
 	export default {
 		data() {
 			return {
+						//token
+						token  : "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjIsIlVuYW1lIjoieHljZiIsIk9yZ0lEIjoxLCJleHAiOjE2NTMwOTczNDF9.UBTeUJOApg6Kd9rzKTDQKghsV8S0WA0aMGwYqt6Xk9E",
+						UID : "2",
+						Url : "http://101.37.175.115/api/",
+						
+						
+						//用户信息
+						user : {},
+					
+						//排名信息
+						Situation : {},
+						
 						pro:0.6 ,//计时器
+						
+						//分钟为0，小时为1
+						timeFlag : 0,
+						timeList : ["分钟","小时"],
 						
 						//todoList
 						week : ["星期一","星期二","星期三","星期四","星期五","星期六","星期日",],
@@ -164,15 +180,50 @@
 				}else{
 					return (text.slice(0,length)+'...')
 				}
+			},
+			
+			timeChange(time){
+				let that = this
+				if(time<60){
+					that.timeFlag = 0
+					return 0
+					
+				}else if(time < 3600){
+					that.timeFlag = 0
+					return Math.floor(time/60)
+					
+				}else{
+					that.timeFlag = 1
+					return Math.floor(time/3600)
+				}
 			}
 		},
 		onLoad() {
+			let that = this
+			
 			uni.getSystemInfo({
 				success: (res) => {
 					console.log(res.deviceId)
 				}
 			})
 			
+			uni.request({
+				url: that.Url + "User/Detail/"+"2/"+"?token="+that.token,
+				method: "GET",
+				success: (res) => {
+					that.user = res.data
+					console.log(that.user.Header)
+				}
+			})
+			
+			uni.request({
+				url:that.Url + "Reward/Situation/" + "?token="+that.token,
+				success: (res) => {
+					that.Situation = res.data
+					console.log(that.Situation.percent)
+				}
+			})
+			console.log(Math.floor(this.timeChange(3666)))
 			console.log(this.textFix("aaaaaa",3))
 		}
 	}
