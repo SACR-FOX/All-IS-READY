@@ -84,6 +84,10 @@
 				this.userMsg = await this.getUserMsg()
 				if(this.userMsg != "err"){
 					this.setStorage(this.userMsg)
+					// console.log(this.userMsg.token)
+					uni.reLaunch({
+						url:'../community/community'
+					})
 				}else{
 					console.log("err")
 				}

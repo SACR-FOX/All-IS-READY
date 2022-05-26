@@ -51,6 +51,7 @@
 	export default {
 		data() {
 			return {
+				Url:'http://101.37.175.115/api/',
 				HasImage:true,
 				Poster:'../../static/logo.png',
 				CommunityName:'操作系统',
@@ -58,6 +59,8 @@
 				PostCount:'158',
 				Renewal:'2天前',
 				Renewal:'2天前',
+				
+				useMsg : {},
 			}
 		},
 		methods: {
@@ -70,10 +73,44 @@
 			},
 			jump(){
 				uni.navigateTo({
-					url:'../communityTopic/communityTopic'
+					url:'../communityTopic/communityTopic',
+					
+				})
+			},
+			getToken(){
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'userMsg',
+						success: function (res) {
+								req(res.data)
+							},
+					})
+				})
+			},
+			getCommunity(){
+				let that = this
+				console.log(that.useMsg.token)
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: that.Url + 'Community/Action',
+						method:'GET',
+						data:{
+							'token' : that.useMsg.token,
+							'page' : '1',
+						},
+						success: (res) => {
+							req(res.data)
+						},
+						fail: (err) => {
+							req(err)
+						}
+					})
 				})
 			}
-			
+		},
+		async onLoad() {
+			this.useMsg = await this.getToken()
+			// console.log(this.useMsg.token)
 		}
 	}
 </script>
