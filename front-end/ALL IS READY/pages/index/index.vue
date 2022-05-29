@@ -31,7 +31,7 @@
 						<text style="font-weight: bold;">下一节</text>
 						<text style="font-size: 60rpx; font-weight: bold; margin-top: 10rpx;">{{textFix(classSch.curName,3)}}</text>
 						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.room}}</text>
-						<text style="font-weight: bold;">{{classSch.Time}}</text>
+						<text style="font-weight: bold;">{{timeToStr(classSch.Time)}}</text>
 					</view>
 				</view>
 				
@@ -85,9 +85,10 @@
 		data() {
 			return {
 						//token
-						token  : "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjIsIlVuYW1lIjoieHljZiIsIk9yZ0lEIjoxLCJleHAiOjE2NTMwOTczNDF9.UBTeUJOApg6Kd9rzKTDQKghsV8S0WA0aMGwYqt6Xk9E",
-						UID : "2",
+						// token  : "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjIsIlVuYW1lIjoieHljZiIsIk9yZ0lEIjoxLCJleHAiOjE2NTMwOTczNDF9.UBTeUJOApg6Kd9rzKTDQKghsV8S0WA0aMGwYqt6Xk9E",
+						// UID : "2",
 						Url : "http://101.37.175.115/api/",
+						userMsg : {},
 						
 						
 						//用户信息
@@ -114,7 +115,7 @@
 						//classSchedule
 						classSch : {
 							"curName" :"移动软件开发",
-							"Time" : "9:40",
+							"Time" : 75600,
 							"room" : "信息实验室4",
 							"Tag" : "rgba(255, 190, 118,1.0)"
 						},
@@ -196,20 +197,60 @@
 					that.timeFlag = 1
 					return Math.floor(time/3600)
 				}
-			}
+			},
+			
+			timeToStr(time){
+				let that = this;
+				var hour = time/3600
+				var min = time - hour * 3600;
+				return hour.toString() + ":" + min.toString()
+			},
+			
+			
+			getSystemInfo(){		
+				uni.getSystemInfo({
+					success: (res) => {
+						console.log(res.deviceId)
+					}
+				})
+			},
+			
+			
+			getUserMsg(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							req("success")
+						},
+						fail: (err) => {
+							console.log("err")
+							uni.reLaunch({
+								url:"../Login/Login"
+							})
+						}
+					})
+				})
+			},
 		},
-		onLoad() {
+		async onLoad() {
 			let that = this
 			
-			uni.getSystemInfo({
-				success: (res) => {
-					console.log(res.deviceId)
-				}
-			})
+			await this.getUserMsg()
 			
+				
+			if(this.userMsg.length == 0){
+				uni.reLaunch({
+					url:"../Login/Login"
+				})
+			}
+			console.log(that.userMsg.token)
 			uni.request({
-				url: that.Url + "User/Detail/"+"2/"+"?token="+that.token,
+				url: that.Url + "User/Detail/"+"2/"+"?token="+that.userMsg.token,
 				method: "GET",
+
 				success: (res) => {
 					that.user = res.data
 					console.log(that.user.Header)
@@ -217,14 +258,55 @@
 			})
 			
 			uni.request({
-				url:that.Url + "Reward/Situation/" + "?token="+that.token,
+				url:that.Url + "Reward/Situation/" + "?token="+that.userMsg.token,
 				success: (res) => {
 					that.Situation = res.data
 					console.log(that.Situation.percent)
 				}
 			})
+			
+			uni.request({
+				url:that.Url + "Schedule/Next/?token="+that.userMsg.token,
+				success: (res) => {
+					console.log(res.data)
+					if(res.data[0] == "result: Empty"){
+						// classSch : {
+						// 	"curName" :"移动软件开发",
+						// 	"Time" : "9:40",
+						// 	"room" : "信息实验室4",
+						// 	"Tag" : "rgba(255, 190, 118,1.0)"
+						// },
+						that.classSch = {
+							"curName" :"無 ",
+							"Time" : "",
+							"room" : "",
+							"Tag" : "rgba(255, 190, 118,1.0)"
+						}
+						
+						
+					}
+					// console.log(that.Url + "Schedule/Next/?token="+that.userMsg.token)
+				}
+			})
+			
 			console.log(Math.floor(this.timeChange(3666)))
 			console.log(this.textFix("aaaaaa",3))
+		},
+		filters:{
+			timeStamp: function(value) {
+				var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				var year = date.getFullYear();
+				var month = ("0" + (date.getMonth() + 1)).slice(-2);
+				var sdate = ("0" + date.getDate()).slice(-2);
+				var hour = ("0" + date.getHours()).slice(-2);
+				var minute = ("0" + date.getMinutes()).slice(-2);
+				// var second = ("0" + date.getSeconds()).slice(-2);
+				// 拼接
+				var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute ;
+				// 返回
+				return result;
+			},
+			
 		}
 	}
 </script>
