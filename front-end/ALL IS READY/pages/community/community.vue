@@ -9,41 +9,30 @@
 		
 		<view style="margin-top: 80rpx;"></view>
 		
-		<view class="communityItem" @click="jump">
-			<view class="row">
-				<view v-if="HasImage">
-					<image :src='Poster' class="image"></image>
-				</view>
-				<view class="col">
-					<view class="row">
-						<text class="communityName">{{CommunityName}}</text>
-						<text class="postCount">{{PostCount}}</text>
+		<view v-for='i in count'>
+			<view class="communityItem" @click="jump(results[i-1].CommunityID,
+			results[i-1].CommunityName,
+			results[i-1].Description,
+			results[i-1].Renewal,
+			results[i-1].Poster)">
+				<view class="row">
+					<view v-if="HasImage">
+						<image :src='results[i-1].Poster' class="image"></image>
 					</view>
-					<view class="row">
-						<text class="description">{{textFix(Description,30)}}</text>
-						<text class="renewal">{{Renewal}}</text>
+					<view class="col">
+						<view class="row">
+							<text class="communityName">{{results[i-1].CommunityName}}</text>
+							<text class="postCount">{{results[i-1].PostCount}}</text>
+						</view>
+						<view class="row">
+							<text class="description">{{textFix(results[i-1].Description,30)}}</text>
+							<text class="renewal">{{results[i-1].Renewal}}天前</text>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		
-		<view class="communityItem">
-			<view class="row">
-				<view v-if="HasImage">
-					<image :src='Poster' class="image"></image>
-				</view>
-				<view class="col">
-					<view class="row">
-						<text class="communityName">{{CommunityName}}</text>
-						<text class="postCount">{{PostCount}}</text>
-					</view>
-					<view class="row">
-						<text class="description">{{textFix(Description,30)}}</text>
-						<text class="renewal">{{Renewal}}</text>
-					</view>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -52,15 +41,20 @@
 		data() {
 			return {
 				Url:'http://101.37.175.115/api/',
+				count:{},
+				data:{},
 				HasImage:true,
 				Poster:'../../static/logo.png',
-				CommunityName:'操作系统',
-				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+				CommunityName:{},
+				CommunityID:{},
+				results:{},
+				
+				Description:{},
 				PostCount:'158',
 				Renewal:'2天前',
 				Renewal:'2天前',
-				
 				useMsg : {},
+				page:'1',
 			}
 		},
 		methods: {
@@ -71,12 +65,26 @@
 					return (text.slice(0,length)+'...')
 				}
 			},
-			jump(){
-				uni.navigateTo({
-					url:'../communityTopic/communityTopic',
-					
+			setStorage(id,name,desc,renewal,poster){
+				// console.log(name)
+				uni.setStorage({
+					key : 'communityID',
+					data : {
+						CommunityID:id,
+						CommunityName:name,
+						Description:desc,
+						Renewal:renewal,
+						Poster:poster,
+					},
 				})
 			},
+			jump(id,name,desc,renewal,poster){
+				this.setStorage(id,name,desc,renewal,poster)
+				uni.navigateTo({
+					url:'../communityTopic/communityTopic',
+				})
+			},
+	
 			getToken(){
 				return new Promise((req,rej)=>{
 					uni.getStorage({
@@ -89,17 +97,20 @@
 			},
 			getCommunity(){
 				let that = this
-				console.log(that.useMsg.token)
 				return new Promise((req,rej)=>{
 					uni.request({
-						url: that.Url + 'Community/Action',
+						url: that.Url + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page,
 						method:'GET',
 						data:{
-							'token' : that.useMsg.token,
-							'page' : '1',
+
 						},
 						success: (res) => {
 							req(res.data)
+							console.log(that.Url + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page)
+							// console.log(res.data.results[0].CommunityName)
+							this.count = res.data.count
+							this.results = res.data.results
+							// this.CommunityName = res.data.results
 						},
 						fail: (err) => {
 							req(err)
@@ -111,6 +122,8 @@
 		async onLoad() {
 			this.useMsg = await this.getToken()
 			// console.log(this.useMsg.token)
+			this.data = await this.getCommunity()
+			// console.log(this.data.results[0].CommunityName)
 		}
 	}
 </script>

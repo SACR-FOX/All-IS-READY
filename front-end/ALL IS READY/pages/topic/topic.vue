@@ -2,27 +2,30 @@
 	
 	<view>
 		<u-navbar
-		    title="帖子"
+		    title="话题帖子"
 		    @rightClick="rightClick"
 		    :autoBack="true">
 		</u-navbar>
 		
 		<view class="page">
-			<text class="title">官方：波多尔斯基与波兰超球队扎布热矿工续约一个赛季</text>
+			<text class="title">{{Title}}</text>
 			<view class="row" style="margin-top: 20rpx; margin-bottom: 20rpx;">
 				<u-avatar :src="src" size="30" style="width: 80rpx; margin-top:;"></u-avatar>
 				<text class="creator">张三</text>
 				<view class="time">发布于5天前</view>
 			</view>
 			<text class="content">
-				斯基拉的报道宣称，国米的CEO马洛塔接下来将会再次和迪巴拉的经纪人安图恩会面，目前蓝黑军团为这位阿根廷国脚准备了一份为期3年并附带1年续约选择权，年薪约700万欧元的报价。
-				
-				这名意大利记者的报道进一步表示，虽然近期媒体上出现了穆里尼奥要求罗马引进迪巴拉的传闻，但双方之间并未进行接触。
+				<!-- {{result[0].Content}} -->
 			</text>
 			
-			<view v-if="HasImage">
+			<!-- <view v-if="HasImage">
 				<image :src="topicSrc" class="topicSrc"></image>
+			</view> -->
+			
+			<view>
+				
 			</view>
+			
 		</view>
 	</view>
 </template>
@@ -31,12 +34,79 @@
 	export default {
 		data() {
 			return {
+				Url:'http://101.37.175.115/api/',
+				page:'1',
+				TopicID:'10',
+				data:{},
 				src:'../../static/logo.png',
 				topicSrc:'../../static/logo.png',
-				HasImage:true
+				HasImage:true,
+				Content:'',
+				result:{},
+				Title:''
 				
-			};
-		}
+			}
+		},
+		methods:{
+			getToken(){
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'userMsg',
+						success: function (res) {
+							req(res.data)
+						},
+					})
+				})
+			},
+			getTopicID(){
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'TopicID',
+						success: function (res) {
+							req(res.data)
+						},
+					})
+				})
+			},
+			getTopic(){
+				let that = this
+				console.log(that.TopicID)
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: that.Url + 'Community/Post_All' + '?token=' + that.useMsg.token + '&page=' + that.page +'&TopicID=' + this.TopicID,
+						method:'GET',
+						
+						success: (res) => {
+							req(res.data)
+							console.log(that.Url + 'Community/Post_All' + '?token=' + that.useMsg.token + '&page=' + that.page +'&TopicID=' + this.TopicID)
+							this.result = res.data.result
+							// console.log(this.TopicID)
+							
+							// console.log(res.data.result[0].Content)
+						},
+						fail: (err) => {
+							req(err)
+						}
+					})
+				})
+			}
+		},
+		
+		async onLoad() {
+			this.useMsg = await this.getToken()
+			
+			this.TopicData = await this.getTopicID()
+			this.TopicID = this.TopicData.TopicID
+			this.Title = this.TopicData.Title
+			
+			this.data = await this.getTopic()
+			
+			
+			
+			console.log(this.TopicID)
+			console.log(this.Title)
+		},
+		
 	}
 </script>
 
