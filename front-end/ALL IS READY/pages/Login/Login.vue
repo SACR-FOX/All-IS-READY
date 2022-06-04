@@ -14,31 +14,17 @@
 				
 				<view class="input">
 					<view class="input-msg" style="">
-						<!-- <u-input v-model="userName"
-								 clearable placeholder="请输入用户名"
-						         shape = "circle"
-								>userName</u-input> -->
+						
 						<input style="height: 50rpx; margin-left: 30rpx;" 
 						placeholder="请输入用户名 " 
 						v-model="userName"/>
 					</view>
 					<view class="input-msg" >
-						<!-- <u-input v-model="userName"
-								 clearable placeholder="请输入用户名"
-						         shape = "circle"
-								>userName</u-input> -->
+						
 						<input style="height: 50rpx; margin-left: 30rpx;" 
 						placeholder="请输入密码" 
 						password="" v-model="passW"/>
 					</view>
-					<!-- <view class="input-msg">
-						<u-input v-model="passW"
-								 type = "password" clearable
-								 placeholder="请输入密码"
-								 shape = "circle"
-								  class="input-msg">passWord</u-input>
-					</view>
-					 -->
 					
 				</view>
 				<button class="login_btn" @click="Login()">Login</button>
@@ -100,13 +86,34 @@
 							},
 
 							fail: (err) => {
-								req(err)
+								req(404)
 							}
 
 						})
 				})
 
 			},
+			
+			getStorage(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							uni.reLaunch({
+								url:"../index/index"
+							})
+							req("success")
+						},
+						fail: (err) => {
+							req(404)
+						}
+					})
+				})
+			},
+			
+			
 
 			getSystemInfo(){
 				return new Promise((req, rej) => {
@@ -135,15 +142,10 @@
 				this.userMsg = await this.getUserMsg()
 				if(this.userMsg != "err"){
 					this.setStorage(this.userMsg)
-<<<<<<< HEAD
+
 					console.log("success")
 					uni.reLaunch({
 						url:"../index/index"
-=======
-					// console.log(this.userMsg.token)
-					uni.reLaunch({
-						url:'../community/community'
->>>>>>> 7b25b3486794966d17df1a9917af379fb93df630
 					})
 				}else{
 					console.log("err")
@@ -162,6 +164,8 @@
 			// let that = this
 			// that.token = await that.getToken();
 			// console.log(that.token)
+			//查看是否已经登录成功
+			await this.getStorage()
 			this.backGroundImg = await this.getBackGround()
 			this.sysInfo = await this.getSystemInfo()
 			console.log(this.sysInfo.windowHeight)

@@ -110,6 +110,15 @@
             
         }
         
+        ,{
+            "path" : "pages/file/file_detial",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

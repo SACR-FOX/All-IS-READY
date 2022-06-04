@@ -30,8 +30,8 @@
 					<view  style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
 						<text style="font-weight: bold;">下一节</text>
 						<text style="font-size: 60rpx; font-weight: bold; margin-top: 10rpx;">{{textFix(classSch.curName,3)}}</text>
-						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.room}}</text>
-						<text style="font-weight: bold;">{{timeToStr(classSch.Time)}}</text>
+						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.Location}}</text>
+						<text style="font-weight: bold;">{{timeToStr(classSch.Start)}}</text>
 					</view>
 				</view>
 				
@@ -114,10 +114,11 @@
 						
 						//classSchedule
 						classSch : {
-							"curName" :"移动软件开发",
-							"Time" : 75600,
-							"room" : "信息实验室4",
-							"Tag" : "rgba(255, 190, 118,1.0)"
+							"curName" :"",
+							"Start" : 0,
+							"Location" : "",
+							"Tag" : "rgba(255, 190, 118,1.0)",
+							"End" : 0,
 						},
 						//班级动态
 						classAct: "无事发生",
@@ -201,9 +202,28 @@
 			
 			timeToStr(time){
 				let that = this;
-				var hour = time/3600
-				var min = time - hour * 3600;
-				return hour.toString() + ":" + min.toString()
+				 // console.log(time)
+				if(time == 0){
+					return ""
+				}
+				if(time >= 3600){
+					var hour = Math.floor((time/3600))
+					console.log(hour)
+					var min = Math.floor(((time - hour * 3600))/60)
+				}else{
+					var hour = 0 
+					var min = Math.floor(((time - hour * 3600))/60)
+				}
+				
+				if(hour.toString().length < 2)
+				{
+					hour = "0"+hour
+				}
+				if(min.toString().length < 2)
+				{
+					min = "0"+min
+				}
+				return hour + ":" + min
 			},
 			
 			
@@ -261,14 +281,14 @@
 				url:that.Url + "Reward/Situation/" + "?token="+that.userMsg.token,
 				success: (res) => {
 					that.Situation = res.data
-					console.log(that.Situation.percent)
+					// console.log(that.Situation.percent)
 				}
 			})
 			
 			uni.request({
 				url:that.Url + "Schedule/Next/?token="+that.userMsg.token,
 				success: (res) => {
-					console.log(res.data)
+					// console.log(res.data)
 					if(res.data[0] == "result: Empty"){
 						// classSch : {
 						// 	"curName" :"移动软件开发",
@@ -277,20 +297,24 @@
 						// 	"Tag" : "rgba(255, 190, 118,1.0)"
 						// },
 						that.classSch = {
-							"curName" :"無 ",
-							"Time" : "",
-							"room" : "",
-							"Tag" : "rgba(255, 190, 118,1.0)"
+							"curName" :"無",
+							"Start" : 0,
+							"Location" : "",
+							"Tag" : "rgba(255, 190, 118,1.0)",
+							"End" : 0,
 						}
-						
+						// console.log("aaa")
+					}else{
+						that.classSch = res.data
 						
 					}
+					// console.log(that.classSch.Start)
 					// console.log(that.Url + "Schedule/Next/?token="+that.userMsg.token)
 				}
 			})
 			
-			console.log(Math.floor(this.timeChange(3666)))
-			console.log(this.textFix("aaaaaa",3))
+			// console.log(Math.floor(this.timeChange(3666)))
+			// console.log(this.textFix("aaaaaa",3))
 		},
 		filters:{
 			timeStamp: function(value) {
