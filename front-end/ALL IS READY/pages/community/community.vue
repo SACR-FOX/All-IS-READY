@@ -33,6 +33,9 @@
 			</view>
 		</view>
 		
+		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
+		
+		
 	</view>
 </template>
 
@@ -55,6 +58,21 @@
 				Renewal:'2天前',
 				useMsg : {},
 				page:'1',
+				
+				content: [{
+						iconPath: '../../static/shequ.png',
+						selectedIconPath: '../../static/shequ.png',
+						text: '创建社区',
+						active: false
+					},
+					{
+						iconPath: '../../static/huati.png',
+						selectedIconPath: '../../static/huati.png',
+						text: '创建话题',
+						active: false
+					},
+				]
+				
 			}
 		},
 		methods: {
@@ -64,6 +82,24 @@
 				}else{
 					return (text.slice(0,length)+'...')
 				}
+			},
+			trigger(e) {
+				// console.log(e)
+				this.content[e.index].active = !e.item.active
+				uni.showModal({
+					title: '提示',
+					content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定')
+							uni.navigateTo({
+								url: 'createCommunity'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
 			},
 			setStorage(id,name,desc,renewal,poster){
 				// console.log(name)
@@ -117,7 +153,7 @@
 						}
 					})
 				})
-			}
+			},
 		},
 		async onLoad() {
 			this.useMsg = await this.getToken()

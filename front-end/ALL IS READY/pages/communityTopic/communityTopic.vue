@@ -26,7 +26,7 @@
 		
 		<view v-for="i in count">
 			<view class="topic">
-				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title)">
+				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,results[i-1].Time)">
 					<!-- <text class=" title">{{results[i-1].Title}}</text> -->
 					<view class="row">
 						<view v-if="results[i-1].HasImage">
@@ -45,6 +45,7 @@
 				</view>
 			</view>
 		</view>
+	
 
 	</view>
 </template>
@@ -69,18 +70,22 @@
 			}
 		},
 		methods: {
-			setStorage(TopicID,Title){
+			setStorage(TopicID,Title,header,Creator,Time){
 				// console.log(name)
 				uni.setStorage({
 					key : 'TopicID',
 					data : {
 						TopicID : TopicID,
-						Title : Title
+						Title : Title,
+						header:header,
+						Creator:Creator,
+						Time : Time
+						
 					}
 				})
 			},
-			jump(TopicID,Title){
-				this.setStorage(TopicID,Title)
+			jump(TopicID,Title,header,Creator,Time){
+				this.setStorage(TopicID,Title,header,Creator,Time)
 				console.log(Title)
 				uni.navigateTo({
 					url:'../topic/topic'
@@ -118,9 +123,14 @@
 						success: (res) => {
 							req(res.data)
 							console.log(that.Url + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
-							this.results = res.data.results
-							this.count = res.data.count
+							// this.results = res.data.results
+							// this.count = res.data.count
 							// console.log(this.results[0].TopicID)
+							
+							// console.log(res.data.data[0].Creator)
+							this.results = res.data.data
+							this.count = res.data.count
+							// console.log(this.results[0].UID)
 						},
 						fail: (err) => {
 							req(err)
@@ -132,14 +142,18 @@
 		},
 		async onLoad() {
 			this.useMsg = await this.getToken()
-			this.Community = await this.getCommnunityID()
+			this.Community = await this.getCommnunityID() //获取传参
 			this.CommunityName=this.Community.CommunityName
 			this.CommunityID = this.Community.CommunityID
 			this.Description = this.Community.Description
 			this.Renewal = this.Community.Renewal
 			this.ImageUri = this.Community.Poster
 			
-			this.data = await this.getCommunityTopic()
+			this.data = await this.getCommunityTopic() //获取get数据
+			// this.results = this.data.results
+			// console.log(this.results[0].Poster)
+
+			console.log(this.results[0].UID)
 			
 			
 			
@@ -165,7 +179,7 @@
 		.community_image{
 			width: 120rpx;
 			height: 120rpx;
-			border-radius: 30rpx;
+			border-radius: 100rpx;
 			margin-left: 25rpx;
 		}
 		.communityName{
