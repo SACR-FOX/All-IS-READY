@@ -111,6 +111,12 @@
 			
 			read(index){
 				console.log("打开PDF文件+++++++"+index)
+				uni.navigateTo({
+					url:'./file_detial',
+					fail(err) {
+						console.log(err)
+					}
+				})
 			},
 			
 			showDetial(){
