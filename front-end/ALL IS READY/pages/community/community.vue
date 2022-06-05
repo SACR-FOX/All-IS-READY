@@ -65,12 +65,12 @@
 						text: '创建社区',
 						active: false
 					},
-					{
-						iconPath: '../../static/huati.png',
-						selectedIconPath: '../../static/huati.png',
-						text: '创建话题',
-						active: false
-					},
+					// {
+					// 	iconPath: '../../static/huati.png',
+					// 	selectedIconPath: '../../static/huati.png',
+					// 	text: '创建话题',
+					// 	active: false
+					// },
 				]
 				
 			}

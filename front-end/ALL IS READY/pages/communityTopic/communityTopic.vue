@@ -46,6 +46,7 @@
 			</view>
 		</view>
 	
+		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
 
 	</view>
 </template>
@@ -67,9 +68,42 @@
 				count:'',
 				Renewal:'2天前',
 				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+				
+				content: [
+					// {
+					// 	iconPath: '../../static/shequ.png',
+					// 	selectedIconPath: '../../static/shequ.png',
+					// 	text: '创建社区',
+					// 	active: false
+					// },
+					{
+						iconPath: '../../static/huati.png',
+						selectedIconPath: '../../static/huati.png',
+						text: '创建话题',
+						active: false
+					},
+				]
 			}
 		},
 		methods: {
+			trigger(e) {
+				// console.log(e)
+				this.content[e.index].active = !e.item.active
+				uni.showModal({
+					title: '提示',
+					content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定')
+							uni.navigateTo({
+								url:'./createTopic'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
+			},
 			setStorage(TopicID,Title,header,Creator,Time){
 				// console.log(name)
 				uni.setStorage({

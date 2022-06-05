@@ -8,16 +8,29 @@
 					rightText="发布"
 		        >
 		        </u-navbar>
-				<!-- <u-icon name="checkbox-mark" size="19"></u-icon> -->
 			</view>
 		
-		<u--input
-		    placeholder="请输入话题名字"
-		    border="bottom"
-		    clearable style="margin-top: 100rpx;"
-		  ></u--input>
+		<view class="row">
+			<u--input
+				v-model="c1"
+			    placeholder="请输入社区名字"
+			    border="bottom"
+			    clearable
+				autoHeight
+				style=""
+			  ></u--input>
+			  <u-upload
+			  		:fileList="fileList1"
+			  		@afterRead="afterRead"
+			  		@delete="deletePic"
+			  		name="1"
+			  		multiple
+			  		:maxCount="1"
+					style="margin-left: 300rpx;"
+			  	></u-upload>
+		</view>
 		  
-		  <u--textarea  placeholder="从这里开始分享..." style="height: 300rpx"></u--textarea>
+		  <u--textarea v-model="c2" placeholder="请输入社区描述" autoHeight style="height: 300rpx;"></u--textarea>
 	</view>
 </template>
 
@@ -25,7 +38,9 @@
 	export default {
 		data() {
 			return {
-				
+				fileList1: [],
+				c1:'',
+				c2:''
 			}
 		},
 		methods: {
@@ -56,5 +71,9 @@
 </script>
 
 <style>
-
+	.row{
+		display: flex;
+		flex-direction: row;
+		margin-top: 100rpx;
+	}
 </style>

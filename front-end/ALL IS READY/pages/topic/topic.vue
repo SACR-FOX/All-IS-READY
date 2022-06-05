@@ -18,9 +18,6 @@
 				<!-- {{result[0].Content}} -->
 			</text>
 			
-			<!-- <view v-if="HasImage">
-				<image :src="topicSrc" class="topicSrc"></image>
-			</view> -->
 		</view>
 		
 		<view v-for="i in count">
@@ -52,12 +49,16 @@
 			              margin="0 0 8px 0"
 			              :text="result[i-1].Content"
 			            ></u--text>
-			            <!-- <u-album :urls="urls2"></u-album> -->
 						<u-album :urls="result[i-1].pics"></u-album>
 						
 			          </view>
 					  <view class="row">
-						  <image src="../../static/star.png" class="star" @click="star(result[i-1].PostID),showToast()"></image>
+						  <view v-show="list1[i-1]">
+							  <image src="../../static/stared.png" class="star" @click="star(result[i-1].PostID),showToast()"></image>
+						  </view>
+						  <view v-show="list1[i-1]==false">
+								<image src="../../static/star.png" class="star" @click="star(result[i-1].PostID),showToast()"></image>
+						  </view>
 						  <view style="margin-top: 7rpx;">{{result[i-1].Stars}}</view>
 					  </view>
 					  
@@ -92,12 +93,13 @@
 				Time:'',
 				count:'',
 				PostID:'',
+				stars:'',
 				
 				albumWidth: 0,
 
 				pics:[],
 				
-				
+				list1:[],
 			}
 		},
 		computed: {
@@ -153,8 +155,30 @@
 					})
 				})
 			},
+			getStar(index){
+				let that = this
+				let id = that.result[index].PostID
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: that.Url + 'Community/checkStar/' + '?token=' + that.useMsg.token,
+						method:'POST',
+						data:{
+							'ID':id,
+							'type':1
+						},
+						success: (res) => {
+							req(res.data)
+							// console.log(that.Url + 'Community/checkStar/' + '?token=' + that.useMsg.token)
+							this.list1[index] = res.data.result
+							// console.log(res.data.result)
+						},
+						fail: (err) => {
+							req(err)
+						}
+					})
+				})
+			},
 			star(PostID){
-				console.log(PostID)
 				let that = this
 				return new Promise((req,rej)=>{
 					uni.request({
@@ -178,25 +202,24 @@
 			this.useMsg = await this.getToken()
 			
 			this.TopicData = await this.getTopicID()
-			// console.log(this.TopicData)
 			this.TopicID = this.TopicData.TopicID
 			this.Title = this.TopicData.Title
 			this.header = this.TopicData.header
 			this.Creator = this.TopicData.Creator
 			this.Time = this.TopicData.Time
-			
-			
-			
+
 			this.data = await this.getTopic()
 			this.count = this.data.count
 			this.result = this.data.result
+			// console.log(this.result[0].PostID)
 			
+			for (var i = 0; i <= this.count;i++){
+				this.stars = await this.getStar(i)
+				// console.log(this.stars.result)
+				console.log(this.list1[i])
+			}
+			// console.log(this.list1)
 
-			
-			// console.log(this.result[0].header)
-				
-			// console.log(this.TopicID)
-			// console.log(this.Title)
 		},
 		
 	}
