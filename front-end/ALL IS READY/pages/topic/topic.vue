@@ -50,19 +50,11 @@
 			              :text="result[i-1].Content"
 			            ></u--text>
 						<u-album :urls="result[i-1].pics"></u-album>
-						
 			          </view>
-					  <view class="row">
-						  <view v-show="list1[i-1]">
-							  <image src="../../static/stared.png" class="star" @click="star(result[i-1].PostID),showToast()"></image>
-						  </view>
-						  <view v-show="list1[i-1]==false">
-								<image src="../../static/star.png" class="star" @click="star(result[i-1].PostID),showToast()"></image>
-						  </view>
-						  <view style="margin-top: 7rpx;">{{result[i-1].Stars}}</view>
-					  </view>
 					  
-					  
+					  <image :src="a[list1[i-1]]" class="star" @click="star(result[i-1].PostID,showToast2())"></image>
+					  <!-- <image v-else src="../../static/star.png" class="star" @click="star(result[i-1].PostID,showToast1())"></image> -->
+					  <view style="margin-top: 7rpx;">{{result[i-1].Stars}}</view>
 			        </view>
 			      </view>
 			    </view>
@@ -70,6 +62,8 @@
 		</view>
 			
 		<u-toast ref="uToast" />
+		
+		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
 		
 	</view>
 </template>
@@ -95,11 +89,22 @@
 				PostID:'',
 				stars:'',
 				
+				a : ["../../static/star.png",
+					"../../static/stared.png"],
+				
 				albumWidth: 0,
 
 				pics:[],
 				
 				list1:[],
+				
+				content: [{
+						iconPath: '../../static/shequ.png',
+						selectedIconPath: '../../static/shequ.png',
+						text: '发帖',
+						active: false
+					}
+				]
 			}
 		},
 		computed: {
@@ -110,12 +115,37 @@
 			},
 		},
 		methods:{
-			showToast() {
+			showToast1() {
                 this.$refs.uToast.show({
                     message: '点赞成功',
                     type: 'success',
                 })
             },
+			showToast2() {
+			    this.$refs.uToast.show({
+			        message: '您已经点过赞了',
+			        type: 'success',
+			    })
+			},
+			trigger(e) {
+				// console.log(e)
+				this.content[e.index].active = !e.item.active
+				uni.showModal({
+					title: '提示',
+					// content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					content:'确认要发帖吗',
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定')
+							uni.navigateTo({
+								url: './createTopicPost'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
+			},
 			getToken(){
 				return new Promise((req,rej)=>{
 					uni.getStorage({
@@ -167,14 +197,23 @@
 							'type':1
 						},
 						success: (res) => {
-							req(res.data)
+							
 							// console.log(that.Url + 'Community/checkStar/' + '?token=' + that.useMsg.token)
-							this.list1[index] = res.data.result
+							// this.list1[index] = res.data.result
+							if(res.data.result){
+								this.list1[index] = 1
+							}else
+							{
+								this.list1[index]=0
+							}
+							console.log(res.data.result)
+							req(res.data)
 							// console.log(res.data.result)
 						},
 						fail: (err) => {
-							req(err)
-						}
+							rej(err)
+						},
+						
 					})
 				})
 			},
@@ -191,14 +230,22 @@
 						},
 						fail: (err) => {
 							req(err)
-						}
+						},
 					})
 				})
 			},
-			
+			setStorage(){
+				uni.setStorage({
+					key:'TopicID',
+					data:{
+						TopicID:this.TopicID
+					}
+				})
+			}
 		},
 		
 		async onLoad() {
+			
 			this.useMsg = await this.getToken()
 			
 			this.TopicData = await this.getTopicID()
@@ -213,13 +260,14 @@
 			this.result = this.data.result
 			// console.log(this.result[0].PostID)
 			
-			for (var i = 0; i <= this.count;i++){
+			
+			for (var i = 0; i < this.count;i++){
 				this.stars = await this.getStar(i)
 				// console.log(this.stars.result)
-				console.log(this.list1[i])
+				 
 			}
 			// console.log(this.list1)
-
+			console.log(this.list1[0])
 		},
 		
 	}
@@ -298,6 +346,7 @@
 		margin: 10rpx;
 	}
 	.star{
+		margin-top: 1rpx;
 		height: 50rpx;
 		width: 50rpx;
 	}

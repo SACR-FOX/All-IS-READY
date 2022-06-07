@@ -76,7 +76,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		
+		<button @click="j">11</button>
 	</view>
 </template>
 
@@ -149,6 +149,11 @@
 					}
 		},
 		methods: {
+			j(){
+				uni.navigateTo({
+					url:'../community/community'
+				})
+			},
 			toTodolist(){
 				uni.navigateTo({
 					url:"../todo_list/todo_list"

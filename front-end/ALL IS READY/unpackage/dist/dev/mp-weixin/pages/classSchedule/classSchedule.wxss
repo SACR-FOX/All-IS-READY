@@ -5,16 +5,23 @@
 	white-space: nowrap;
 	background-color: #55ff7f;
 	margin-top: 10rpx;
+	align-items: center;
+	height: 100rpx;
 }
 .time{
 	margin-left: 30rpx;
+	font-size: 40rpx;
+	font-weight: bold;
+	align-items: center;
+	text-shadow: 0 0 5px #000000,0 0 5px #000000;
+	color: #ffffff;
 }
 .curName{
-	margin-top: 50rpx;
 	margin-left: 50rpx;
 	font-size: 40rpx;
 	font-weight: bold;
 	align-items: center;
+	text-shadow: 0 0 5px #000000,0 0 5px #000000;
 	color: #ffffff;
 }
 .room{
@@ -22,5 +29,6 @@
 	font-size: 40rpx;
 	font-weight: bold;
 	color: #ffffff;
+	text-shadow: 0 0 5px #000000,0 0 5px #000000;
 }
 

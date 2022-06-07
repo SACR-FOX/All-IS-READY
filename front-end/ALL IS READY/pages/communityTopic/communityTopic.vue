@@ -68,14 +68,9 @@
 				count:'',
 				Renewal:'2天前',
 				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+				UID:'',
 				
 				content: [
-					// {
-					// 	iconPath: '../../static/shequ.png',
-					// 	selectedIconPath: '../../static/shequ.png',
-					// 	text: '创建社区',
-					// 	active: false
-					// },
 					{
 						iconPath: '../../static/huati.png',
 						selectedIconPath: '../../static/huati.png',
@@ -86,15 +81,18 @@
 			}
 		},
 		methods: {
-			trigger(e) {
+			trigger(e) {	//点击悬浮按钮
 				// console.log(e)
 				this.content[e.index].active = !e.item.active
+				this.setCommunityID()
+				// console.log(this.CommunityID)
 				uni.showModal({
 					title: '提示',
-					content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					content:'确认要创建话题吗',
 					success: function(res) {
 						if (res.confirm) {
 							console.log('用户点击确定')
+							
 							uni.navigateTo({
 								url:'./createTopic'
 							})
@@ -104,7 +102,7 @@
 					}
 				})
 			},
-			setStorage(TopicID,Title,header,Creator,Time){
+			setStorage(TopicID,Title,header,Creator,Time){	//跳转到话题内部，存储本地数据
 				// console.log(name)
 				uni.setStorage({
 					key : 'TopicID',
@@ -114,7 +112,15 @@
 						header:header,
 						Creator:Creator,
 						Time : Time
-						
+					}
+				})
+			},
+			setCommunityID(){	//跳转创建话题，存储社区ID
+				console.log(this.CommunityID)
+				uni.setStorage({
+					key:'create',
+					data:{
+						CommunityID : this.CommunityID
 					}
 				})
 			},
@@ -125,7 +131,7 @@
 					url:'../topic/topic'
 				})
 			},
-			getToken(){
+			getToken(){	//获取token
 				return new Promise((req,rej)=>{
 					uni.getStorage({
 						key: 'userMsg',
@@ -135,7 +141,7 @@
 					})
 				})
 			},
-			getCommnunityID(){
+			getCommnunityID(){	//获取当前社区ID，用于get请求
 				return new Promise((req,rej)=>{
 					uni.getStorage({
 						key: 'communityID',
@@ -172,6 +178,32 @@
 					})
 				})
 			},
+			// getCommunityTopic(){
+			// 	let that = this
+			// 	console.log('hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
+			// 	return new Promise((req,rej)=>{
+			// 		uni.request({
+			// 			url: 'http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page,
+			// 			method:'GET',
+						
+			// 			success: (res) => {
+			// 				req(res.data)
+			// 				console.log('http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
+			// 				// this.results = res.data.results
+			// 				// this.count = res.data.count
+			// 				// console.log(this.results[0].TopicID)
+							
+			// 				// console.log(res.data.data[0].Creator)
+			// 				this.results = res.data.data
+			// 				this.count = res.data.count
+			// 				// console.log(this.results[0].UID)
+			// 			},
+			// 			fail: (err) => {
+			// 				req(err)
+			// 			}
+			// 		})
+			// 	})
+			// },
 			
 		},
 		async onLoad() {
@@ -183,15 +215,9 @@
 			this.Renewal = this.Community.Renewal
 			this.ImageUri = this.Community.Poster
 			
+			
 			this.data = await this.getCommunityTopic() //获取get数据
-			// this.results = this.data.results
-			// console.log(this.results[0].Poster)
 
-			console.log(this.results[0].UID)
-			
-			
-			
-			// console.log(this.useMsg.token)
 		},
 	}
 </script>

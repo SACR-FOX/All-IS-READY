@@ -41,9 +41,7 @@ view.data-v-95dec1ae, scroll-view.data-v-95dec1ae, swiper-item.data-v-95dec1ae {
   z-index: 11;
 }
 .u-navbar__content.data-v-95dec1ae {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   height: 44px;
@@ -56,9 +54,7 @@ view.data-v-95dec1ae, scroll-view.data-v-95dec1ae, swiper-item.data-v-95dec1ae {
   position: absolute;
   top: 0;
   bottom: 0;
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
 }

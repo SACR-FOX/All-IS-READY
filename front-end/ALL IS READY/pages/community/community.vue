@@ -44,6 +44,7 @@
 		data() {
 			return {
 				Url:'http://101.37.175.115/api/',
+				
 				count:{},
 				data:{},
 				HasImage:true,
@@ -51,6 +52,7 @@
 				CommunityName:{},
 				CommunityID:{},
 				results:{},
+				PostID:'',
 				
 				Description:{},
 				PostCount:'158',
@@ -88,7 +90,8 @@
 				this.content[e.index].active = !e.item.active
 				uni.showModal({
 					title: '提示',
-					content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					// content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
+					content:'确认要创建社区吗',
 					success: function(res) {
 						if (res.confirm) {
 							console.log('用户点击确定')
@@ -154,6 +157,34 @@
 					})
 				})
 			},
+			
+			// getCommunity(){
+			// 	let that = this
+			// 	console.log('192.168.31.240:8000/api/' + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page)
+			// 	return new Promise((req,rej)=>{
+			// 		uni.request({
+			// 			url: 'http://hcl.free.svipss.top/api/' + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page,
+			// 			method:'GET',
+			// 			data:{
+			
+			// 			},
+			// 			success: (res) => {
+			// 				req(res.data)
+			// 				// console.log(that.Url + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page)
+			// 				console.log('http://hcl.free.svipss.top/api/' + 'Community/Action' + '?token=' + that.useMsg.token +'&page=' +that.page)
+			// 				// console.log(res.data.results[0].CommunityName)
+			// 				this.count = res.data.count
+			// 				this.results = res.data.results
+			// 				// this.CommunityName = res.data.results
+			// 			},
+			// 			fail: (err) => {
+			// 				console.log(err)
+			// 				req(err)
+							
+			// 			}
+			// 		})
+			// 	})
+			// },
 		},
 		async onLoad() {
 			this.useMsg = await this.getToken()

@@ -38,9 +38,7 @@ view.data-v-13728ffe, scroll-view.data-v-13728ffe, swiper-item.data-v-13728ffe {
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
-
   display: flex;
-
   flex-direction: row;
   line-height: 11px;
   text-align: center;

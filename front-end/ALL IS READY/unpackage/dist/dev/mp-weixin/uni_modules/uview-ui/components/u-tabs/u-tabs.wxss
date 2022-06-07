@@ -34,9 +34,7 @@ view.data-v-48634e29, scroll-view.data-v-48634e29, swiper-item.data-v-48634e29 {
   align-content: flex-start;
 }
 .u-tabs__wrapper.data-v-48634e29 {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
 }
@@ -45,24 +43,18 @@ view.data-v-48634e29, scroll-view.data-v-48634e29, swiper-item.data-v-48634e29 {
   overflow: auto hidden;
 }
 .u-tabs__wrapper__scroll-view.data-v-48634e29 {
-
   display: flex;
-
   flex-direction: row;
   flex: 1;
 }
 .u-tabs__wrapper__nav.data-v-48634e29 {
-
   display: flex;
-
   flex-direction: row;
   position: relative;
 }
 .u-tabs__wrapper__nav__item.data-v-48634e29 {
   padding: 0 11px;
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   justify-content: center;

@@ -28,30 +28,35 @@
   display: flex;
   flex-direction: row;
 }
-.card {
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.communityItem {
   padding: 10rpx;
 }
-.card .title {
-  font-weight: bold;
-  font-size: 30rpx;
-  margin-bottom: 10rpx;
-}
-.card .img {
-  width: 90rpx;
+.communityItem .image {
   height: 90rpx;
+  width: 90rpx;
+  border-radius: 180rpx;
 }
-.card .content {
-  font-size: 30rpx;
-  margin-left: 10rpx;
+.communityItem .communityName {
+  padding: 5rpx;
 }
-.card .bor {
-  border: 1rpx solid #c7ecee;
+.communityItem .description {
+  width: 560rpx;
+  padding: 5rpx;
+  font-size: 18rpx;
+  color: #95afc0;
 }
-.card .creator {
-  font-size: 25rpx;
-  width: 100rpx;
+.communityItem .renewal {
+  padding: 5rpx;
+  font-size: 18rpx;
+  color: #95afc0;
 }
-.card .time {
-  font-size: 25rpx;
+.communityItem .postCount {
+  margin-top: 7rpx;
+  font-size: 12rpx;
+  color: #686de0;
 }
 
