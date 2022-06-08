@@ -12,9 +12,14 @@
     "pages/topic/topic",
     "pages/communityTopic/communityTopic",
     "pages/Login/Login",
+<<<<<<< HEAD
     "pages/community/createCommunity",
     "pages/communityTopic/createTopic",
     "pages/topic/createTopicPost"
+=======
+    "pages/file/file_detial",
+    "pages/Login/register"
+>>>>>>> front-end
   ],
   "subPackages": [],
   "window": {
@@ -24,5 +29,6 @@
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

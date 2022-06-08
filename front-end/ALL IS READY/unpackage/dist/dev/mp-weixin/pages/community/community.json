@@ -2,7 +2,11 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
+<<<<<<< HEAD
     "u-navbar": "/uni_modules/uview-ui/components/u-navbar/u-navbar",
     "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab"
+=======
+    "u-navbar": "/uni_modules/uview-ui/components/u-navbar/u-navbar"
+>>>>>>> front-end
   }
 }

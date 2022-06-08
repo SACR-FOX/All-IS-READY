@@ -40,7 +40,11 @@
 .head .community_image {
   width: 120rpx;
   height: 120rpx;
+<<<<<<< HEAD
   border-radius: 100rpx;
+=======
+  border-radius: 30rpx;
+>>>>>>> front-end
   margin-left: 25rpx;
 }
 .head .communityName {

@@ -24,77 +24,49 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.u-page {
-  padding: 0;
+.content-box {
+  flex: 1;
+  height: 44px;
+  line-height: 44px;
+  padding: 0 15px;
+  position: relative;
+  background-color: #fff;
+  border-bottom-color: #f5f5f5;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
-.u-cell-icon {
-  width: 36rpx;
-  height: 36rpx;
-  margin-right: 8rpx;
+.content-text {
+  font-size: 15px;
 }
-.u-cell-group__title__text {
-  font-weight: bold;
-}
-.page {
-  padding: 10rpx;
-  margin-top: 70rpx;
-<<<<<<< HEAD
-  background-color: #F1F1F1;
-=======
->>>>>>> front-end
-}
-.row {
-  display: flex;
-  flex-direction: row;
-}
-.title {
-  font-size: 40rpx;
-  font-weight: bold;
-}
-.creator {
-  display: flex;
-  align-items: center;
-  width: 450rpx;
-}
-.time {
-  display: flex;
-  align-items: center;
-  color: #95afc0;
-}
-.topicSrc {
-  width: 400rpx;
-  height: 400rpx;
+.example-body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 10px 0;
+  background-color: #fff;
 }
-.content {
-  font-size: 30rpx;
+.button {
+  border-color: #e5e5e5;
+  border-style: solid;
+  border-width: 1px;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
-<<<<<<< HEAD
-.album {
+.button-text {
+  font-size: 15px;
+}
+.slot-button {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-.album__avatar {
-  background-color: #f3f4f6;
-  padding: 5px;
-  border-radius: 3px;
-}
-.album__content {
-  margin-left: 10px;
+  height: 100%;
   flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #ff5a5f;
 }
-.card {
-  background-color: #F1F1F1;
-  margin: 10rpx;
+.slot-button-text {
+  color: #ffffff;
+  font-size: 14px;
 }
-.star {
-  margin-top: 1rpx;
-  height: 50rpx;
-  width: 50rpx;
-}
-=======
->>>>>>> front-end
 

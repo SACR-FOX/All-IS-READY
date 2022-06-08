@@ -96,10 +96,14 @@ var components
 try {
   components = {
     uNavbar: function() {
+<<<<<<< HEAD
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-navbar/u-navbar.vue */ 349))
     },
     uniFab: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-fab/components/uni-fab/uni-fab */ "uni_modules/uni-fab/components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-fab/components/uni-fab/uni-fab.vue */ 365))
+=======
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-navbar/u-navbar.vue */ 339))
+>>>>>>> front-end
     }
   }
 } catch (e) {
@@ -123,6 +127,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   var l0 = _vm.__map(_vm.count, function(i, __i0__) {
     var $orig = _vm.__get_orig(i)
 
@@ -133,11 +138,20 @@ var render = function() {
     }
   })
 
+=======
+  var m0 = _vm.textFix(_vm.Description, 30)
+  var m1 = _vm.textFix(_vm.Description, 30)
+>>>>>>> front-end
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+<<<<<<< HEAD
         l0: l0
+=======
+        m0: m0,
+        m1: m1
+>>>>>>> front-end
       }
     }
   )
@@ -195,6 +209,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> front-end
 //
 //
 //
@@ -220,6 +245,7 @@ var _default =
   data: function data() {var _ref;
     return _ref = {
       Url: 'http://101.37.175.115/api/',
+<<<<<<< HEAD
 
       count: {},
       data: {},
@@ -251,6 +277,17 @@ var _default =
     // },
     ]), _ref;
 
+=======
+      HasImage: true,
+      Poster: '../../static/logo.png',
+      CommunityName: '操作系统',
+      Description: '操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+      PostCount: '158',
+      Renewal: '2天前' }, _defineProperty(_ref, "Renewal",
+    '2天前'), _defineProperty(_ref, "useMsg",
+
+    {}), _ref;
+>>>>>>> front-end
 
   },
   methods: {
@@ -261,6 +298,7 @@ var _default =
         return text.slice(0, length) + '...';
       }
     },
+<<<<<<< HEAD
     trigger: function trigger(e) {
       // console.log(e)
       this.content[e.index].active = !e.item.active;
@@ -300,6 +338,14 @@ var _default =
 
     },
 
+=======
+    jump: function jump() {
+      uni.navigateTo({
+        url: '../communityTopic/communityTopic' });
+
+
+    },
+>>>>>>> front-end
     getToken: function getToken() {
       return new Promise(function (req, rej) {
         uni.getStorage({
@@ -310,6 +356,7 @@ var _default =
 
       });
     },
+<<<<<<< HEAD
     getCommunity: function getCommunity() {var _this = this;
       var that = this;
       return new Promise(function (req, rej) {
@@ -326,12 +373,28 @@ var _default =
             _this.count = res.data.count;
             _this.results = res.data.results;
             // this.CommunityName = res.data.results
+=======
+    getCommunity: function getCommunity() {
+      var that = this;
+      console.log(that.useMsg.token);
+      return new Promise(function (req, rej) {
+        uni.request({
+          url: that.Url + 'Community/Action',
+          method: 'GET',
+          data: {
+            'token': that.useMsg.token,
+            'page': '1' },
+
+          success: function success(res) {
+            req(res.data);
+>>>>>>> front-end
           },
           fail: function fail(err) {
             req(err);
           } });
 
       });
+<<<<<<< HEAD
     }
 
     // getCommunity(){
@@ -366,6 +429,12 @@ var _default =
                 _this2.getToken());case 2:_this2.useMsg = _context.sent;_context.next = 5;return (
 
                 _this2.getCommunity());case 5:_this2.data = _context.sent;case 6:case "end":return _context.stop();}}}, _callee);}))();
+=======
+    } },
+
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                _this.getToken());case 2:_this.useMsg = _context.sent;case 3:case "end":return _context.stop();}}}, _callee);}))();
+>>>>>>> front-end
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

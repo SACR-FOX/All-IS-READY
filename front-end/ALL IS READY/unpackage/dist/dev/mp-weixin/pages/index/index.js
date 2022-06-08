@@ -96,10 +96,17 @@ var components
 try {
   components = {
     uAvatar: function() {
+<<<<<<< HEAD
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 252))
     },
     circleProgressBar: function() {
       return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 260))
+=======
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 242))
+    },
+    circleProgressBar: function() {
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 250))
+>>>>>>> front-end
     }
   }
 } catch (e) {
@@ -367,6 +374,18 @@ var _default =
 
     },
 
+    logout: function logout() {
+      uni.removeStorage({
+        key: "userMsg",
+        success: function success(res) {
+          console.log(res);
+          uni.navigateTo({
+            url: "../Login/Login" });
+
+        } });
+
+    },
+
     //修改过长字体
     textFix: function textFix(text, length) {
       if (text.length <= length) {
@@ -375,12 +394,57 @@ var _default =
         return text.slice(0, length) + '...';
       }
     },
+<<<<<<< HEAD
 
     timeChange: function timeChange(time) {
       var that = this;
       if (time < 60) {
         that.timeFlag = 0;
         return 0;
+
+      } else if (time < 3600) {
+        that.timeFlag = 0;
+        return Math.floor(time / 60);
+
+      } else {
+        that.timeFlag = 1;
+        return Math.floor(time / 3600);
+      }
+    },
+
+    timeToStr: function timeToStr(time) {
+      var that = this;
+      // console.log(time)
+      if (time == 0) {
+        return "";
+      }
+      if (time >= 3600) {
+        var hour = Math.floor(time / 3600);
+        console.log(hour);
+        var min = Math.floor((time - hour * 3600) / 60);
+      } else {
+        var hour = 0;
+        var min = Math.floor((time - hour * 3600) / 60);
+      }
+
+      if (hour.toString().length < 2)
+      {
+        hour = "0" + hour;
+      }
+      if (min.toString().length < 2)
+      {
+        min = "0" + min;
+      }
+      return hour + ":" + min;
+    },
+=======
+
+    timeChange: function timeChange(time) {
+      var that = this;
+      if (time < 60) {
+        that.timeFlag = 0;
+        return 0;
+>>>>>>> front-end
 
       } else if (time < 3600) {
         that.timeFlag = 0;
@@ -447,6 +511,37 @@ var _default =
       });
     } },
 
+<<<<<<< HEAD
+    getSystemInfo: function getSystemInfo() {
+      uni.getSystemInfo({
+        success: function success(res) {
+          console.log(res.deviceId);
+        } });
+
+    },
+
+
+    getUserMsg: function getUserMsg() {var _this = this;
+      return new Promise(function (req, rej) {
+        uni.getStorage({
+          key: "userMsg",
+          success: function success(res) {
+            console.log("success");
+            _this.userMsg = res.data;
+            req("success");
+          },
+          fail: function fail(err) {
+            console.log("err");
+            uni.reLaunch({
+              url: "../Login/Login" });
+
+          } });
+
+      });
+    } },
+
+=======
+>>>>>>> front-end
   onLoad: function onLoad() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               that = _this2;_context.next = 3;return (
 
@@ -460,7 +555,11 @@ var _default =
               }
               console.log(that.userMsg.token);
               uni.request({
+<<<<<<< HEAD
                 url: that.Url + "User/Detail/" + "2/" + "?token=" + that.userMsg.token,
+=======
+                url: that.Url + "User/Detail/" + that.userMsg.UID + "?token=" + that.userMsg.token,
+>>>>>>> front-end
                 method: "GET",
 
                 success: function success(res) {
