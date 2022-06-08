@@ -1,12 +1,12 @@
 from models.models import User,ToDoList
 from django.db.models import F
 
-# HOST_PREFIX="http://127.0.0.1:8000"
-# FILE_UPLOAD_CACHE_PATH="/Users/lishengdi/lib/oss_test/"
+HOST_PREFIX="http://hcl.free.svipss.top"
+FILE_UPLOAD_CACHE_PATH="/Users/lishengdi/lib/oss_test/"
 DEFAULT_PIC="/static/img/header_default.png"
 
-HOST_PREFIX="http://101.37.175.115"
-FILE_UPLOAD_CACHE_PATH="/home/ALL_IS_READY_CACHE"
+# HOST_PREFIX="http://101.37.175.115"
+# FILE_UPLOAD_CACHE_PATH="/home/ALL_IS_READY_CACHE"
 
 def EXP2Rank(exp):
     if exp<81:

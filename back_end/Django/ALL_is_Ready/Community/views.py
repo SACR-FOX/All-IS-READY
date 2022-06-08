@@ -89,6 +89,7 @@ class TopicAction(ModelViewSet):
         if HasImage=="True":
             try:
                 img=request.FILES.get('TopicPic')
+                print(img)
                 CommunityTopic.objects.create(CommunityID=CommunityID, UID=UID,
                                               Time=Time, HasImage=True, Title=Title, ImageUri=img,Stars=0)
             except Exception as e:
@@ -187,13 +188,49 @@ class TopicAction(ModelViewSet):
         else:
             return Response({'result':'already thumbed'},status=status.HTTP_403_FORBIDDEN)
 
-class ShowAllTopic(ModelViewSet):
-    def get_queryset(self):
-        CommID = self.request.query_params.get("CommunityID")
-        return CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars','-Time')
+class ShowAllTopic(APIView):
 
-    serializer_class = TopicSerializers
-    pagination_class = pagination.TopicPageNumberPagination
+    def get(self,request):
+        CommID =request.query_params.get("CommunityID")
+        Page=request.query_params.get("page")
+        if not Page:
+            Page = 1
+        else:
+            Page = int(Page)
+        All=CommunityTopic.objects.filter(CommunityID=CommID).order_by('-Stars','-Time')
+        paginator = Paginator(All, 12)
+        try:
+            page=paginator.page(Page)
+        except Exception:
+            return Response({"result":"empty"},status=status.HTTP_200_OK)
+        content={}
+        if page.has_next():
+            content['next'] = True
+        else:
+            content['next'] = False
+        if page.has_previous():
+            content['previous'] = True
+        else:
+            content['previous'] = False
+        content['count'] = paginator.count
+        itemlist=[]
+        for p in page.object_list:
+            usr=User.objects.filter(UID__exact=p.UID).first()
+            item={}
+            item['TopicID']=p.TopicID
+            item['UID']=usr.UID
+            item['header']=tools.common.HOST_PREFIX+usr.Header.url
+            item['Creator']=usr.Uname
+            item['Time']=p.Time
+            item['HasImage']=p.HasImage
+            if p.HasImage:
+                item['ImageUri']=tools.common.HOST_PREFIX+p.ImageUri.url
+            item['Title']=p.Title
+            item['Stars']=p.Stars
+            itemlist.append(item)
+        content['data']=itemlist
+        return Response(content,status=status.HTTP_200_OK)
+
 
 
 
@@ -217,6 +254,7 @@ class PostAction(ModelViewSet):
         if HasImage == "True":
             try:
                 imgs = request.FILES.getlist('PostPic')
+                print(imgs)
                 t=TopicPost.objects.create(TopicID=TopicID, UID=UID,
                                               Time=Time, HasImage=True, Content=Content)
                 for f in imgs:
@@ -347,6 +385,7 @@ class ShowAllPost(APIView):
 
         itemList=[]
         for p in Page.object_list:
+            usr = User.objects.filter(UID__exact=p.UID).first()
             if p.HasImage:
                 picList=[]
                 try:
@@ -356,10 +395,14 @@ class ShowAllPost(APIView):
                 except Exception as e:
                     print(e)
                     return Response({"result": "internal error"})
+
+
                 item={}
                 item['PostID']=p.PostID
                 item['TopicID']=p.TopicID
                 item['UID']=p.UID
+                item['header']=tools.common.HOST_PREFIX+usr.Header.url
+                item['Creator']=usr.Uname
                 item['Time']=p.Time
                 item['HasImage']=p.HasImage
                 item['Content']=p.Content
@@ -374,6 +417,8 @@ class ShowAllPost(APIView):
                 item['PostID'] = p.PostID
                 item['TopicID'] = p.TopicID
                 item['UID'] = p.UID
+                item['header'] = tools.common.HOST_PREFIX+usr.Header.url
+                item['Creator'] = usr.Uname
                 item['Time'] = p.Time
                 item['HasImage'] = p.HasImage
                 item['Content'] = p.Content

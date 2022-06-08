@@ -2,9 +2,10 @@
 	<view>
 		
 		    <u-navbar
-		            title="我的班级"
-		            @rightClick="rightClick"
+		            title="我的组织"
+		            @leftClick="leftClick"
 		            :autoBack="true"
+					
 		        >
 		        </u-navbar>
 		
@@ -12,42 +13,89 @@
 		<view class="radius">
 			
 			  <view class="icons">
-			        <view class="icon_g1" bindtap="toMyClass">
+			        <view class="icon_g1" @click="toOrgInfo">
 			           <view id="g1_img" > 
 			             <image src="../../static/Class.png"></image> 
 			           </view>
 			           <view id="g1_text">
-			              <text>我的班级</text>
+			              <text>我的组织</text>
 			           </view>
 			        </view>
-			        <view class="icon_g2" bindtap="toTask">
+			        <view class="icon_g2" @click="toTask">
 			           <view id="g2_img">
 			             <image src="../../static/Task.png"></image> 
 			           </view>
 			           <view id="g2_text">
-			             <text>我的任务</text>
+			             <text>组织任务</text>
 			           </view>
 			        </view>
 			
-			        <view class="icon_g3" bindtap="CreateClass">
+			        <view class="icon_g3" @click="CreateClass">
 			          <view id="g3_img">
 			            <image src="../../static/CreateClass.png"></image>
 			          </view>
 			          <view id="g3_text">
-			            <text>创建班级</text>
+			            <text>创建组织</text>
 			          </view>
 			        </view>
 			
-			        <view class="icon_g4" bindtap="CreateTask">
+			        <view class="icon_g4" @click="CreateTask">
 			          <view id="g4_img">
 			            <image src="../../static/CreateTask.png"></image>
 			          </view>
 			          <view id="g4_text">
-			            <text>创建任务</text>
+			            <text>发布任务</text>
 			          </view>
 			        </view>
 			  </view>
 		</view>
+	
+	<view class="block1">
+	   <text class="inner_text">最近任务</text>
+	   
+	   <view class="Record_field">
+	          <view class="record">
+	            <text >taskRecord_1</text>
+	          </view>
+	          <view class="record">
+	            <text>taskRecord_2</text>
+	          </view>
+	          <view class="record">
+	            <text>taskRecord_3</text>
+	          </view>
+	          <view class="record">
+	            <text>taskRecord_4</text>
+	          </view>
+	   </view>
+	</view>
+	
+	<view class="block2">
+	  <text class="inner_text">组织通知</text>
+	  
+	  <view class="Record_field">
+	            <view class="record">
+	              <text>submitRecord_1</text>
+	            </view>
+	            <view class="record">
+	              <text>submitRecord_2</text>
+	            </view>
+	            <view class="record">
+	              <text>submitRecord_3</text>
+	            </view>
+	            <view class="record">
+	              <text>submitRecord_4</text>
+	            </view>
+	  </view>
+	  
+	</view>
+		<view class="scan" style=" position: absolute;bottom: 80rpx; left: 36%; display: flex;flex-direction: column;justify-content: center;align-items: center;
+		" @click="scan">
+			
+			<u-icon name="scan" size=120rpx></u-icon>
+			<text>扫码更换组织</text>
+		</view>
+			
+	
 	</view>
         
 	
@@ -57,11 +105,44 @@
 	export default {
 		data() {
 			return {
-				
+				codeInfo:0,
 			}
 		},
 		methods: {
-			
+			leftClick(){
+				uni.navigateTo({
+					url:'../index/index'
+				})
+			},
+			toOrgInfo(){
+				uni.navigateTo({
+					url:"./MyOrginization"
+				})
+			},
+			CreateTask(){
+				uni.navigateTo({
+					url:'./CreateTask'
+				})
+			},
+			CreateClass(){
+				uni.navigateTo({
+					url:'./CreateOrg'
+				})
+			},
+			toTask(){
+				uni.navigateTo({
+					url:'./TaskList'
+				})
+			}
+			,
+			scan(){
+				uni.scanCode({
+					success: function (res) {
+						console.log('条码内容：' + res.result);
+						this.codeInfo=res.result
+					}
+				});
+			}
 		}
 	}
 </script>
@@ -78,7 +159,7 @@
 	 top: 0rpx;left: 0rpx;
 }
 .icons{
-	margin-top: 20%;
+	margin-top: 18%;
 	height:140rpx;
 	display: flex;
 	flex-direction: row;
@@ -139,4 +220,50 @@
 	align-items: center;
 	color:#fff;
 }
+
+.block1{
+	height: 30%; 
+	width:92%;
+	background: #ffeaa7;
+	border-width: 0px 0px 0px 0px;	
+	border-style: solid;
+	border-radius: 25px 25px 25px 25px;	
+	position: absolute;
+	top:20%; left:4%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+.block2{
+	height: 30%; 
+	width:92%;
+	background:#dfe6e9;
+	border-width: 0px 0px 0px 0px;	
+	border-style: solid;
+	border-radius: 25px 25px 25px 25px;	
+	position: absolute;
+	top:52%; left:4%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.Record_field{
+	 /* background-color: pink; */
+	 width: 85%;
+	 height: 70%;
+	 margin-top: 15%;
+	 display: flex;
+	 flex-direction: column;
+	justify-content: space-evenly;
+}
+.inner_text{
+	 position: absolute;
+	 top:10%; left: 7%;	 
+	 font-size:20px;
+	 font-family:'Times New Roman', 'Times, serif';
+	 font-weight: 800;
+}
+
+
 </style>

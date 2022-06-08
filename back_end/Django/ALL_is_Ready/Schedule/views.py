@@ -1,5 +1,7 @@
 import json
 import time
+
+import requests
 from django.db.models import Q
 
 from models.models import Schedule,User
@@ -15,12 +17,13 @@ from django.core.cache import cache
 import uuid
 
 
-class Schedule_today(APIView):
+class Schedule_byday(APIView):
 
     def get(self,request):
         UID = request.user['UID']
-        weekNum=datetime.today().isoweekday()
-        datalist=Schedule.objects.filter(Q(Day=weekNum),Q(UID__exact=UID)).order_by("DurationStart")
+        # weekNum=datetime.today().isoweekday()
+        day=request.query_params.get('Day')
+        datalist=Schedule.objects.filter(Q(Day=day),Q(UID__exact=UID)).order_by("DurationStart")
         Switcher = switcher()
 
         result={}
@@ -59,10 +62,14 @@ class Schedule_next(APIView):
         weekNum = datetime.today().isoweekday()
         Switcher = switcher()
         match= Schedule.objects.filter(Q(Day=weekNum), Q(UID__exact=UID),Q(DurationEnd__gte=Switcher.secFrom0())).order_by("DurationStart").first()
+        if not match:
+            return Response({"result: Empty"},status=status.HTTP_200_OK)
         Dict = {}
         Dict["CurName"] = match.CurName
         Dict["Location"] = match.Location
         Dict["Tag"] = match.Tag
+        Dict["Start"]=match.DurationStart
+        Dict["End"]=match.DurationEnd
 
         try:
             cache.set(token,json.dumps(Dict),Switcher.due(match.DurationEnd))
