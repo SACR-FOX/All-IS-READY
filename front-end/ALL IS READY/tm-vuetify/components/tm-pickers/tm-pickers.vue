@@ -181,7 +181,7 @@
 				this.showpop=true;
 			},
 			toogle(e){
-				console.log(this.showpop);
+				// console.log(this.showpop);
 				if(e){
 					this.$nextTick(function(){
 						

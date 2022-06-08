@@ -264,6 +264,15 @@
 		            
 		        }
 		
+        ,{
+            "path" : "pages/classSchedule/addCourse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
