@@ -63,7 +63,7 @@
 			
 		<u-toast ref="uToast" />
 		
-		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
+		<uni-fab ref="fab" :content="content" @trigger="trigger" />
 		
 	</view>
 </template>

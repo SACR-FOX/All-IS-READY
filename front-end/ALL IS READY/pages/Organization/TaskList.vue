@@ -59,8 +59,24 @@
 						uni.navigateTo({
 							url:"./TaskDetail"
 						})
-					}
-			}
+					},
+					getUserInfo(){
+						return new Promise((req,rej)=>{
+							uni.getStorage({
+								key: 'userMsg',
+								success: function (res) {
+										req(res.data)
+									},
+							})
+						})
+					},
+			},
+			async onLoad() {
+				this.usrInfo = await this.getUserInfo()
+				console.log(this.usrInfo.token)
+				await this.getOrgInfo()
+				
+			},
 		
 	}
 </script>
