@@ -17,6 +17,13 @@
 .scroll{
 	display: ;
 }
+.folderItem{
+	display: flex;
+	flex-direction: row;
+	background-color: #FFFFFF;
+	margin: 15rpx;
+	border-radius: 15rpx;
+}
 .tag{
 	background-color: #3C9CFF;
 	height: 20px;

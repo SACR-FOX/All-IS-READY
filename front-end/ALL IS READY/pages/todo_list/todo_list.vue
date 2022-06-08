@@ -314,7 +314,7 @@
 						that.picker_tag = 0
 						that.pickerName = ""
 						// console.log("/" + this.date_value/1000)
-						// console.log(res.data)
+						console.log(res.data)
 						that.list.splice(0,0,item)
 						that.list_classify = that.list
 						that.load = false

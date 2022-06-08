@@ -96,10 +96,17 @@ var components
 try {
   components = {
     uNavbar: function() {
+<<<<<<< HEAD
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-navbar/u-navbar.vue */ 349))
     },
     uIcon: function() {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
+=======
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-navbar/u-navbar.vue */ 339))
+    },
+    uIcon: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 298))
+>>>>>>> front-end
     }
   }
 } catch (e) {
@@ -123,20 +130,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   var l0 = _vm.__map(_vm.classfily_list, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
     var m0 = _vm.textFix(item.classFName, 5)
+=======
+  var l0 = _vm.__map(_vm.folderList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = _vm.textFix(item.FolderName, 5)
+>>>>>>> front-end
     return {
       $orig: $orig,
       m0: m0
     }
   })
 
+<<<<<<< HEAD
   var l1 = _vm.__map(_vm.file_list, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
     var m1 = _vm.textFix(item.Fname, 10)
+=======
+  var l1 = _vm.__map(_vm.fileList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m1 = _vm.textFix(item.FileName, 9)
+>>>>>>> front-end
     return {
       $orig: $orig,
       m1: m1
@@ -185,37 +206,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -247,6 +238,7 @@ var _default =
         "Uri": "asdasda",
         "Theme": "PDF",
         "Renewal": "1" },
+<<<<<<< HEAD
 
       {
         "FID": "aa",
@@ -288,18 +280,62 @@ var _default =
         "classFName": "EEEEEEEEEE",
         "classFTag": 1 }] };
 
+=======
+>>>>>>> front-end
 
+      {
+        "FID": "aa",
+        "Fname": "bbbbbbbbbbbb",
+        "Uri": "asdasda",
+        "Theme": "PDF",
+        "Renewal": "2" },
+
+      {
+        "FID": "bbb",
+        "Fname": "cccccccccccccc",
+        "Uri": "asdasda",
+        "Theme": "PDF",
+        "Renewal": "3" },
+
+      {
+        "FID": "cccc",
+        "Fname": "DDDDDDDDDDDDDD",
+        "Uri": "asdasda",
+        "Theme": "PDF",
+        "Renewal": "4" }],
+
+
+
+      fileList: [],
+
+
+      folderList: [],
+      folderSelecter: 0,
+
+      Url: "http://101.37.175.115/api/",
+
+      userMsg: {},
+
+      tmp: "http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/1/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%AC%AC1%E8%AE%B2%20%E7%BB%AA%E8%AE%BA.pdf?OSSAccessKeyId=LTAI5tGWHb9WqaX55jRKoPyv&Expires=1654356557&Signature=bcYPh6gi8ybaUUdyZeawtns3ZBU%3D" };
 
   },
   methods: {
-    show: function show() {
-      console.log("点击分类名");
+    show: function show(select) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  _this.getFileList(_this.folderList[select].FolderName));case 2:_this.fileList = _context.sent;case 3:case "end":return _context.stop();}}}, _callee);}))();
+
     },
 
     read: function read(index) {
+<<<<<<< HEAD
       console.log("打开PDF文件+++++++" + index);
       uni.navigateTo({
         url: './file_detial',
+=======
+      console.log("打开PDF文件+++++++" + this.fileList[index].ID);
+      uni.navigateTo({
+        url: './file_detial?ID=' + this.fileList[index].ID,
+>>>>>>> front-end
         fail: function fail(err) {
           console.log(err);
         } });
@@ -319,7 +355,86 @@ var _default =
       } else {
         return text.slice(0, length) + '...';
       }
+<<<<<<< HEAD
     } } };exports.default = _default;
+=======
+    },
+
+    getFolerLsit: function getFolerLsit() {
+      var that = this;
+      return new Promise(function (req, rej) {
+        uni.request({
+          url: that.Url + 'Files/FolderList?token=' + that.userMsg.token,
+          //url:"http://hcl.free.svipss.top/api/Files/Detail/FolderList/?token=" + that.userMsg.token,
+          success: function success(res) {
+            req(res.data.list);
+          } });
+
+      });
+    },
+
+    getFileList: function getFileList(folderName) {
+      var that = this;
+      // console.log(folderName)
+      // console.log("http://hcl.free.svipss.top/Files/Detail/FileList/?token=" + that.userMsg.token)
+      return new Promise(function (req, rej) {
+        uni.request({
+          url: that.Url + "Files/FileList?token=" + that.userMsg.token + "&Folder=" + folderName,
+          //url:"http://hcl.free.svipss.top/api/Files/FileList?token=" + that.userMsg.token  + "&Folder=" + folderName,
+          method: "GET",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' },
+
+          // data:{
+          // 	Folder : "申请",
+          // 	OrgID : -1
+          // },
+          success: function success(res) {
+            // console.log(res.data.list)
+            req(res.data.list);
+          },
+          fail: function fail(err) {
+            console.log(err);
+          } });
+
+      });
+    },
+
+    getUserMsg: function getUserMsg() {var _this2 = this;
+      return new Promise(function (req, rej) {
+        uni.getStorage({
+          key: "userMsg",
+          success: function success(res) {
+            //							console.log("success")
+            _this2.userMsg = res.data;
+            req("success");
+          },
+          fail: function fail(err) {
+            console.log("err");
+            uni.reLaunch({
+              url: "../Login/Login" });
+
+          } });
+
+      });
+    } },
+
+  onLoad: function onLoad() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                _this3.getUserMsg());case 2:_context2.next = 4;return (
+                _this3.getFolerLsit());case 4:_this3.folderList = _context2.sent;_context2.next = 7;return (
+
+
+
+
+
+                _this3.getFileList(_this3.folderList[0].FolderName));case 7:_this3.fileList = _context2.sent;case 8:case "end":return _context2.stop();}}}, _callee2);}))();
+
+
+
+
+
+  } };exports.default = _default;
+>>>>>>> front-end
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -6,43 +6,36 @@
 				
 				<view class="top">
 					<u-avatar 
-					src="" class="header"
-					size="150rpx">
+					:src="imgSrc[0]" class="header"
+					size="150rpx"
+					@click="chooseAvg()">
 						
 					</u-avatar>
 				</view>
 				
 				<view class="input">
 					<view class="input-msg" style="">
-						<!-- <u-input v-model="userName"
-								 clearable placeholder="请输入用户名"
-						         shape = "circle"
-								>userName</u-input> -->
+						
 						<input style="height: 50rpx; margin-left: 30rpx;" 
 						placeholder="请输入用户名 " 
 						v-model="userName"/>
 					</view>
 					<view class="input-msg" >
-						<!-- <u-input v-model="userName"
-								 clearable placeholder="请输入用户名"
-						         shape = "circle"
-								>userName</u-input> -->
+						
 						<input style="height: 50rpx; margin-left: 30rpx;" 
 						placeholder="请输入密码" 
 						password="" v-model="passW"/>
 					</view>
-					<!-- <view class="input-msg">
-						<u-input v-model="passW"
-								 type = "password" clearable
-								 placeholder="请输入密码"
-								 shape = "circle"
-								  class="input-msg">passWord</u-input>
+					<view class="input-msg" >
+						
+						<input style="height: 50rpx; margin-left: 30rpx;" 
+						placeholder="请确认输入密码" 
+						password="" v-model="passWW"/>
 					</view>
-					 -->
 					
 				</view>
-				<button class="login_btn" @click="Login()">Login</button>
-				<button class="login_btn" @click="toReg()">Register</button>
+				
+				<button class="login_btn" @click="reg()">Register</button>
 			</view>
 		</view>
 	</view>
@@ -67,9 +60,14 @@
 				u : 'a',
 				userName : "",
 				passW : "",
+				passWW : '',
 				
 				//background
 				backGroundImg : {},
+				
+				
+				//头像路径
+				imgSrc : ''
 			}
 		},
 		methods: {
@@ -95,20 +93,108 @@
 								if(res.data.code == 200){
 									req(res.data)
 								}else{
-									console.log(res.data)
 									req("err")
 								}
 
 							},
 
 							fail: (err) => {
-								req(err)
+								req(404)
 							}
 
 						})
 				})
 
 			},
+			
+			chooseAvg(){
+				uni.chooseImage({
+					success: (res) => {
+						this.imgSrc = res.tempFilePaths
+					}
+				})
+			},
+			
+			//注册
+			async reg(){
+				let that = this
+				if(that.userName == ""){
+					uni.showToast({
+						title:"请输用户名",
+						icon:"error"
+					})
+					return "err"
+				}else if(that.passW == ""){
+					uni.showToast({
+						title:"请输入密码",
+						icon:"error"
+					})
+					return "err"
+				}else if(that.passW == ""){
+					uni.showToast({
+						title:"请确认密码",
+						icon:"error"
+					})
+					return "err"
+				}else if(that.passW != that.passWW){
+					uni.showToast({
+						title:"请输入相同的密码",
+						icon:"error"
+					})
+					return "err"
+				}else if(that.imgSrc == ""){
+					uni.showToast({
+						title:"请选择头像",
+						icon:"error"
+					})
+					return "err"
+				}
+				
+				console.log(that.imgSrc[0])
+				 uni.uploadFile({
+					url:"http://101.37.175.115/api/User/Register",
+					filePath: that.imgSrc[0],
+					name:"header",
+					formData:{
+						username : that.userName,
+						password : that.passW	,
+						stuID : "123456789",
+						
+					},
+					success: (res) => {
+						console.log(res)
+					},
+					
+					fail: (err) => {
+						console.log(err)
+					}
+				})
+				
+			},
+			
+			
+			
+			
+			getStorage(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							uni.reLaunch({
+								url:"../index/index"
+							})
+							req("success")
+						},
+						fail: (err) => {
+							req(404)
+						}
+					})
+				})
+			},
+			
+			
 
 			getSystemInfo(){
 				return new Promise((req, rej) => {
@@ -137,13 +223,10 @@
 				this.userMsg = await this.getUserMsg()
 				if(this.userMsg != "err"){
 					this.setStorage(this.userMsg)
+
 					console.log("success")
 					uni.reLaunch({
-						url:"../index/index",
-					// console.log(this.userMsg.token)
-					})
-					uni.reLaunch({
-						url:'../community/community',
+						url:"../index/index"
 					})
 				}else{
 					console.log("err")
@@ -157,17 +240,13 @@
 				})
 			},
 			
-			toReg(){
-				uni.reLaunch({
-					url:"./register"
-				})
-			}
-
 		},
 		async onLoad() {
 			// let that = this
 			// that.token = await that.getToken();
 			// console.log(that.token)
+			//查看是否已经登录成功
+			// await this.getStorage()
 			this.backGroundImg = await this.getBackGround()
 			this.sysInfo = await this.getSystemInfo()
 			console.log(this.sysInfo.windowHeight)

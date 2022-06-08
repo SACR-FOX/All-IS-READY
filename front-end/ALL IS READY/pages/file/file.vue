@@ -22,23 +22,23 @@
 		
 		<view class="col">
 			
-			<view class="card_theme" @click="show()">
+			<view class="card_theme">
 				<scroll-view scroll-y="true" class="scroll">
-					 <view class="col" v-for="(item,index) in classfily_list">
+					 <view class="folderItem" v-for="(item,index) in folderList"  @click="show(index)">
 						 <view class="tag"></view>
-						 <text class="theme_text">{{textFix(item.classFName,5)}}</text>
+						 <text class="theme_text">{{textFix(item.FolderName,5)}}</text>
 					 </view>
 				</scroll-view>
 			</view>
 			
 			<view class="card_file">
 				<scroll-view scroll-y="true">
-					<view class="col_right" v-for="(item,index) in file_list"  @click="read(index)">
+					<view class="col_right" v-for="(item,index) in fileList"  @click="read(index)">
 							<image src="../../static/pdf_icon.png" class="file_img"></image>
 							<view class="row">
 								<view class="col_right_text">
-									<text class="fname_text">{{textFix(item.Fname,10)}}</text>
-									<text class="renewal_text">{{item.Renewal}}天前</text>
+									<text class="fname_text">{{textFix(item.FileName,9)}}</text>
+									<text class="renewal_text">1天前</text>
 								</view>
 							</view>
 					</view>
@@ -84,35 +84,30 @@
 					
 				},],
 				
-				classfily_list : [
-					{
-						"classFName" : "编译原理",
-						"classFTag" : 1
-					},{
-						"classFName" : "BBBBBBBBB",
-						"classFTag" : 1
-					},{
-						"classFName" : "CCCCCCCCCC",
-						"classFTag" : 1
-					},{
-						"classFName" : "DDDDDDDDD",
-						"classFTag" : 1
-					},{
-						"classFName" : "EEEEEEEEEE",
-						"classFTag" : 1
-					},
-				]
+				fileList : [],
+				
+				
+				folderList : [], 
+				folderSelecter : 0,
+				
+				Url : "http://101.37.175.115/api/",
+				
+				userMsg : {},
+				
+				tmp: "http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/1/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%AC%AC1%E8%AE%B2%20%E7%BB%AA%E8%AE%BA.pdf?OSSAccessKeyId=LTAI5tGWHb9WqaX55jRKoPyv&Expires=1654356557&Signature=bcYPh6gi8ybaUUdyZeawtns3ZBU%3D",
 			}
 		},
 		methods: {
-			show(){
-				console.log("点击分类名")
+			async show(select){
+	//			console.log(select)
+				this.fileList = await this.getFileList(this.folderList[select].FolderName)
+//				console.log(this.fileList[0].FileName)
 			},
 			
 			read(index){
-				console.log("打开PDF文件+++++++"+index)
+				console.log("打开PDF文件+++++++"+this.fileList[index].ID)
 				uni.navigateTo({
-					url:'./file_detial',
+					url:'./file_detial?ID='+this.fileList[index].ID,
 					fail(err) {
 						console.log(err)
 					}
@@ -132,7 +127,81 @@
 				}else{
 					return (text.slice(0,length)+'...')
 				}
-			}
+			},
+			
+			getFolerLsit(){
+				let that = this
+				return new Promise((req,rej)=>{
+					uni.request({
+						 url:that.Url + 'Files/FolderList?token=' + that.userMsg.token,
+						//url:"http://hcl.free.svipss.top/api/Files/Detail/FolderList/?token=" + that.userMsg.token,
+						success: (res) => {
+							req(res.data.list)
+						}
+					})
+				})
+			},
+			
+			getFileList(folderName){
+				let that = this
+				// console.log(folderName)
+				// console.log("http://hcl.free.svipss.top/Files/Detail/FileList/?token=" + that.userMsg.token)
+				return new Promise((req,rej)=>{
+					uni.request({
+						url:that.Url + "Files/FileList?token=" + that.userMsg.token + "&Folder=" + folderName,
+						//url:"http://hcl.free.svipss.top/api/Files/FileList?token=" + that.userMsg.token  + "&Folder=" + folderName,
+						method:"GET",
+						header:{
+							'content-type':'application/x-www-form-urlencoded'
+						},	
+						// data:{
+						// 	Folder : "申请",
+						// 	OrgID : -1
+						// },
+						success: (res) => {
+							// console.log(res.data.list)
+							req(res.data.list)
+						},
+						fail: (err) => {
+							console.log(err)
+						}
+					})
+				})
+			},
+			
+			getUserMsg(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+//							console.log("success")
+							this.userMsg = res.data
+							req("success")
+						},
+						fail: (err) => {
+							console.log("err")
+							uni.reLaunch({
+								url:"../Login/Login"
+							})
+						}
+					})
+				})
+			},
+		},
+		async onLoad() {
+			await this.getUserMsg()
+			this.folderList = await this.getFolerLsit()
+			// console.log(this.folderList)
+			// this.folderList.forEach((item) =>{
+			// 	console.log(item.FolderName)
+			// })
+			
+			this.fileList = await this.getFileList(this.folderList[0].FolderName)
+			// console.log(this.fileList)
+			// this.fileList.forEach((item)=>{
+			// 	console.log(item.FileName)
+			// })
+			
 		}
 	}
 </script>
@@ -155,6 +224,15 @@
 	}
 	.scroll{
 		display: ;
+	}
+	
+	
+	.folderItem{
+		display: flex;
+		flex-direction: row;
+		background-color: #FFFFFF;
+		margin: 15rpx;
+		border-radius: 15rpx;
 	}
 	.tag{
 		background-color: #3C9CFF;
