@@ -28,6 +28,7 @@
 					
 				</view>
 				<button class="login_btn" @click="Login()">Login</button>
+				<button class="login_btn" @click="toReg()">Register</button>
 			</view>
 		</view>
 	</view>
@@ -80,6 +81,7 @@
 								if(res.data.code == 200){
 									req(res.data)
 								}else{
+									console.log(res.data)
 									req("err")
 								}
 
@@ -158,6 +160,12 @@
 					data: userMsg
 				})
 			},
+			
+			toReg(){
+				uni.reLaunch({
+					url:"./register"
+				})
+			}
 
 		},
 		async onLoad() {

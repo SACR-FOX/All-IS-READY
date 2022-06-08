@@ -93,10 +93,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-navbar/u-navbar.vue */ 339))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var m0 = _vm.textFix(_vm.Description, 30)
+  var m1 = _vm.textFix(_vm.Description, 30)
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        m0: m0,
+        m1: m1
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -130,7 +164,35 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -152,19 +214,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 var _default =
-
 {
-  data: function data() {
-    return {
-      HasImage: true };
+  data: function data() {var _ref;
+    return _ref = {
+      Url: 'http://101.37.175.115/api/',
+      HasImage: true,
+      Poster: '../../static/logo.png',
+      CommunityName: '操作系统',
+      Description: '操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+      PostCount: '158',
+      Renewal: '2天前' }, _defineProperty(_ref, "Renewal",
+    '2天前'), _defineProperty(_ref, "useMsg",
+
+    {}), _ref;
 
   },
   methods: {
+    textFix: function textFix(text, length) {
+      if (text.length <= length) {
+        return text;
+      } else {
+        return text.slice(0, length) + '...';
+      }
+    },
     jump: function jump() {
       uni.navigateTo({
-        url: '../topic/topic' });
+        url: '../communityTopic/communityTopic' });
 
-    } } };exports.default = _default;
+
+    },
+    getToken: function getToken() {
+      return new Promise(function (req, rej) {
+        uni.getStorage({
+          key: 'userMsg',
+          success: function success(res) {
+            req(res.data);
+          } });
+
+      });
+    },
+    getCommunity: function getCommunity() {
+      var that = this;
+      console.log(that.useMsg.token);
+      return new Promise(function (req, rej) {
+        uni.request({
+          url: that.Url + 'Community/Action',
+          method: 'GET',
+          data: {
+            'token': that.useMsg.token,
+            'page': '1' },
+
+          success: function success(res) {
+            req(res.data);
+          },
+          fail: function fail(err) {
+            req(err);
+          } });
+
+      });
+    } },
+
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                _this.getToken());case 2:_this.useMsg = _context.sent;case 3:case "end":return _context.stop();}}}, _callee);}))();
+
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

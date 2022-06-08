@@ -96,13 +96,13 @@ var components
 try {
   components = {
     circleProgressBar: function() {
-      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 226))
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 250))
     },
     uIcon: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 274))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 298))
     },
     "u-Text": function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 310))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 334))
     }
   }
 } catch (e) {
@@ -265,6 +265,11 @@ var _default =
         "name": "阅读 Passsage 1",
         "date": 60,
         "percent": 100,
+        "color": 2 },
+      {
+        "name": "阅读 Passsage 1",
+        "date": 5,
+        "percent": 100,
         "color": 2 }],
 
 
@@ -324,6 +329,7 @@ var _default =
       console.log(per);
       // console.log(this.poject_now.date)
       if (that.poject_now.date == 0 || !that.timer_flag) {
+        this.work_flag = false;
         clearTimeout(this.timer);
       } else {
 

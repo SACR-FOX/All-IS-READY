@@ -10,7 +10,10 @@
     "pages/leaderBoard/leaderBoard",
     "pages/community/community",
     "pages/topic/topic",
-    "pages/file/file_detial"
+    "pages/communityTopic/communityTopic",
+    "pages/Login/Login",
+    "pages/file/file_detial",
+    "pages/Login/register"
   ],
   "subPackages": [],
   "window": {
@@ -20,5 +23,6 @@
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

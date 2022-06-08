@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 218))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 242))
     },
     circleProgressBar: function() {
-      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 226))
+      return __webpack_require__.e(/*! import() | components/circle-progress-bar/circle-progress-bar */ "components/circle-progress-bar/circle-progress-bar").then(__webpack_require__.bind(null, /*! @/components/circle-progress-bar/circle-progress-bar.vue */ 250))
     }
   }
 } catch (e) {
@@ -123,17 +123,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.textFix(_vm.todoList, 7)
-  var m1 = _vm.textFix(_vm.classSch.curName, 3)
-  var m2 = _vm.textFix(_vm.classAct, 4)
+  var m0 = _vm.timeChange(_vm.user.Accumulation)
+  var m1 = _vm.textFix(_vm.todoList, 6)
+  var m2 = _vm.textFix(_vm.classSch.curName, 3)
+  var m3 = _vm.timeToStr(_vm.classSch.Start)
+  var m4 = _vm.textFix(_vm.classAct, 4)
 
   var l0 = _vm.__map(_vm.fileList, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var m3 = _vm.textFix(item.name, 6)
+    var m5 = _vm.textFix(item.name, 6)
     return {
       $orig: $orig,
-      m3: m3
+      m5: m5
     }
   })
 
@@ -144,6 +146,8 @@ var render = function() {
         m0: m0,
         m1: m1,
         m2: m2,
+        m3: m3,
+        m4: m4,
         l0: l0
       }
     }
@@ -181,7 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -267,25 +271,41 @@ var _default =
 {
   data: function data() {
     return {
+      //token
+      // token  : "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjIsIlVuYW1lIjoieHljZiIsIk9yZ0lEIjoxLCJleHAiOjE2NTMwOTczNDF9.UBTeUJOApg6Kd9rzKTDQKghsV8S0WA0aMGwYqt6Xk9E",
+      // UID : "2",
+      Url: "http://101.37.175.115/api/",
+      userMsg: {},
+
+
+      //用户信息
+      user: {},
+
+      //排名信息
+      Situation: {},
+
       pro: 0.6, //计时器
+
+      //分钟为0，小时为1
+      timeFlag: 0,
+      timeList: ["分钟", "小时"],
 
       //todoList
       week: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
       week_id: -1,
       days: -1,
-      todoList: "aaaaaaaa",
+      todoList: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 
       //学习时间
       learnTime: 6,
-      rank: 10,
 
       //classSchedule
       classSch: {
-        "curName": "移动软件开发",
-        "Time": "9:40",
-        "room": "信息实验室4",
-        "Tag": "rgba(255, 190, 118,1.0)" },
-
+        "curName": "",
+        "Start": 0,
+        "Location": "",
+        "Tag": "rgba(255, 190, 118,1.0)",
+        "End": 0 },
 
       //班级动态
       classAct: "无事发生",
@@ -342,6 +362,18 @@ var _default =
 
     },
 
+    logout: function logout() {
+      uni.removeStorage({
+        key: "userMsg",
+        success: function success(res) {
+          console.log(res);
+          uni.navigateTo({
+            url: "../Login/Login" });
+
+        } });
+
+    },
+
     //修改过长字体
     textFix: function textFix(text, length) {
       if (text.length <= length) {
@@ -349,17 +381,154 @@ var _default =
       } else {
         return text.slice(0, length) + '...';
       }
+    },
+
+    timeChange: function timeChange(time) {
+      var that = this;
+      if (time < 60) {
+        that.timeFlag = 0;
+        return 0;
+
+      } else if (time < 3600) {
+        that.timeFlag = 0;
+        return Math.floor(time / 60);
+
+      } else {
+        that.timeFlag = 1;
+        return Math.floor(time / 3600);
+      }
+    },
+
+    timeToStr: function timeToStr(time) {
+      var that = this;
+      // console.log(time)
+      if (time == 0) {
+        return "";
+      }
+      if (time >= 3600) {
+        var hour = Math.floor(time / 3600);
+        console.log(hour);
+        var min = Math.floor((time - hour * 3600) / 60);
+      } else {
+        var hour = 0;
+        var min = Math.floor((time - hour * 3600) / 60);
+      }
+
+      if (hour.toString().length < 2)
+      {
+        hour = "0" + hour;
+      }
+      if (min.toString().length < 2)
+      {
+        min = "0" + min;
+      }
+      return hour + ":" + min;
+    },
+
+
+    getSystemInfo: function getSystemInfo() {
+      uni.getSystemInfo({
+        success: function success(res) {
+          console.log(res.deviceId);
+        } });
+
+    },
+
+
+    getUserMsg: function getUserMsg() {var _this = this;
+      return new Promise(function (req, rej) {
+        uni.getStorage({
+          key: "userMsg",
+          success: function success(res) {
+            console.log("success");
+            _this.userMsg = res.data;
+            req("success");
+          },
+          fail: function fail(err) {
+            console.log("err");
+            uni.reLaunch({
+              url: "../Login/Login" });
+
+          } });
+
+      });
     } },
 
-  onLoad: function onLoad() {
-    uni.getSystemInfo({
-      success: function success(res) {
-        console.log(res.deviceId);
-      } });
+  onLoad: function onLoad() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              that = _this2;_context.next = 3;return (
+
+                _this2.getUserMsg());case 3:
 
 
-    console.log(this.textFix("aaaaaa", 3));
-  } };exports.default = _default;
+              if (_this2.userMsg.length == 0) {
+                uni.reLaunch({
+                  url: "../Login/Login" });
+
+              }
+              console.log(that.userMsg.token);
+              uni.request({
+                url: that.Url + "User/Detail/" + that.userMsg.UID + "?token=" + that.userMsg.token,
+                method: "GET",
+
+                success: function success(res) {
+                  that.user = res.data;
+                  console.log(that.user.Header);
+                } });
+
+
+              uni.request({
+                url: that.Url + "Reward/Situation/" + "?token=" + that.userMsg.token,
+                success: function success(res) {
+                  that.Situation = res.data;
+                  // console.log(that.Situation.percent)
+                } });
+
+
+              uni.request({
+                url: that.Url + "Schedule/Next/?token=" + that.userMsg.token,
+                success: function success(res) {
+                  // console.log(res.data)
+                  if (res.data[0] == "result: Empty") {
+                    // classSch : {
+                    // 	"curName" :"移动软件开发",
+                    // 	"Time" : "9:40",
+                    // 	"room" : "信息实验室4",
+                    // 	"Tag" : "rgba(255, 190, 118,1.0)"
+                    // },
+                    that.classSch = {
+                      "curName": "無",
+                      "Start": 0,
+                      "Location": "",
+                      "Tag": "rgba(255, 190, 118,1.0)",
+                      "End": 0 };
+
+                    // console.log("aaa")
+                  } else {
+                    that.classSch = res.data;
+
+                  }
+                  // console.log(that.classSch.Start)
+                  // console.log(that.Url + "Schedule/Next/?token="+that.userMsg.token)
+                } });
+
+
+              // console.log(Math.floor(this.timeChange(3666)))
+              // console.log(this.textFix("aaaaaa",3))
+            case 8:case "end":return _context.stop();}}}, _callee);}))();},
+  filters: {
+    timeStamp: function timeStamp(value) {
+      var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var year = date.getFullYear();
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
+      var sdate = ("0" + date.getDate()).slice(-2);
+      var hour = ("0" + date.getHours()).slice(-2);
+      var minute = ("0" + date.getMinutes()).slice(-2);
+      // var second = ("0" + date.getSeconds()).slice(-2);
+      // 拼接
+      var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute;
+      // 返回
+      return result;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

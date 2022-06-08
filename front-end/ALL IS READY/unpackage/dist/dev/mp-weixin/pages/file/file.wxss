@@ -17,6 +17,13 @@
 .scroll{
 	display: ;
 }
+.folderItem{
+	display: flex;
+	flex-direction: row;
+	background-color: #FFFFFF;
+	margin: 15rpx;
+	border-radius: 15rpx;
+}
 .tag{
 	background-color: #3C9CFF;
 	height: 20px;
@@ -33,7 +40,22 @@
 .col_right{
 	display: flex;
 	flex-direction: row;
-	margin-top: 25rpx;
+
+	background-color: #ffffff;
+	height: 170rpx;
+	border-radius: 15rpx;
+	align-items: center;
+	margin: 20rpx;
+}
+.col_right_text{
+	margin-left: 15rpx;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 80rpx;
+	margin-top: 10rpx;
+	/* background-color: #398ADE */
 }
 .row{
 	display: flex;
@@ -45,8 +67,9 @@
 	margin-left: 3rpx;
 }
 .file_img{
-	height: 110rpx;
-	width: 110rpx;
+	height: 70rpx;
+	width: 70rpx;
+	margin-left: 20rpx;
 }
 .fname_text{
 	font-weight: bolder;
@@ -55,6 +78,6 @@
 }
 .renewal_text{
 	font-size: 10rpx;
-	color: rgba(224, 86, 253,1.0);
+	color: rgba(131, 131, 131, 1.0);
 }
 

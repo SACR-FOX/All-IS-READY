@@ -76,7 +76,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		
+		<button @click="logout()">退出登录</button>
 	</view>
 </template>
 
@@ -175,6 +175,18 @@
 				})
 			},
 			
+			logout(){
+				uni.removeStorage({
+					key:"userMsg",
+					success: (res) => {
+						console.log(res)
+						uni.navigateTo({
+							url:"../Login/Login"
+						})
+					}
+				})
+			},
+			
 			//修改过长字体
 			textFix(text,length){
 				if(text.length <= length){
@@ -268,7 +280,7 @@
 			}
 			console.log(that.userMsg.token)
 			uni.request({
-				url: that.Url + "User/Detail/"+"2/"+"?token="+that.userMsg.token,
+				url: that.Url + "User/Detail/"+that.userMsg.UID+"?token="+that.userMsg.token,
 				method: "GET",
 
 				success: (res) => {

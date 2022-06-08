@@ -1,11 +1,12 @@
 <template>
 	<view>
-		<u-navbar
+<!-- 		<u-navbar
 		    title="帖子"
 		    @rightClick="rightClick"
 		    :autoBack="true">
-		</u-navbar>
-		<web-view :src="Url" ></web-view>
+		</u-navbar> -->
+		<!-- <web-view :src="Url" ></web-view> -->
+<!-- 		<button style="margin-top: 500rpx;" @click="">aaaa</button> -->
 	</view>
 </template>
 
@@ -13,11 +14,82 @@
 	export default {
 		data() {
 			return {
-				"Url":"http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/1/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%AC%AC1%E8%AE%B2%20%E7%BB%AA%E8%AE%BA.pdf?OSSAccessKeyId=LTAI5tGWHb9WqaX55jRKoPyv&Expires=1654356557&Signature=bcYPh6gi8ybaUUdyZeawtns3ZBU%3D"
+				fileUrl:"",
+				Url : "http://101.37.175.115/api/",
+				userMsg : {},
+				id : ''
 			}
 		},
 		methods: {
+			loadFile(url){
+				console.log(url)
+				uni.downloadFile({
+					url: url,
+					success: (res) => {
+						console.log(res.tempFilePath)
+						if (res.statusCode === 200) {
+							uni.openDocument({
+								filePath: encodeURI(res.tempFilePath), 
+				                    // 如果文件名包含中文，建议使用escape(res.tempFilePath)转码，防止ios和安卓客户端导致的差异
+									success: function(res) {
+										console.log(res)
+										console.log('打开文档成功');
+									},
+									fail: (err) => {
+										console.log(err)
+									}
+							});
+						}
+					},
+					fail: (err) => {
+						console.log(err)
+					}
+				});
+			},
 			
+			getUserMsg(){
+							return new Promise((req,rej) =>{
+								uni.getStorage({
+									key:"userMsg",
+									success:(res)=>{
+			//							console.log("success")
+										this.userMsg = res.data
+										req("success")
+									},
+									fail: (err) => {
+										console.log("err")
+										uni.reLaunch({
+											url:"../Login/Login"
+										})
+									}
+								})
+							})
+						},
+			
+			getFileInfo(){
+				console.log(this.id)
+				console.log(this.Url + 'Files/OnlinePreview?token=' + this.userMsg.token + "&FileID=" + this.id)
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: this.Url + 'Files/OnlinePreview?token=' + this.userMsg.token + "&FileID=" + this.id,
+						success: (res) => {
+							console.log(res.data.url)
+							req(res.data.url)
+						}
+					})
+				})
+			}
+		},
+		async onLoad (option) {
+			this.id = option.ID
+			await this.getUserMsg()
+			this.fileUrl = await this.getFileInfo()
+			console.log(this.fileUrl)
+			this.loadFile(this.fileUrl)
+			// console.log(await this.getFileInfo().url)
+			
+		   
+		   
 		}
 	}
 </script>
