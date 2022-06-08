@@ -53,7 +53,7 @@ class OrgTaskAction(ModelViewSet):
 
 class OrgInfo(APIView):
     def get(self,request):
-        OrgID=request.data.get('OrgID')
+        OrgID=request.query_params.get('OrgID')
         Org=Organization.objects.filter(OrgID=OrgID).first()
         if Org:
             dict={}

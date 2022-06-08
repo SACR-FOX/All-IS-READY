@@ -46,7 +46,7 @@
 			</view>
 		</view>
 	
-		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
+		<uni-fab ref="fab" :content="content" @trigger="trigger" />
 
 	</view>
 </template>
@@ -86,21 +86,22 @@
 				this.content[e.index].active = !e.item.active
 				this.setCommunityID()
 				// console.log(this.CommunityID)
-				uni.showModal({
-					title: '提示',
-					content:'确认要创建话题吗',
-					success: function(res) {
-						if (res.confirm) {
-							console.log('用户点击确定')
+				// uni.showModal({
+				// 	title: '提示',
+				// 	content:'确认要创建话题吗',
+				// 	success: function(res) {
+				// 		if (res.confirm) {
+				// 			console.log('用户点击确定')
 							
-							uni.navigateTo({
+				// 			
+				// 		} else if (res.cancel) {
+				// 			console.log('用户点击取消')
+				// 		}
+				// 	}
+				// })
+				uni.navigateTo({
 								url:'./createTopic'
 							})
-						} else if (res.cancel) {
-							console.log('用户点击取消')
-						}
-					}
-				})
 			},
 			setStorage(TopicID,Title,header,Creator,Time){	//跳转到话题内部，存储本地数据
 				// console.log(name)
