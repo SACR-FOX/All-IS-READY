@@ -20,9 +20,9 @@
 			<view class="col">
 				<view class="card" @click="toTodolist()">
 					<view style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
-						<text style="font-size: 30rpx; font-weight: bold; color: #E43D33;margin-left: 10rpx;">{{week[0]}}</text>
-						<text style="font-size: 75rpx; font-weight: bold; margin-top: 10rpx;">10</text>
-						<text style="font-size: 50rpx; font-weight: bold; margin-top: 30rpx;margin-left: 10rpx;">{{textFix(todoList,6)}}</text>
+						<text style="font-size: 30rpx; font-weight: bold; color: #E43D33;margin-left: 10rpx;">{{week[date.week]}}</text>
+						<text style="font-size: 75rpx; font-weight: bold; margin-top: 10rpx;">{{date.day}}</text>
+						<text style="font-size: 40rpx; font-weight: bold; margin-top: 30rpx;margin-left: 0rpx;">{{textFix(todoList,6)}}</text>
 					</view>
 				</view>
 				
@@ -96,6 +96,7 @@
 						Url : "http://101.37.175.115/api/",
 						userMsg : {},
 						
+						date : {},
 						
 						//用户信息
 						user : {},
@@ -110,10 +111,10 @@
 						timeList : ["分钟","小时"],
 						
 						//todoList
-						week : ["星期一","星期二","星期三","星期四","星期五","星期六","星期日",],
+						week : ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
 						week_id : -1,
 						days : -1,
-						todoList : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+						todoList : "",
 						
 						//学习时间
 						learnTime : 6,
@@ -186,6 +187,13 @@
 				})
 			},
 			
+			getTodoList(){
+				let that = this
+				return new Promise((req,rej)=>{
+					
+				})
+			},
+			
 			logout(){
 				uni.removeStorage({
 					key:"userMsg",
@@ -236,7 +244,7 @@
 				}
 				if(time >= 3600){
 					var hour = Math.floor((time/3600))
-					console.log(hour)
+					// console.log(hour)
 					var min = Math.floor(((time - hour * 3600))/60)
 				}else{
 					var hour = 0 
@@ -263,6 +271,20 @@
 				})
 			},
 			
+			getDate(){
+				var date = new Date()
+				
+				var tmp = {
+					year : date.getYear(),
+					mon : date.getMonth(),
+					day : date.getDate(),
+					week : date.getDay()
+				}
+				
+				this.date = tmp
+			
+			},
+			
 			
 			getUserMsg(){
 				return new Promise((req,rej) =>{
@@ -286,9 +308,12 @@
 		async onLoad() {
 			let that = this
 			
+			this.getDate()
+			console.log(this.date.day)
+			
 			await this.getUserMsg()
 			
-			console.log(this.userMsg.token)
+			// console.log(this.userMsg.token)
 				
 			if(this.userMsg.length == 0){
 				uni.reLaunch({
@@ -302,7 +327,7 @@
 
 				success: (res) => {
 					that.user = res.data
-					console.log(that.user.Header)
+					// console.log(that.user.Header)
 				}
 			})
 			
@@ -311,6 +336,19 @@
 				success: (res) => {
 					that.Situation = res.data
 					// console.log(that.Situation.percent)
+				}
+			})
+			
+			uni.request({
+				url:that.Url + 'ToDoList/Today?token=' + that.userMsg.token,
+				success: (res) => {
+					if(res.data.length == 0 || res.data == undefined){
+						that.todoList = "目前没有事项"
+					}else{
+						that.todoList = res.data[0].ItemName
+					}
+					
+					
 				}
 			})
 			
@@ -329,7 +367,7 @@
 						 console.log("aaa")
 					}else{
 						that.classSch = res.data
-						// console.log(res.data)
+						// console.log(res.data.Start)
 						
 					}
 					// console.log(that.classSch.Start)
