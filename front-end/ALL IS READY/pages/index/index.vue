@@ -29,7 +29,7 @@
 				<view class="card" @click="toClassSche()"> 
 					<view  style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
 						<text style="font-weight: bold;">下一节</text>
-						<text style="font-size: 60rpx; font-weight: bold; margin-top: 10rpx;">{{textFix(classSch.curName,3)}}</text>
+						<text style="font-size: 60rpx; font-weight: bold; margin-top: 10rpx;">{{textFix(classSch.CurName,3)}}</text>
 						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.Location}}</text>
 						<text style="font-weight: bold;">{{timeToStr(classSch.Start)}}</text>
 					</view>
@@ -76,8 +76,12 @@
 				</view>
 			</scroll-view>
 		</view>
-		<button @click="j">11</button>
-		<button @click="logout()">退出登录</button>
+		<!-- <button @click="j">11</button> -->
+		<view @click="j"
+		style="background-color: #F1F1F1;height: 200rpx; margin: 20rpx; border-radius: 15rpx;"> 
+			
+		</view>
+		<button @click="logout()"  style="background-color: #ffa4a4; margin-left: 15rpx;margin-right: 15rpx;">退出登录</button>
 
 	</view>
 </template>
@@ -116,7 +120,7 @@
 						
 						//classSchedule
 						classSch : {
-							"curName" :"",
+							"CurName" :"",
 							"Start" : 0,
 							"Location" : "",
 							"Tag" : "rgba(255, 190, 118,1.0)",
@@ -196,6 +200,11 @@
 			
 			//修改过长字体
 			textFix(text,length){
+				
+				if(text==undefined){
+					return "无"
+				}
+				
 				if(text.length <= length){
 					return text
 				}else{
@@ -279,13 +288,14 @@
 			
 			await this.getUserMsg()
 			
+			console.log(this.userMsg.token)
 				
 			if(this.userMsg.length == 0){
 				uni.reLaunch({
 					url:"../Login/Login"
 				})
 			}
-			console.log(that.userMsg.token)
+			
 			uni.request({
 				url: that.Url + "User/Detail/"+that.userMsg.UID+"?token="+that.userMsg.token,
 				method: "GET",
@@ -307,24 +317,19 @@
 			uni.request({
 				url:that.Url + "Schedule/Next/?token="+that.userMsg.token,
 				success: (res) => {
-					// console.log(res.data)
+					 // console.log(res.data.CurName)
 					if(res.data[0] == "result: Empty"){
-						// classSch : {
-						// 	"curName" :"移动软件开发",
-						// 	"Time" : "9:40",
-						// 	"room" : "信息实验室4",
-						// 	"Tag" : "rgba(255, 190, 118,1.0)"
-						// },
 						that.classSch = {
-							"curName" :"無",
+							"CurName" :"無",
 							"Start" : 0,
 							"Location" : "",
 							"Tag" : "rgba(255, 190, 118,1.0)",
 							"End" : 0,
 						}
-						// console.log("aaa")
+						 console.log("aaa")
 					}else{
 						that.classSch = res.data
+						// console.log(res.data)
 						
 					}
 					// console.log(that.classSch.Start)
@@ -408,43 +413,5 @@
 		border-radius: 30rpx;
 	}
 	
-	
-	// .circleprogress{
-	// 	width: 100%;
-	// 	height: 200px;
-	// 	display: flex;
-	// 	justify-content: center;
-		
-	// }
-	// .circleprogress .progresstext{
-	// 	position: absolute;
-	// 	font-size: 40px;
-	// 	width: 200px;
-	// 	height: 200px; 
-	// 	display: flex;
-	// 	justify-content: center;
-	// 	align-items: center;
-	// 	z-index: 10;
-	// 	color: #008000;
-	// }
-	// .circleprogress .wrapper{
-	// 	width: 100px;
-	// 	height: 200px;
-	// 	overflow: hidden;
-	// }
-	// .circleprogress .leftprogress,.rightprogress{
-	// 	width: 160px;
-	// 	height: 160px;
-	// 	border:20px solid green;
-	// 	border-bottom:20px solid #7ef22e;
-	// 	border-radius: 50%;
-		
-	// }
-	// .circleprogress .leftprogress{
-	// 	border-right:20px solid #7ef22e;
-	// }
-	// .circleprogress .rightprogress{
-	// 	border-left:20px solid #7ef22e;
-	// 	margin-left: -100px;
-	// }
+
 </style>

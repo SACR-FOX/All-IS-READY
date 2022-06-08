@@ -163,6 +163,8 @@
 					},
 					success: (res) => {
 						console.log(res)
+						this.Login()
+						
 					},
 					
 					fail: (err) => {
@@ -223,10 +225,10 @@
 				this.userMsg = await this.getUserMsg()
 				if(this.userMsg != "err"){
 					this.setStorage(this.userMsg)
-
 					console.log("success")
 					uni.reLaunch({
-						url:"../index/index"
+						url:"../index/index",
+					// console.log(this.userMsg.token)
 					})
 				}else{
 					console.log("err")

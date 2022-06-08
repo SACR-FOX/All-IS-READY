@@ -107,7 +107,7 @@
 			read(index){
 				console.log("打开PDF文件+++++++"+this.fileList[index].ID)
 				uni.navigateTo({
-					url:'./file_detial?ID='+this.fileList[index].ID,
+					url:"./file_detial?ID="+this.fileList[index].ID,
 					fail(err) {
 						console.log(err)
 					}

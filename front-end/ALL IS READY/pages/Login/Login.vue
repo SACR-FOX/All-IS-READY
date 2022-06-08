@@ -142,9 +142,6 @@
 						url:"../index/index",
 					// console.log(this.userMsg.token)
 					})
-					uni.reLaunch({
-						url:'../community/community',
-					})
 				}else{
 					console.log("err")
 				}
@@ -161,13 +158,33 @@
 				uni.reLaunch({
 					url:"./register"
 				})
-			}
+			},
+			
+			getStorage(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							uni.reLaunch({
+								url:"../index/index"
+							})
+							req("success")
+						},
+						fail: (err) => {
+							req(404)
+						}
+					})
+				})
+			},
 
 		},
 		async onLoad() {
 			// let that = this
 			// that.token = await that.getToken();
 			// console.log(that.token)
+			await this.getStorage()
 			this.backGroundImg = await this.getBackGround()
 			this.sysInfo = await this.getSystemInfo()
 			console.log(this.sysInfo.windowHeight)

@@ -55,8 +55,12 @@
 		<!-- todoList 主体 -->
 		<view class="list">
 			<view class="center_top">
-				<!-- <u-text text="My List" style="margin-left: 23px;" bold="" size="17px"></u-text> -->
-				<text style="font-size: 17px;margin-right: 280px; font-weight: bold;">My List</text>
+				<text style="font-size: 17px;margin-right:200px; font-weight: bold;">My List</text>
+				<view style="margin-right: 10rpx; background-color: #ffffff;width: 140rpx;
+							  border-radius: 10rpx; display: flex; align-items: center;justify-content: center;"
+							 >
+							<button  @click="inputByOrg()" style=" font-size: 10rpx;" >批量导入</button>
+							 </view>
 				<u-icon name="list" style="" size="25px" bold @click="classify()" ></u-icon>
 			</view>
 			<view  style="display: flex; flex-direction: column;justify-content: center;">
@@ -196,6 +200,21 @@
 				this.dayN = ("0" + date.getDate()).slice(-2);
 				this.hourN = ("0" + date.getHours()).slice(-2);
 				this.minN = ("0" + date.getMinutes()).slice(-2);
+			},
+			
+			//批量导入
+			inputByOrg(){
+				uni.request({
+					url: this.Url + "ToDoList/GroupImport?token=" + this.userMsg.token,
+					method:"POST",
+					data:{
+						OrgID : this.userMsg.OrgID
+					},
+					success: (res) => {
+						console.log(res.data)
+						this.getList()
+					}
+				})
 			},
 			
 			//删除列表
@@ -424,7 +443,7 @@
 					uni.request({
 						url:that.Url + "ToDoList/All?token=" + that.userMsg.token,
 						success: (res) => {
-							console.log(res.data[0].Tag)
+							console.log(res.data.length)
 							req(res.data)
 						}
 					})

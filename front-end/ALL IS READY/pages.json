@@ -67,6 +67,14 @@
 			}
 		},
 		{
+			"path":"pages/file/file_detial",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
 			"path":"pages/leaderBoard/leaderBoard",
 			"style" :
 			{
