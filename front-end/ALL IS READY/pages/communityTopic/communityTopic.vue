@@ -13,70 +13,41 @@
 				<view class="col">
 					<text class="communityName">{{CommunityName}}</text>
 					<view class="row">
-						<text class="postCount">{{PostCount+'帖子'}}</text>
+						<text class="postCount">{{count+'帖子'}}</text>
 						<text class="shu">|</text>
 						<text class="renewal">{{Renewal}}</text>
 					</view>
 				</view>
-				
 			</view>
 			<view class="description">{{Description}}</view>
 		</view>
 		
 		<view style="margin-top: 30rpx;"></view>
 		
-		<view class="topic">
-			<view class="card" @click="jump">
-				<text class=" title">官方：波多尔斯基与波兰超球队扎布热矿工续约一个赛季</text>
-				<view class="row">
-					<view v-if="HasImage">
-						<image src="../../static/logo.png" class="img"></image>
+		<view v-for="i in count">
+			<view class="topic">
+				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,results[i-1].Time)">
+					<!-- <text class=" title">{{results[i-1].Title}}</text> -->
+					<view class="row">
+						<view v-if="results[i-1].HasImage">
+							<image :src='results[i-1].ImageUri' class="img"></image>
+						</view>
+						<text class=" title">{{results[i-1].Title}}</text>
+						<!-- <text class="content">
+							波兰
+						</text> -->
 					</view>
-					<text class="content">
-						波兰超扎布热矿工官方宣布，俱乐部与36岁的波多尔斯基续约至2022-23赛季结束。
-					</text>
-				</view>
-				<view class="bor"></view>
-				<view class="row">
-					<text class="creator">张三</text>
-					<text class="time">5天前</text>
-				</view>
-			</view>
-			
-			<view class="card" @click="jump">
-				<text class=" title">曼晚：亨德森加盟纽卡99%完成，在讨论是转会还是租借一年</text>
-				<view class="row">
-					<view v-if="HasImage">
-						<image src="../../static/logo.png" class="img"></image>
+					<view class="bor"></view>
+					<view class="row">
+						<text class="creator">{{results[i-1].UID}}</text>
+						<text class="time">{{results[i-1].Time}}</text>
 					</view>
-					<text class="content">
-						虎扑05月19日讯 根据曼彻斯特晚报曼联方面主编Samuel Luckhurst的最新报道，消息人士称，25岁的曼联门将迪恩-亨德森周三在纽卡斯尔进行谈判，交易“99%完成”。
-					</text>
-				</view>
-				<view class="bor"></view>
-				<view class="row">
-					<text class="creator">张三</text>
-					<text class="time">5天前</text>
-				</view>
-			</view>
-			
-			<view class="card" @click="jump">
-				<text class=" title">六台：巴黎愿意把球队交给姆巴佩，想换教练换队友都行</text>
-				<view class="row">
-					<view v-if="HasImage">
-						<image src="../../static/logo.png" class="img"></image>
-					</view>
-					<text class="content">
-						虎扑05月19日讯 根据西班牙六台记者Edu Aguirre透露称，在最近几个月，巴黎圣日尔曼方面为了能够留住姆巴佩，向姆巴佩提出极为宽厚的条件。
-					</text>
-				</view>
-				<view class="bor"></view>
-				<view class="row">
-					<text class="creator">张三</text>
-					<text class="time">5天前</text>
 				</view>
 			</view>
 		</view>
+	
+		<uni-fab ref="fab" :content="content" @trigger="trigger" @fabClick="fabClick" />
+
 	</view>
 </template>
 
@@ -85,21 +56,169 @@
 	export default {
 		data() {
 			return {
+				Url:'http://101.37.175.115/api/',
+				results:{},
+				Community:{},
+				CommunityID:'1',
+				page:'1',
 				HasImage : true,
 				ImageUri:'../../static/logo.png',
-				CommunityName:'操作系统',
-				PostCount:'158',
+				CommunityName:{},
+				// PostCount:'158',
+				count:'',
 				Renewal:'2天前',
-				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。'
+				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
+				UID:'',
+				
+				content: [
+					{
+						iconPath: '../../static/huati.png',
+						selectedIconPath: '../../static/huati.png',
+						text: '创建话题',
+						active: false
+					},
+				]
 			}
 		},
 		methods: {
-			jump(){
+			trigger(e) {	//点击悬浮按钮
+				// console.log(e)
+				this.content[e.index].active = !e.item.active
+				this.setCommunityID()
+				// console.log(this.CommunityID)
+				uni.showModal({
+					title: '提示',
+					content:'确认要创建话题吗',
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定')
+							
+							uni.navigateTo({
+								url:'./createTopic'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
+			},
+			setStorage(TopicID,Title,header,Creator,Time){	//跳转到话题内部，存储本地数据
+				// console.log(name)
+				uni.setStorage({
+					key : 'TopicID',
+					data : {
+						TopicID : TopicID,
+						Title : Title,
+						header:header,
+						Creator:Creator,
+						Time : Time
+					}
+				})
+			},
+			setCommunityID(){	//跳转创建话题，存储社区ID
+				console.log(this.CommunityID)
+				uni.setStorage({
+					key:'create',
+					data:{
+						CommunityID : this.CommunityID
+					}
+				})
+			},
+			jump(TopicID,Title,header,Creator,Time){
+				this.setStorage(TopicID,Title,header,Creator,Time)
+				console.log(Title)
 				uni.navigateTo({
 					url:'../topic/topic'
 				})
-			}
-		}
+			},
+			getToken(){	//获取token
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'userMsg',
+						success: function (res) {
+							req(res.data)
+						},
+					})
+				})
+			},
+			getCommnunityID(){	//获取当前社区ID，用于get请求
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'communityID',
+						success: function (res) {
+							req(res.data)
+							// this.CommunityName = res.data.CommunityName
+							// console.log(this.Description)
+						},
+					})
+				})
+			},
+			getCommunityTopic(){
+				let that = this
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: that.Url + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page,
+						method:'GET',
+						
+						success: (res) => {
+							req(res.data)
+							console.log(that.Url + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
+							// this.results = res.data.results
+							// this.count = res.data.count
+							// console.log(this.results[0].TopicID)
+							
+							// console.log(res.data.data[0].Creator)
+							this.results = res.data.data
+							this.count = res.data.count
+							// console.log(this.results[0].UID)
+						},
+						fail: (err) => {
+							req(err)
+						}
+					})
+				})
+			},
+			// getCommunityTopic(){
+			// 	let that = this
+			// 	console.log('hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
+			// 	return new Promise((req,rej)=>{
+			// 		uni.request({
+			// 			url: 'http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page,
+			// 			method:'GET',
+						
+			// 			success: (res) => {
+			// 				req(res.data)
+			// 				console.log('http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
+			// 				// this.results = res.data.results
+			// 				// this.count = res.data.count
+			// 				// console.log(this.results[0].TopicID)
+							
+			// 				// console.log(res.data.data[0].Creator)
+			// 				this.results = res.data.data
+			// 				this.count = res.data.count
+			// 				// console.log(this.results[0].UID)
+			// 			},
+			// 			fail: (err) => {
+			// 				req(err)
+			// 			}
+			// 		})
+			// 	})
+			// },
+			
+		},
+		async onLoad() {
+			this.useMsg = await this.getToken()
+			this.Community = await this.getCommnunityID() //获取传参
+			this.CommunityName=this.Community.CommunityName
+			this.CommunityID = this.Community.CommunityID
+			this.Description = this.Community.Description
+			this.Renewal = this.Community.Renewal
+			this.ImageUri = this.Community.Poster
+			
+			
+			this.data = await this.getCommunityTopic() //获取get数据
+
+		},
 	}
 </script>
 
@@ -120,7 +239,7 @@
 		.community_image{
 			width: 120rpx;
 			height: 120rpx;
-			border-radius: 30rpx;
+			border-radius: 100rpx;
 			margin-left: 25rpx;
 		}
 		.communityName{

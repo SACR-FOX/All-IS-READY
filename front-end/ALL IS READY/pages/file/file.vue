@@ -77,7 +77,7 @@
 					
 				},{
 					"FID" : "cccc",
-					"Fname" : "YHY的产后护理",
+					"Fname" : "DDDDDDDDDDDDDD",
 					"Uri" : "asdasda",
 					"Theme" : "PDF",
 					"Renewal" : "4"
@@ -111,6 +111,12 @@
 			
 			read(index){
 				console.log("打开PDF文件+++++++"+index)
+				uni.navigateTo({
+					url:'./file_detial',
+					fail(err) {
+						console.log(err)
+					}
+				})
 			},
 			
 			showDetial(){

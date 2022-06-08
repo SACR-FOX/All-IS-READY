@@ -99,16 +99,44 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-		{
-		    "path" : "pages/Organization/Organization",
-		    "style" :                                                                                    
-		    {
-		        "navigationStyle": "custom" ,// 隐藏系统导航栏
-				"navigationBarTextStyle": "black" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
-		    }
-		    
-		}
+        }
+        ,{
+            "path" : "pages/Login/Login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/community/createCommunity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/communityTopic/createTopic",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/topic/createTopicPost",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -60,9 +60,7 @@ view.data-v-2ee87dc9, scroll-view.data-v-2ee87dc9, swiper-item.data-v-2ee87dc9 {
 .u-icon__icon.data-v-2ee87dc9 {
   font-family: uicon-iconfont;
   position: relative;
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
 }

@@ -34,9 +34,7 @@ view.data-v-d3651d6e, scroll-view.data-v-d3651d6e, swiper-item.data-v-d3651d6e {
   align-content: flex-start;
 }
 .u-avatar.data-v-d3651d6e {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   justify-content: center;

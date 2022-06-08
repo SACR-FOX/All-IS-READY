@@ -2,6 +2,11 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
+    "u-navbar": "/uni_modules/uview-ui/components/u-navbar/u-navbar",
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-album": "/uni_modules/uview-ui/components/u-album/u-album",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
+    "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab"
   }
 }

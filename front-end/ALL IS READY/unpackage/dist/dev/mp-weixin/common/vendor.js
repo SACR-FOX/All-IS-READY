@@ -324,7 +324,7 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|Window$|WindowStyle$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale/;
+/^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
@@ -589,6 +589,14 @@ var getSystemInfo = {
   } };
 
 
+var showActionSheet = {
+  args: function args(fromArgs) {
+    if (typeof fromArgs === 'object') {
+      fromArgs.alertText = fromArgs.title;
+    }
+  } };
+
+
 // import navigateTo from 'uni-helpers/navigate-to'
 
 var protocols = {
@@ -596,7 +604,8 @@ var protocols = {
   // navigateTo,  // 由于在微信开发者工具的页面参数，会显示__id__参数，因此暂时关闭mp-weixin对于navigateTo的AOP
   previewImage: previewImage,
   getSystemInfo: getSystemInfo,
-  getSystemInfoSync: getSystemInfo };
+  getSystemInfoSync: getSystemInfo,
+  showActionSheet: showActionSheet };
 
 var todos = [
 'vibrate',
@@ -805,9 +814,15 @@ var customize = cached(function (str) {
 
 function initTriggerEvent(mpInstance) {
   var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
+  var newTriggerEvent = function newTriggerEvent(event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
     return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
   };
+  try {
+    // 京东小程序 triggerEvent 为只读
+    mpInstance.triggerEvent = newTriggerEvent;
+  } catch (error) {
+    mpInstance._triggerEvent = newTriggerEvent;
+  }
 }
 
 function initHook(name, options, isComponent) {
@@ -1380,11 +1395,33 @@ function handleEvent(event) {var _this = this;
   }
 }
 
+var messages = {};
+
 var locale;
 
 {
   locale = wx.getSystemInfoSync().language;
 }
+
+function initI18nMessages() {
+  if (!isEnableLocale()) {
+    return;
+  }
+  var localeKeys = Object.keys(__uniConfig.locales);
+  if (localeKeys.length) {
+    localeKeys.forEach(function (locale) {
+      var curMessages = messages[locale];
+      var userMessages = __uniConfig.locales[locale];
+      if (curMessages) {
+        Object.assign(curMessages, userMessages);
+      } else {
+        messages[locale] = userMessages;
+      }
+    });
+  }
+}
+
+initI18nMessages();
 
 var i18n = (0, _uniI18n.initVueI18n)(
 locale,
@@ -1427,6 +1464,19 @@ function initAppLocale(Vue, appVm, locale) {
     } });
 
 }
+
+function isEnableLocale() {
+  return typeof __uniConfig !== 'undefined' && __uniConfig.locales && !!Object.keys(__uniConfig.locales).length;
+}
+
+// export function initI18n() {
+//   const localeKeys = Object.keys(__uniConfig.locales || {})
+//   if (localeKeys.length) {
+//     localeKeys.forEach((locale) =>
+//       i18n.add(locale, __uniConfig.locales[locale])
+//     )
+//   }
+// }
 
 var eventChannels = {};
 
@@ -1946,17 +1996,17 @@ function createPlugin(vm) {
   var appOptions = parseApp(vm);
   if (isFn(appOptions.onShow) && wx.onAppShow) {
     wx.onAppShow(function () {for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {args[_key7] = arguments[_key7];}
-      appOptions.onShow.apply(vm, args);
+      vm.__call_hook('onShow', args);
     });
   }
   if (isFn(appOptions.onHide) && wx.onAppHide) {
     wx.onAppHide(function () {for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {args[_key8] = arguments[_key8];}
-      appOptions.onHide.apply(vm, args);
+      vm.__call_hook('onHide', args);
     });
   }
   if (isFn(appOptions.onLaunch)) {
     var args = wx.getLaunchOptionsSync && wx.getLaunchOptionsSync();
-    appOptions.onLaunch.call(vm, args);
+    vm.__call_hook('onLaunch', args);
   }
   return vm;
 }
@@ -2090,7 +2140,7 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.6.11
- * (c) 2014-2021 Evan You
+ * (c) 2014-2022 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -6699,7 +6749,7 @@ function initProps (vm, propsOptions) {
       defineReactive$$1(props, key, value, function () {
         if (!isRoot && !isUpdatingChildComponent) {
           {
-            if(vm.mpHost === 'mp-baidu' || vm.mpHost === 'mp-kuaishou'){//百度、快手 observer 在 setData callback 之后触发，直接忽略该 warn
+            if(vm.mpHost === 'mp-baidu' || vm.mpHost === 'mp-kuaishou' || vm.mpHost === 'mp-xhs'){//百度、快手、小红书 observer 在 setData callback 之后触发，直接忽略该 warn
                 return
             }
             //fixed by xxxxxx __next_tick_pending,uni://form-field 时不告警
@@ -7546,7 +7596,6 @@ function _diff(current, pre, path, result) {
                 var currentType = type(currentValue);
                 var preType = type(preValue);
                 if (currentType != ARRAYTYPE && currentType != OBJECTTYPE) {
-                    // NOTE 此处将 != 修改为 !==。涉及地方太多恐怕测试不到，如果出现数据对比问题，将其修改回来。
                     if (currentValue !== pre[key]) {
                         setResult(result, (path == '' ? '' : path + ".") + key, currentValue);
                     }
@@ -7906,7 +7955,7 @@ function internalMixin(Vue) {
 
   Vue.prototype.$emit = function(event) {
     if (this.$scope && event) {
-      this.$scope['triggerEvent'](event, {
+      (this.$scope['_triggerEvent'] || this.$scope['triggerEvent']).call(this.$scope, event, {
         __args__: toArray(arguments, 1)
       });
     }
@@ -7972,14 +8021,16 @@ function internalMixin(Vue) {
     if (!target) {
       target = this;
     }
-    target[key] = value;
+    // 解决动态属性添加
+    Vue.set(target, key, value);
   };
 
   Vue.prototype.__set_sync = function(target, key, value) {
     if (!target) {
       target = this;
     }
-    target[key] = value;
+    // 解决动态属性添加
+    Vue.set(target, key, value);
   };
 
   Vue.prototype.__get_orig = function(item) {
@@ -8591,9 +8642,9 @@ function resolveLocaleChain(locale) {
 
 /***/ }),
 /* 5 */
-/*!*****************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/pages.json ***!
-  \*****************************************************/
+/*!**************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/pages.json ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8734,9 +8785,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 12 */
-/*!************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/index.js ***!
-  \************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/index.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8823,9 +8874,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 13 */
-/*!***********************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/mixin.js ***!
-  \***********************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/mixin.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8992,9 +9043,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 14 */
-/*!*************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/mpMixin.js ***!
-  \*************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/mpMixin.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9007,9 +9058,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 15 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/index.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/index.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9020,9 +9071,9 @@ _Request.default;exports.default = _default;
 
 /***/ }),
 /* 16 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/Request.js ***!
-  \*************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/Request.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9228,9 +9279,9 @@ Request = /*#__PURE__*/function () {
 
 /***/ }),
 /* 17 */
-/*!*********************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
-  \*********************************************************************************************************/
+/*!******************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9241,9 +9292,9 @@ function _default(config) {return (0, _index.default)(config);};exports.default 
 
 /***/ }),
 /* 18 */
-/*!***************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/adapters/index.js ***!
-  \***************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/adapters/index.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9349,9 +9400,9 @@ function _default(config) {return new Promise(function (resolve, reject) {
 
 /***/ }),
 /* 19 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
-  \*****************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9428,9 +9479,9 @@ function buildURL(url, params) {
 
 /***/ }),
 /* 20 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/utils.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/utils.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9569,9 +9620,9 @@ function isUndefined(val) {
 
 /***/ }),
 /* 21 */
-/*!*******************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
-  \*******************************************************************************************************/
+/*!****************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
+  \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9599,9 +9650,9 @@ function buildFullPath(baseURL, requestedURL) {
 
 /***/ }),
 /* 22 */
-/*!**********************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
-  \**********************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9623,9 +9674,9 @@ function isAbsoluteURL(url) {
 
 /***/ }),
 /* 23 */
-/*!********************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
-  \********************************************************************************************************/
+/*!*****************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
+  \*****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9647,9 +9698,9 @@ function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 /* 24 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/settle.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/settle.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9673,9 +9724,9 @@ function settle(resolve, reject, response) {var
 
 /***/ }),
 /* 25 */
-/*!************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
-  \************************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
+  \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9733,9 +9784,9 @@ InterceptorManager;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
-  \*****************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9846,9 +9897,9 @@ function _default(globalsConfig) {var config2 = arguments.length > 1 && argument
 
 /***/ }),
 /* 27 */
-/*!**************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/defaults.js ***!
-  \**************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/core/defaults.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9884,9 +9935,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 28 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/utils/clone.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/luch-request/utils/clone.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10155,7 +10206,7 @@ var clone = function () {
 }();var _default =
 
 clone;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 29).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/buffer/index.js */ 29).Buffer))
 
 /***/ }),
 /* 29 */
@@ -12232,17 +12283,17 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 /* 33 */
-/*!**********************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/route.js ***!
-  \**********************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/route.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 并且带有路由拦截功能
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */var
 
 Router = /*#__PURE__*/function () {
   function Router() {_classCallCheck(this, Router);
@@ -13155,9 +13206,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 37 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/colorGradient.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/colorGradient.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13298,9 +13349,9 @@ function colorToRgba(color, alpha) {
 
 /***/ }),
 /* 38 */
-/*!*************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/test.js ***!
-  \*************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/test.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13595,9 +13646,9 @@ function regExp(o) {
 
 /***/ }),
 /* 39 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/debounce.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/debounce.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13634,9 +13685,9 @@ debounce;exports.default = _default;
 
 /***/ }),
 /* 40 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/throttle.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/throttle.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13674,9 +13725,9 @@ throttle;exports.default = _default;
 
 /***/ }),
 /* 41 */
-/*!**************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/index.js ***!
-  \**************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/index.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14389,9 +14440,9 @@ function setConfig(_ref3)
 
 /***/ }),
 /* 42 */
-/*!**************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/digit.js ***!
-  \**************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/digit.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14564,9 +14615,9 @@ function enableBoundaryChecking() {var flag = arguments.length > 0 && arguments[
 
 /***/ }),
 /* 43 */
-/*!*************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/config.js ***!
-  \*************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/config.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14607,9 +14658,9 @@ if (true) {
 
 /***/ }),
 /* 44 */
-/*!************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props.js ***!
-  \************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14806,9 +14857,9 @@ _upload.default);exports.default = _default;
 
 /***/ }),
 /* 45 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/actionSheet.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/actionSheet.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14839,9 +14890,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 46 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/album.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/album.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14872,9 +14923,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 47 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/alert.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/alert.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14902,9 +14953,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 48 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/avatar.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/avatar.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14938,9 +14989,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 49 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/avatarGroup.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/avatarGroup.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14969,9 +15020,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 50 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/backtop.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/backtop.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15003,9 +15054,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 51 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/badge.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/badge.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15038,9 +15089,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 52 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/button.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/button.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15088,9 +15139,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 53 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/calendar.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/calendar.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15138,9 +15189,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 54 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/carKeyboard.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/carKeyboard.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15161,9 +15212,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 55 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/cell.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/cell.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15204,9 +15255,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 56 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/cellGroup.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/cellGroup.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15229,9 +15280,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 57 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/checkbox.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/checkbox.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15264,9 +15315,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 58 */
-/*!**************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
-  \**************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15301,9 +15352,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 59 */
-/*!***************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/circleProgress.js ***!
-  \***************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/circleProgress.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15324,9 +15375,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 60 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/code.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/code.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15353,9 +15404,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 61 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/codeInput.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/codeInput.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15389,9 +15440,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 62 */
-/*!****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/col.js ***!
-  \****************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/col.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15416,9 +15467,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 63 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/collapse.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/collapse.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15441,9 +15492,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 64 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/collapseItem.js ***!
-  \*************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/collapseItem.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15474,9 +15525,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 65 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/columnNotice.js ***!
-  \*************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/columnNotice.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15506,9 +15557,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 66 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/countDown.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/countDown.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15532,9 +15583,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 67 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/countTo.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/countTo.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15565,9 +15616,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 68 */
-/*!***************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/datetimePicker.js ***!
-  \***************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/datetimePicker.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15609,9 +15660,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 69 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/divider.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/divider.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15639,9 +15690,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 70 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/empty.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/empty.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15672,9 +15723,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 71 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/form.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/form.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15702,9 +15753,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 72 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/formItem.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/formItem.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15732,9 +15783,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 73 */
-/*!****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/gap.js ***!
-  \****************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/gap.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15759,9 +15810,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 74 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/grid.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/grid.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15784,9 +15835,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 75 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/gridItem.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/gridItem.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15808,9 +15859,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 76 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/icon.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/icon.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15852,9 +15903,9 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 43));f
 
 /***/ }),
 /* 77 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/image.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/image.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15890,9 +15941,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 78 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/indexAnchor.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/indexAnchor.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15917,9 +15968,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 79 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/indexList.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/indexList.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15944,9 +15995,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 80 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/input.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/input.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16000,9 +16051,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 81 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/keyboard.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/keyboard.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16038,9 +16089,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 82 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/line.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/line.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16066,9 +16117,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 83 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/lineProgress.js ***!
-  \*************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/lineProgress.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16093,9 +16144,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 84 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/link.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/link.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16127,9 +16178,9 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 43));f
 
 /***/ }),
 /* 85 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/list.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/list.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16163,9 +16214,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 86 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/listItem.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/listItem.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16186,9 +16237,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 87 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadingIcon.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadingIcon.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16224,9 +16275,9 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 43));f
 
 /***/ }),
 /* 88 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadingPage.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadingPage.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16254,9 +16305,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 89 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadmore.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/loadmore.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16291,9 +16342,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 90 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/modal.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/modal.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16329,9 +16380,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 91 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/navbar.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/navbar.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16368,9 +16419,9 @@ var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 92));fun
 
 /***/ }),
 /* 92 */
-/*!************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/color.js ***!
-  \************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/color.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16395,9 +16446,9 @@ color;exports.default = _default;
 
 /***/ }),
 /* 93 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/noNetwork.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/noNetwork.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16420,9 +16471,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 94 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/noticeBar.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/noticeBar.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16455,9 +16506,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 95 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/notify.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/notify.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16485,9 +16536,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 96 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/numberBox.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/numberBox.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16528,9 +16579,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 97 */
-/*!***************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
-  \***************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16553,9 +16604,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 98 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/overlay.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/overlay.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16579,9 +16630,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 99 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/parse.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/parse.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16609,9 +16660,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 100 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/picker.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/picker.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16647,9 +16698,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 101 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/popup.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/popup.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16684,9 +16735,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 102 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/radio.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/radio.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16719,9 +16770,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 103 */
-/*!***********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/radioGroup.js ***!
-  \***********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/radioGroup.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16757,9 +16808,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 104 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/rate.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/rate.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16791,9 +16842,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 105 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/readMore.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/readMore.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16821,9 +16872,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 106 */
-/*!****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/row.js ***!
-  \****************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/row.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16846,9 +16897,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 107 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/rowNotice.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/rowNotice.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16875,9 +16926,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 108 */
-/*!***********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/scrollList.js ***!
-  \***********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/scrollList.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16903,9 +16954,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 109 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/search.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/search.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16948,9 +16999,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 110 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/section.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/section.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16980,9 +17031,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 111 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/skeleton.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/skeleton.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17013,9 +17064,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 112 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/slider.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/slider.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17046,9 +17097,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 113 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/statusBar.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/statusBar.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17069,9 +17120,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 114 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/steps.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/steps.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17098,9 +17149,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 115 */
-/*!**********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/stepsItem.js ***!
-  \**********************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/stepsItem.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17124,9 +17175,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 116 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/sticky.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/sticky.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17152,9 +17203,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 117 */
-/*!***********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/subsection.js ***!
-  \***********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/subsection.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17183,9 +17234,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 118 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipeAction.js ***!
-  \************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipeAction.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17206,9 +17257,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 119 */
-/*!****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
-  \****************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17235,9 +17286,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 120 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swiper.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swiper.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17281,9 +17332,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 121 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
-  \*****************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17308,9 +17359,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 122 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/switch.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/switch.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17340,9 +17391,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 123 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabbar.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabbar.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17370,9 +17421,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 124 */
-/*!***********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabbarItem.js ***!
-  \***********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabbarItem.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17398,9 +17449,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 125 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabs.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tabs.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17437,9 +17488,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 126 */
-/*!****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tag.js ***!
-  \****************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tag.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17474,9 +17525,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 127 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/text.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/text.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17519,9 +17570,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 128 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/textarea.js ***!
-  \*********************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/textarea.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17563,9 +17614,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 129 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/toast.js ***!
-  \******************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/toast.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17600,9 +17651,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 130 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/toolbar.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/toolbar.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17628,9 +17679,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 131 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tooltip.js ***!
-  \********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/tooltip.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17661,9 +17712,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 132 */
-/*!***********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/transition.js ***!
-  \***********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/transition.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17687,9 +17738,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 133 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/upload.js ***!
-  \*******************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/props/upload.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17731,9 +17782,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 134 */
-/*!*************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/zIndex.js ***!
-  \*************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/config/zIndex.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17760,9 +17811,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 135 */
-/*!*****************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/platform.js ***!
-  \*****************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/function/platform.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17931,10 +17982,44 @@ platform;exports.default = _default;
 /* 220 */,
 /* 221 */,
 /* 222 */,
-/* 223 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-avatar/props.js ***!
-  \********************************************************************************************/
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-avatar/props.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18017,24 +18102,24 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-popup/props.js ***!
-  \*******************************************************************************************/
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-popup/props.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18118,17 +18203,17 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-input/props.js ***!
-  \*******************************************************************************************/
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-input/props.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18315,15 +18400,15 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
-  \*****************************************************************************************************/
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */
+/*!**************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18444,10 +18529,10 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 253 */
-/*!**********************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/dayjs.js ***!
-  \**********************************************************************************/
+/* 287 */
+/*!*******************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/dayjs.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18760,17 +18845,17 @@ platform;exports.default = _default;
 });
 
 /***/ }),
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-picker/props.js ***!
-  \********************************************************************************************/
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-picker/props.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18859,17 +18944,17 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */
-/*!************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/button.js ***!
-  \************************************************************************************/
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */
+/*!*********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/button.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18887,10 +18972,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     openType: String } };exports.default = _default;
 
 /***/ }),
-/* 270 */
-/*!**************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/openType.js ***!
-  \**************************************************************************************/
+/* 304 */
+/*!***********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/openType.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18920,10 +19005,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     } } };exports.default = _default;
 
 /***/ }),
-/* 271 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-button/props.js ***!
-  \********************************************************************************************/
+/* 305 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-button/props.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19089,17 +19174,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/icons.js ***!
-  \******************************************************************************************/
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/icons.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19319,10 +19404,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'uicon-en': "\uE692" };exports.default = _default;
 
 /***/ }),
-/* 280 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/props.js ***!
-  \******************************************************************************************/
+/* 314 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/props.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19416,29 +19501,29 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */
-/*!*****************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpwxs.js ***!
-  \*****************************************************************************************************************/
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpwxs.js ***!
+  \**************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var _isPC = __webpack_require__(/*! ./isPC */ 294);var mpMixins = {};
+var _isPC = __webpack_require__(/*! ./isPC */ 328);var mpMixins = {};
 
 
 mpMixins = {
@@ -19520,10 +19605,10 @@ mpMixins = {
 mpMixins;exports.default = _default;
 
 /***/ }),
-/* 294 */
-/*!****************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/isPC.js ***!
-  \****************************************************************************************************************/
+/* 328 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/isPC.js ***!
+  \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19542,10 +19627,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.isPC = isP
 }
 
 /***/ }),
-/* 295 */
-/*!********************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/bindingx.js ***!
-  \********************************************************************************************************************/
+/* 329 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/bindingx.js ***!
+  \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19852,10 +19937,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 bindIngXMixins;exports.default = _default;
 
 /***/ }),
-/* 296 */
-/*!*******************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpother.js ***!
-  \*******************************************************************************************************************/
+/* 330 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpother.js ***!
+  \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20119,19 +20204,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 otherMixins;exports.default = _default;
 
 /***/ }),
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/value.js ***!
-  \******************************************************************************************/
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/value.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20222,10 +20307,10 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 307 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/props.js ***!
-  \******************************************************************************************/
+/* 341 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/props.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20340,22 +20425,22 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-navbar/props.js ***!
-  \********************************************************************************************/
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-navbar/props.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20444,17 +20529,17 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-tabs/props.js ***!
-  \******************************************************************************************/
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-tabs/props.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20518,17 +20603,568 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 329 */,
-/* 330 */,
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-overlay/props.js ***!
-  \*********************************************************************************************/
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-album/props.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 图片地址，Array<String>|Array<Object>形式
+    urls: {
+      type: Array,
+      default: uni.$u.props.album.urls },
+
+    // 指定从数组的对象元素中读取哪个属性作为图片地址
+    keyName: {
+      type: String,
+      default: uni.$u.props.album.keyName },
+
+    // 单图时，图片长边的长度
+    singleSize: {
+      type: [String, Number],
+      default: uni.$u.props.album.singleSize },
+
+    // 多图时，图片边长
+    multipleSize: {
+      type: [String, Number],
+      default: uni.$u.props.album.multipleSize },
+
+    // 多图时，图片水平和垂直之间的间隔
+    space: {
+      type: [String, Number],
+      default: uni.$u.props.album.space },
+
+    // 单图时，图片缩放裁剪的模式
+    singleMode: {
+      type: String,
+      default: uni.$u.props.album.singleMode },
+
+    // 多图时，图片缩放裁剪的模式
+    multipleMode: {
+      type: String,
+      default: uni.$u.props.album.multipleMode },
+
+    // 最多展示的图片数量，超出时最后一个位置将会显示剩余图片数量
+    maxCount: {
+      type: [String, Number],
+      default: uni.$u.props.album.maxCount },
+
+    // 是否可以预览图片
+    previewFullImage: {
+      type: Boolean,
+      default: uni.$u.props.album.previewFullImage },
+
+    // 每行展示图片数量，如设置，singleSize和multipleSize将会无效
+    rowCount: {
+      type: [String, Number],
+      default: uni.$u.props.album.rowCount },
+
+    // 超出maxCount时是否显示查看更多的提示
+    showMore: {
+      type: Boolean,
+      default: uni.$u.props.album.showMore } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/utils.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.chooseFile = chooseFile;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function pickExclude(obj, keys) {
+  // 某些情况下，type可能会为
+  if (!['[object Object]', '[object File]'].includes(Object.prototype.toString.call(obj))) {
+    return {};
+  }
+  return Object.keys(obj).reduce(function (prev, key) {
+    if (!keys.includes(key)) {
+      prev[key] = obj[key];
+    }
+    return prev;
+  }, {});
+}
+
+function formatImage(res) {
+  return res.tempFiles.map(function (item) {return _objectSpread(_objectSpread({},
+    pickExclude(item, ['path'])), {}, {
+      type: 'image',
+      url: item.path,
+      thumb: item.path,
+      size: item.size });});
+
+
+
+
+}
+
+function formatVideo(res) {
+  return [_objectSpread(_objectSpread({},
+
+  pickExclude(res, ['tempFilePath', 'thumbTempFilePath', 'errMsg'])), {}, {
+    type: 'video',
+    url: res.tempFilePath,
+    thumb: res.thumbTempFilePath,
+    size: res.size })];
+
+
+
+
+
+}
+
+function formatMedia(res) {
+  return res.tempFiles.map(function (item) {return _objectSpread(_objectSpread({},
+    pickExclude(item, ['fileType', 'thumbTempFilePath', 'tempFilePath'])), {}, {
+      type: res.type,
+      url: item.tempFilePath,
+      thumb: res.type === 'video' ? item.thumbTempFilePath : item.tempFilePath,
+      size: item.size });});
+
+}
+
+function formatFile(res) {
+  return res.tempFiles.map(function (item) {return _objectSpread(_objectSpread({},
+    pickExclude(item, ['path'])), {}, {
+      url: item.path,
+      size: item.size });});
+
+
+
+
+
+}
+function chooseFile(_ref)
+
+
+
+
+
+
+
+
+{var accept = _ref.accept,multiple = _ref.multiple,capture = _ref.capture,compressed = _ref.compressed,maxDuration = _ref.maxDuration,sizeType = _ref.sizeType,camera = _ref.camera,maxCount = _ref.maxCount;
+  return new Promise(function (resolve, reject) {
+    switch (accept) {
+      case 'image':
+        uni.chooseImage({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          sourceType: capture,
+          sizeType: sizeType,
+          success: function success(res) {return resolve(formatImage(res));},
+          fail: reject });
+
+        break;
+
+      // 只有微信小程序才支持chooseMedia接口
+      case 'media':
+        wx.chooseMedia({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          sourceType: capture,
+          maxDuration: maxDuration,
+          sizeType: sizeType,
+          camera: camera,
+          success: function success(res) {return resolve(formatMedia(res));},
+          fail: reject });
+
+        break;
+
+      case 'video':
+        uni.chooseVideo({
+          sourceType: capture,
+          compressed: compressed,
+          maxDuration: maxDuration,
+          camera: camera,
+          success: function success(res) {return resolve(formatVideo(res));},
+          fail: reject });
+
+        break;
+
+      // 只有微信小程序才支持chooseMessageFile接口
+      case 'file':
+
+        wx.chooseMessageFile({
+          count: multiple ? maxCount : 1,
+          type: accept,
+          success: function success(res) {return resolve(formatFile(res));},
+          fail: reject });
+
+
+
+
+
+
+
+
+
+
+
+        break;
+
+      default:
+        // 此为保底选项，在accept不为上面任意一项的时候选取全部文件
+
+        wx.chooseMessageFile({
+          count: multiple ? maxCount : 1,
+          type: 'all',
+          success: function success(res) {return resolve(formatFile(res));},
+          fail: reject });}
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 393 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/mixin.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  watch: {
+    // 监听accept的变化，判断是否符合个平台要求
+    // 只有微信小程序才支持选择媒体，文件类型，所以这里做一个判断提示
+    accept: {
+      immediate: true,
+      handler: function handler(val) {
+
+
+
+
+
+
+
+
+
+
+      } } } };exports.default = _default;
+
+/***/ }),
+/* 394 */
+/*!*****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/props.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 接受的文件类型, 可选值为all media image file video
+    accept: {
+      type: String,
+      default: uni.$u.props.upload.accept },
+
+    // 	图片或视频拾取模式，当accept为image类型时设置capture可选额外camera可以直接调起摄像头
+    capture: {
+      type: [String, Array],
+      default: uni.$u.props.upload.capture },
+
+    // 当accept为video时生效，是否压缩视频，默认为true
+    compressed: {
+      type: Boolean,
+      default: uni.$u.props.upload.compressed },
+
+    // 当accept为video时生效，可选值为back或front
+    camera: {
+      type: String,
+      default: uni.$u.props.upload.camera },
+
+    // 当accept为video时生效，拍摄视频最长拍摄时间，单位秒
+    maxDuration: {
+      type: Number,
+      default: uni.$u.props.upload.maxDuration },
+
+    // 上传区域的图标，只能内置图标
+    uploadIcon: {
+      type: String,
+      default: uni.$u.props.upload.uploadIcon },
+
+    // 上传区域的图标的颜色，默认
+    uploadIconColor: {
+      type: String,
+      default: uni.$u.props.upload.uploadIconColor },
+
+    // 是否开启文件读取前事件
+    useBeforeRead: {
+      type: Boolean,
+      default: uni.$u.props.upload.useBeforeRead },
+
+    // 读取后的处理函数
+    afterRead: {
+      type: Function,
+      default: null },
+
+    // 读取前的处理函数
+    beforeRead: {
+      type: Function,
+      default: null },
+
+    // 是否显示组件自带的图片预览功能
+    previewFullImage: {
+      type: Boolean,
+      default: uni.$u.props.upload.previewFullImage },
+
+    // 最大上传数量
+    maxCount: {
+      type: [String, Number],
+      default: uni.$u.props.upload.maxCount },
+
+    // 是否启用
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.upload.disabled },
+
+    // 预览上传的图片时的裁剪模式，和image组件mode属性一致
+    imageMode: {
+      type: String,
+      default: uni.$u.props.upload.imageMode },
+
+    // 标识符，可以在回调函数的第二项参数中获取
+    name: {
+      type: String,
+      default: uni.$u.props.upload.name },
+
+    // 所选的图片的尺寸, 可选值为original compressed
+    sizeType: {
+      type: Array,
+      default: uni.$u.props.upload.sizeType },
+
+    // 是否开启图片多选，部分安卓机型不支持
+    multiple: {
+      type: Boolean,
+      default: uni.$u.props.upload.multiple },
+
+    // 是否展示删除按钮
+    deletable: {
+      type: Boolean,
+      default: uni.$u.props.upload.deletable },
+
+    // 文件大小限制，单位为byte
+    maxSize: {
+      type: [String, Number],
+      default: uni.$u.props.upload.maxSize },
+
+    // 显示已上传的文件列表
+    fileList: {
+      type: Array,
+      default: uni.$u.props.upload.fileList },
+
+    // 上传区域的提示文字
+    uploadText: {
+      type: String,
+      default: uni.$u.props.upload.uploadText },
+
+    // 内部预览图片区域和选择图片按钮的区域宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.upload.width },
+
+    // 内部预览图片区域和选择图片按钮的区域高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.upload.height },
+
+    // 是否在上传完成后展示预览图
+    previewImage: {
+      type: Boolean,
+      default: uni.$u.props.upload.previewImage } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-textarea/props.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 输入框的内容
+    value: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.value },
+
+    // 输入框为空时占位符
+    placeholder: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.placeholder },
+
+    // 指定placeholder的样式类，注意页面或组件的style中写了scoped时，需要在类名前写/deep/
+    placeholderClass: {
+      type: String,
+      default: uni.$u.props.input.placeholderClass },
+
+    // 指定placeholder的样式
+    placeholderStyle: {
+      type: [String, Object],
+      default: uni.$u.props.input.placeholderStyle },
+
+    // 输入框高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.height },
+
+    // 设置键盘右下角按钮的文字，仅微信小程序，App-vue和H5有效
+    confirmType: {
+      type: String,
+      default: uni.$u.props.textarea.confirmType },
+
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.textarea.disabled },
+
+    // 是否显示统计字数
+    count: {
+      type: Boolean,
+      default: uni.$u.props.textarea.count },
+
+    // 是否自动获取焦点，nvue不支持，H5取决于浏览器的实现
+    focus: {
+      type: Boolean,
+      default: uni.$u.props.textarea.focus },
+
+    // 是否自动增加高度
+    autoHeight: {
+      type: Boolean,
+      default: uni.$u.props.textarea.autoHeight },
+
+    // 如果textarea是在一个position:fixed的区域，需要显示指定属性fixed为true
+    fixed: {
+      type: Boolean,
+      default: uni.$u.props.textarea.fixed },
+
+    // 指定光标与键盘的距离
+    cursorSpacing: {
+      type: Number,
+      default: uni.$u.props.textarea.cursorSpacing },
+
+    // 指定focus时的光标位置
+    cursor: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.cursor },
+
+    // 是否显示键盘上方带有”完成“按钮那一栏，
+    showConfirmBar: {
+      type: Boolean,
+      default: uni.$u.props.textarea.showConfirmBar },
+
+    // 光标起始位置，自动聚焦时有效，需与selection-end搭配使用
+    selectionStart: {
+      type: Number,
+      default: uni.$u.props.textarea.selectionStart },
+
+    // 光标结束位置，自动聚焦时有效，需与selection-start搭配使用
+    selectionEnd: {
+      type: Number,
+      default: uni.$u.props.textarea.selectionEnd },
+
+    // 键盘弹起时，是否自动上推页面
+    adjustPosition: {
+      type: Boolean,
+      default: uni.$u.props.textarea.adjustPosition },
+
+    // 是否去掉 iOS 下的默认内边距，只微信小程序有效
+    disableDefaultPadding: {
+      type: Boolean,
+      default: uni.$u.props.textarea.disableDefaultPadding },
+
+    // focus时，点击页面的时候不收起键盘，只微信小程序有效
+    holdKeyboard: {
+      type: Boolean,
+      default: uni.$u.props.textarea.holdKeyboard },
+
+    // 最大输入长度，设置为 -1 的时候不限制最大长度
+    maxlength: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.maxlength },
+
+    // 边框类型，surround-四周边框，bottom-底部边框
+    border: {
+      type: String,
+      default: uni.$u.props.textarea.border },
+
+    // 用于处理或者过滤输入框内容的方法
+    formatter: {
+      type: [Function, null],
+      default: uni.$u.props.textarea.formatter } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-overlay/props.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20557,17 +21193,17 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/props.js ***!
-  \************************************************************************************************/
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/props.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20596,10 +21232,10 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 345 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/transition.js ***!
-  \*****************************************************************************************************/
+/* 424 */
+/*!**************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/transition.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20607,7 +21243,7 @@ otherMixins;exports.default = _default;
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
 
 
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 346));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 425));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {return new Promise(function (resolve) {return setTimeout(resolve, 1000 / 50);});}; // nvue动画模块实现细节抽离在外部文件
 
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
@@ -20759,10 +21395,10 @@ var getClassNames = function getClassNames(name) {return {
     } } };exports.default = _default;
 
 /***/ }),
-/* 346 */
-/*!*******************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
-  \*******************************************************************************************************/
+/* 425 */
+/*!****************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
+  \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20835,17 +21471,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     'leave-to': { opacity: 0, transform: 'scale(0.95)' } } };exports.default = _default;
 
 /***/ }),
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-status-bar/props.js ***!
-  \************************************************************************************************/
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-status-bar/props.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20858,17 +21494,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
-  \*************************************************************************************************/
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */
+/*!**********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20877,24 +21513,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   props: {} };exports.default = _default;
 
 /***/ }),
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-toolbar/props.js ***!
-  \*********************************************************************************************/
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-toolbar/props.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20933,17 +21569,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 378 */,
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */
-/*!**************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
-  \**************************************************************************************************/
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */
+/*!***********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21007,17 +21643,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 386 */,
-/* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-link/props.js ***!
-  \******************************************************************************************/
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-link/props.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21061,17 +21697,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-badge/props.js ***!
-  \*******************************************************************************************/
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */
+/*!****************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-badge/props.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21145,6 +21781,1228 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     absolute: {
       type: Boolean,
       default: uni.$u.props.badge.absolute } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */
+/*!*******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-icons/components/uni-icons/icons.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  "id": "2852637",
+  "name": "uniui图标库",
+  "font_family": "uniicons",
+  "css_prefix_text": "uniui-",
+  "description": "",
+  "glyphs": [
+  {
+    "icon_id": "25027049",
+    "name": "yanse",
+    "font_class": "color",
+    "unicode": "e6cf",
+    "unicode_decimal": 59087 },
+
+  {
+    "icon_id": "25027048",
+    "name": "wallet",
+    "font_class": "wallet",
+    "unicode": "e6b1",
+    "unicode_decimal": 59057 },
+
+  {
+    "icon_id": "25015720",
+    "name": "settings-filled",
+    "font_class": "settings-filled",
+    "unicode": "e6ce",
+    "unicode_decimal": 59086 },
+
+  {
+    "icon_id": "25015434",
+    "name": "shimingrenzheng-filled",
+    "font_class": "auth-filled",
+    "unicode": "e6cc",
+    "unicode_decimal": 59084 },
+
+  {
+    "icon_id": "24934246",
+    "name": "shop-filled",
+    "font_class": "shop-filled",
+    "unicode": "e6cd",
+    "unicode_decimal": 59085 },
+
+  {
+    "icon_id": "24934159",
+    "name": "staff-filled-01",
+    "font_class": "staff-filled",
+    "unicode": "e6cb",
+    "unicode_decimal": 59083 },
+
+  {
+    "icon_id": "24932461",
+    "name": "VIP-filled",
+    "font_class": "vip-filled",
+    "unicode": "e6c6",
+    "unicode_decimal": 59078 },
+
+  {
+    "icon_id": "24932462",
+    "name": "plus_circle_fill",
+    "font_class": "plus-filled",
+    "unicode": "e6c7",
+    "unicode_decimal": 59079 },
+
+  {
+    "icon_id": "24932463",
+    "name": "folder_add-filled",
+    "font_class": "folder-add-filled",
+    "unicode": "e6c8",
+    "unicode_decimal": 59080 },
+
+  {
+    "icon_id": "24932464",
+    "name": "yanse-filled",
+    "font_class": "color-filled",
+    "unicode": "e6c9",
+    "unicode_decimal": 59081 },
+
+  {
+    "icon_id": "24932465",
+    "name": "tune-filled",
+    "font_class": "tune-filled",
+    "unicode": "e6ca",
+    "unicode_decimal": 59082 },
+
+  {
+    "icon_id": "24932455",
+    "name": "a-rilidaka-filled",
+    "font_class": "calendar-filled",
+    "unicode": "e6c0",
+    "unicode_decimal": 59072 },
+
+  {
+    "icon_id": "24932456",
+    "name": "notification-filled",
+    "font_class": "notification-filled",
+    "unicode": "e6c1",
+    "unicode_decimal": 59073 },
+
+  {
+    "icon_id": "24932457",
+    "name": "wallet-filled",
+    "font_class": "wallet-filled",
+    "unicode": "e6c2",
+    "unicode_decimal": 59074 },
+
+  {
+    "icon_id": "24932458",
+    "name": "paihangbang-filled",
+    "font_class": "medal-filled",
+    "unicode": "e6c3",
+    "unicode_decimal": 59075 },
+
+  {
+    "icon_id": "24932459",
+    "name": "gift-filled",
+    "font_class": "gift-filled",
+    "unicode": "e6c4",
+    "unicode_decimal": 59076 },
+
+  {
+    "icon_id": "24932460",
+    "name": "fire-filled",
+    "font_class": "fire-filled",
+    "unicode": "e6c5",
+    "unicode_decimal": 59077 },
+
+  {
+    "icon_id": "24928001",
+    "name": "refreshempty",
+    "font_class": "refreshempty",
+    "unicode": "e6bf",
+    "unicode_decimal": 59071 },
+
+  {
+    "icon_id": "24926853",
+    "name": "location-ellipse",
+    "font_class": "location-filled",
+    "unicode": "e6af",
+    "unicode_decimal": 59055 },
+
+  {
+    "icon_id": "24926735",
+    "name": "person-filled",
+    "font_class": "person-filled",
+    "unicode": "e69d",
+    "unicode_decimal": 59037 },
+
+  {
+    "icon_id": "24926703",
+    "name": "personadd-filled",
+    "font_class": "personadd-filled",
+    "unicode": "e698",
+    "unicode_decimal": 59032 },
+
+  {
+    "icon_id": "24923351",
+    "name": "back",
+    "font_class": "back",
+    "unicode": "e6b9",
+    "unicode_decimal": 59065 },
+
+  {
+    "icon_id": "24923352",
+    "name": "forward",
+    "font_class": "forward",
+    "unicode": "e6ba",
+    "unicode_decimal": 59066 },
+
+  {
+    "icon_id": "24923353",
+    "name": "arrowthinright",
+    "font_class": "arrow-right",
+    "unicode": "e6bb",
+    "unicode_decimal": 59067 },
+
+  {
+    "icon_id": "24923353",
+    "name": "arrowthinright",
+    "font_class": "arrowthinright",
+    "unicode": "e6bb",
+    "unicode_decimal": 59067 },
+
+  {
+    "icon_id": "24923354",
+    "name": "arrowthinleft",
+    "font_class": "arrow-left",
+    "unicode": "e6bc",
+    "unicode_decimal": 59068 },
+
+  {
+    "icon_id": "24923354",
+    "name": "arrowthinleft",
+    "font_class": "arrowthinleft",
+    "unicode": "e6bc",
+    "unicode_decimal": 59068 },
+
+  {
+    "icon_id": "24923355",
+    "name": "arrowthinup",
+    "font_class": "arrow-up",
+    "unicode": "e6bd",
+    "unicode_decimal": 59069 },
+
+  {
+    "icon_id": "24923355",
+    "name": "arrowthinup",
+    "font_class": "arrowthinup",
+    "unicode": "e6bd",
+    "unicode_decimal": 59069 },
+
+  {
+    "icon_id": "24923356",
+    "name": "arrowthindown",
+    "font_class": "arrow-down",
+    "unicode": "e6be",
+    "unicode_decimal": 59070 },
+  {
+    "icon_id": "24923356",
+    "name": "arrowthindown",
+    "font_class": "arrowthindown",
+    "unicode": "e6be",
+    "unicode_decimal": 59070 },
+
+  {
+    "icon_id": "24923349",
+    "name": "arrowdown",
+    "font_class": "bottom",
+    "unicode": "e6b8",
+    "unicode_decimal": 59064 },
+  {
+    "icon_id": "24923349",
+    "name": "arrowdown",
+    "font_class": "arrowdown",
+    "unicode": "e6b8",
+    "unicode_decimal": 59064 },
+
+  {
+    "icon_id": "24923346",
+    "name": "arrowright",
+    "font_class": "right",
+    "unicode": "e6b5",
+    "unicode_decimal": 59061 },
+
+  {
+    "icon_id": "24923346",
+    "name": "arrowright",
+    "font_class": "arrowright",
+    "unicode": "e6b5",
+    "unicode_decimal": 59061 },
+
+  {
+    "icon_id": "24923347",
+    "name": "arrowup",
+    "font_class": "top",
+    "unicode": "e6b6",
+    "unicode_decimal": 59062 },
+
+  {
+    "icon_id": "24923347",
+    "name": "arrowup",
+    "font_class": "arrowup",
+    "unicode": "e6b6",
+    "unicode_decimal": 59062 },
+
+  {
+    "icon_id": "24923348",
+    "name": "arrowleft",
+    "font_class": "left",
+    "unicode": "e6b7",
+    "unicode_decimal": 59063 },
+
+  {
+    "icon_id": "24923348",
+    "name": "arrowleft",
+    "font_class": "arrowleft",
+    "unicode": "e6b7",
+    "unicode_decimal": 59063 },
+
+  {
+    "icon_id": "24923334",
+    "name": "eye",
+    "font_class": "eye",
+    "unicode": "e651",
+    "unicode_decimal": 58961 },
+
+  {
+    "icon_id": "24923335",
+    "name": "eye-filled",
+    "font_class": "eye-filled",
+    "unicode": "e66a",
+    "unicode_decimal": 58986 },
+
+  {
+    "icon_id": "24923336",
+    "name": "eye-slash",
+    "font_class": "eye-slash",
+    "unicode": "e6b3",
+    "unicode_decimal": 59059 },
+
+  {
+    "icon_id": "24923337",
+    "name": "eye-slash-filled",
+    "font_class": "eye-slash-filled",
+    "unicode": "e6b4",
+    "unicode_decimal": 59060 },
+
+  {
+    "icon_id": "24923305",
+    "name": "info-filled",
+    "font_class": "info-filled",
+    "unicode": "e649",
+    "unicode_decimal": 58953 },
+
+  {
+    "icon_id": "24923299",
+    "name": "reload-01",
+    "font_class": "reload",
+    "unicode": "e6b2",
+    "unicode_decimal": 59058 },
+
+  {
+    "icon_id": "24923195",
+    "name": "mic_slash_fill",
+    "font_class": "micoff-filled",
+    "unicode": "e6b0",
+    "unicode_decimal": 59056 },
+
+  {
+    "icon_id": "24923165",
+    "name": "map-pin-ellipse",
+    "font_class": "map-pin-ellipse",
+    "unicode": "e6ac",
+    "unicode_decimal": 59052 },
+
+  {
+    "icon_id": "24923166",
+    "name": "map-pin",
+    "font_class": "map-pin",
+    "unicode": "e6ad",
+    "unicode_decimal": 59053 },
+
+  {
+    "icon_id": "24923167",
+    "name": "location",
+    "font_class": "location",
+    "unicode": "e6ae",
+    "unicode_decimal": 59054 },
+
+  {
+    "icon_id": "24923064",
+    "name": "starhalf",
+    "font_class": "starhalf",
+    "unicode": "e683",
+    "unicode_decimal": 59011 },
+
+  {
+    "icon_id": "24923065",
+    "name": "star",
+    "font_class": "star",
+    "unicode": "e688",
+    "unicode_decimal": 59016 },
+
+  {
+    "icon_id": "24923066",
+    "name": "star-filled",
+    "font_class": "star-filled",
+    "unicode": "e68f",
+    "unicode_decimal": 59023 },
+
+  {
+    "icon_id": "24899646",
+    "name": "a-rilidaka",
+    "font_class": "calendar",
+    "unicode": "e6a0",
+    "unicode_decimal": 59040 },
+
+  {
+    "icon_id": "24899647",
+    "name": "fire",
+    "font_class": "fire",
+    "unicode": "e6a1",
+    "unicode_decimal": 59041 },
+
+  {
+    "icon_id": "24899648",
+    "name": "paihangbang",
+    "font_class": "medal",
+    "unicode": "e6a2",
+    "unicode_decimal": 59042 },
+
+  {
+    "icon_id": "24899649",
+    "name": "font",
+    "font_class": "font",
+    "unicode": "e6a3",
+    "unicode_decimal": 59043 },
+
+  {
+    "icon_id": "24899650",
+    "name": "gift",
+    "font_class": "gift",
+    "unicode": "e6a4",
+    "unicode_decimal": 59044 },
+
+  {
+    "icon_id": "24899651",
+    "name": "link",
+    "font_class": "link",
+    "unicode": "e6a5",
+    "unicode_decimal": 59045 },
+
+  {
+    "icon_id": "24899652",
+    "name": "notification",
+    "font_class": "notification",
+    "unicode": "e6a6",
+    "unicode_decimal": 59046 },
+
+  {
+    "icon_id": "24899653",
+    "name": "staff",
+    "font_class": "staff",
+    "unicode": "e6a7",
+    "unicode_decimal": 59047 },
+
+  {
+    "icon_id": "24899654",
+    "name": "VIP",
+    "font_class": "vip",
+    "unicode": "e6a8",
+    "unicode_decimal": 59048 },
+
+  {
+    "icon_id": "24899655",
+    "name": "folder_add",
+    "font_class": "folder-add",
+    "unicode": "e6a9",
+    "unicode_decimal": 59049 },
+
+  {
+    "icon_id": "24899656",
+    "name": "tune",
+    "font_class": "tune",
+    "unicode": "e6aa",
+    "unicode_decimal": 59050 },
+
+  {
+    "icon_id": "24899657",
+    "name": "shimingrenzheng",
+    "font_class": "auth",
+    "unicode": "e6ab",
+    "unicode_decimal": 59051 },
+
+  {
+    "icon_id": "24899565",
+    "name": "person",
+    "font_class": "person",
+    "unicode": "e699",
+    "unicode_decimal": 59033 },
+
+  {
+    "icon_id": "24899566",
+    "name": "email-filled",
+    "font_class": "email-filled",
+    "unicode": "e69a",
+    "unicode_decimal": 59034 },
+
+  {
+    "icon_id": "24899567",
+    "name": "phone-filled",
+    "font_class": "phone-filled",
+    "unicode": "e69b",
+    "unicode_decimal": 59035 },
+
+  {
+    "icon_id": "24899568",
+    "name": "phone",
+    "font_class": "phone",
+    "unicode": "e69c",
+    "unicode_decimal": 59036 },
+
+  {
+    "icon_id": "24899570",
+    "name": "email",
+    "font_class": "email",
+    "unicode": "e69e",
+    "unicode_decimal": 59038 },
+
+  {
+    "icon_id": "24899571",
+    "name": "personadd",
+    "font_class": "personadd",
+    "unicode": "e69f",
+    "unicode_decimal": 59039 },
+
+  {
+    "icon_id": "24899558",
+    "name": "chatboxes-filled",
+    "font_class": "chatboxes-filled",
+    "unicode": "e692",
+    "unicode_decimal": 59026 },
+
+  {
+    "icon_id": "24899559",
+    "name": "contact",
+    "font_class": "contact",
+    "unicode": "e693",
+    "unicode_decimal": 59027 },
+
+  {
+    "icon_id": "24899560",
+    "name": "chatbubble-filled",
+    "font_class": "chatbubble-filled",
+    "unicode": "e694",
+    "unicode_decimal": 59028 },
+
+  {
+    "icon_id": "24899561",
+    "name": "contact-filled",
+    "font_class": "contact-filled",
+    "unicode": "e695",
+    "unicode_decimal": 59029 },
+
+  {
+    "icon_id": "24899562",
+    "name": "chatboxes",
+    "font_class": "chatboxes",
+    "unicode": "e696",
+    "unicode_decimal": 59030 },
+
+  {
+    "icon_id": "24899563",
+    "name": "chatbubble",
+    "font_class": "chatbubble",
+    "unicode": "e697",
+    "unicode_decimal": 59031 },
+
+  {
+    "icon_id": "24881290",
+    "name": "upload-filled",
+    "font_class": "upload-filled",
+    "unicode": "e68e",
+    "unicode_decimal": 59022 },
+
+  {
+    "icon_id": "24881292",
+    "name": "upload",
+    "font_class": "upload",
+    "unicode": "e690",
+    "unicode_decimal": 59024 },
+
+  {
+    "icon_id": "24881293",
+    "name": "weixin",
+    "font_class": "weixin",
+    "unicode": "e691",
+    "unicode_decimal": 59025 },
+
+  {
+    "icon_id": "24881274",
+    "name": "compose",
+    "font_class": "compose",
+    "unicode": "e67f",
+    "unicode_decimal": 59007 },
+
+  {
+    "icon_id": "24881275",
+    "name": "qq",
+    "font_class": "qq",
+    "unicode": "e680",
+    "unicode_decimal": 59008 },
+
+  {
+    "icon_id": "24881276",
+    "name": "download-filled",
+    "font_class": "download-filled",
+    "unicode": "e681",
+    "unicode_decimal": 59009 },
+
+  {
+    "icon_id": "24881277",
+    "name": "pengyouquan",
+    "font_class": "pyq",
+    "unicode": "e682",
+    "unicode_decimal": 59010 },
+
+  {
+    "icon_id": "24881279",
+    "name": "sound",
+    "font_class": "sound",
+    "unicode": "e684",
+    "unicode_decimal": 59012 },
+
+  {
+    "icon_id": "24881280",
+    "name": "trash-filled",
+    "font_class": "trash-filled",
+    "unicode": "e685",
+    "unicode_decimal": 59013 },
+
+  {
+    "icon_id": "24881281",
+    "name": "sound-filled",
+    "font_class": "sound-filled",
+    "unicode": "e686",
+    "unicode_decimal": 59014 },
+
+  {
+    "icon_id": "24881282",
+    "name": "trash",
+    "font_class": "trash",
+    "unicode": "e687",
+    "unicode_decimal": 59015 },
+
+  {
+    "icon_id": "24881284",
+    "name": "videocam-filled",
+    "font_class": "videocam-filled",
+    "unicode": "e689",
+    "unicode_decimal": 59017 },
+
+  {
+    "icon_id": "24881285",
+    "name": "spinner-cycle",
+    "font_class": "spinner-cycle",
+    "unicode": "e68a",
+    "unicode_decimal": 59018 },
+
+  {
+    "icon_id": "24881286",
+    "name": "weibo",
+    "font_class": "weibo",
+    "unicode": "e68b",
+    "unicode_decimal": 59019 },
+
+  {
+    "icon_id": "24881288",
+    "name": "videocam",
+    "font_class": "videocam",
+    "unicode": "e68c",
+    "unicode_decimal": 59020 },
+
+  {
+    "icon_id": "24881289",
+    "name": "download",
+    "font_class": "download",
+    "unicode": "e68d",
+    "unicode_decimal": 59021 },
+
+  {
+    "icon_id": "24879601",
+    "name": "help",
+    "font_class": "help",
+    "unicode": "e679",
+    "unicode_decimal": 59001 },
+
+  {
+    "icon_id": "24879602",
+    "name": "navigate-filled",
+    "font_class": "navigate-filled",
+    "unicode": "e67a",
+    "unicode_decimal": 59002 },
+
+  {
+    "icon_id": "24879603",
+    "name": "plusempty",
+    "font_class": "plusempty",
+    "unicode": "e67b",
+    "unicode_decimal": 59003 },
+
+  {
+    "icon_id": "24879604",
+    "name": "smallcircle",
+    "font_class": "smallcircle",
+    "unicode": "e67c",
+    "unicode_decimal": 59004 },
+
+  {
+    "icon_id": "24879605",
+    "name": "minus-filled",
+    "font_class": "minus-filled",
+    "unicode": "e67d",
+    "unicode_decimal": 59005 },
+
+  {
+    "icon_id": "24879606",
+    "name": "micoff",
+    "font_class": "micoff",
+    "unicode": "e67e",
+    "unicode_decimal": 59006 },
+
+  {
+    "icon_id": "24879588",
+    "name": "closeempty",
+    "font_class": "closeempty",
+    "unicode": "e66c",
+    "unicode_decimal": 58988 },
+
+  {
+    "icon_id": "24879589",
+    "name": "clear",
+    "font_class": "clear",
+    "unicode": "e66d",
+    "unicode_decimal": 58989 },
+
+  {
+    "icon_id": "24879590",
+    "name": "navigate",
+    "font_class": "navigate",
+    "unicode": "e66e",
+    "unicode_decimal": 58990 },
+
+  {
+    "icon_id": "24879591",
+    "name": "minus",
+    "font_class": "minus",
+    "unicode": "e66f",
+    "unicode_decimal": 58991 },
+
+  {
+    "icon_id": "24879592",
+    "name": "image",
+    "font_class": "image",
+    "unicode": "e670",
+    "unicode_decimal": 58992 },
+
+  {
+    "icon_id": "24879593",
+    "name": "mic",
+    "font_class": "mic",
+    "unicode": "e671",
+    "unicode_decimal": 58993 },
+
+  {
+    "icon_id": "24879594",
+    "name": "paperplane",
+    "font_class": "paperplane",
+    "unicode": "e672",
+    "unicode_decimal": 58994 },
+
+  {
+    "icon_id": "24879595",
+    "name": "close",
+    "font_class": "close",
+    "unicode": "e673",
+    "unicode_decimal": 58995 },
+
+  {
+    "icon_id": "24879596",
+    "name": "help-filled",
+    "font_class": "help-filled",
+    "unicode": "e674",
+    "unicode_decimal": 58996 },
+
+  {
+    "icon_id": "24879597",
+    "name": "plus-filled",
+    "font_class": "paperplane-filled",
+    "unicode": "e675",
+    "unicode_decimal": 58997 },
+
+  {
+    "icon_id": "24879598",
+    "name": "plus",
+    "font_class": "plus",
+    "unicode": "e676",
+    "unicode_decimal": 58998 },
+
+  {
+    "icon_id": "24879599",
+    "name": "mic-filled",
+    "font_class": "mic-filled",
+    "unicode": "e677",
+    "unicode_decimal": 58999 },
+
+  {
+    "icon_id": "24879600",
+    "name": "image-filled",
+    "font_class": "image-filled",
+    "unicode": "e678",
+    "unicode_decimal": 59000 },
+
+  {
+    "icon_id": "24855900",
+    "name": "locked-filled",
+    "font_class": "locked-filled",
+    "unicode": "e668",
+    "unicode_decimal": 58984 },
+
+  {
+    "icon_id": "24855901",
+    "name": "info",
+    "font_class": "info",
+    "unicode": "e669",
+    "unicode_decimal": 58985 },
+
+  {
+    "icon_id": "24855903",
+    "name": "locked",
+    "font_class": "locked",
+    "unicode": "e66b",
+    "unicode_decimal": 58987 },
+
+  {
+    "icon_id": "24855884",
+    "name": "camera-filled",
+    "font_class": "camera-filled",
+    "unicode": "e658",
+    "unicode_decimal": 58968 },
+
+  {
+    "icon_id": "24855885",
+    "name": "chat-filled",
+    "font_class": "chat-filled",
+    "unicode": "e659",
+    "unicode_decimal": 58969 },
+
+  {
+    "icon_id": "24855886",
+    "name": "camera",
+    "font_class": "camera",
+    "unicode": "e65a",
+    "unicode_decimal": 58970 },
+
+  {
+    "icon_id": "24855887",
+    "name": "circle",
+    "font_class": "circle",
+    "unicode": "e65b",
+    "unicode_decimal": 58971 },
+
+  {
+    "icon_id": "24855888",
+    "name": "checkmarkempty",
+    "font_class": "checkmarkempty",
+    "unicode": "e65c",
+    "unicode_decimal": 58972 },
+
+  {
+    "icon_id": "24855889",
+    "name": "chat",
+    "font_class": "chat",
+    "unicode": "e65d",
+    "unicode_decimal": 58973 },
+
+  {
+    "icon_id": "24855890",
+    "name": "circle-filled",
+    "font_class": "circle-filled",
+    "unicode": "e65e",
+    "unicode_decimal": 58974 },
+
+  {
+    "icon_id": "24855891",
+    "name": "flag",
+    "font_class": "flag",
+    "unicode": "e65f",
+    "unicode_decimal": 58975 },
+
+  {
+    "icon_id": "24855892",
+    "name": "flag-filled",
+    "font_class": "flag-filled",
+    "unicode": "e660",
+    "unicode_decimal": 58976 },
+
+  {
+    "icon_id": "24855893",
+    "name": "gear-filled",
+    "font_class": "gear-filled",
+    "unicode": "e661",
+    "unicode_decimal": 58977 },
+
+  {
+    "icon_id": "24855894",
+    "name": "home",
+    "font_class": "home",
+    "unicode": "e662",
+    "unicode_decimal": 58978 },
+
+  {
+    "icon_id": "24855895",
+    "name": "home-filled",
+    "font_class": "home-filled",
+    "unicode": "e663",
+    "unicode_decimal": 58979 },
+
+  {
+    "icon_id": "24855896",
+    "name": "gear",
+    "font_class": "gear",
+    "unicode": "e664",
+    "unicode_decimal": 58980 },
+
+  {
+    "icon_id": "24855897",
+    "name": "smallcircle-filled",
+    "font_class": "smallcircle-filled",
+    "unicode": "e665",
+    "unicode_decimal": 58981 },
+
+  {
+    "icon_id": "24855898",
+    "name": "map-filled",
+    "font_class": "map-filled",
+    "unicode": "e666",
+    "unicode_decimal": 58982 },
+
+  {
+    "icon_id": "24855899",
+    "name": "map",
+    "font_class": "map",
+    "unicode": "e667",
+    "unicode_decimal": 58983 },
+
+  {
+    "icon_id": "24855825",
+    "name": "refresh-filled",
+    "font_class": "refresh-filled",
+    "unicode": "e656",
+    "unicode_decimal": 58966 },
+
+  {
+    "icon_id": "24855826",
+    "name": "refresh",
+    "font_class": "refresh",
+    "unicode": "e657",
+    "unicode_decimal": 58967 },
+
+  {
+    "icon_id": "24855808",
+    "name": "cloud-upload",
+    "font_class": "cloud-upload",
+    "unicode": "e645",
+    "unicode_decimal": 58949 },
+
+  {
+    "icon_id": "24855809",
+    "name": "cloud-download-filled",
+    "font_class": "cloud-download-filled",
+    "unicode": "e646",
+    "unicode_decimal": 58950 },
+
+  {
+    "icon_id": "24855810",
+    "name": "cloud-download",
+    "font_class": "cloud-download",
+    "unicode": "e647",
+    "unicode_decimal": 58951 },
+
+  {
+    "icon_id": "24855811",
+    "name": "cloud-upload-filled",
+    "font_class": "cloud-upload-filled",
+    "unicode": "e648",
+    "unicode_decimal": 58952 },
+
+  {
+    "icon_id": "24855813",
+    "name": "redo",
+    "font_class": "redo",
+    "unicode": "e64a",
+    "unicode_decimal": 58954 },
+
+  {
+    "icon_id": "24855814",
+    "name": "images-filled",
+    "font_class": "images-filled",
+    "unicode": "e64b",
+    "unicode_decimal": 58955 },
+
+  {
+    "icon_id": "24855815",
+    "name": "undo-filled",
+    "font_class": "undo-filled",
+    "unicode": "e64c",
+    "unicode_decimal": 58956 },
+
+  {
+    "icon_id": "24855816",
+    "name": "more",
+    "font_class": "more",
+    "unicode": "e64d",
+    "unicode_decimal": 58957 },
+
+  {
+    "icon_id": "24855817",
+    "name": "more-filled",
+    "font_class": "more-filled",
+    "unicode": "e64e",
+    "unicode_decimal": 58958 },
+
+  {
+    "icon_id": "24855818",
+    "name": "undo",
+    "font_class": "undo",
+    "unicode": "e64f",
+    "unicode_decimal": 58959 },
+
+  {
+    "icon_id": "24855819",
+    "name": "images",
+    "font_class": "images",
+    "unicode": "e650",
+    "unicode_decimal": 58960 },
+
+  {
+    "icon_id": "24855821",
+    "name": "paperclip",
+    "font_class": "paperclip",
+    "unicode": "e652",
+    "unicode_decimal": 58962 },
+
+  {
+    "icon_id": "24855822",
+    "name": "settings",
+    "font_class": "settings",
+    "unicode": "e653",
+    "unicode_decimal": 58963 },
+
+  {
+    "icon_id": "24855823",
+    "name": "search",
+    "font_class": "search",
+    "unicode": "e654",
+    "unicode_decimal": 58964 },
+
+  {
+    "icon_id": "24855824",
+    "name": "redo-filled",
+    "font_class": "redo-filled",
+    "unicode": "e655",
+    "unicode_decimal": 58965 },
+
+  {
+    "icon_id": "24841702",
+    "name": "list",
+    "font_class": "list",
+    "unicode": "e644",
+    "unicode_decimal": 58948 },
+
+  {
+    "icon_id": "24841489",
+    "name": "mail-open-filled",
+    "font_class": "mail-open-filled",
+    "unicode": "e63a",
+    "unicode_decimal": 58938 },
+
+  {
+    "icon_id": "24841491",
+    "name": "hand-thumbsdown-filled",
+    "font_class": "hand-down-filled",
+    "unicode": "e63c",
+    "unicode_decimal": 58940 },
+
+  {
+    "icon_id": "24841492",
+    "name": "hand-thumbsdown",
+    "font_class": "hand-down",
+    "unicode": "e63d",
+    "unicode_decimal": 58941 },
+
+  {
+    "icon_id": "24841493",
+    "name": "hand-thumbsup-filled",
+    "font_class": "hand-up-filled",
+    "unicode": "e63e",
+    "unicode_decimal": 58942 },
+
+  {
+    "icon_id": "24841494",
+    "name": "hand-thumbsup",
+    "font_class": "hand-up",
+    "unicode": "e63f",
+    "unicode_decimal": 58943 },
+
+  {
+    "icon_id": "24841496",
+    "name": "heart-filled",
+    "font_class": "heart-filled",
+    "unicode": "e641",
+    "unicode_decimal": 58945 },
+
+  {
+    "icon_id": "24841498",
+    "name": "mail-open",
+    "font_class": "mail-open",
+    "unicode": "e643",
+    "unicode_decimal": 58947 },
+
+  {
+    "icon_id": "24841488",
+    "name": "heart",
+    "font_class": "heart",
+    "unicode": "e639",
+    "unicode_decimal": 58937 },
+
+  {
+    "icon_id": "24839963",
+    "name": "loop",
+    "font_class": "loop",
+    "unicode": "e633",
+    "unicode_decimal": 58931 },
+
+  {
+    "icon_id": "24839866",
+    "name": "pulldown",
+    "font_class": "pulldown",
+    "unicode": "e632",
+    "unicode_decimal": 58930 },
+
+  {
+    "icon_id": "24813798",
+    "name": "scan",
+    "font_class": "scan",
+    "unicode": "e62a",
+    "unicode_decimal": 58922 },
+
+  {
+    "icon_id": "24813786",
+    "name": "bars",
+    "font_class": "bars",
+    "unicode": "e627",
+    "unicode_decimal": 58919 },
+
+  {
+    "icon_id": "24813788",
+    "name": "cart-filled",
+    "font_class": "cart-filled",
+    "unicode": "e629",
+    "unicode_decimal": 58921 },
+
+  {
+    "icon_id": "24813790",
+    "name": "checkbox",
+    "font_class": "checkbox",
+    "unicode": "e62b",
+    "unicode_decimal": 58923 },
+
+  {
+    "icon_id": "24813791",
+    "name": "checkbox-filled",
+    "font_class": "checkbox-filled",
+    "unicode": "e62c",
+    "unicode_decimal": 58924 },
+
+  {
+    "icon_id": "24813794",
+    "name": "shop",
+    "font_class": "shop",
+    "unicode": "e62f",
+    "unicode_decimal": 58927 },
+
+  {
+    "icon_id": "24813795",
+    "name": "headphones",
+    "font_class": "headphones",
+    "unicode": "e630",
+    "unicode_decimal": 58928 },
+
+  {
+    "icon_id": "24813796",
+    "name": "cart",
+    "font_class": "cart",
+    "unicode": "e631",
+    "unicode_decimal": 58929 }] };exports.default = _default;
+
+/***/ }),
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-gap/props.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 背景颜色（默认transparent）
+    bgColor: {
+      type: String,
+      default: uni.$u.props.gap.bgColor },
+
+    // 分割槽高度，单位px（默认30）
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.gap.height },
+
+    // 与上一个组件的距离
+    marginTop: {
+      type: [String, Number],
+      default: uni.$u.props.gap.marginTop },
+
+    // 与下一个组件的距离
+    marginBottom: {
+      type: [String, Number],
+      default: uni.$u.props.gap.marginBottom } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })

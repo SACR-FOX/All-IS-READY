@@ -1,6 +1,11 @@
 <template>
 	<view>
-<web-view src="http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/Test2.pdf?Expires=1652794968&OSSAccessKeyId=TMP.3Kf5f8iPFKsYedkF1rfuY626RLkBAHxvSwgiB29r4ekDANRxTADkdNj5tLwPDDbaRL94dthmmHEQkqsfchB3UPuDje1wmH&Signature=h3jjKOhTf1aTOzX3CjOPeKSYD8o%3D"></web-view>
+		<u-navbar
+		    title="帖子"
+		    @rightClick="rightClick"
+		    :autoBack="true">
+		</u-navbar>
+		<web-view :src="Url" ></web-view>
 	</view>
 </template>
 
@@ -8,7 +13,7 @@
 	export default {
 		data() {
 			return {
-				
+				"Url":"http://all-is-ready-file-storage.oss-cn-hangzhou.aliyuncs.com/userPDF/1/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%AC%AC1%E8%AE%B2%20%E7%BB%AA%E8%AE%BA.pdf?OSSAccessKeyId=LTAI5tGWHb9WqaX55jRKoPyv&Expires=1654356557&Signature=bcYPh6gi8ybaUUdyZeawtns3ZBU%3D"
 			}
 		},
 		methods: {

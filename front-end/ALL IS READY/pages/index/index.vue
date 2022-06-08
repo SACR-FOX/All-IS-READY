@@ -2,16 +2,16 @@
 	<view>
 		<view class="card_top" style="display: flex; ">
 			<view style="display: flex;flex-direction: row;margin-top: 50rpx;">
-				<u-avatar src="../../static/avatar.jpg" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
+				<u-avatar src="../../static/avatar.jpg" :src="user.Header" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
 				<view style="">
 					<view style="text-align: right; margin-left: 170px;display: flex;">
 						<text style="margin-top: 30rpx;">今天学习了:</text>
 						<text style="font-size: 60rpx; 
 									margin-left: 15rpx;margin-right: 15rpx;
-									font-weight: bold;">{{learnTime}}</text>
-						<text style="margin-top: 30rpx;">小时</text>
+									font-weight: bold;">{{timeChange(user.Accumulation)}}</text>
+						<text style="margin-top: 30rpx;">{{timeList[timeFlag]}}</text>
 					</view>
-					<view style="text-align: right;">TOP:10%</view>
+					<view style="text-align: right;">TOP:{{Situation.percent}}%</view>
 				</view>
 			</view>
 		</view>
@@ -30,8 +30,8 @@
 					<view  style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
 						<text style="font-weight: bold;">下一节</text>
 						<text style="font-size: 60rpx; font-weight: bold; margin-top: 10rpx;">{{textFix(classSch.curName,3)}}</text>
-						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.room}}</text>
-						<text style="font-weight: bold;">{{classSch.Time}}</text>
+						<text style="font-weight: bold; margin-top: 20rpx;">{{classSch.Location}}</text>
+						<text style="font-weight: bold;">{{timeToStr(classSch.Start)}}</text>
 					</view>
 				</view>
 				
@@ -76,7 +76,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		
+		<button @click="j">11</button>
 	</view>
 </template>
 
@@ -84,7 +84,24 @@
 	export default {
 		data() {
 			return {
+						//token
+						// token  : "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJVSUQiOjIsIlVuYW1lIjoieHljZiIsIk9yZ0lEIjoxLCJleHAiOjE2NTMwOTczNDF9.UBTeUJOApg6Kd9rzKTDQKghsV8S0WA0aMGwYqt6Xk9E",
+						// UID : "2",
+						Url : "http://101.37.175.115/api/",
+						userMsg : {},
+						
+						
+						//用户信息
+						user : {},
+					
+						//排名信息
+						Situation : {},
+						
 						pro:0.6 ,//计时器
+						
+						//分钟为0，小时为1
+						timeFlag : 0,
+						timeList : ["分钟","小时"],
 						
 						//todoList
 						week : ["星期一","星期二","星期三","星期四","星期五","星期六","星期日",],
@@ -97,10 +114,11 @@
 						
 						//classSchedule
 						classSch : {
-							"curName" :"移动软件开发",
-							"Time" : "9:40",
-							"room" : "信息实验室4",
-							"Tag" : "rgba(255, 190, 118,1.0)"
+							"curName" :"",
+							"Start" : 0,
+							"Location" : "",
+							"Tag" : "rgba(255, 190, 118,1.0)",
+							"End" : 0,
 						},
 						//班级动态
 						classAct: "无事发生",
@@ -131,6 +149,11 @@
 					}
 		},
 		methods: {
+			j(){
+				uni.navigateTo({
+					url:'../community/community'
+				})
+			},
 			toTodolist(){
 				uni.navigateTo({
 					url:"../todo_list/todo_list"
@@ -164,16 +187,155 @@
 				}else{
 					return (text.slice(0,length)+'...')
 				}
-			}
+			},
+			
+			timeChange(time){
+				let that = this
+				if(time<60){
+					that.timeFlag = 0
+					return 0
+					
+				}else if(time < 3600){
+					that.timeFlag = 0
+					return Math.floor(time/60)
+					
+				}else{
+					that.timeFlag = 1
+					return Math.floor(time/3600)
+				}
+			},
+			
+			timeToStr(time){
+				let that = this;
+				 // console.log(time)
+				if(time == 0){
+					return ""
+				}
+				if(time >= 3600){
+					var hour = Math.floor((time/3600))
+					console.log(hour)
+					var min = Math.floor(((time - hour * 3600))/60)
+				}else{
+					var hour = 0 
+					var min = Math.floor(((time - hour * 3600))/60)
+				}
+				
+				if(hour.toString().length < 2)
+				{
+					hour = "0"+hour
+				}
+				if(min.toString().length < 2)
+				{
+					min = "0"+min
+				}
+				return hour + ":" + min
+			},
+			
+			
+			getSystemInfo(){		
+				uni.getSystemInfo({
+					success: (res) => {
+						console.log(res.deviceId)
+					}
+				})
+			},
+			
+			
+			getUserMsg(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							req("success")
+						},
+						fail: (err) => {
+							console.log("err")
+							uni.reLaunch({
+								url:"../Login/Login"
+							})
+						}
+					})
+				})
+			},
 		},
-		onLoad() {
-			uni.getSystemInfo({
+		async onLoad() {
+			let that = this
+			
+			await this.getUserMsg()
+			
+				
+			if(this.userMsg.length == 0){
+				uni.reLaunch({
+					url:"../Login/Login"
+				})
+			}
+			console.log(that.userMsg.token)
+			uni.request({
+				url: that.Url + "User/Detail/"+"2/"+"?token="+that.userMsg.token,
+				method: "GET",
+
 				success: (res) => {
-					console.log(res.deviceId)
+					that.user = res.data
+					console.log(that.user.Header)
 				}
 			})
 			
-			console.log(this.textFix("aaaaaa",3))
+			uni.request({
+				url:that.Url + "Reward/Situation/" + "?token="+that.userMsg.token,
+				success: (res) => {
+					that.Situation = res.data
+					// console.log(that.Situation.percent)
+				}
+			})
+			
+			uni.request({
+				url:that.Url + "Schedule/Next/?token="+that.userMsg.token,
+				success: (res) => {
+					// console.log(res.data)
+					if(res.data[0] == "result: Empty"){
+						// classSch : {
+						// 	"curName" :"移动软件开发",
+						// 	"Time" : "9:40",
+						// 	"room" : "信息实验室4",
+						// 	"Tag" : "rgba(255, 190, 118,1.0)"
+						// },
+						that.classSch = {
+							"curName" :"無",
+							"Start" : 0,
+							"Location" : "",
+							"Tag" : "rgba(255, 190, 118,1.0)",
+							"End" : 0,
+						}
+						// console.log("aaa")
+					}else{
+						that.classSch = res.data
+						
+					}
+					// console.log(that.classSch.Start)
+					// console.log(that.Url + "Schedule/Next/?token="+that.userMsg.token)
+				}
+			})
+			
+			// console.log(Math.floor(this.timeChange(3666)))
+			// console.log(this.textFix("aaaaaa",3))
+		},
+		filters:{
+			timeStamp: function(value) {
+				var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				var year = date.getFullYear();
+				var month = ("0" + (date.getMonth() + 1)).slice(-2);
+				var sdate = ("0" + date.getDate()).slice(-2);
+				var hour = ("0" + date.getHours()).slice(-2);
+				var minute = ("0" + date.getMinutes()).slice(-2);
+				// var second = ("0" + date.getSeconds()).slice(-2);
+				// 拼接
+				var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute ;
+				// 返回
+				return result;
+			},
+			
 		}
 	}
 </script>

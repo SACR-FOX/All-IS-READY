@@ -6,7 +6,7 @@
 		:show="popupShow" mode="bottom" :round="10" closeable closeOnClickOverlay>
 			<view class="popBac">
 				<view class="input_item" >
-					<u--input clearable placeholder="计划名称"></u--input>
+					<u--input clearable placeholder="计划名称" v-model="pickerName">aaa</u--input>
 				</view>
 				<view class="date_picker" @click="datePickerShow()">
 					<!-- <u--input clearable></u--input> -->
@@ -24,7 +24,7 @@
 							:show = "tag_picker_show" v-model="picker_tag"></u-picker>
 				</view>
 			</view>
-			<u-button text="确定"></u-button>
+			<u-button text="确定" @click="addTodo()"></u-button>
 		</u-popup>
 		
 		<!-- 上部组件，显示今日和计划列表 -->
@@ -63,18 +63,19 @@
 				<scroll-view style=" height: 615px;"  scroll-y="true">
 					<uni-swipe-action style="margin-left: 0px; height: 615px;">
 						<uni-swipe-action-item  class="list_item"
+						
 												v-for="(item,index) in tagFilter(list)"
 												:right-options="options"
 												@click = "delItem(index)"
 												v-if = "item.Status">
 							<view class="list_item" @click="showDetial(item.ID)">
-								<view v-if="item.tag == '1'" class="tag" style="background-color: #3C9CFF;">
+								<view v-if="item.Tag == '1'" class="tag" style="background-color: #3C9CFF;">
 								</view>
-								<view v-if="item.tag == '2'" class="tag" style="background-color: #F0AD4E;">
+								<view v-else-if="item.Tag == '2'" class="tag" style="background-color: #F0AD4E;">
 								</view>
-								<view v-if="item.tag == '3'" class="tag" style="background-color: #DD524D;">
+								<view v-else class="tag" style="background-color: #DD524D;">
 								</view>
-								<u-text :text="item.itemName" size="20px" bold="" type=""></u-text>
+								<u-text :text="textFix(item.ItemName,9)" size="20px" bold="" type=""></u-text>
 								<view style="background-color: #A9E08F; height: 15px; width: 15px; margin-right: 15px; border-radius: 90%;"></view>
 							</view>
 						</uni-swipe-action-item>
@@ -84,14 +85,14 @@
 												@click = "delItem(index)"
 												v-if = "!item.Status">
 							<view class="list_item" @click="showDetial(item.ID)">
-								<view v-if="item.tag == '1'" class="tag" style="background-color: #3C9CFF;">
+								<view v-if="item.Tag == '1'" class="tag" style="background-color: #3C9CFF;">
 								</view>
-								<view v-if="item.tag == '2'" class="tag" style="background-color: #F0AD4E;">
+								<view v-else-if="item.Tag == '2'" class="tag" style="background-color: #F0AD4E;">
 								</view>
-								<view v-if="item.tag == '3'" class="tag" style="background-color: #DD524D;">
+								<view v-else class="tag" style="background-color: #DD524D;">
 								</view>
-								<u-text :text="item.itemName" size="20px" bold="" type=""></u-text>
-								<view style="background-color: #F56C6C; height: 15px; width: 15px; margin-right: 15px; border-radius: 90%;"></view>
+								<u-text :text="textFix(item.ItemName,9)" size="20px" bold="" type=""></u-text>
+								<view v-if="!item.Status" style="background-color: #F56C6C; height: 15px; width: 15px; margin-right: 15px; border-radius: 90%;"></view>
 							</view>
 						</uni-swipe-action-item>
 					</uni-swipe-action>
@@ -148,6 +149,8 @@
 				 //弹出组件控制
 				 "popupShow" : false,
 				
+				
+				pickerName : "",
 				//date选择控制
 				"date_picker_show" : false,
 				"time" : 1649389163,
@@ -158,7 +161,11 @@
 				"tag_picker_show" : false,
 				"columns": [['第一类', '第二类', '第三类']],
 				"C_tag" : "null",
-				"picker_tag" : 0
+				"picker_tag" : 0,
+				
+				//用户信息
+				userMsg : [],
+				Url : "http://101.37.175.115/api/",
 			}
 		},
 		methods: {
@@ -178,6 +185,7 @@
 			datePickerConfirm(){
 				this.date_flag = true
 				this.date_picker_show = false;
+				
 			},
 			//获取当前时间
 			getTimeNow(){
@@ -191,13 +199,26 @@
 			},
 			
 			//删除列表
+			//-->完成
 			delItem(index){
 				uni.showModal({
 					title: '提示',
 					content: '是否已经完成此事项',
 					success: res => {
 						if (res.confirm) {
-							this.list.splice(index, 1);
+							// this.list.splice(index, 1);
+							uni.request({
+								url:this.Url + "ToDoList/Action/"+ this.list[index].ID + "/Done/?token=" + this.userMsg.token,
+								method: "PUT",
+								// http://101.37.175.115/api/ToDoList/Action/<ID>/Done/
+								success: (res) => {
+									this.list[index].Status = true
+									console.log(res.data)
+								},
+								fail: (err) => {
+									console.log("err")
+								}
+							})
 						} else if (res.cancel) {	
 							console.log('用户点击取消');
 						}
@@ -235,6 +256,7 @@
 			//关闭添加界面
 			closePop() {
 					this.popupShow = false
+					this.load = false
 			    // console.log('close');
 			},
 			
@@ -243,7 +265,62 @@
 				this.tag_picker_show = false
 				this.date_flag = 1
 				this.picker_tag = e["value"]["0"]
-				console.log(e["value"]["0"])
+					
+				if(this.picker_tag == "第一类"){
+					this.picker_tag = 1
+				}else if(this.picker_tag == "第二类"){
+					this.picker_tag = 2
+				}else if(this.picker_tag == "第三类"){
+					this.picker_tag = 3
+				}
+				console.log(this.picker_tag)
+			},
+			
+			//添加事项
+			addTodo(){
+				let that =this
+				if(!this.date_flag){
+					console.log("err")
+					return false
+				}else if(this.picker_tag == 0){
+					console.log("err")
+					return false
+				}else if(this.pickerName == ""){
+					console.log("err")
+					return false
+				}
+				
+				uni.request({
+					method:"POST",
+					url:this.Url + "ToDoList/Action/?token="+this.userMsg.token,
+					data:{
+							"OrgID": -1,
+						    "UID": this.userMsg.UID,
+						    "ItemName": this.pickerName,
+						    "UUID": 7,
+						    "Tag": this.picker_tag,
+						    "Time": Math.floor(this.date_value/1000)
+					},
+					success: (res) => {
+						let item = {
+							"OrgID": -1,
+							"UID": this.userMsg.UID,
+							"ItemName": this.pickerName,
+							"UUID": 7,
+							"Tag": this.picker_tag,
+							"Time": Math.floor(this.date_value/1000)
+						}
+						that.date_value = Number(new Date())
+						that.picker_tag = 0
+						that.pickerName = ""
+						// console.log("/" + this.date_value/1000)
+						// console.log(res.data)
+						that.list.splice(0,0,item)
+						that.list_classify = that.list
+						that.load = false
+						that.popupShow = false
+					}
+				})
 			},
 			
 			
@@ -271,7 +348,7 @@
 				// })
 				
 				let tag = Math.ceil(Math.random()*3);
-				let item = {"ID":Math.ceil(Math.random()*100),"itemName": "DEMO","OrgId":1,"Status":true,"time":"2022.1.1","tag" : tag,"UUID": ""}
+				let item = {"ID":Math.ceil(Math.random()*100),"ItemName": "DEMO","OrgId":1,"Status":true,"time":"2022.1.1","tag" : tag}
 				that.list.splice(0,0,item)
 				that.list_classify = that.list
 				that.load = false
@@ -300,11 +377,17 @@
 				var result = []
 				if( that.tag <= 3 && that.tag > 0){
 					 result = list.filter(item =>{
-						return item.tag == that.tag
+						 if(that.tag ==3 ){
+							 return item.Tag >= 3
+						 }else{
+							 return item.Tag == that.tag
+						 }
+						
 					})
 				}else if( that.tag == 4){
 					result = list.filter(item =>{
 						return !item.Status
+						
 					})
 				}else if( that.tag == 5){
 					result = list.filter(item =>{
@@ -316,17 +399,68 @@
 				
 				return result;
 			},
+			getUserMsg(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							req("success")
+						},
+						fail: (err) => {
+							console.log("err")
+							uni.reLaunch({
+								url:"../Login/Login"
+							})
+						}
+					})
+				})
+			},
+			
+			getList(){
+				let that = this
+				return new Promise((req,rej)=>{
+					uni.request({
+						url:that.Url + "ToDoList/All?token=" + that.userMsg.token,
+						success: (res) => {
+							console.log(res.data[0].Tag)
+							req(res.data)
+						}
+					})
+				})
+			},
+			//修改过长字体
+			textFix(text,length){
+				if(text.length <= length){
+					return text
+				}else{
+					return (text.slice(0,length)+'...')
+				}
+			}
 
 		},
 	
 		
-		onLoad() {
+		async onLoad() {
 			let that = this;
-			for(var i = 1;i <= 10 ; i++){
-				let tag = Math.ceil(Math.random()*3);
-				let item = {"ID":i,"itemName": "DEMO","OrgId":1,"Status":false,"time":"2022.1.1","tag" : tag,"UUID" : ""}
-				that.list.splice(0,0,item)
-			}
+			
+			await that.getUserMsg()
+			that.list = await that.getList()
+			console.log(that.userMsg.OrgID)
+			// for(var i = 1;i <= 10 ; i++){
+			// 	let tag = Math.ceil(Math.random()*3);
+			// 	// "ID": 2,
+			// 	// "ItemName": "偷懒",
+			// 	// "OrgID": -1,
+			// 	// "Status": false,
+			// 	// "Tag": 6,
+			// 	// "Time": 1649424695
+			// 	let item = {"ID":i,"ItemName": "DEMO","OrgID":1,"Status":false,"Time": 1649424695,"tag" : 2}
+			// 	that.list.splice(0,0,item)
+			// }
+			
+			
 			that.list_classify = that.list
 			// let item = {"ID":i,"itemName": "DEMO1","OrgId":1,"Status":true,"time":"2022.1.1","tag" : tag,"UUID" : ""}
 			// that.list.splice(0,0,item)
@@ -355,7 +489,6 @@
 				// 拼接
 				var result = year + "-" + month + "-" + sdate + " " + hour + ":" + minute ;
 				// 返回
-				console.log(result)
 				return result;
 			},
 			

@@ -1,0 +1,38 @@
+
+.background{
+	background : url("http://101.37.175.115/static/bg/bg9.jpg");
+	background-color: rgba(255,255,255,0.5);
+	background-size:cover;
+	height:1625rpx;
+	z-index: -1;
+}
+.top{
+	height: 400rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.header{
+}
+.input{
+	
+	display: flex;
+	flex-direction: column;
+}
+.input-msg{
+	height: 90rpx;
+	margin-top: 100rpx;
+	margin: 50rpx;
+	border-radius: 35rpx;
+	background-color:rgba(255, 255, 255, 0.95);
+	display: flex;
+	align-items: center;
+	outline: #000000;
+	outline-width: medium;
+	box-shadow: 1px 1px 2px #E5E5E5, 0 0 25px #faf3e9, 0 0 5px #f9ecd4;
+}
+.login_btn{
+	margin: 50rpx;
+	border-radius: 35rpx;
+}
+
