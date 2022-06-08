@@ -37,6 +37,7 @@ class UserRegister(APIView):
         try:
             header = request.FILES.get('header')
         except Exception as e:
+
             header = common.HOST_PREFIX + "/static/img/header_default.png"
 
         if not header:

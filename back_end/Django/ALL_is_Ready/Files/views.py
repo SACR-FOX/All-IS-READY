@@ -101,45 +101,111 @@ class Upload(APIView):
         os.remove(TMP_PATH)
 
 
-class Detail(ModelViewSet):
+# class Detail(ModelViewSet):
+#
+#     @action(methods=['get'], detail=False, url_path="FolderList")
+#     def get_fold_list(self,request):
+#         UID=request.user['UID']
+#         OrgID=request.data.get('OrgID')
+#         print(OrgID)
+#
+#         if not OrgID:
+#             data = FileModel.objects.filter(Q(UID=UID),Q(OrgID=-1)).values('FolderName').distinct().order_by('FolderName')
+#         else:
+#             data = FileModel.objects.filter(OrgID=OrgID).values('FolderName').distinct().order_by('FolderName')
+#
+#         Folders={}
+#         Folders['list']=data
+#
+#         return Response(Folders,status=status.HTTP_200_OK)
+#
+#     @action(methods=['get'], detail=False, url_path="FileList")
+#     def get_file_list(self,request):
+#         UID=request.user['UID']
+#         Folder=request.data.get('Folder')
+#         OrgID = request.data.get('OrgID')
+#         print(Folder)
+#         print(OrgID)
+#         if not OrgID:
+#             data=FileModel.objects.filter(Q(UID__exact=UID),Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
+#         else:
+#             data = FileModel.objects.filter(Q(OrgID=OrgID), Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
+#
+#         FileList = {}
+#         FileList['list'] = data
+#         return Response(FileList, status=status.HTTP_200_OK)
+#
+#     @action(methods=['get'], detail=False, url_path="OnlinePreview")
+#     def get_preview_url(self,request):
+#         FileID = request.data.get('FileID')
+#         UID = request.user['UID']
+#
+#         OrgID = request.data.get('OrgID')
+#         if not OrgID:
+#             data=FileModel.objects.filter(Q(UID=UID),Q(ID=FileID)).first()
+#             obj_path = "userPDF/" + str(UID) + "/" + data.FolderName + "/" + data.FileName
+#             print(obj_path)
+#         else:
+#             data = FileModel.objects.filter(Q(OrgID=OrgID), Q(ID=FileID)).first()
+#             obj_path = "OrgPDF/" + str(OrgID) + "/" + data.FolderName + "/" + data.FileName
+#             print(obj_path)
+#         if not data:
+#             return Response({"result":'no such file'},status=status.HTTP_204_NO_CONTENT)
+#
+#
+#         try:
+#             url = bucket.sign_url('GET', obj_path, 7200, slash_safe=True)
+#         except Exception as e:
+#             print(e)
+#             return Response({"result":"OSS sign err"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+#
+#         return Response({'url':url},status=status.HTTP_200_OK)
 
-    @action(methods=['get'], detail=False, url_path="FolderList")
-    def get_fold_list(self,request):
-        UID=request.user['UID']
-        OrgID=request.data.get('OrgID')
-        print(OrgID)
+
+class FileList(APIView):
+    def get(self,request):
+        UID = request.user['UID']
+        Folder = request.query_params.get('Folder')
+        OrgID = request.query_params.get('OrgID')
+
         if not OrgID:
-            data = FileModel.objects.filter(Q(UID=UID),Q(OrgID=-1)).values('FolderName').distinct().order_by('FolderName')
+            data = FileModel.objects.filter(Q(UID__exact=UID), Q(FolderName__exact=Folder)).values('FileName',
+                                                                                                   'ID').distinct().order_by(
+                'FileName')
         else:
-            data = FileModel.objects.filter(OrgID=OrgID).values('FolderName').distinct().order_by('FolderName')
-
-        Folders={}
-        Folders['list']=data
-
-        return Response(Folders,status=status.HTTP_200_OK)
-
-    @action(methods=['get'], detail=False, url_path="FileList")
-    def get_file_list(self,request):
-        UID=request.user['UID']
-        Folder=request.data.get('Folder')
-        OrgID = request.data.get('OrgID')
-        if not OrgID:
-            data=FileModel.objects.filter(Q(UID__exact=UID),Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
-        else:
-            data = FileModel.objects.filter(Q(OrgID=OrgID), Q(FolderName__exact=Folder)).values('FileName','ID').distinct().order_by('FileName')
+            data = FileModel.objects.filter(Q(OrgID=OrgID), Q(FolderName__exact=Folder)).values('FileName',
+                                                                                                'ID').distinct().order_by(
+                'FileName')
 
         FileList = {}
         FileList['list'] = data
         return Response(FileList, status=status.HTTP_200_OK)
 
-    @action(methods=['get'], detail=False, url_path="OnlinePreview")
-    def get_preview_url(self,request):
-        FileID = request.data.get('FileID')
+class FolderList(APIView):
+    def get(self,request):
+        UID = request.user['UID']
+        OrgID = request.query_params.get('OrgID')
+
+
+        if not OrgID:
+            data = FileModel.objects.filter(Q(UID=UID), Q(OrgID=-1)).values('FolderName').distinct().order_by(
+                'FolderName')
+        else:
+            data = FileModel.objects.filter(OrgID=OrgID).values('FolderName').distinct().order_by('FolderName')
+
+        Folders = {}
+        Folders['list'] = data
+
+        return Response(Folders, status=status.HTTP_200_OK)
+
+class OnlinePreview(APIView):
+    def get(self,request):
+        FileID = request.query_params.get('FileID')
         UID = request.user['UID']
 
         OrgID = request.data.get('OrgID')
         if not OrgID:
-            data=FileModel.objects.filter(Q(UID=UID),Q(ID=FileID)).first()
+            data = FileModel.objects.filter(Q(UID=UID), Q(ID=FileID)).first()
             obj_path = "userPDF/" + str(UID) + "/" + data.FolderName + "/" + data.FileName
             print(obj_path)
         else:
@@ -147,16 +213,12 @@ class Detail(ModelViewSet):
             obj_path = "OrgPDF/" + str(OrgID) + "/" + data.FolderName + "/" + data.FileName
             print(obj_path)
         if not data:
-            return Response({"result":'no such file'},status=status.HTTP_204_NO_CONTENT)
-
+            return Response({"result": 'no such file'}, status=status.HTTP_204_NO_CONTENT)
 
         try:
             url = bucket.sign_url('GET', obj_path, 7200, slash_safe=True)
         except Exception as e:
             print(e)
-            return Response({"result":"OSS sign err"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"result": "OSS sign err"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response({'url':url},status=status.HTTP_200_OK)
-
-
-
+        return Response({'url': url}, status=status.HTTP_200_OK)

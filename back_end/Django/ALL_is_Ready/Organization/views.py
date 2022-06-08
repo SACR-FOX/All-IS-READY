@@ -26,6 +26,8 @@ class OrgAction(ModelViewSet):
     @action(methods=['put'],detail=True,url_path="Modify")
     def Modify(self,request,OrgID):
         Org=Organization.objects.get(OrgID=OrgID)
+        if Org.MonitorID!=request.user['UID']:
+            return Response({"result":"permission denied"},status=status.HTTP_403_FORBIDDEN)
         ser=OrganizationSerializer(instance=Org,data=request.data,partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
@@ -42,11 +44,29 @@ class OrgTaskAction(ModelViewSet):
     @action(methods=['put'], detail=True, url_path="Modify")
     def Modify(self, request, TaskID):
         Tsk = OrgTask.objects.get(TaskID=TaskID)
+        if Tsk.Creator!=request.user['Uname']:
+            return Response({"result":"permission denied"},status=status.HTTP_403_FORBIDDEN)
         ser = TaskSerializer(instance=Tsk, data=request.data, partial=True)
         ser.is_valid(raise_exception=True)
         ser.save()
         return Response(ser.data)
 
+class OrgInfo(APIView):
+    def get(self,request):
+        OrgID=request.data.get('OrgID')
+        Org=Organization.objects.filter(OrgID=OrgID).first()
+        if Org:
+            dict={}
+            usr=User.objects.filter(UID__exact=Org.MonitorID).first()
+            aggregate=User.objects.filter(OrgID=OrgID).count()
+            dict['Monitor']=usr.Uname
+            dict['aggregate']=aggregate
+            dict['OrgName']=Org.OrgName
+            dict['OrgID']=Org.OrgID
+            dict['Description']=Org.Description
+            return Response(dict,status=status.HTTP_200_OK)
+        else:
+            return Response({"result":"empty"},status=status.HTTP_200_OK)
 class OrgTaskAll(APIView):
 
     def get(self,request):
@@ -121,8 +141,14 @@ class ACK(APIView):
             return Response(dataFinish,status=status.HTTP_200_OK)
 
         else:
-            if Tsk.Status==False:
-                return Response({"result":"Task Due"},status=status.HTTP_403_FORBIDDEN)
+            #检查任务截止时间
+            now = int(time.time())
+            if now > Tsk.TimeDue:
+                if Tsk.Status:
+                    Tsk.Status=False
+                    Tsk.save()
+                return Response({"result": "Task Due"}, status=status.HTTP_403_FORBIDDEN)
+
             Tsk.AckCount+=1
             Tsk.save()
             TaskAck.objects.create(UID=UID,TaskID=TaskID)
