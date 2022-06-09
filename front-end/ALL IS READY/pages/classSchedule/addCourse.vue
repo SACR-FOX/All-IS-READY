@@ -2,7 +2,7 @@
 	<view >
 		<u-navbar
 		           title="创建课程表项"
-		           @leftClick="leftClick"
+		           @leftClick="leftClick()"
 		           :autoBack="true"
 		       >
 		       </u-navbar>
