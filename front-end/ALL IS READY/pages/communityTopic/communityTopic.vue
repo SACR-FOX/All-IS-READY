@@ -1,6 +1,14 @@
 <template>
 	<view>
-
+		
+		<view>
+		        <u-navbar
+		            title="课程社区"
+		            @leftClick="leftClick"
+		        >
+		        </u-navbar>
+			</view>
+		<view style="height: 70rpx;"></view>
 		
 		<view class="head">
 			<!-- <view class="bg-colore"></view> -->
@@ -77,6 +85,11 @@
 			}
 		},
 		methods: {
+			leftClick(){
+				uni.navigateTo({
+					url:'../community/community'
+				})
+			},
 			trigger(e) {	//点击悬浮按钮
 				this.content[e.index].active = !e.item.active
 				this.setCommunityID()

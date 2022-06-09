@@ -45,6 +45,7 @@
 			}
 		},
 		methods: {
+			
 			getToken(){
 				return new Promise((req,rej)=>{
 					uni.getStorage({
@@ -100,14 +101,21 @@
 				// console.log(lists[0].url)
 				// console.log(this.useMsg.UID)
 			},
+			
 
 		},
 			
 			async onLoad() {
 				this.useMsg = await this.getToken()
 				// console.log(this.useMsg.UID)
-			}
+			},
+			
+			
+			
 		}
+		
+		
+		
 	
 </script>
 

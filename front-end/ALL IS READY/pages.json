@@ -67,28 +67,39 @@
 		},
 		{
 			"path":"pages/community/community",
-			"style" :
-			{
-			    "navigationBarTitleText": "课程社区",
-			    "enablePullDownRefresh": false
+			// "style" :
+			// {
+			//     "navigationBarTitleText": "课程社区",
+			//     "enablePullDownRefresh": false
+			// }
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path":"pages/topic/topic",
+			// "style" :
+			// {
+			//     "navigationBarTitleText": "主题帖子",
+			//     "enablePullDownRefresh": false
+			// }
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
 			}
 		}
         ,{
-            "path" : "pages/topic/topic",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "主题帖子",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/communityTopic/communityTopic",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "主题",
-                "enablePullDownRefresh": false
-            }
+            // "style" :                                                                                    
+            // {
+            //     "navigationBarTitleText": "主题",
+            //     "enablePullDownRefresh": false
+            // }
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
+			}
             
         }
         ,{
@@ -109,7 +120,10 @@
                 "navigationBarTitleText": "创建社区",
                 "enablePullDownRefresh": false
             }
-            
+			// "style": {
+			// 	"navigationBarTitleText": "uni-app",
+			// 	"navigationStyle":"custom"
+			// }
         }
         ,{
             "path" : "pages/communityTopic/createTopic",

@@ -1,7 +1,13 @@
 <template>
 	<view>
-
-		<view style="margin-top: 15rpx;"></view>
+		<view>
+		        <u-navbar
+		            title="课程社区"
+		            @leftClick="leftClick"
+		        >
+		        </u-navbar>
+			</view>
+		<view style="height: 70rpx;"></view>
 		
 		<view v-for='i in count'>
 			<view class="communityItem" @click="jump(results[i-1].CommunityID,
@@ -66,6 +72,12 @@
 			}
 		},
 		methods: {
+			
+			leftClick(){
+				uni.navigateTo({
+					url:'../index/index'
+				})
+			},
 
 			rightClick(){
 				uni.navigateTo({
@@ -200,6 +212,11 @@
 			this.useMsg = await this.getToken()	//获取用户数据
 			this.data = await this.getCommunity()	//获取当前页面数据
 
+		},
+		onBack(){
+			uni.navigateTo({
+				url:'../index/index'
+			})
 		}
 	}
 </script>

@@ -1,7 +1,13 @@
 <template>
-	
 	<view class="back">
-	
+	<view>
+	        <u-navbar
+	            title="话题社区"
+	            @leftClick="leftClick"
+	        >
+	        </u-navbar>
+		</view>
+	<view style="height: 70rpx;"></view>
 		
 		<view class="page">
 			<text class="title" @click="showToast()">{{Title}}</text>
@@ -113,6 +119,11 @@
 			},
 		},
 		methods:{
+			leftClick(){
+				uni.navigateTo({
+					url:'../communityTopic/communityTopic'
+				})
+			},
 			showToast1() {	//点赞成功提示
                 this.$refs.uToast.show({
                     message: '点赞成功',
