@@ -3,8 +3,8 @@
 		<view>
 		    <u-navbar
 		        title="课程表"
-		        @leftClick="rightClick()"
-		        :autoBack="true"
+		        @leftClick="leftClick()"
+				@rightClick="rightClick"
 		    >
 				<view
 				    class="u-nav-slot"
@@ -211,7 +211,7 @@
 					}
 				})
 			},
-			rightClick(){
+			leftClick(){
 				uni.navigateTo({
 					url:'./addCourse'
 				})
@@ -247,7 +247,7 @@
 			},
 		rightClick(){
 				uni.navigateTo({
-					url:"../index/index"
+					url:"./addCourse"
 				})
 			},
 		},

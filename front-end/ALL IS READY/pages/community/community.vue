@@ -161,11 +161,17 @@
 				})
 			},
 			timeToStr(time){	//时间转换
+			// console.log(time)
+			var now=new Date()
+			var sec=now.getTime()/1000
+			if(time <= 10){
+				return "刚刚"
+			}
+			time = sec - time
+			
 				let that = this;
 				 // console.log(time)
-				if(time == 0){
-					return "刚刚"
-				}
+				
 				if(time >= 3600){
 					var hour = Math.floor((time/3600))
 					// console.log(hour)

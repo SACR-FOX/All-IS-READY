@@ -316,6 +316,7 @@
 		display: flex;
 		align-items: center;
 		color: #95afc0;
+		margin-left:80rpx;
 	}
 	.topicSrc{
 		width: 400rpx;

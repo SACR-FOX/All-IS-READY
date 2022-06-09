@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<u-navbar
-		    title="社区"
+		    title="话题广场"
 		    @rightClick="rightClick"
 			:autoBack="true">
 		</u-navbar>
@@ -24,22 +24,25 @@
 		
 		<view style="margin-top: 30rpx;"></view>
 		
-		<view v-for="i in count">
-			<view class="topic">
-				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,timeToStr(results[i-1].Time))">
-					<view class="row">
-						<view v-if="results[i-1].HasImage">
-							<image :src='results[i-1].ImageUri' class="img"></image>
+		<view v-for="i in count" style="margin-top: 20rpx;">
+			<view style="display: flex;justify-content: center;">
+				<view class="topic">
+					<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,timeToStr(results[i-1].Time))">
+						<view class="row">
+							<view v-if="results[i-1].HasImage">
+								<image :src='results[i-1].ImageUri' class="img"></image>
+							</view>
+							<text class=" title">{{results[i-1].Title}}</text>
 						</view>
-						<text class=" title">{{results[i-1].Title}}</text>
-					</view>
-					<view class="bor"></view>
-					<view class="row">
-						<text class="creator">{{results[i-1].Creator}}</text>
-						<text class="time">{{timeToStr(results[i-1].Time)}}</text>
+						<view class="bor"></view>
+						<view class="row">
+							<text class="creator">{{results[i-1].Creator}}</text>
+							<text class="time">{{timeToStr(results[i-1].Time)}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
+			
 		</view>
 	
 		<uni-fab ref="fab" :content="content" @trigger="trigger" />
@@ -154,11 +157,14 @@
 				})
 			},
 			timeToStr(time){
-				let that = this;
-				 // console.log(time)
-				if(time == 0){
+				var now=new Date()
+				var sec=now.getTime()/1000
+				if(time <= 10){
 					return "刚刚"
 				}
+				time = sec - time
+				let that = this;
+				 // console.log(time)
 				if(time >= 3600){
 					var hour = Math.floor((time/3600))
 					// console.log(hour)
@@ -254,18 +260,22 @@
 	.topic{
 		background-color: #F1F1F1;
 		border-radius: 25rpx;
+		
+		width: 95%;
 	}
 	.card{
 		padding: 10rpx;
-		margin-top: 10rpx;
+		margin-top: 15rpx;
 		.title{
 			font-weight: bold;
 			font-size: 30rpx;
 			margin-bottom: 10rpx;
+			margin-left: 20rpx;
 		}
 		.img{
 			width: 90rpx;
 			height: 90rpx;
+			margin-left: 10rpx;
 		}
 		.content{
 			font-size: 30rpx;
@@ -277,10 +287,11 @@
 		.creator{
 			font-size: 25rpx;
 			width: 100rpx;
+			margin-left: 10rpx;
 		}
 		.time{
 			font-size: 25rpx;
-			
+			margin-left: 400rpx;
 		}
 	}
 </style>
