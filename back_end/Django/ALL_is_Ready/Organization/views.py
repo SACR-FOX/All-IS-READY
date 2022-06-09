@@ -107,8 +107,8 @@ class OrgTaskAll(APIView):
             else:
                 item['Status'] = i.Status
 
-            item['TimeStart'] = i.TimeStart
-            item['TimeDue'] = i.TimeDue
+            # item['TimeStart'] = i.TimeStart
+            item['TimeDue'] = sw.stamp2str(i.TimeDue)
             # item['Description'] = i.Description
             # item['Creator'] = i.Creator
             # item['AckCount'] = i.AckCount
@@ -157,8 +157,8 @@ class ACK(APIView):
             return Response(dataFinish, status=status.HTTP_200_OK)
 
     def get(self,request):
-        UID = request.data.get("UID")
-        TaskID = request.data.get("TaskID")
+        UID = request.user['UID']
+        TaskID = request.query_params.get("TaskID")
         if TaskAck.objects.filter(Q(UID=UID), Q(TaskID=TaskID)).exists():
             data = {
                 "TaskID": TaskID,

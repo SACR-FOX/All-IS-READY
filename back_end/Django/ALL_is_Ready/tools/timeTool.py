@@ -8,9 +8,15 @@ class switcher:
         "Thus":4,
         "Fri":5
     }
+    def stamp2str(self,Sec):
+        timeArray = time.localtime(Sec)
+        otherStyleTime = time.strftime("%m月%d日 %H:%M", timeArray)
+        return otherStyleTime
+
+
     def sec2hm(self,Sec):
-        h=str(Sec//3600) if (Sec//3600)>10 else "0"+str(Sec//3600)
-        m=str((Sec%3600)//60) if (Sec%3600)//60 > 10 else "0"+str((Sec%3600)//60)
+        h=str(Sec//3600) if (Sec//3600)>=10 else "0"+str(Sec//3600)
+        m=str((Sec%3600)//60) if (Sec%3600)//60 >= 10 else "0"+str((Sec%3600)//60)
         return h+":"+m
 
     def secFrom0(self):
