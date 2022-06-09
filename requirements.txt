@@ -7,3 +7,4 @@ simplejson==3.17.6
 sqlparse==0.4.2
 tzdata==2021.5
 PyMySQL==1.0.2
+djangorestframework==3.13.1
