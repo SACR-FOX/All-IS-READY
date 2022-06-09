@@ -52,7 +52,9 @@
 						<u-album :urls="result[i-1].pics"></u-album>
 			          </view>
 					  
-					  <image :src="a[list1[i-1]]" class="star" @click="star(result[i-1].PostID,showToast2())"></image>
+						<u-icon name="thumb-up" size="20" style="margin-top: 10rpx;" @click="star(result[i-1].PostID,i),showToast1()"></u-icon>
+						<!-- <u-icon v-show="a[list1[i-1]]" name="thumb-up-fill" size="20" style="margin-top: 10rpx;" @click="star(result[i-1].PostID,showToast2())"></u-icon> -->
+					  <!-- <image :src="a[list1[i-1]]" class="star" @click="star(result[i-1].PostID,showToast2())"></image> -->
 					  <!-- <image v-else src="../../static/star.png" class="star" @click="star(result[i-1].PostID,showToast1())"></image> -->
 					  <view style="margin-top: 7rpx;">{{result[i-1].Stars}}</view>
 			        </view>
@@ -115,24 +117,23 @@
 			},
 		},
 		methods:{
-			showToast1() {
+			showToast1() {	//点赞成功提示
                 this.$refs.uToast.show({
                     message: '点赞成功',
                     type: 'success',
                 })
             },
-			showToast2() {
+			showToast2() {	//点赞失败提示
 			    this.$refs.uToast.show({
 			        message: '您已经点过赞了',
 			        type: 'success',
 			    })
 			},
-			trigger(e) {
+			trigger(e) {	//悬浮按钮点击事件
 				// console.log(e)
 				this.content[e.index].active = !e.item.active
 				uni.showModal({
 					title: '提示',
-					// content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
 					content:'确认要发帖吗',
 					success: function(res) {
 						if (res.confirm) {
@@ -156,7 +157,7 @@
 					})
 				})
 			},
-			getTopicID(){
+			getTopicID(){	//获取当前页面TopicID
 				return new Promise((req,rej)=>{
 					uni.getStorage({
 						key: 'TopicID',
@@ -166,7 +167,7 @@
 					})
 				})
 			},
-			getTopic(){
+			getTopic(){	//获取当前页面数据
 				let that = this
 				// console.log(that.TopicID)
 				return new Promise((req,rej)=>{
@@ -185,7 +186,7 @@
 					})
 				})
 			},
-			getStar(index){
+			getStar(index){	//获取点赞情况
 				let that = this
 				let id = that.result[index].PostID
 				return new Promise((req,rej)=>{
@@ -217,7 +218,7 @@
 					})
 				})
 			},
-			star(PostID){
+			star(PostID,i){	//点赞事件
 				let that = this
 				return new Promise((req,rej)=>{
 					uni.request({
@@ -227,6 +228,7 @@
 						success: (res) => {
 							req(res.data)
 							console.log(that.Url + 'Community/Post/' + PostID + '/Star/' + "?token=" + that.useMsg.token)
+							// console.log(res.data.result[i])
 						},
 						fail: (err) => {
 							req(err)
@@ -234,7 +236,7 @@
 					})
 				})
 			},
-			setStorage(){
+			setStorage(){	//存储数据
 				uni.setStorage({
 					key:'TopicID',
 					data:{
@@ -267,7 +269,7 @@
 				 
 			}
 			// console.log(this.list1)
-			console.log(this.list1[0])
+			// console.log(this.list1[0])
 		},
 		
 	}
@@ -293,7 +295,7 @@
 	.page{
 		padding: 10rpx;
 		margin-top: 70rpx;
-		background-color: #F1F1F1;
+		background-color: #dcdde1;
 	}
 	.row{
 		display: flex;
@@ -344,6 +346,7 @@
 	.card{
 		background-color: #F1F1F1;
 		margin: 10rpx;
+		margin-top: 20rpx;
 	}
 	.star{
 		margin-top: 1rpx;

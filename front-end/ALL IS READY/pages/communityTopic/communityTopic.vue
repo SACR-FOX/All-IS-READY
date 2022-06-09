@@ -3,7 +3,7 @@
 		<u-navbar
 		    title="社区"
 		    @rightClick="rightClick"
-		    :autoBack="true">
+			:autoBack="true">
 		</u-navbar>
 		
 		<view class="head">
@@ -26,21 +26,17 @@
 		
 		<view v-for="i in count">
 			<view class="topic">
-				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,results[i-1].Time)">
-					<!-- <text class=" title">{{results[i-1].Title}}</text> -->
+				<view class="card" @click="jump(results[i-1].TopicID,results[i-1].Title,results[i-1].header,results[i-1].Creator,timeToStr(results[i-1].Time))">
 					<view class="row">
 						<view v-if="results[i-1].HasImage">
 							<image :src='results[i-1].ImageUri' class="img"></image>
 						</view>
 						<text class=" title">{{results[i-1].Title}}</text>
-						<!-- <text class="content">
-							波兰
-						</text> -->
 					</view>
 					<view class="bor"></view>
 					<view class="row">
-						<text class="creator">{{results[i-1].UID}}</text>
-						<text class="time">{{results[i-1].Time}}</text>
+						<text class="creator">{{results[i-1].Creator}}</text>
+						<text class="time">{{timeToStr(results[i-1].Time)}}</text>
 					</view>
 				</view>
 			</view>
@@ -69,6 +65,7 @@
 				Renewal:'2天前',
 				Description:'操作系统（operating system，简称OS）是管理计算机硬件与软件资源的计算机程序。',
 				UID:'',
+				Creator:'',
 				
 				content: [
 					{
@@ -82,23 +79,8 @@
 		},
 		methods: {
 			trigger(e) {	//点击悬浮按钮
-				// console.log(e)
 				this.content[e.index].active = !e.item.active
 				this.setCommunityID()
-				// console.log(this.CommunityID)
-				// uni.showModal({
-				// 	title: '提示',
-				// 	content:'确认要创建话题吗',
-				// 	success: function(res) {
-				// 		if (res.confirm) {
-				// 			console.log('用户点击确定')
-							
-				// 			
-				// 		} else if (res.cancel) {
-				// 			console.log('用户点击取消')
-				// 		}
-				// 	}
-				// })
 				uni.navigateTo({
 								url:'./createTopic'
 							})
@@ -132,7 +114,7 @@
 					url:'../topic/topic'
 				})
 			},
-			getToken(){	//获取token
+			getToken(){
 				return new Promise((req,rej)=>{
 					uni.getStorage({
 						key: 'userMsg',
@@ -148,13 +130,11 @@
 						key: 'communityID',
 						success: function (res) {
 							req(res.data)
-							// this.CommunityName = res.data.CommunityName
-							// console.log(this.Description)
 						},
 					})
 				})
 			},
-			getCommunityTopic(){
+			getCommunityTopic(){	//获取当前页面数据
 				let that = this
 				return new Promise((req,rej)=>{
 					uni.request({
@@ -164,14 +144,8 @@
 						success: (res) => {
 							req(res.data)
 							console.log(that.Url + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
-							// this.results = res.data.results
-							// this.count = res.data.count
-							// console.log(this.results[0].TopicID)
-							
-							// console.log(res.data.data[0].Creator)
 							this.results = res.data.data
 							this.count = res.data.count
-							// console.log(this.results[0].UID)
 						},
 						fail: (err) => {
 							req(err)
@@ -179,33 +153,41 @@
 					})
 				})
 			},
-			// getCommunityTopic(){
-			// 	let that = this
-			// 	console.log('hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
-			// 	return new Promise((req,rej)=>{
-			// 		uni.request({
-			// 			url: 'http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page,
-			// 			method:'GET',
-						
-			// 			success: (res) => {
-			// 				req(res.data)
-			// 				console.log('http://hcl.free.svipss.top/api/' + 'Community/Topic_All' + '?token=' + that.useMsg.token + '&CommunityID=' + that.CommunityID +'&page=' +that.page)
-			// 				// this.results = res.data.results
-			// 				// this.count = res.data.count
-			// 				// console.log(this.results[0].TopicID)
-							
-			// 				// console.log(res.data.data[0].Creator)
-			// 				this.results = res.data.data
-			// 				this.count = res.data.count
-			// 				// console.log(this.results[0].UID)
-			// 			},
-			// 			fail: (err) => {
-			// 				req(err)
-			// 			}
-			// 		})
-			// 	})
-			// },
-			
+			timeToStr(time){
+				let that = this;
+				 // console.log(time)
+				if(time == 0){
+					return "刚刚"
+				}
+				if(time >= 3600){
+					var hour = Math.floor((time/3600))
+					// console.log(hour)
+					var min = Math.floor(((time - hour * 3600))/60)
+					// console.log(min)
+				}else{
+					var hour = 0 
+					var min = Math.floor(((time - hour * 3600))/60)
+				}
+				
+				if(hour.toString().length < 2)
+				{
+					hour = "0"+hour
+				}
+				if(min.toString().length < 2)
+				{
+					min = "0"+min
+				}
+				// console.log(hour)
+				if(hour==0){
+					return min+ "分钟前"
+				}else if(hour>=24){
+					var day = 0
+					day = Math.floor(hour/24)
+					return day + "天前"
+				}else{
+					return hour + "小时前"
+				}
+			},
 		},
 		async onLoad() {
 			this.useMsg = await this.getToken()
@@ -214,6 +196,7 @@
 			this.CommunityID = this.Community.CommunityID
 			this.Description = this.Community.Description
 			this.Renewal = this.Community.Renewal
+			console.log(this.Renewal)
 			this.ImageUri = this.Community.Poster
 			
 			

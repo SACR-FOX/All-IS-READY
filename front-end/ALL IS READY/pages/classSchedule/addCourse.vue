@@ -46,7 +46,6 @@
 
 					</view>
 			   </view>
-				
 	</view>
 </template>
 
@@ -77,7 +76,7 @@
 					CurName:'',
 					Location:'',
 					UID:'',
-					UUID:'8526a105-58b9-4952-a5f3-ba23eeb50168',
+					UUID:'',
 				}
 
 					
@@ -85,6 +84,20 @@
 			}
 		},
 		methods: {
+			uuid() {
+			    var s = [];
+			    var hexDigits = "0123456789abcdef";
+			    for (var i = 0; i < 36; i++) {
+			        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+			    }
+			    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+			    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+			    s[8] = s[13] = s[18] = s[23] = "-";
+			
+			    var uuid = s.join("");
+				// console.log(uuid)
+			    return uuid;
+			},
 			getToken(){
 				return new Promise((req,rej)=>{
 					uni.getStorage({
@@ -148,6 +161,9 @@
 							req(res.data)
 							console.log('http://101.37.175.115/api/Schedule/Action/?token=' + that.useMsg.token)
 							// console.log(res.data.content[0].Tag)
+							uni.navigateTo({
+								url:'./classSchedule'
+							})
 						},
 						fail: (err) => {
 							console.log(err)
@@ -162,6 +178,8 @@
 		async onLoad(){
 			this.useMsg = await this.getToken()
 			this.newCur.UID = this.useMsg.UID
+			this.UUID = await this.uuid()
+			// console.log(this.uuid)
 			}
 	}
 </script>

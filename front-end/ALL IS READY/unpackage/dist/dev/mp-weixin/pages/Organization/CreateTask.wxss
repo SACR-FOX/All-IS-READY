@@ -1,0 +1,21 @@
+
+.topBlock{
+	height: 120rpx;
+}
+.inputArea{
+	display: flex;
+	align-items: center;
+	justify-content:fl;
+}
+.bottomLayer{
+	width: 90%;
+	height: 1000rpx;
+	background-color: #ffffff;
+	border-radius: 60rpx 60rpx 60rpx 60rpx;
+	padding-top: 60rpx;
+}
+page{
+	background-color: #f7f1e3;
+}
+
+

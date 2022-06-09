@@ -1,0 +1,17 @@
+
+.topBlock{
+		height: 120rpx;
+}
+page{
+		background-color: #f1f2f6;
+}
+.submit{
+		position: relative;
+		top: 90rpx;
+	
+		height: 120rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+}
+

@@ -8,8 +8,8 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.createPlugin = createPlugin;exports.createSubpackageApp = createSubpackageApp;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
-var _uniI18n = __webpack_require__(/*! @dcloudio/uni-i18n */ 4);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
+/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.createPlugin = createPlugin;exports.createSubpackageApp = createSubpackageApp;exports.default = void 0;var _uniI18n = __webpack_require__(/*! @dcloudio/uni-i18n */ 3);
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 var realAtob;
 
@@ -128,6 +128,16 @@ var camelizeRE = /-(\w)/g;
 var camelize = cached(function (str) {
   return str.replace(camelizeRE, function (_, c) {return c ? c.toUpperCase() : '';});
 });
+
+function sortObject(obj) {
+  var sortObj = {};
+  if (isPlainObject(obj)) {
+    Object.keys(obj).sort().forEach(function (key) {
+      sortObj[key] = obj[key];
+    });
+  }
+  return !Object.keys(sortObj) ? obj : sortObj;
+}
 
 var HOOKS = [
 'invoke',
@@ -324,7 +334,7 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale/;
+/^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale|invokePushCallback|getWindowInfo|getDeviceInfo|getAppBaseInfo/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
@@ -437,7 +447,134 @@ function upx2px(number, newDeviceWidth) {
   return number < 0 ? -result : result;
 }
 
-function getLocale() {
+var LOCALE_ZH_HANS = 'zh-Hans';
+var LOCALE_ZH_HANT = 'zh-Hant';
+var LOCALE_EN = 'en';
+var LOCALE_FR = 'fr';
+var LOCALE_ES = 'es';
+
+var messages = {};
+
+var locale;
+
+{
+  locale = normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN;
+}
+
+function initI18nMessages() {
+  if (!isEnableLocale()) {
+    return;
+  }
+  var localeKeys = Object.keys(__uniConfig.locales);
+  if (localeKeys.length) {
+    localeKeys.forEach(function (locale) {
+      var curMessages = messages[locale];
+      var userMessages = __uniConfig.locales[locale];
+      if (curMessages) {
+        Object.assign(curMessages, userMessages);
+      } else {
+        messages[locale] = userMessages;
+      }
+    });
+  }
+}
+
+initI18nMessages();
+
+var i18n = (0, _uniI18n.initVueI18n)(
+locale,
+{});
+
+var t = i18n.t;
+var i18nMixin = i18n.mixin = {
+  beforeCreate: function beforeCreate() {var _this = this;
+    var unwatch = i18n.i18n.watchLocale(function () {
+      _this.$forceUpdate();
+    });
+    this.$once('hook:beforeDestroy', function () {
+      unwatch();
+    });
+  },
+  methods: {
+    $$t: function $$t(key, values) {
+      return t(key, values);
+    } } };
+
+
+var setLocale = i18n.setLocale;
+var getLocale = i18n.getLocale;
+
+function initAppLocale(Vue, appVm, locale) {
+  var state = Vue.observable({
+    locale: locale || i18n.getLocale() });
+
+  var localeWatchers = [];
+  appVm.$watchLocale = function (fn) {
+    localeWatchers.push(fn);
+  };
+  Object.defineProperty(appVm, '$locale', {
+    get: function get() {
+      return state.locale;
+    },
+    set: function set(v) {
+      state.locale = v;
+      localeWatchers.forEach(function (watch) {return watch(v);});
+    } });
+
+}
+
+function isEnableLocale() {
+  return typeof __uniConfig !== 'undefined' && __uniConfig.locales && !!Object.keys(__uniConfig.locales).length;
+}
+
+function include(str, parts) {
+  return !!parts.find(function (part) {return str.indexOf(part) !== -1;});
+}
+
+function startsWith(str, parts) {
+  return parts.find(function (part) {return str.indexOf(part) === 0;});
+}
+
+function normalizeLocale(locale, messages) {
+  if (!locale) {
+    return;
+  }
+  locale = locale.trim().replace(/_/g, '-');
+  if (messages && messages[locale]) {
+    return locale;
+  }
+  locale = locale.toLowerCase();
+  if (locale === 'chinese') {
+    // 支付宝
+    return LOCALE_ZH_HANS;
+  }
+  if (locale.indexOf('zh') === 0) {
+    if (locale.indexOf('-hans') > -1) {
+      return LOCALE_ZH_HANS;
+    }
+    if (locale.indexOf('-hant') > -1) {
+      return LOCALE_ZH_HANT;
+    }
+    if (include(locale, ['-tw', '-hk', '-mo', '-cht'])) {
+      return LOCALE_ZH_HANT;
+    }
+    return LOCALE_ZH_HANS;
+  }
+  var lang = startsWith(locale, [LOCALE_EN, LOCALE_FR, LOCALE_ES]);
+  if (lang) {
+    return lang;
+  }
+}
+// export function initI18n() {
+//   const localeKeys = Object.keys(__uniConfig.locales || {})
+//   if (localeKeys.length) {
+//     localeKeys.forEach((locale) =>
+//       i18n.add(locale, __uniConfig.locales[locale])
+//     )
+//   }
+// }
+
+function getLocale$1() {
   // 优先使用 $locale
   var app = getApp({
     allowDefault: true });
@@ -445,10 +582,10 @@ function getLocale() {
   if (app && app.$vm) {
     return app.$vm.$locale;
   }
-  return wx.getSystemInfoSync().language || 'zh-Hans';
+  return normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN;
 }
 
-function setLocale(locale) {
+function setLocale$1(locale) {
   var app = getApp();
   if (!app) {
     return false;
@@ -472,7 +609,7 @@ function onLocaleChange(fn) {
 }
 
 if (typeof global !== 'undefined') {
-  global.getLocale = getLocale;
+  global.getLocale = getLocale$1;
 }
 
 var interceptors = {
@@ -482,8 +619,8 @@ var interceptors = {
 var baseApi = /*#__PURE__*/Object.freeze({
   __proto__: null,
   upx2px: upx2px,
-  getLocale: getLocale,
-  setLocale: setLocale,
+  getLocale: getLocale$1,
+  setLocale: setLocale$1,
   onLocaleChange: onLocaleChange,
   addInterceptor: addInterceptor,
   removeInterceptor: removeInterceptor,
@@ -558,7 +695,7 @@ var previewImage = {
 
 var UUID_KEY = '__DC_STAT_UUID';
 var deviceId;
-function addUuid(result) {
+function useDeviceId(result) {
   deviceId = deviceId || wx.getStorageSync(UUID_KEY);
   if (!deviceId) {
     deviceId = Date.now() + '' + Math.floor(Math.random() * 1e7);
@@ -577,15 +714,142 @@ function addSafeAreaInsets(result) {
       top: safeArea.top,
       left: safeArea.left,
       right: result.windowWidth - safeArea.right,
-      bottom: result.windowHeight - safeArea.bottom };
+      bottom: result.screenHeight - safeArea.bottom };
 
   }
 }
 
+function populateParameters(result) {var _result$brand =
+
+
+
+
+
+  result.brand,brand = _result$brand === void 0 ? '' : _result$brand,_result$model = result.model,model = _result$model === void 0 ? '' : _result$model,_result$system = result.system,system = _result$system === void 0 ? '' : _result$system,_result$language = result.language,language = _result$language === void 0 ? '' : _result$language,theme = result.theme,version = result.version,platform = result.platform,fontSizeSetting = result.fontSizeSetting,SDKVersion = result.SDKVersion,pixelRatio = result.pixelRatio,deviceOrientation = result.deviceOrientation;
+  // const isQuickApp = "mp-weixin".indexOf('quickapp-webview') !== -1
+
+  // osName osVersion
+  var osName = '';
+  var osVersion = '';
+  {
+    osName = system.split(' ')[0] || '';
+    osVersion = system.split(' ')[1] || '';
+  }
+  var hostVersion = version;
+
+  // deviceType
+  var deviceType = getGetDeviceType(result, model);
+
+  // deviceModel
+  var deviceBrand = getDeviceBrand(brand);
+
+  // hostName
+  var _hostName = getHostName(result);
+
+  // deviceOrientation
+  var _deviceOrientation = deviceOrientation; // 仅 微信 百度 支持
+
+  // devicePixelRatio
+  var _devicePixelRatio = pixelRatio;
+
+  // SDKVersion
+  var _SDKVersion = SDKVersion;
+
+  // hostLanguage
+  var hostLanguage = language.replace(/_/g, '-');
+
+  // wx.getAccountInfoSync
+
+  var parameters = {
+    appId: "__UNI__BF257AC",
+    appName: "ALL IS READY",
+    appVersion: "1.0.0",
+    appVersionCode: "100",
+    appLanguage: getAppLanguage(hostLanguage),
+    uniCompileVersion: "3.4.14",
+    uniRuntimeVersion: "3.4.14",
+    uniPlatform: undefined || "mp-weixin",
+    deviceBrand: deviceBrand,
+    deviceModel: model,
+    deviceType: deviceType,
+    devicePixelRatio: _devicePixelRatio,
+    deviceOrientation: _deviceOrientation,
+    osName: osName.toLocaleLowerCase(),
+    osVersion: osVersion,
+    hostTheme: theme,
+    hostVersion: hostVersion,
+    hostLanguage: hostLanguage,
+    hostName: _hostName,
+    hostSDKVersion: _SDKVersion,
+    hostFontSizeSetting: fontSizeSetting,
+    windowTop: 0,
+    windowBottom: 0,
+    // TODO
+    osLanguage: undefined,
+    osTheme: undefined,
+    ua: undefined,
+    hostPackageName: undefined,
+    browserName: undefined,
+    browserVersion: undefined };
+
+
+  Object.assign(result, parameters);
+}
+
+function getGetDeviceType(result, model) {
+  var deviceType = result.deviceType || 'phone';
+  {
+    var deviceTypeMaps = {
+      ipad: 'pad',
+      windows: 'pc',
+      mac: 'pc' };
+
+    var deviceTypeMapsKeys = Object.keys(deviceTypeMaps);
+    var _model = model.toLocaleLowerCase();
+    for (var index = 0; index < deviceTypeMapsKeys.length; index++) {
+      var _m = deviceTypeMapsKeys[index];
+      if (_model.indexOf(_m) !== -1) {
+        deviceType = deviceTypeMaps[_m];
+        break;
+      }
+    }
+  }
+  return deviceType;
+}
+
+function getDeviceBrand(brand) {
+  var deviceBrand = brand;
+  if (deviceBrand) {
+    deviceBrand = brand.toLocaleLowerCase();
+  }
+  return deviceBrand;
+}
+
+function getAppLanguage(defaultLanguage) {
+  return getLocale$1 ?
+  getLocale$1() :
+  defaultLanguage;
+}
+
+function getHostName(result) {
+  var _platform = 'WeChat';
+  var _hostName = result.hostName || _platform; // mp-jd
+  {
+    if (result.environment) {
+      _hostName = result.environment;
+    } else if (result.host && result.host.env) {
+      _hostName = result.host.env;
+    }
+  }
+
+  return _hostName;
+}
+
 var getSystemInfo = {
   returnValue: function returnValue(result) {
-    addUuid(result);
+    useDeviceId(result);
     addSafeAreaInsets(result);
+    populateParameters(result);
   } };
 
 
@@ -597,6 +861,55 @@ var showActionSheet = {
   } };
 
 
+var getAppBaseInfo = {
+  returnValue: function returnValue(result) {var _result =
+    result,version = _result.version,language = _result.language,SDKVersion = _result.SDKVersion,theme = _result.theme;
+
+    var _hostName = getHostName(result);
+
+    var hostLanguage = language.replace('_', '-');
+
+    result = sortObject(Object.assign(result, {
+      appId: "__UNI__BF257AC",
+      appName: "ALL IS READY",
+      appVersion: "1.0.0",
+      appVersionCode: "100",
+      appLanguage: getAppLanguage(hostLanguage),
+      hostVersion: version,
+      hostLanguage: hostLanguage,
+      hostName: _hostName,
+      hostSDKVersion: SDKVersion,
+      hostTheme: theme }));
+
+  } };
+
+
+var getDeviceInfo = {
+  returnValue: function returnValue(result) {var _result2 =
+    result,brand = _result2.brand,model = _result2.model;
+    var deviceType = getGetDeviceType(result, model);
+    var deviceBrand = getDeviceBrand(brand);
+    useDeviceId(result);
+
+    result = sortObject(Object.assign(result, {
+      deviceType: deviceType,
+      deviceBrand: deviceBrand,
+      deviceModel: model }));
+
+  } };
+
+
+var getWindowInfo = {
+  returnValue: function returnValue(result) {
+    addSafeAreaInsets(result);
+
+    result = sortObject(Object.assign(result, {
+      windowTop: 0,
+      windowBottom: 0 }));
+
+  } };
+
+
 // import navigateTo from 'uni-helpers/navigate-to'
 
 var protocols = {
@@ -605,7 +918,10 @@ var protocols = {
   previewImage: previewImage,
   getSystemInfo: getSystemInfo,
   getSystemInfoSync: getSystemInfo,
-  showActionSheet: showActionSheet };
+  showActionSheet: showActionSheet,
+  getAppBaseInfo: getAppBaseInfo,
+  getDeviceInfo: getDeviceInfo,
+  getWindowInfo: getWindowInfo };
 
 var todos = [
 'vibrate',
@@ -799,8 +1115,136 @@ var eventApi = /*#__PURE__*/Object.freeze({
   $emit: $emit });
 
 
+/**
+                    * 框架内 try-catch
+                    */
+/**
+                        * 开发者 try-catch
+                        */
+function tryCatch(fn) {
+  return function () {
+    try {
+      return fn.apply(fn, arguments);
+    } catch (e) {
+      // TODO
+      console.error(e);
+    }
+  };
+}
+
+function getApiCallbacks(params) {
+  var apiCallbacks = {};
+  for (var name in params) {
+    var param = params[name];
+    if (isFn(param)) {
+      apiCallbacks[name] = tryCatch(param);
+      delete params[name];
+    }
+  }
+  return apiCallbacks;
+}
+
+var cid;
+var cidErrMsg;
+
+function normalizePushMessage(message) {
+  try {
+    return JSON.parse(message);
+  } catch (e) {}
+  return message;
+}
+
+function invokePushCallback(
+args)
+{
+  if (args.type === 'clientId') {
+    cid = args.cid;
+    cidErrMsg = args.errMsg;
+    invokeGetPushCidCallbacks(cid, args.errMsg);
+  } else if (args.type === 'pushMsg') {
+    onPushMessageCallbacks.forEach(function (callback) {
+      callback({
+        type: 'receive',
+        data: normalizePushMessage(args.message) });
+
+    });
+  } else if (args.type === 'click') {
+    onPushMessageCallbacks.forEach(function (callback) {
+      callback({
+        type: 'click',
+        data: normalizePushMessage(args.message) });
+
+    });
+  }
+}
+
+var getPushCidCallbacks = [];
+
+function invokeGetPushCidCallbacks(cid, errMsg) {
+  getPushCidCallbacks.forEach(function (callback) {
+    callback(cid, errMsg);
+  });
+  getPushCidCallbacks.length = 0;
+}
+
+function getPushClientid(args) {
+  if (!isPlainObject(args)) {
+    args = {};
+  }var _getApiCallbacks =
+
+
+
+
+  getApiCallbacks(args),success = _getApiCallbacks.success,fail = _getApiCallbacks.fail,complete = _getApiCallbacks.complete;
+  var hasSuccess = isFn(success);
+  var hasFail = isFn(fail);
+  var hasComplete = isFn(complete);
+  getPushCidCallbacks.push(function (cid, errMsg) {
+    var res;
+    if (cid) {
+      res = {
+        errMsg: 'getPushClientid:ok',
+        cid: cid };
+
+      hasSuccess && success(res);
+    } else {
+      res = {
+        errMsg: 'getPushClientid:fail' + (errMsg ? ' ' + errMsg : '') };
+
+      hasFail && fail(res);
+    }
+    hasComplete && complete(res);
+  });
+  if (typeof cid !== 'undefined') {
+    Promise.resolve().then(function () {return invokeGetPushCidCallbacks(cid, cidErrMsg);});
+  }
+}
+
+var onPushMessageCallbacks = [];
+// 不使用 defineOnApi 实现，是因为 defineOnApi 依赖 UniServiceJSBridge ，该对象目前在小程序上未提供，故简单实现
+var onPushMessage = function onPushMessage(fn) {
+  if (onPushMessageCallbacks.indexOf(fn) === -1) {
+    onPushMessageCallbacks.push(fn);
+  }
+};
+
+var offPushMessage = function offPushMessage(fn) {
+  if (!fn) {
+    onPushMessageCallbacks.length = 0;
+  } else {
+    var index = onPushMessageCallbacks.indexOf(fn);
+    if (index > -1) {
+      onPushMessageCallbacks.splice(index, 1);
+    }
+  }
+};
+
 var api = /*#__PURE__*/Object.freeze({
-  __proto__: null });
+  __proto__: null,
+  getPushClientid: getPushClientid,
+  onPushMessage: onPushMessage,
+  offPushMessage: offPushMessage,
+  invokePushCallback: invokePushCallback });
 
 
 var MPPage = Page;
@@ -1309,7 +1753,7 @@ function getContextVm(vm) {
   return $parent && $parent.$parent;
 }
 
-function handleEvent(event) {var _this = this;
+function handleEvent(event) {var _this2 = this;
   event = wrapper$1(event);
 
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
@@ -1340,14 +1784,14 @@ function handleEvent(event) {var _this = this;
       eventsArray.forEach(function (eventArray) {
         var methodName = eventArray[0];
         if (methodName) {
-          var handlerCtx = _this.$vm;
+          var handlerCtx = _this2.$vm;
           if (handlerCtx.$options.generic) {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
             handlerCtx = getContextVm(handlerCtx) || handlerCtx;
           }
           if (methodName === '$emit') {
             handlerCtx.$emit.apply(handlerCtx,
             processEventArgs(
-            _this.$vm,
+            _this2.$vm,
             event,
             eventArray[1],
             eventArray[2],
@@ -1367,7 +1811,7 @@ function handleEvent(event) {var _this = this;
             handler.once = true;
           }
           var params = processEventArgs(
-          _this.$vm,
+          _this2.$vm,
           event,
           eventArray[1],
           eventArray[2],
@@ -1394,89 +1838,6 @@ function handleEvent(event) {var _this = this;
     return ret[0];
   }
 }
-
-var messages = {};
-
-var locale;
-
-{
-  locale = wx.getSystemInfoSync().language;
-}
-
-function initI18nMessages() {
-  if (!isEnableLocale()) {
-    return;
-  }
-  var localeKeys = Object.keys(__uniConfig.locales);
-  if (localeKeys.length) {
-    localeKeys.forEach(function (locale) {
-      var curMessages = messages[locale];
-      var userMessages = __uniConfig.locales[locale];
-      if (curMessages) {
-        Object.assign(curMessages, userMessages);
-      } else {
-        messages[locale] = userMessages;
-      }
-    });
-  }
-}
-
-initI18nMessages();
-
-var i18n = (0, _uniI18n.initVueI18n)(
-locale,
-{});
-
-var t = i18n.t;
-var i18nMixin = i18n.mixin = {
-  beforeCreate: function beforeCreate() {var _this2 = this;
-    var unwatch = i18n.i18n.watchLocale(function () {
-      _this2.$forceUpdate();
-    });
-    this.$once('hook:beforeDestroy', function () {
-      unwatch();
-    });
-  },
-  methods: {
-    $$t: function $$t(key, values) {
-      return t(key, values);
-    } } };
-
-
-var setLocale$1 = i18n.setLocale;
-var getLocale$1 = i18n.getLocale;
-
-function initAppLocale(Vue, appVm, locale) {
-  var state = Vue.observable({
-    locale: locale || i18n.getLocale() });
-
-  var localeWatchers = [];
-  appVm.$watchLocale = function (fn) {
-    localeWatchers.push(fn);
-  };
-  Object.defineProperty(appVm, '$locale', {
-    get: function get() {
-      return state.locale;
-    },
-    set: function set(v) {
-      state.locale = v;
-      localeWatchers.forEach(function (watch) {return watch(v);});
-    } });
-
-}
-
-function isEnableLocale() {
-  return typeof __uniConfig !== 'undefined' && __uniConfig.locales && !!Object.keys(__uniConfig.locales).length;
-}
-
-// export function initI18n() {
-//   const localeKeys = Object.keys(__uniConfig.locales || {})
-//   if (localeKeys.length) {
-//     localeKeys.forEach((locale) =>
-//       i18n.add(locale, __uniConfig.locales[locale])
-//     )
-//   }
-// }
 
 var eventChannels = {};
 
@@ -1652,7 +2013,7 @@ function parseBaseApp(vm, _ref3)
     });
   }
 
-  initAppLocale(_vue.default, vm, wx.getSystemInfoSync().language || 'zh-Hans');
+  initAppLocale(_vue.default, vm, normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN);
 
   initHooks(appOptions, hooks);
 
@@ -2130,6 +2491,469 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
+/*!*************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni, global) {Object.defineProperty(exports, "__esModule", { value: true });exports.compileI18nJsonStr = compileI18nJsonStr;exports.hasI18nJson = hasI18nJson;exports.initVueI18n = initVueI18n;exports.isI18nStr = isI18nStr;exports.normalizeLocale = normalizeLocale;exports.parseI18nJson = parseI18nJson;exports.resolveLocale = resolveLocale;exports.isString = exports.LOCALE_ZH_HANT = exports.LOCALE_ZH_HANS = exports.LOCALE_FR = exports.LOCALE_ES = exports.LOCALE_EN = exports.I18n = exports.Formatter = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var isArray = Array.isArray;
+var isObject = function isObject(val) {return val !== null && typeof val === 'object';};
+var defaultDelimiters = ['{', '}'];var
+BaseFormatter = /*#__PURE__*/function () {
+  function BaseFormatter() {_classCallCheck(this, BaseFormatter);
+    this._caches = Object.create(null);
+  }_createClass(BaseFormatter, [{ key: "interpolate", value: function interpolate(
+    message, values) {var delimiters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultDelimiters;
+      if (!values) {
+        return [message];
+      }
+      var tokens = this._caches[message];
+      if (!tokens) {
+        tokens = parse(message, delimiters);
+        this._caches[message] = tokens;
+      }
+      return compile(tokens, values);
+    } }]);return BaseFormatter;}();exports.Formatter = BaseFormatter;
+
+var RE_TOKEN_LIST_VALUE = /^(?:\d)+/;
+var RE_TOKEN_NAMED_VALUE = /^(?:\w)+/;
+function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter = _ref2[0],endDelimiter = _ref2[1];
+  var tokens = [];
+  var position = 0;
+  var text = '';
+  while (position < format.length) {
+    var char = format[position++];
+    if (char === startDelimiter) {
+      if (text) {
+        tokens.push({ type: 'text', value: text });
+      }
+      text = '';
+      var sub = '';
+      char = format[position++];
+      while (char !== undefined && char !== endDelimiter) {
+        sub += char;
+        char = format[position++];
+      }
+      var isClosed = char === endDelimiter;
+      var type = RE_TOKEN_LIST_VALUE.test(sub) ?
+      'list' :
+      isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ?
+      'named' :
+      'unknown';
+      tokens.push({ value: sub, type: type });
+    }
+    //  else if (char === '%') {
+    //   // when found rails i18n syntax, skip text capture
+    //   if (format[position] !== '{') {
+    //     text += char
+    //   }
+    // }
+    else {
+        text += char;
+      }
+  }
+  text && tokens.push({ type: 'text', value: text });
+  return tokens;
+}
+function compile(tokens, values) {
+  var compiled = [];
+  var index = 0;
+  var mode = isArray(values) ?
+  'list' :
+  isObject(values) ?
+  'named' :
+  'unknown';
+  if (mode === 'unknown') {
+    return compiled;
+  }
+  while (index < tokens.length) {
+    var token = tokens[index];
+    switch (token.type) {
+      case 'text':
+        compiled.push(token.value);
+        break;
+      case 'list':
+        compiled.push(values[parseInt(token.value, 10)]);
+        break;
+      case 'named':
+        if (mode === 'named') {
+          compiled.push(values[token.value]);
+        } else
+        {
+          if (true) {
+            console.warn("Type of token '".concat(token.type, "' and format of value '").concat(mode, "' don't match!"));
+          }
+        }
+        break;
+      case 'unknown':
+        if (true) {
+          console.warn("Detect 'unknown' type of token!");
+        }
+        break;}
+
+    index++;
+  }
+  return compiled;
+}
+
+var LOCALE_ZH_HANS = 'zh-Hans';exports.LOCALE_ZH_HANS = LOCALE_ZH_HANS;
+var LOCALE_ZH_HANT = 'zh-Hant';exports.LOCALE_ZH_HANT = LOCALE_ZH_HANT;
+var LOCALE_EN = 'en';exports.LOCALE_EN = LOCALE_EN;
+var LOCALE_FR = 'fr';exports.LOCALE_FR = LOCALE_FR;
+var LOCALE_ES = 'es';exports.LOCALE_ES = LOCALE_ES;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwn = function hasOwn(val, key) {return hasOwnProperty.call(val, key);};
+var defaultFormatter = new BaseFormatter();
+function include(str, parts) {
+  return !!parts.find(function (part) {return str.indexOf(part) !== -1;});
+}
+function startsWith(str, parts) {
+  return parts.find(function (part) {return str.indexOf(part) === 0;});
+}
+function normalizeLocale(locale, messages) {
+  if (!locale) {
+    return;
+  }
+  locale = locale.trim().replace(/_/g, '-');
+  if (messages && messages[locale]) {
+    return locale;
+  }
+  locale = locale.toLowerCase();
+  if (locale.indexOf('zh') === 0) {
+    if (locale.indexOf('-hans') > -1) {
+      return LOCALE_ZH_HANS;
+    }
+    if (locale.indexOf('-hant') > -1) {
+      return LOCALE_ZH_HANT;
+    }
+    if (include(locale, ['-tw', '-hk', '-mo', '-cht'])) {
+      return LOCALE_ZH_HANT;
+    }
+    return LOCALE_ZH_HANS;
+  }
+  var lang = startsWith(locale, [LOCALE_EN, LOCALE_FR, LOCALE_ES]);
+  if (lang) {
+    return lang;
+  }
+}var
+I18n = /*#__PURE__*/function () {
+  function I18n(_ref3) {var locale = _ref3.locale,fallbackLocale = _ref3.fallbackLocale,messages = _ref3.messages,watcher = _ref3.watcher,formater = _ref3.formater;_classCallCheck(this, I18n);
+    this.locale = LOCALE_EN;
+    this.fallbackLocale = LOCALE_EN;
+    this.message = {};
+    this.messages = {};
+    this.watchers = [];
+    if (fallbackLocale) {
+      this.fallbackLocale = fallbackLocale;
+    }
+    this.formater = formater || defaultFormatter;
+    this.messages = messages || {};
+    this.setLocale(locale || LOCALE_EN);
+    if (watcher) {
+      this.watchLocale(watcher);
+    }
+  }_createClass(I18n, [{ key: "setLocale", value: function setLocale(
+    locale) {var _this = this;
+      var oldLocale = this.locale;
+      this.locale = normalizeLocale(locale, this.messages) || this.fallbackLocale;
+      if (!this.messages[this.locale]) {
+        // 可能初始化时不存在
+        this.messages[this.locale] = {};
+      }
+      this.message = this.messages[this.locale];
+      // 仅发生变化时，通知
+      if (oldLocale !== this.locale) {
+        this.watchers.forEach(function (watcher) {
+          watcher(_this.locale, oldLocale);
+        });
+      }
+    } }, { key: "getLocale", value: function getLocale()
+    {
+      return this.locale;
+    } }, { key: "watchLocale", value: function watchLocale(
+    fn) {var _this2 = this;
+      var index = this.watchers.push(fn) - 1;
+      return function () {
+        _this2.watchers.splice(index, 1);
+      };
+    } }, { key: "add", value: function add(
+    locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var curMessages = this.messages[locale];
+      if (curMessages) {
+        if (override) {
+          Object.assign(curMessages, message);
+        } else
+        {
+          Object.keys(message).forEach(function (key) {
+            if (!hasOwn(curMessages, key)) {
+              curMessages[key] = message[key];
+            }
+          });
+        }
+      } else
+      {
+        this.messages[locale] = message;
+      }
+    } }, { key: "f", value: function f(
+    message, values, delimiters) {
+      return this.formater.interpolate(message, values, delimiters).join('');
+    } }, { key: "t", value: function t(
+    key, locale, values) {
+      var message = this.message;
+      if (typeof locale === 'string') {
+        locale = normalizeLocale(locale, this.messages);
+        locale && (message = this.messages[locale]);
+      } else
+      {
+        values = locale;
+      }
+      if (!hasOwn(message, key)) {
+        console.warn("Cannot translate the value of keypath ".concat(key, ". Use the value of keypath as default."));
+        return key;
+      }
+      return this.formater.interpolate(message[key], values).join('');
+    } }]);return I18n;}();exports.I18n = I18n;
+
+
+function watchAppLocale(appVm, i18n) {
+  // 需要保证 watch 的触发在组件渲染之前
+  if (appVm.$watchLocale) {
+    // vue2
+    appVm.$watchLocale(function (newLocale) {
+      i18n.setLocale(newLocale);
+    });
+  } else
+  {
+    appVm.$watch(function () {return appVm.$locale;}, function (newLocale) {
+      i18n.setLocale(newLocale);
+    });
+  }
+}
+function getDefaultLocale() {
+  if (typeof uni !== 'undefined' && uni.getLocale) {
+    return uni.getLocale();
+  }
+  // 小程序平台，uni 和 uni-i18n 互相引用，导致访问不到 uni，故在 global 上挂了 getLocale
+  if (typeof global !== 'undefined' && global.getLocale) {
+    return global.getLocale();
+  }
+  return LOCALE_EN;
+}
+function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var fallbackLocale = arguments.length > 2 ? arguments[2] : undefined;var watcher = arguments.length > 3 ? arguments[3] : undefined;
+  // 兼容旧版本入参
+  if (typeof locale !== 'string') {var _ref4 =
+    [
+    messages,
+    locale];locale = _ref4[0];messages = _ref4[1];
+
+  }
+  if (typeof locale !== 'string') {
+    // 因为小程序平台，uni-i18n 和 uni 互相引用，导致此时访问 uni 时，为 undefined
+    locale = getDefaultLocale();
+  }
+  if (typeof fallbackLocale !== 'string') {
+    fallbackLocale =
+    typeof __uniConfig !== 'undefined' && __uniConfig.fallbackLocale ||
+    LOCALE_EN;
+  }
+  var i18n = new I18n({
+    locale: locale,
+    fallbackLocale: fallbackLocale,
+    messages: messages,
+    watcher: watcher });
+
+  var _t = function t(key, values) {
+    if (typeof getApp !== 'function') {
+      // app view
+      /* eslint-disable no-func-assign */
+      _t = function t(key, values) {
+        return i18n.t(key, values);
+      };
+    } else
+    {
+      var isWatchedAppLocale = false;
+      _t = function t(key, values) {
+        var appVm = getApp().$vm;
+        // 可能$vm还不存在，比如在支付宝小程序中，组件定义较早，在props的default里使用了t()函数（如uni-goods-nav），此时app还未初始化
+        // options: {
+        // 	type: Array,
+        // 	default () {
+        // 		return [{
+        // 			icon: 'shop',
+        // 			text: t("uni-goods-nav.options.shop"),
+        // 		}, {
+        // 			icon: 'cart',
+        // 			text: t("uni-goods-nav.options.cart")
+        // 		}]
+        // 	}
+        // },
+        if (appVm) {
+          // 触发响应式
+          appVm.$locale;
+          if (!isWatchedAppLocale) {
+            isWatchedAppLocale = true;
+            watchAppLocale(appVm, i18n);
+          }
+        }
+        return i18n.t(key, values);
+      };
+    }
+    return _t(key, values);
+  };
+  return {
+    i18n: i18n,
+    f: function f(message, values, delimiters) {
+      return i18n.f(message, values, delimiters);
+    },
+    t: function t(key, values) {
+      return _t(key, values);
+    },
+    add: function add(locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      return i18n.add(locale, message, override);
+    },
+    watch: function watch(fn) {
+      return i18n.watchLocale(fn);
+    },
+    getLocale: function getLocale() {
+      return i18n.getLocale();
+    },
+    setLocale: function setLocale(newLocale) {
+      return i18n.setLocale(newLocale);
+    } };
+
+}
+
+var isString = function isString(val) {return typeof val === 'string';};exports.isString = isString;
+var formater;
+function hasI18nJson(jsonObj, delimiters) {
+  if (!formater) {
+    formater = new BaseFormatter();
+  }
+  return walkJsonObj(jsonObj, function (jsonObj, key) {
+    var value = jsonObj[key];
+    if (isString(value)) {
+      if (isI18nStr(value, delimiters)) {
+        return true;
+      }
+    } else
+    {
+      return hasI18nJson(value, delimiters);
+    }
+  });
+}
+function parseI18nJson(jsonObj, values, delimiters) {
+  if (!formater) {
+    formater = new BaseFormatter();
+  }
+  walkJsonObj(jsonObj, function (jsonObj, key) {
+    var value = jsonObj[key];
+    if (isString(value)) {
+      if (isI18nStr(value, delimiters)) {
+        jsonObj[key] = compileStr(value, values, delimiters);
+      }
+    } else
+    {
+      parseI18nJson(value, values, delimiters);
+    }
+  });
+  return jsonObj;
+}
+function compileI18nJsonStr(jsonStr, _ref5) {var locale = _ref5.locale,locales = _ref5.locales,delimiters = _ref5.delimiters;
+  if (!isI18nStr(jsonStr, delimiters)) {
+    return jsonStr;
+  }
+  if (!formater) {
+    formater = new BaseFormatter();
+  }
+  var localeValues = [];
+  Object.keys(locales).forEach(function (name) {
+    if (name !== locale) {
+      localeValues.push({
+        locale: name,
+        values: locales[name] });
+
+    }
+  });
+  localeValues.unshift({ locale: locale, values: locales[locale] });
+  try {
+    return JSON.stringify(compileJsonObj(JSON.parse(jsonStr), localeValues, delimiters), null, 2);
+  }
+  catch (e) {}
+  return jsonStr;
+}
+function isI18nStr(value, delimiters) {
+  return value.indexOf(delimiters[0]) > -1;
+}
+function compileStr(value, values, delimiters) {
+  return formater.interpolate(value, values, delimiters).join('');
+}
+function compileValue(jsonObj, key, localeValues, delimiters) {
+  var value = jsonObj[key];
+  if (isString(value)) {
+    // 存在国际化
+    if (isI18nStr(value, delimiters)) {
+      jsonObj[key] = compileStr(value, localeValues[0].values, delimiters);
+      if (localeValues.length > 1) {
+        // 格式化国际化语言
+        var valueLocales = jsonObj[key + 'Locales'] = {};
+        localeValues.forEach(function (localValue) {
+          valueLocales[localValue.locale] = compileStr(value, localValue.values, delimiters);
+        });
+      }
+    }
+  } else
+  {
+    compileJsonObj(value, localeValues, delimiters);
+  }
+}
+function compileJsonObj(jsonObj, localeValues, delimiters) {
+  walkJsonObj(jsonObj, function (jsonObj, key) {
+    compileValue(jsonObj, key, localeValues, delimiters);
+  });
+  return jsonObj;
+}
+function walkJsonObj(jsonObj, walk) {
+  if (isArray(jsonObj)) {
+    for (var i = 0; i < jsonObj.length; i++) {
+      if (walk(jsonObj, i)) {
+        return true;
+      }
+    }
+  } else
+  if (isObject(jsonObj)) {
+    for (var key in jsonObj) {
+      if (walk(jsonObj, key)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function resolveLocale(locales) {
+  return function (locale) {
+    if (!locale) {
+      return locale;
+    }
+    locale = normalizeLocale(locale) || locale;
+    return resolveLocaleChain(locale).find(function (locale) {return locales.indexOf(locale) > -1;});
+  };
+}
+function resolveLocaleChain(locale) {
+  var chain = [];
+  var tokens = locale.split('-');
+  while (tokens.length) {
+    chain.push(tokens.join('-'));
+    tokens.pop();
+  }
+  return chain;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 2)))
+
+/***/ }),
+/* 4 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -8176,469 +9000,6 @@ internalMixin(Vue);
 /* harmony default export */ __webpack_exports__["default"] = (Vue);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 2)))
-
-/***/ }),
-/* 4 */
-/*!*************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni, global) {Object.defineProperty(exports, "__esModule", { value: true });exports.compileI18nJsonStr = compileI18nJsonStr;exports.hasI18nJson = hasI18nJson;exports.initVueI18n = initVueI18n;exports.isI18nStr = isI18nStr;exports.normalizeLocale = normalizeLocale;exports.parseI18nJson = parseI18nJson;exports.resolveLocale = resolveLocale;exports.isString = exports.LOCALE_ZH_HANT = exports.LOCALE_ZH_HANS = exports.LOCALE_FR = exports.LOCALE_ES = exports.LOCALE_EN = exports.I18n = exports.Formatter = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var isArray = Array.isArray;
-var isObject = function isObject(val) {return val !== null && typeof val === 'object';};
-var defaultDelimiters = ['{', '}'];var
-BaseFormatter = /*#__PURE__*/function () {
-  function BaseFormatter() {_classCallCheck(this, BaseFormatter);
-    this._caches = Object.create(null);
-  }_createClass(BaseFormatter, [{ key: "interpolate", value: function interpolate(
-    message, values) {var delimiters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultDelimiters;
-      if (!values) {
-        return [message];
-      }
-      var tokens = this._caches[message];
-      if (!tokens) {
-        tokens = parse(message, delimiters);
-        this._caches[message] = tokens;
-      }
-      return compile(tokens, values);
-    } }]);return BaseFormatter;}();exports.Formatter = BaseFormatter;
-
-var RE_TOKEN_LIST_VALUE = /^(?:\d)+/;
-var RE_TOKEN_NAMED_VALUE = /^(?:\w)+/;
-function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter = _ref2[0],endDelimiter = _ref2[1];
-  var tokens = [];
-  var position = 0;
-  var text = '';
-  while (position < format.length) {
-    var char = format[position++];
-    if (char === startDelimiter) {
-      if (text) {
-        tokens.push({ type: 'text', value: text });
-      }
-      text = '';
-      var sub = '';
-      char = format[position++];
-      while (char !== undefined && char !== endDelimiter) {
-        sub += char;
-        char = format[position++];
-      }
-      var isClosed = char === endDelimiter;
-      var type = RE_TOKEN_LIST_VALUE.test(sub) ?
-      'list' :
-      isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ?
-      'named' :
-      'unknown';
-      tokens.push({ value: sub, type: type });
-    }
-    //  else if (char === '%') {
-    //   // when found rails i18n syntax, skip text capture
-    //   if (format[position] !== '{') {
-    //     text += char
-    //   }
-    // }
-    else {
-        text += char;
-      }
-  }
-  text && tokens.push({ type: 'text', value: text });
-  return tokens;
-}
-function compile(tokens, values) {
-  var compiled = [];
-  var index = 0;
-  var mode = isArray(values) ?
-  'list' :
-  isObject(values) ?
-  'named' :
-  'unknown';
-  if (mode === 'unknown') {
-    return compiled;
-  }
-  while (index < tokens.length) {
-    var token = tokens[index];
-    switch (token.type) {
-      case 'text':
-        compiled.push(token.value);
-        break;
-      case 'list':
-        compiled.push(values[parseInt(token.value, 10)]);
-        break;
-      case 'named':
-        if (mode === 'named') {
-          compiled.push(values[token.value]);
-        } else
-        {
-          if (true) {
-            console.warn("Type of token '".concat(token.type, "' and format of value '").concat(mode, "' don't match!"));
-          }
-        }
-        break;
-      case 'unknown':
-        if (true) {
-          console.warn("Detect 'unknown' type of token!");
-        }
-        break;}
-
-    index++;
-  }
-  return compiled;
-}
-
-var LOCALE_ZH_HANS = 'zh-Hans';exports.LOCALE_ZH_HANS = LOCALE_ZH_HANS;
-var LOCALE_ZH_HANT = 'zh-Hant';exports.LOCALE_ZH_HANT = LOCALE_ZH_HANT;
-var LOCALE_EN = 'en';exports.LOCALE_EN = LOCALE_EN;
-var LOCALE_FR = 'fr';exports.LOCALE_FR = LOCALE_FR;
-var LOCALE_ES = 'es';exports.LOCALE_ES = LOCALE_ES;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var hasOwn = function hasOwn(val, key) {return hasOwnProperty.call(val, key);};
-var defaultFormatter = new BaseFormatter();
-function include(str, parts) {
-  return !!parts.find(function (part) {return str.indexOf(part) !== -1;});
-}
-function startsWith(str, parts) {
-  return parts.find(function (part) {return str.indexOf(part) === 0;});
-}
-function normalizeLocale(locale, messages) {
-  if (!locale) {
-    return;
-  }
-  locale = locale.trim().replace(/_/g, '-');
-  if (messages && messages[locale]) {
-    return locale;
-  }
-  locale = locale.toLowerCase();
-  if (locale.indexOf('zh') === 0) {
-    if (locale.indexOf('-hans') > -1) {
-      return LOCALE_ZH_HANS;
-    }
-    if (locale.indexOf('-hant') > -1) {
-      return LOCALE_ZH_HANT;
-    }
-    if (include(locale, ['-tw', '-hk', '-mo', '-cht'])) {
-      return LOCALE_ZH_HANT;
-    }
-    return LOCALE_ZH_HANS;
-  }
-  var lang = startsWith(locale, [LOCALE_EN, LOCALE_FR, LOCALE_ES]);
-  if (lang) {
-    return lang;
-  }
-}var
-I18n = /*#__PURE__*/function () {
-  function I18n(_ref3) {var locale = _ref3.locale,fallbackLocale = _ref3.fallbackLocale,messages = _ref3.messages,watcher = _ref3.watcher,formater = _ref3.formater;_classCallCheck(this, I18n);
-    this.locale = LOCALE_EN;
-    this.fallbackLocale = LOCALE_EN;
-    this.message = {};
-    this.messages = {};
-    this.watchers = [];
-    if (fallbackLocale) {
-      this.fallbackLocale = fallbackLocale;
-    }
-    this.formater = formater || defaultFormatter;
-    this.messages = messages || {};
-    this.setLocale(locale || LOCALE_EN);
-    if (watcher) {
-      this.watchLocale(watcher);
-    }
-  }_createClass(I18n, [{ key: "setLocale", value: function setLocale(
-    locale) {var _this = this;
-      var oldLocale = this.locale;
-      this.locale = normalizeLocale(locale, this.messages) || this.fallbackLocale;
-      if (!this.messages[this.locale]) {
-        // 可能初始化时不存在
-        this.messages[this.locale] = {};
-      }
-      this.message = this.messages[this.locale];
-      // 仅发生变化时，通知
-      if (oldLocale !== this.locale) {
-        this.watchers.forEach(function (watcher) {
-          watcher(_this.locale, oldLocale);
-        });
-      }
-    } }, { key: "getLocale", value: function getLocale()
-    {
-      return this.locale;
-    } }, { key: "watchLocale", value: function watchLocale(
-    fn) {var _this2 = this;
-      var index = this.watchers.push(fn) - 1;
-      return function () {
-        _this2.watchers.splice(index, 1);
-      };
-    } }, { key: "add", value: function add(
-    locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var curMessages = this.messages[locale];
-      if (curMessages) {
-        if (override) {
-          Object.assign(curMessages, message);
-        } else
-        {
-          Object.keys(message).forEach(function (key) {
-            if (!hasOwn(curMessages, key)) {
-              curMessages[key] = message[key];
-            }
-          });
-        }
-      } else
-      {
-        this.messages[locale] = message;
-      }
-    } }, { key: "f", value: function f(
-    message, values, delimiters) {
-      return this.formater.interpolate(message, values, delimiters).join('');
-    } }, { key: "t", value: function t(
-    key, locale, values) {
-      var message = this.message;
-      if (typeof locale === 'string') {
-        locale = normalizeLocale(locale, this.messages);
-        locale && (message = this.messages[locale]);
-      } else
-      {
-        values = locale;
-      }
-      if (!hasOwn(message, key)) {
-        console.warn("Cannot translate the value of keypath ".concat(key, ". Use the value of keypath as default."));
-        return key;
-      }
-      return this.formater.interpolate(message[key], values).join('');
-    } }]);return I18n;}();exports.I18n = I18n;
-
-
-function watchAppLocale(appVm, i18n) {
-  // 需要保证 watch 的触发在组件渲染之前
-  if (appVm.$watchLocale) {
-    // vue2
-    appVm.$watchLocale(function (newLocale) {
-      i18n.setLocale(newLocale);
-    });
-  } else
-  {
-    appVm.$watch(function () {return appVm.$locale;}, function (newLocale) {
-      i18n.setLocale(newLocale);
-    });
-  }
-}
-function getDefaultLocale() {
-  if (typeof uni !== 'undefined' && uni.getLocale) {
-    return uni.getLocale();
-  }
-  // 小程序平台，uni 和 uni-i18n 互相引用，导致访问不到 uni，故在 global 上挂了 getLocale
-  if (typeof global !== 'undefined' && global.getLocale) {
-    return global.getLocale();
-  }
-  return LOCALE_EN;
-}
-function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var fallbackLocale = arguments.length > 2 ? arguments[2] : undefined;var watcher = arguments.length > 3 ? arguments[3] : undefined;
-  // 兼容旧版本入参
-  if (typeof locale !== 'string') {var _ref4 =
-    [
-    messages,
-    locale];locale = _ref4[0];messages = _ref4[1];
-
-  }
-  if (typeof locale !== 'string') {
-    // 因为小程序平台，uni-i18n 和 uni 互相引用，导致此时访问 uni 时，为 undefined
-    locale = getDefaultLocale();
-  }
-  if (typeof fallbackLocale !== 'string') {
-    fallbackLocale =
-    typeof __uniConfig !== 'undefined' && __uniConfig.fallbackLocale ||
-    LOCALE_EN;
-  }
-  var i18n = new I18n({
-    locale: locale,
-    fallbackLocale: fallbackLocale,
-    messages: messages,
-    watcher: watcher });
-
-  var _t = function t(key, values) {
-    if (typeof getApp !== 'function') {
-      // app view
-      /* eslint-disable no-func-assign */
-      _t = function t(key, values) {
-        return i18n.t(key, values);
-      };
-    } else
-    {
-      var isWatchedAppLocale = false;
-      _t = function t(key, values) {
-        var appVm = getApp().$vm;
-        // 可能$vm还不存在，比如在支付宝小程序中，组件定义较早，在props的default里使用了t()函数（如uni-goods-nav），此时app还未初始化
-        // options: {
-        // 	type: Array,
-        // 	default () {
-        // 		return [{
-        // 			icon: 'shop',
-        // 			text: t("uni-goods-nav.options.shop"),
-        // 		}, {
-        // 			icon: 'cart',
-        // 			text: t("uni-goods-nav.options.cart")
-        // 		}]
-        // 	}
-        // },
-        if (appVm) {
-          // 触发响应式
-          appVm.$locale;
-          if (!isWatchedAppLocale) {
-            isWatchedAppLocale = true;
-            watchAppLocale(appVm, i18n);
-          }
-        }
-        return i18n.t(key, values);
-      };
-    }
-    return _t(key, values);
-  };
-  return {
-    i18n: i18n,
-    f: function f(message, values, delimiters) {
-      return i18n.f(message, values, delimiters);
-    },
-    t: function t(key, values) {
-      return _t(key, values);
-    },
-    add: function add(locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      return i18n.add(locale, message, override);
-    },
-    watch: function watch(fn) {
-      return i18n.watchLocale(fn);
-    },
-    getLocale: function getLocale() {
-      return i18n.getLocale();
-    },
-    setLocale: function setLocale(newLocale) {
-      return i18n.setLocale(newLocale);
-    } };
-
-}
-
-var isString = function isString(val) {return typeof val === 'string';};exports.isString = isString;
-var formater;
-function hasI18nJson(jsonObj, delimiters) {
-  if (!formater) {
-    formater = new BaseFormatter();
-  }
-  return walkJsonObj(jsonObj, function (jsonObj, key) {
-    var value = jsonObj[key];
-    if (isString(value)) {
-      if (isI18nStr(value, delimiters)) {
-        return true;
-      }
-    } else
-    {
-      return hasI18nJson(value, delimiters);
-    }
-  });
-}
-function parseI18nJson(jsonObj, values, delimiters) {
-  if (!formater) {
-    formater = new BaseFormatter();
-  }
-  walkJsonObj(jsonObj, function (jsonObj, key) {
-    var value = jsonObj[key];
-    if (isString(value)) {
-      if (isI18nStr(value, delimiters)) {
-        jsonObj[key] = compileStr(value, values, delimiters);
-      }
-    } else
-    {
-      parseI18nJson(value, values, delimiters);
-    }
-  });
-  return jsonObj;
-}
-function compileI18nJsonStr(jsonStr, _ref5) {var locale = _ref5.locale,locales = _ref5.locales,delimiters = _ref5.delimiters;
-  if (!isI18nStr(jsonStr, delimiters)) {
-    return jsonStr;
-  }
-  if (!formater) {
-    formater = new BaseFormatter();
-  }
-  var localeValues = [];
-  Object.keys(locales).forEach(function (name) {
-    if (name !== locale) {
-      localeValues.push({
-        locale: name,
-        values: locales[name] });
-
-    }
-  });
-  localeValues.unshift({ locale: locale, values: locales[locale] });
-  try {
-    return JSON.stringify(compileJsonObj(JSON.parse(jsonStr), localeValues, delimiters), null, 2);
-  }
-  catch (e) {}
-  return jsonStr;
-}
-function isI18nStr(value, delimiters) {
-  return value.indexOf(delimiters[0]) > -1;
-}
-function compileStr(value, values, delimiters) {
-  return formater.interpolate(value, values, delimiters).join('');
-}
-function compileValue(jsonObj, key, localeValues, delimiters) {
-  var value = jsonObj[key];
-  if (isString(value)) {
-    // 存在国际化
-    if (isI18nStr(value, delimiters)) {
-      jsonObj[key] = compileStr(value, localeValues[0].values, delimiters);
-      if (localeValues.length > 1) {
-        // 格式化国际化语言
-        var valueLocales = jsonObj[key + 'Locales'] = {};
-        localeValues.forEach(function (localValue) {
-          valueLocales[localValue.locale] = compileStr(value, localValue.values, delimiters);
-        });
-      }
-    }
-  } else
-  {
-    compileJsonObj(value, localeValues, delimiters);
-  }
-}
-function compileJsonObj(jsonObj, localeValues, delimiters) {
-  walkJsonObj(jsonObj, function (jsonObj, key) {
-    compileValue(jsonObj, key, localeValues, delimiters);
-  });
-  return jsonObj;
-}
-function walkJsonObj(jsonObj, walk) {
-  if (isArray(jsonObj)) {
-    for (var i = 0; i < jsonObj.length; i++) {
-      if (walk(jsonObj, i)) {
-        return true;
-      }
-    }
-  } else
-  if (isObject(jsonObj)) {
-    for (var key in jsonObj) {
-      if (walk(jsonObj, key)) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-function resolveLocale(locales) {
-  return function (locale) {
-    if (!locale) {
-      return locale;
-    }
-    locale = normalizeLocale(locale) || locale;
-    return resolveLocaleChain(locale).find(function (locale) {return locales.indexOf(locale) > -1;});
-  };
-}
-function resolveLocaleChain(locale) {
-  var chain = [];
-  var tokens = locale.split('-');
-  while (tokens.length) {
-    chain.push(tokens.join('-'));
-    tokens.pop();
-  }
-  return chain;
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 2)))
 
 /***/ }),
 /* 5 */
@@ -17895,40 +18256,4475 @@ platform = 'mp';var _default =
 platform;exports.default = _default;
 
 /***/ }),
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
+/* 136 */
+/*!***********************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/index.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./tool/mixin/mixin.js */ 137));
+
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ./tool/function/dayjs/index */ 141));
+var _util = _interopRequireDefault(__webpack_require__(/*! ./tool/function/util */ 139));
+
+
+var _guid = _interopRequireDefault(__webpack_require__(/*! ./tool/function/guid.js */ 147));
+
+var _sleep = _interopRequireDefault(__webpack_require__(/*! ./tool/function/sleep.js */ 148));
+
+var _randomArray = _interopRequireDefault(__webpack_require__(/*! ./tool/function/randomArray.js */ 149));
+
+var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./tool/function/deepClone.js */ 150));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ./tool/function/deepMerge.js */ 151));
+
+
+
+var _test = _interopRequireDefault(__webpack_require__(/*! ./tool/function/test.js */ 152));
+
+var _random = _interopRequireDefault(__webpack_require__(/*! ./tool/function/random.js */ 153));
+
+var _trim = _interopRequireDefault(__webpack_require__(/*! ./tool/function/trim.js */ 154));
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! ./tool/function/toast.js */ 155));
+
+var _getParent = _interopRequireDefault(__webpack_require__(/*! ./tool/function/getParent.js */ 156));
+
+var _getParentAttr = _interopRequireDefault(__webpack_require__(/*! ./tool/function/getParentAttr.js */ 157));
+
+var _getParentAls = _interopRequireDefault(__webpack_require__(/*! ./tool/function/getParentAls.js */ 158));
+
+var _upload = _interopRequireDefault(__webpack_require__(/*! ./tool/function/upload.js */ 159));
+
+var _preview = _interopRequireDefault(__webpack_require__(/*! ./tool/function/preview.js */ 140));
+
+
+var _objToString = __webpack_require__(/*! ./tool/function/objToString.js */ 160);
+
+var _calendar = _interopRequireDefault(__webpack_require__(/*! ./tool/function/calendar.js */ 161));
+
+var _signBoard = _interopRequireDefault(__webpack_require__(/*! ./tool/function/signBoard.js */ 162));
+
+var _choujianggailv = _interopRequireDefault(__webpack_require__(/*! ./tool/function/choujianggailv.js */ 163));
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ./tool/config/config.js */ 164));
+var _tmVuetify = _interopRequireDefault(__webpack_require__(/*! ./tool/store/tm-vuetify */ 165));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! ./tool/function/vuex.js */ 167));
+var _theme = _interopRequireDefault(__webpack_require__(/*! ./tool/function/theme.js */ 168));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ./tool/request/index */ 169));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+
+var $tm = {
+
+  sleep: _sleep.default,
+  request: _index2.default,
+  objToString: _objToString.objToString,
+  dayjs: _index.default.dayjs,
+  guid: _guid.default,
+  upload: _upload.default,
+  preview: _preview.default,
+  randomArray: _randomArray.default,
+  test: _test.default,
+  random: _random.default,
+  deepClone: _deepClone.default,
+  deepMerge: _deepMerge.default,
+  getParent: _getParent.default,
+  getParentAttr: _getParentAttr.default,
+  getParentAls: _getParentAls.default,
+  trim: _trim.default,
+  toast: _toast.default,
+  config: _config.default,
+  calendar: _calendar.default,
+  HandwritingSelf: _signBoard.default,
+  choujiang: _choujianggailv.default,
+  vx: new _vuex.default(_tmVuetify.default),
+  theme: _theme.default,
+  u: _util.default };
+
+
+
+
+
+uni.$tm = $tm;
+var install = function install(Vue) {
+  Vue.mixin(_mixin.default);
+  Vue.prototype.$tm = _objectSpread({}, $tm);
+
+  // Vue.prototype.$store = store
+
+};var _default =
+
+{
+  install: install };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 137 */
+/*!**********************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/mixin/mixin.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {var _wxshare = _interopRequireDefault(__webpack_require__(/*! ../function/wxshare.js */ 138));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+module.exports = _objectSpread(_objectSpread({},
+_wxshare.default.sharebywx), {}, {
+  data: function data() {
+    return {
+      tmVueTifly_pages: '' };
+
+  },
+  created: function created() {
+    this.setVueTiflyThemeBlack();
+  },
+  onShow: function onShow() {
+    var urls = getCurrentPages();
+    if (urls.length > 0) {
+      var url = urls[urls.length - 1].$page.fullPath;
+      if (url[0] != '/') url = '/' + url;
+      url = url.split('?')[0];
+      uni.$tm.vx.commit('setPageNow', url);
+    }
+    this.setVueTiflyThemeBlack();
+  },
+  onLoad: function onLoad() {
+    // this.$tm.vx.commit('setWxShare',{title:'hhhhh'})
+  },
+
+  methods: {
+    setVueTiflyThemeBlack: function setVueTiflyThemeBlack() {
+      var vueTifly_black = this.$tm.vx.state().tmVuetify.black;
+      if (vueTifly_black === true) {
+        uni.setTabBarStyle({
+          backgroundColor: "#212121" });
+
+      } else {
+        uni.setTabBarStyle({
+          backgroundColor: "#FFFFFF" });
+
+      }
+    },
+    // ...mapMutations(['setTmVuetifyColor', 'setTmVuetifyBlack']),
+    // 检测提供的字符串是否是颜色值还是颜色主题。true，表示颜色主题名称。否则为false.
+    $TestColor: function $TestColor(color) {
+      if (typeof color !== 'string') return false;
+
+      if (color.indexOf('rgb') > -1 || color.indexOf('rgba') > -1 || color.indexOf('#') > -1) {
+        return {
+          theme: false,
+          color: color };
+
+      } else {
+        return {
+          theme: true,
+          color: color };
+
+      }
+    },
+    // 检查给定的值。如果是带有vw,vh,rem,em,upx,rpx,%则返回.如果是px,或者45数字，则转换为upx单位的数值。
+    $TestUnit: function $TestUnit(n) {
+      if (typeof n !== 'string' && typeof n !== 'number') return 0;
+      if (typeof n === 'number') return {
+        type: 'number',
+        value: uni.upx2px(n) };
+
+      var reg = /(vw|vh|rem|em|\%|upx|rpx|auto|px)/g;
+
+      if (reg.test(n)) {
+
+        return {
+          type: 'string',
+          value: n };
+
+      }
+      var num = parseFloat(n);
+      if (isNaN(n)) return 0;
+      return {
+        type: 'number',
+        value: uni.upx2px(n) };
+
+
+    },
+    $Querey: function $Querey(clsaaName, t) {var _this = this;var ycnum = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 50;var isAll = arguments.length > 3 ? arguments[3] : undefined;
+
+      return new Promise(function (rs, rj) {
+
+        if (isAll == true) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+          uni.$tm.sleep(ycnum).then(function (r) {
+            uni.createSelectorQuery().in(t ? t : _this).selectAll(clsaaName).
+            boundingClientRect().exec(
+            function (res) {
+              rs(res);
+            });
+          });
+
+
+
+
+
+
+
+
+
+
+
+        } else {
+
+
+
+
+
+
+
+
+
+
+
+
+
+          uni.$tm.sleep(ycnum).then(function (r) {
+            uni.createSelectorQuery().in(t ? t : _this).select(clsaaName).
+            boundingClientRect().exec(
+            function (res) {
+              rs(res);
+            });
+          });
+
+
+
+
+
+
+
+
+
+
+
+        }
+        // console.log(ycnum);
+
+      });
+    } },
+
+
+  onPageScroll: function onPageScroll(e) {
+    /**
+                                           * 此全局注册用于在组件顶部，监听下拉状况以解决渐变透明的功能。
+                                           * 组件：tm-menubars能用到。
+                                           */
+    uni.$emit('onPageScroll', e);
+  },
+  onReachBottom: function onReachBottom() {
+
+  },
+  beforeDestroy: function beforeDestroy() {
+
+  } });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 138 */
+/*!***************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/wxshare.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _util = _interopRequireDefault(__webpack_require__(/*! ./util */ 139));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * 微信小程序分享功能。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */
+var cfg = function cfg() {
+
+  var config = _objectSpread({},
+  this.$tm.vx.store.state.tmVuetify.wxshareConfig_miniMp || {});
+
+  if (typeof config.query !== 'object') config.query = {};
+  //获取当前路径。
+  if (!config.path) {
+    var cur = getCurrentPages();
+    config.path = cur[cur.length - 1].route;
+
+    config.path = (config.path[0] == '/' ? '' : '/') + config.path;
+    config.copyLink = config.path;
+
+  }
+  // util.httpUrlAddKey
+  var query = '';
+  for (var key in config.query) {
+    if (config.hasOwnProperty.call(config.query, key)) {
+      var element = config.query[key];
+      query = _util.default.httpUrlAddKey(query, key, element);
+    }
+  }
+  config.copyLink = config.path = config.path + query;
+  config.query = query;
+
+  return config;
+
+
+};
+var sharebywx = {
+  onShareAppMessage: function onShareAppMessage() {
+    var cg = cfg.call(this) || {};
+
+    return _objectSpread({}, cg);
+  },
+  onShareTimeline: function onShareTimeline() {
+    var cg = cfg.call(this) || {};
+
+    return _objectSpread({}, cg);
+  } };var _default =
+
+
+
+{ sharebywx: sharebywx };exports.default = _default;
+
+/***/ }),
+/* 139 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/util.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+var _preview = __webpack_require__(/*! ./preview.js */ 140); /**
+                                         * 预览图片。
+                                         @param {Object} url 必填 当前预览的图片链接。
+                                         @param {Object} list 可以是url数组，也可以是对象，数据比如：["http:url"] or [{url:"https:url",...}]
+                                         @param {Object} rangKey 如果list是对象数组，需要提供url字段。
+                                         */ /**
+                                            * 数据分组
+                                            * @param {Array} oArr - 原数组列表
+                                            * @param {Number} length - 单个数组长度
+                                            * @return {Array}  arr - 分组后的新数组
+                                            */function splitData() {var oArr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;var arr = [];var minArr = [];
+  oArr.forEach(function (c) {
+    if (minArr.length === length) {
+      minArr = [];
+    }
+    if (minArr.length === 0) {
+      arr.push(minArr);
+    }
+    minArr.push(c);
+  });
+
+  return arr;
+}
+
+/**
+  * 剩余时间格式化
+  * @param {Number} t - 剩余多少秒
+  * @return {Object}  format - 格式后的天时分秒对象
+  */
+function timeMuch(t) {
+  var format = {
+    d: '00',
+    h: '00',
+    m: '00',
+    s: '00' };
+
+  if (t > 0) {
+    var d = Math.floor(t / 86400);
+    var h = Math.floor(t / 3600 % 24);
+    var m = Math.floor(t / 60 % 60);
+    var s = Math.floor(t % 60);
+    format.d = d < 10 ? '0' + d : d;
+    format.h = h < 10 ? '0' + h : h;
+    format.m = m < 10 ? '0' + m : m;
+    format.s = s < 10 ? '0' + s : s;
+  }
+  return format;
+}
+/**
+  * 打电话
+  * @param {String<Number>} phoneNumber - 数字字符串
+  * @return {Promise}
+  */
+function callPhone() {var phoneNumber = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var num = phoneNumber.toString();
+  return new Promise(function (rs, rj) {
+    uni.makePhoneCall({
+      phoneNumber: num,
+      success: function success() {return rs();},
+      fail: function fail(err) {return rj(err);} });
+
+  });
+}
+
+/**
+   * 调起客户端相机扫码。
+   * @param {Boolean} onlyFromCamera true 是否只允许相机扫码识别
+   * @param {Array<string>} scanType ['barCode', 'qrCode', 'datamatrix','datamatrix']
+   * @returns Promise 成功返回相关数据结构
+   */
+function scanCode() {var onlyFromCamera = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;var scanType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['barCode', 'qrCode', 'datamatrix', 'datamatrix'];
+
+
+
+  return new Promise(function (rs, rj) {
+    uni.scanCode({
+      onlyFromCamera: onlyFromCamera,
+      scanType: scanType,
+      success: function success(res) {return rs(res);},
+      fail: function fail(error) {return rj(error);} });
+
+  });
+}
+
+/**
+   * 设置剪切板内容。
+   * @param {String} data 
+   * @returns Promise true/false
+   */
+function setClipboardData(data) {
+
+
+  return new Promise(function (rs, rj) {
+    uni.setClipboardData({
+      data: data,
+      success: function success() {return rs(true);},
+      fail: function fail(error) {return rj(error);} });
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+/**
+   * 获取剪切板内容
+   * @returns Promise 剪切板内容
+   */
+function getClipboardData() {
+
+  return new Promise(function (rs, rj) {
+    uni.getClipboardData({
+      success: function success(res) {return rs(res.data);},
+      fail: function fail(error) {return rj(error);} });
+
+  });
+
+
+
+
+}
+
+/**
+   * 设置cookie数据
+   * @param {String} key 键值
+   * @param {String} data 值
+   * @returns Boolean
+   */
+function setCookie(key, data) {
+  try {
+    uni.setStorageSync(key, data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+/**
+   * 删除一个本地cookie
+   * @param {String} key 键值
+   * @returns Boolean
+   */
+function delCookie(key) {
+  try {
+    uni.removeStorageSync(key);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+   * 获取一个cookie数据
+   * 如果存入的是对象，返回的也是对象。如果是string返回的也是字符串。
+   * @param {String} key 键
+   * @returns json/string
+   */
+function getCookie(key) {
+  try {
+    var value = uni.getStorageSync(key);
+    try {
+      var val = JSON.parse(value);
+      return val;
+    } catch (e) {
+      return value;
+    }
+  } catch (e) {
+    return undefined;
+  }
+}
+
+
+/**
+   * 向地址连接追加参数。
+   * @param {string} uri 网址
+   * @param {string} key 字段
+   * @param {string} value 字段值
+   * @returns 
+   */
+function httpUrlAddKey(uri, key, value) {
+  if (!value) {
+    return uri;
+  }
+  var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+  var separator = uri.indexOf("?") !== -1 ? "&" : "?";
+  if (uri.match(re)) {
+    return uri.replace(re, "$1" + key + "=" + value + "$2");
+  } else {
+    return uri + separator + key + "=" + value;
+  }
+}var _default =
+
+{
+  previewImg: _preview.previewImg, //预览图片。
+  splitData: splitData, //数据分组
+  timeMuch: timeMuch, //剩余时间格式化
+  callPhone: callPhone, //打电话
+  scanCode: scanCode, //调起客户端相机扫码。
+  setClipboardData: setClipboardData, //设置剪切板内容。
+  getClipboardData: getClipboardData, //获取剪切板内容
+  setCookie: setCookie, //设置cookie数据
+  delCookie: delCookie, //删除一个本地cookie
+  getCookie: getCookie, //获取一个cookie数据
+  httpUrlAddKey: httpUrlAddKey //向地址连接追加参数
+};exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 140 */
+/*!***************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/preview.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 上传文件。
+                                                                                                      * 作者：tmzdy
+                                                                                                      * 时间：‎2021‎年‎7‎月‎28‎日，‏‎9:14:53
+                                                                                                      * 联系：zhongjihan@sina.com
+                                                                                                      * 预览图片。
+                                                                                                      * @param {Object} url 必填 当前预览的图片链接。
+                                                                                                      * @param {Object} list 可以是url数组，也可以是对象，数据比如：["http:url"] or [{url:"https:url",...}]
+                                                                                                      * @param {Object} rangKey 如果list是对象数组，需要提供url字段。
+                                                                                                      */
+function previewImg(url, list, rangKey) {
+
+  if (!url) {
+    uni.$tm.toast("参数有误");
+    return;
+  }
+
+  if (arguments.length == 1) {
+    uni.previewImage({
+      current: url,
+      urls: list ? list : [url] });
+
+  } else if (arguments.length === 3) {
+
+    if (typeof list[0] === 'object' && typeof list[0] !== 'undefined') {
+
+      var urls = [];
+      list.forEach(function (item) {
+        urls.push(item[rangKey]);
+      });
+
+      uni.previewImage({
+        current: url,
+        urls: urls,
+        fail: function fail(er) {
+          console.warn(er);
+        } });
+
+    } else if (typeof list[0] === 'string') {
+      uni.previewImage({
+        current: url,
+        urls: list });
+
+    }
+  } else {
+    uni.$tm.toast("参数有误");
+  }
+
+
+
+}var _default =
+
+previewImg;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 141 */
+/*!*******************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/index.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var pc = __webpack_require__(/*! ./zh-cn.min */ 142);
+var relativeTime = __webpack_require__(/*! ./relativeTime.min */ 144);
+var isBetween = __webpack_require__(/*! ./isBetween.min */ 145);
+var toObject = __webpack_require__(/*! ./toObject.min */ 146);
+var dayjs = __webpack_require__(/*! ./dayjs.min */ 143);
+dayjs.locale(pc);
+// dayjs.locale('zh-cn')
+dayjs.extend(relativeTime);
+dayjs.extend(isBetween);
+dayjs.extend(toObject);var _default =
+
+{ dayjs: dayjs };exports.default = _default;
+
+/***/ }),
+/* 142 */
+/*!***********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/zh-cn.min.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Original file: /npm/dayjs@1.10.7/locale/zh-cn.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+!function (e, _) { true ? module.exports = _(__webpack_require__(/*! ./dayjs.min */ 143)) : undefined;}(this, function (e) {"use strict";function _(e) {return e && "object" == typeof e && "default" in e ? e : { default: e };}var t = _(e),d = { name: "zh-cn", weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"), weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"), weekdaysMin: "日_一_二_三_四_五_六".split("_"), months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"), monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"), ordinal: function ordinal(e, _) {switch (_) {case "W":return e + "周";default:return e + "日";}}, weekStart: 1, yearStart: 4, formats: { LT: "HH:mm", LTS: "HH:mm:ss", L: "YYYY/MM/DD", LL: "YYYY年M月D日", LLL: "YYYY年M月D日Ah点mm分", LLLL: "YYYY年M月D日ddddAh点mm分", l: "YYYY/M/D", ll: "YYYY年M月D日", lll: "YYYY年M月D日 HH:mm", llll: "YYYY年M月D日dddd HH:mm" }, relativeTime: { future: "%s后", past: "%s前", s: "几秒", m: "1 分钟", mm: "%d 分钟", h: "1 小时", hh: "%d 小时", d: "1 天", dd: "%d 天", M: "1 个月", MM: "%d 个月", y: "1 年", yy: "%d 年" }, meridiem: function meridiem(e, _) {var t = 100 * e + _;return t < 600 ? "凌晨" : t < 900 ? "早上" : t < 1100 ? "上午" : t < 1300 ? "中午" : t < 1800 ? "下午" : "晚上";} };return t.default.locale(d, null, !0), d;});
+
+/***/ }),
+/* 143 */
+/*!***********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/dayjs.min.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function (t, e) { true ? module.exports = e() : undefined;}(this, function () {"use strict";var t = 1e3,e = 6e4,n = 36e5,r = "millisecond",i = "second",s = "minute",u = "hour",a = "day",o = "week",f = "month",h = "quarter",c = "year",d = "date",$ = "Invalid Date",l = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/,y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,M = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_") },m = function m(t, e, n) {var r = String(t);return !r || r.length >= e ? t : "" + Array(e + 1 - r.length).join(n) + t;},g = { s: m, z: function z(t) {var e = -t.utcOffset(),n = Math.abs(e),r = Math.floor(n / 60),i = n % 60;return (e <= 0 ? "+" : "-") + m(r, 2, "0") + ":" + m(i, 2, "0");}, m: function t(e, n) {if (e.date() < n.date()) return -t(n, e);var r = 12 * (n.year() - e.year()) + (n.month() - e.month()),i = e.clone().add(r, f),s = n - i < 0,u = e.clone().add(r + (s ? -1 : 1), f);return +(-(r + (n - i) / (s ? i - u : u - i)) || 0);}, a: function a(t) {return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);}, p: function p(t) {return { M: f, y: c, w: o, d: a, D: d, h: u, m: s, s: i, ms: r, Q: h }[t] || String(t || "").toLowerCase().replace(/s$/, "");}, u: function u(t) {return void 0 === t;} },D = "en",v = {};v[D] = M;var p = function p(t) {return t instanceof _;},S = function S(t, e, n) {var r;if (!t) return D;if ("string" == typeof t) v[t] && (r = t), e && (v[t] = e, r = t);else {var i = t.name;v[i] = t, r = i;}return !n && r && (D = r), r || !n && D;},w = function w(t, e) {if (p(t)) return t.clone();var n = "object" == typeof e ? e : {};return n.date = t, n.args = arguments, new _(n);},O = g;O.l = S, O.i = p, O.w = function (t, e) {return w(t, { locale: e.$L, utc: e.$u, x: e.$x, $offset: e.$offset });};var _ = function () {function M(t) {this.$L = S(t.locale, null, !0), this.parse(t);}var m = M.prototype;return m.parse = function (t) {this.$d = function (t) {var e = t.date,n = t.utc;if (null === e) return new Date(NaN);if (O.u(e)) return new Date();if (e instanceof Date) return new Date(e);if ("string" == typeof e && !/Z$/i.test(e)) {var r = e.match(l);if (r) {var i = r[2] - 1 || 0,s = (r[7] || "0").substring(0, 3);return n ? new Date(Date.UTC(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s)) : new Date(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s);}}return new Date(e);}(t), this.$x = t.x || {}, this.init();}, m.init = function () {var t = this.$d;this.$y = t.getFullYear(), this.$M = t.getMonth(), this.$D = t.getDate(), this.$W = t.getDay(), this.$H = t.getHours(), this.$m = t.getMinutes(), this.$s = t.getSeconds(), this.$ms = t.getMilliseconds();}, m.$utils = function () {return O;}, m.isValid = function () {return !(this.$d.toString() === $);}, m.isSame = function (t, e) {var n = w(t);return this.startOf(e) <= n && n <= this.endOf(e);}, m.isAfter = function (t, e) {return w(t) < this.startOf(e);}, m.isBefore = function (t, e) {return this.endOf(e) < w(t);}, m.$g = function (t, e, n) {return O.u(t) ? this[e] : this.set(n, t);}, m.unix = function () {return Math.floor(this.valueOf() / 1e3);}, m.valueOf = function () {return this.$d.getTime();}, m.startOf = function (t, e) {var n = this,r = !!O.u(e) || e,h = O.p(t),$ = function $(t, e) {var i = O.w(n.$u ? Date.UTC(n.$y, e, t) : new Date(n.$y, e, t), n);return r ? i : i.endOf(a);},l = function l(t, e) {return O.w(n.toDate()[t].apply(n.toDate("s"), (r ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e)), n);},y = this.$W,M = this.$M,m = this.$D,g = "set" + (this.$u ? "UTC" : "");switch (h) {case c:return r ? $(1, 0) : $(31, 11);case f:return r ? $(1, M) : $(0, M + 1);case o:var D = this.$locale().weekStart || 0,v = (y < D ? y + 7 : y) - D;return $(r ? m - v : m + (6 - v), M);case a:case d:return l(g + "Hours", 0);case u:return l(g + "Minutes", 1);case s:return l(g + "Seconds", 2);case i:return l(g + "Milliseconds", 3);default:return this.clone();}}, m.endOf = function (t) {return this.startOf(t, !1);}, m.$set = function (t, e) {var n,o = O.p(t),h = "set" + (this.$u ? "UTC" : ""),$ = (n = {}, n[a] = h + "Date", n[d] = h + "Date", n[f] = h + "Month", n[c] = h + "FullYear", n[u] = h + "Hours", n[s] = h + "Minutes", n[i] = h + "Seconds", n[r] = h + "Milliseconds", n)[o],l = o === a ? this.$D + (e - this.$W) : e;if (o === f || o === c) {var y = this.clone().set(d, 1);y.$d[$](l), y.init(), this.$d = y.set(d, Math.min(this.$D, y.daysInMonth())).$d;} else $ && this.$d[$](l);return this.init(), this;}, m.set = function (t, e) {return this.clone().$set(t, e);}, m.get = function (t) {return this[O.p(t)]();}, m.add = function (r, h) {var d,$ = this;r = Number(r);var l = O.p(h),y = function y(t) {var e = w($);return O.w(e.date(e.date() + Math.round(t * r)), $);};if (l === f) return this.set(f, this.$M + r);if (l === c) return this.set(c, this.$y + r);if (l === a) return y(1);if (l === o) return y(7);var M = (d = {}, d[s] = e, d[u] = n, d[i] = t, d)[l] || 1,m = this.$d.getTime() + r * M;return O.w(m, this);}, m.subtract = function (t, e) {return this.add(-1 * t, e);}, m.format = function (t) {var e = this,n = this.$locale();if (!this.isValid()) return n.invalidDate || $;var r = t || "YYYY-MM-DDTHH:mm:ssZ",i = O.z(this),s = this.$H,u = this.$m,a = this.$M,o = n.weekdays,f = n.months,h = function h(t, n, i, s) {return t && (t[n] || t(e, r)) || i[n].substr(0, s);},c = function c(t) {return O.s(s % 12 || 12, t, "0");},d = n.meridiem || function (t, e, n) {var r = t < 12 ? "AM" : "PM";return n ? r.toLowerCase() : r;},l = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a + 1, MM: O.s(a + 1, 2, "0"), MMM: h(n.monthsShort, a, f, 3), MMMM: h(f, a), D: this.$D, DD: O.s(this.$D, 2, "0"), d: String(this.$W), dd: h(n.weekdaysMin, this.$W, o, 2), ddd: h(n.weekdaysShort, this.$W, o, 3), dddd: o[this.$W], H: String(s), HH: O.s(s, 2, "0"), h: c(1), hh: c(2), a: d(s, u, !0), A: d(s, u, !1), m: String(u), mm: O.s(u, 2, "0"), s: String(this.$s), ss: O.s(this.$s, 2, "0"), SSS: O.s(this.$ms, 3, "0"), Z: i };return r.replace(y, function (t, e) {return e || l[t] || i.replace(":", "");});}, m.utcOffset = function () {return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);}, m.diff = function (r, d, $) {var l,y = O.p(d),M = w(r),m = (M.utcOffset() - this.utcOffset()) * e,g = this - M,D = O.m(this, M);return D = (l = {}, l[c] = D / 12, l[f] = D, l[h] = D / 3, l[o] = (g - m) / 6048e5, l[a] = (g - m) / 864e5, l[u] = g / n, l[s] = g / e, l[i] = g / t, l)[y] || g, $ ? D : O.a(D);}, m.daysInMonth = function () {return this.endOf(f).$D;}, m.$locale = function () {return v[this.$L];}, m.locale = function (t, e) {if (!t) return this.$L;var n = this.clone(),r = S(t, e, !0);return r && (n.$L = r), n;}, m.clone = function () {return O.w(this.$d, this);}, m.toDate = function () {return new Date(this.valueOf());}, m.toJSON = function () {return this.isValid() ? this.toISOString() : null;}, m.toISOString = function () {return this.$d.toISOString();}, m.toString = function () {return this.$d.toUTCString();}, M;}(),b = _.prototype;return w.prototype = b, [["$ms", r], ["$s", i], ["$m", s], ["$H", u], ["$W", a], ["$M", f], ["$y", c], ["$D", d]].forEach(function (t) {b[t[1]] = function (e) {return this.$g(e, t[0], t[1]);};}), w.extend = function (t, e) {return t.$i || (t(e, _, w), t.$i = !0), w;}, w.locale = S, w.isDayjs = p, w.unix = function (t) {return w(1e3 * t);}, w.en = v[D], w.Ls = v, w.p = {}, w;});
+
+/***/ }),
+/* 144 */
+/*!******************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/relativeTime.min.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+!function (r, e) { true ? module.exports = e() : undefined;}(this, function () {"use strict";return function (r, e, t) {r = r || {};var n = e.prototype,o = { future: "in %s", past: "%s ago", s: "a few seconds", m: "a minute", mm: "%d minutes", h: "an hour", hh: "%d hours", d: "a day", dd: "%d days", M: "a month", MM: "%d months", y: "a year", yy: "%d years" };function i(r, e, t, o) {return n.fromToBase(r, e, t, o);}t.en.relativeTime = o, n.fromToBase = function (e, n, i, d, u) {for (var f, a, s, l = i.$locale().relativeTime || o, h = r.thresholds || [{ l: "s", r: 44, d: "second" }, { l: "m", r: 89 }, { l: "mm", r: 44, d: "minute" }, { l: "h", r: 89 }, { l: "hh", r: 21, d: "hour" }, { l: "d", r: 35 }, { l: "dd", r: 25, d: "day" }, { l: "M", r: 45 }, { l: "MM", r: 10, d: "month" }, { l: "y", r: 17 }, { l: "yy", d: "year" }], m = h.length, c = 0; c < m; c += 1) {var y = h[c];y.d && (f = d ? t(e).diff(i, y.d, !0) : i.diff(e, y.d, !0));var p = (r.rounding || Math.round)(Math.abs(f));if (s = f > 0, p <= y.r || !y.r) {p <= 1 && c > 0 && (y = h[c - 1]);var v = l[y.l];u && (p = u("" + p)), a = "string" == typeof v ? v.replace("%d", p) : v(p, n, y.l, s);break;}}if (n) return a;var M = s ? l.future : l.past;return "function" == typeof M ? M(a) : M.replace("%s", a);}, n.to = function (r, e) {return i(r, e, this, !0);}, n.from = function (r, e) {return i(r, e, this);};var d = function d(r) {return r.$u ? t.utc() : t();};n.toNow = function (r) {return this.to(d(this), r);}, n.fromNow = function (r) {return this.from(d(this), r);};};});
+
+/***/ }),
+/* 145 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/isBetween.min.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+!function (e, i) { true ? module.exports = i() : undefined;}(this, function () {"use strict";return function (e, i, t) {i.prototype.isBetween = function (e, i, s, f) {var n = t(e),o = t(i),r = "(" === (f = f || "()")[0],u = ")" === f[1];return (r ? this.isAfter(n, s) : !this.isBefore(n, s)) && (u ? this.isBefore(o, s) : !this.isAfter(o, s)) || (r ? this.isBefore(n, s) : !this.isAfter(n, s)) && (u ? this.isAfter(o, s) : !this.isBefore(o, s));};};});
+
+/***/ }),
+/* 146 */
+/*!**************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/dayjs/toObject.min.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+!function (t, e) { true ? module.exports = e() : undefined;}(this, function () {"use strict";return function (t, e) {e.prototype.toObject = function () {return { years: this.$y, months: this.$M, date: this.$D, hours: this.$H, minutes: this.$m, seconds: this.$s, milliseconds: this.$ms };};};});
+
+/***/ }),
+/* 147 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/guid.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 本算法来源于简书开源代码，详见：https://www.jianshu.com/p/fdbf293d0a85
+                                                                                                      * 全局唯一标识符（uuid，Globally Unique Identifier）,也称作 uuid(Universally Unique IDentifier) 
+                                                                                                      * 一般用于多个组件之间,给它一个唯一的标识符,或者v-for循环的时候,如果使用数组的index可能会导致更新列表出现问题
+                                                                                                      * 最可能的情况是左滑删除item或者对某条信息流"不喜欢"并去掉它的时候,会导致组件内的数据可能出现错乱
+                                                                                                      * v-for的时候,推荐使用后端返回的id而不是循环的index
+                                                                                                      * @param {Number} len uuid的长度
+                                                                                                      * @param {Boolean} firstU 将返回的首字母置为"u"
+                                                                                                      * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+                                                                                                      */
+function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  var uuid = [];
+  radix = radix || chars.length;
+
+  if (len) {
+    // 如果指定uuid长度,只是取随机的字符,0|x为位运算,能去掉x的小数位,返回整数位
+    for (var i = 0; i < len; i++) {uuid[i] = chars[0 | Math.random() * radix];}
+  } else {
+    var r;
+    // rfc4122标准要求返回的uuid中,某些位为固定的字符
+    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+    uuid[14] = '4';
+
+    for (var _i = 0; _i < 36; _i++) {
+      if (!uuid[_i]) {
+        r = 0 | Math.random() * 16;
+        uuid[_i] = chars[_i == 19 ? r & 0x3 | 0x8 : r];
+      }
+    }
+  }
+  // 移除第一个字符,并用u替代,因为第一个字符为数值时,该guuid不能用作id或者class
+  if (firstU) {
+    uuid.shift();
+    return 'u' + uuid.join('');
+  } else {
+    return uuid.join('');
+  }
+}var _default =
+
+guid;exports.default = _default;
+
+/***/ }),
+/* 148 */
+/*!*************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/sleep.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 作者：tmzdy
+                                                                                                      * 延时操作
+                                                                                                      * @param {Number} wait = [500] 延时
+                                                                                                      */
+function sleep() {var wait = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 500;
+  var timid = null;
+  clearTimeout(timid);
+  return new Promise(function (res, rej) {
+    timid = setTimeout(function () {
+      res();
+    }, wait);
+  });
+}var _default =
+
+sleep;exports.default = _default;
+
+/***/ }),
+/* 149 */
+/*!*******************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/randomArray.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 打乱数组
+function randomArray() {var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  // 原理是sort排序,Math.random()产生0<= x < 1之间的数,会导致x-0.05大于或者小于0
+  return array.sort(function () {return Math.random() - 0.5;});
+}var _default =
+
+randomArray;exports.default = _default;
+
+/***/ }),
+/* 150 */
+/*!*****************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/deepClone.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 此库来自 https://www.uviewui.com/js/intro.html
+// 判断arr是否为一个数组，返回一个bool值
+function isArray(arr) {
+  return Object.prototype.toString.call(arr) === '[object Array]';
+}
+
+// 深度克隆
+function deepClone(obj) {
+  // 对常见的“非”值，直接返回原来值
+  if ([null, undefined, NaN, false].includes(obj)) return obj;
+  if (typeof obj !== "object" && typeof obj !== 'function') {
+    //原始类型直接返回
+    return obj;
+  }
+  var o = isArray(obj) ? [] : {};
+  for (var i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      o[i] = typeof obj[i] === "object" ? deepClone(obj[i]) : obj[i];
+    }
+  }
+  return o;
+}var _default =
+
+deepClone;exports.default = _default;
+
+/***/ }),
+/* 151 */
+/*!*****************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/deepMerge.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./deepClone */ 150));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 此库来自 https://www.uviewui.com/js/intro.html
+
+// JS对象深度合并
+function deepMerge() {var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  target = (0, _deepClone.default)(target);
+  if (typeof target !== 'object' || typeof source !== 'object') return false;
+  for (var prop in source) {
+    if (!source.hasOwnProperty(prop)) continue;
+    if (prop in target) {
+      if (typeof target[prop] !== 'object') {
+        target[prop] = source[prop];
+      } else {
+        if (typeof source[prop] !== 'object') {
+          target[prop] = source[prop];
+        } else {
+          if (target[prop].concat && source[prop].concat) {
+            target[prop] = target[prop].concat(source[prop]);
+          } else {
+            target[prop] = deepMerge(target[prop], source[prop]);
+          }
+        }
+      }
+    } else {
+      target[prop] = source[prop];
+    }
+  }
+  return target;
+}var _default =
+
+deepMerge;exports.default = _default;
+
+/***/ }),
+/* 152 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/test.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+/**
+                                                                                                      * 验证电子邮箱格式
+                                                                                                      */
+function email(value) {
+  return /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(value);
+}
+
+/**
+   * 验证手机格式
+   */
+function mobile(value) {
+  return /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
+}
+
+/**
+   * 验证URL格式
+   */
+function url(value) {
+  return /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i.test(value);
+}
+
+/**
+   * 验证日期格式
+   */
+function date(value) {
+  return /^[1-2][0-9][0-9][0-9]-[0-1]{0,1}[0-9]-[0-3]{0,1}[0-9]$/.test(value);
+}
+
+/**
+   * 验证身份证号码
+   */
+function idCard(value) {
+  return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
+  value);
+}
+
+/**
+   * 是否车牌号
+   */
+function carNo(value) {
+  // 新能源车牌
+  var xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
+  // 旧车牌
+  var creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+  if (value.length === 7) {
+    return creg.test(value);
+  } else if (value.length === 8) {
+    return xreg.test(value);
+  } else {
+    return false;
+  }
+}
+
+/**
+   * 中文
+   */
+function chinese(value) {
+  var reg = /^[\u4e00-\u9fa5]+$/gi;
+  return reg.test(value);
+}
+
+/**
+   * 只能输入字母
+   */
+function letter(value) {
+  return /^[a-zA-Z]*$/.test(value);
+}
+
+/**
+   * 只能是字母或者数字
+   */
+function enOrNum(value) {
+  //英文或者数字
+  var reg = /^[0-9a-zA-Z]*$/g;
+  return reg.test(value);
+}
+
+/**
+   * 是否json字符串
+   */
+function jsonString(value) {
+  if (typeof value == 'string') {
+    try {
+      var obj = JSON.parse(value);
+      if (typeof obj == 'object' && obj) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+  return false;
+}
+
+
+/**
+   * 是否对象
+   */
+function object(value) {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
+   * 检查对象或者数组的值， true表示通过，没有空；false表示有空值。
+   * @param {Object} obj 对象
+   * @param {Array<String>} filter 需要排除的字段以数组提供。 对象
+   */
+function checkObject(obj) {var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var istrue = true;
+  function testObjec(obj) {
+    if (typeof obj !== 'object' || Array.isArray(obj) || obj == null) {
+      istrue = false;
+      return false;
+    }
+    for (var item in obj) {
+      if (filter.indexOf(item) === -1) {
+        if (typeof obj[item] === 'undefined' || obj[item] === null) {
+
+          istrue = false;
+          break;
+          return false;
+        }
+        if (typeof obj[item] === 'object') {
+          if (Array.isArray(obj[item])) {
+            if (obj[item].length == 0) {
+              istrue = false;
+
+              break;
+              return false;
+            }
+          } else {
+            testObjec(obj[item]);
+
+          }
+
+        } else if (typeof obj[item] === 'string') {
+
+          if (!uni.$tm.trim(obj[item])) {
+            istrue = false;
+            break;
+            return false;
+          }
+        }
+      }
+
+    }
+
+  }
+  testObjec(obj);
+  return istrue;
+}
+//中国邮政编码
+function chinaPost(value) {
+  return /[1-9]\d{5}(?!\d)/.test(value);
+}
+//中国银行卡号
+function bankCard(value) {
+  var p = /^([1-9]{1})(\d{15}|\d{16}|\d{18})$/;
+  var str = value.replace(/\s+/g, "");
+  return p.test(str);
+}
+//密码验证，只能字母字符和数字
+//默认6位
+function password(value) {var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  var p = new RegExp("^[w+|-|+*.`!@#$%^&()_+,///]{" + len + ",}$");
+  return p.test(value);
+}
+//密码验证，只能字母字符和数字
+//默认6位
+//并且，大小写字母和数字必须至少要有1位。
+function password2(value) {var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  var p = new RegExp("^[w+|-|+*.`!@#$%^&()_+,///]{" + len + ",}$");
+  if (!p.test(value)) return false;
+  if (!/[a-z]{1,}/.test(value)) return false;
+  if (!/[A-Z]{1,}/.test(value)) return false;
+  if (!/[0-9]{1,}/.test(value)) return false;
+  return true;
+}var _default =
+
+{
+  email: email,
+  mobile: mobile,
+  url: url,
+  date: date,
+  idCard: idCard,
+  carNo: carNo,
+  chinese: chinese,
+  letter: letter,
+  enOrNum: enOrNum,
+  jsonString: jsonString,
+  object: object,
+  checkObject: checkObject,
+  chinaPost: chinaPost,
+  password: password,
+  password2: password2 };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 153 */
+/*!**************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/random.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function random(min, max) {
+  if (min >= 0 && max > 0 && max >= min) {
+    var gab = max - min + 1;
+    return Math.floor(Math.random() * gab + min);
+  } else {
+    return 0;
+  }
+}var _default =
+
+random;exports.default = _default;
+
+/***/ }),
+/* 154 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/trim.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function trim(str) {var pos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'both';
+  if (pos == 'both') {
+    return str.replace(/^\s+|\s+$/g, "");
+  } else if (pos == "left") {
+    return str.replace(/^\s*/, '');
+  } else if (pos == 'right') {
+    return str.replace(/(\s*$)/g, "");
+  } else if (pos == 'all') {
+    return str.replace(/\s+/g, "");
+  } else {
+    return str;
+  }
+}var _default =
+
+trim;exports.default = _default;
+
+/***/ }),
+/* 155 */
+/*!*************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/toast.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function toast(title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1500;
+  uni.showToast({
+    title: title,
+    icon: 'none',
+    duration: duration });
+
+}var _default =
+
+toast;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 156 */
+/*!*****************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/getParent.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = getParent; // 此库来自 https://www.uviewui.com/js/intro.html
+// 获取父组件的参数，因为支付宝小程序不支持provide/inject的写法
+// this.$parent在非H5中，可以准确获取到父组件，但是在H5中，需要多次this.$parent.$parent.xxx
+function getParent(name, keys) {
+  var parent = this.$parent;
+  // 通过while历遍，这里主要是为了H5需要多层解析的问题
+  while (parent) {var _parent$$options;
+    // 父组件
+    if (((_parent$$options = parent.$options) === null || _parent$$options === void 0 ? void 0 : _parent$$options.name) !== name) {
+      // 如果组件的name不相等，继续上一级寻找
+      parent = parent.$parent;
+    } else {var _ret = function () {
+        var data = {};
+        // 判断keys是否数组，如果传过来的是一个数组，那么直接使用数组元素值当做键值去父组件寻找
+        if (Array.isArray(keys)) {
+          keys.map(function (val) {
+            data[val] = parent[val] ? parent[val] : '';
+          });
+        } else {
+          // 历遍传过来的对象参数
+          for (var i in keys) {
+            // 如果子组件有此值则用，无此值则用父组件的值
+            // 判断是否空数组，如果是，则用父组件的值，否则用子组件的值
+            if (Array.isArray(keys[i])) {
+              if (keys[i].length) {
+                data[i] = keys[i];
+              } else {
+                data[i] = parent[i];
+              }
+            } else if (keys[i].constructor === Object) {
+              // 判断是否对象，如果是对象，且有属性，那么使用子组件的值，否则使用父组件的值
+              if (Object.keys(keys[i]).length) {
+                data[i] = keys[i];
+              } else {
+                data[i] = parent[i];
+              }
+            } else {
+              // 只要子组件有传值，即使是false值，也是“传值”了，也需要覆盖父组件的同名参数
+              data[i] = keys[i] || keys[i] === false ? keys[i] : parent[i];
+            }
+          }
+        }
+        return { v: data };}();if (typeof _ret === "object") return _ret.v;
+    }
+  }
+
+  return {};
+}
+
+/***/ }),
+/* 157 */
+/*!*********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/getParentAttr.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = getParentAttr; // 使用时，node =  this.$parent;
+function getParentAttr(name, keys, node) {
+
+  var parent = node;
+  while (parent) {var _parent$$options;
+    // 父组件
+    if (((_parent$$options = parent.$options) === null || _parent$$options === void 0 ? void 0 : _parent$$options.name) !== name) {
+      // 如果组件的name不相等，继续上一级寻找
+      parent = parent.$parent;
+    } else {
+
+      return parent[keys];
+    }
+  }
+  return undefined;
+
+
+}
+
+/***/ }),
+/* 158 */
+/*!********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/getParentAls.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = getParentAls; // 使用时，node =  this.$parent;
+// 根据给定的父组件名，寻找它的上一级。
+function getParentAls(name, node) {
+
+  var parent = node;
+  while (parent) {var _parent$$options;
+    // 父组件
+    if (((_parent$$options = parent.$options) === null || _parent$$options === void 0 ? void 0 : _parent$$options.name) !== name) {
+      // 如果组件的name不相等，继续上一级寻找
+      parent = parent.$parent;
+    } else {
+
+      return parent;
+    }
+  }
+  return undefined;
+
+
+}
+
+/***/ }),
+/* 159 */
+/*!**************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/upload.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));var _guid = _interopRequireDefault(__webpack_require__(/*! ./guid */ 147));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 上传文件。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 作者：tmzdy
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 时间：‎2021‎年‎7‎月‎28‎日，‏‎9:14:53
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 联系：zhongjihan@sina.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} chooesefile -- 选择图片上传
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} selected -- 选择图片成功后触发。返回选择后的图片。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} addfile -- 动态加入预上传的文件。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} progress -- 进度。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} fail -- 失败。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} success -- 成功。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} complete -- 完成。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} start -- 开始上传。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {Function} stop -- 停止上传。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
+uploadfile = /*#__PURE__*/function () {
+
+
+
+  function uploadfile(_ref) {var _arguments$;var maxfile = _ref.maxfile,uploadUrl = _ref.uploadUrl,opts = _ref.opts,responseStu = _ref.responseStu,file_list = _ref.file_list,isAuto = _ref.isAuto;_classCallCheck(this, uploadfile);_defineProperty(this, "filelist", []);_defineProperty(this, "isStop", false);_defineProperty(this, "index", 0);
+    var arg = _objectSpread({
+      maxfile: 9,
+      uploadUrl: '',
+      file_list: [],
+      isAuto: true,
+      opts: {},
+      maxsize: 10 * 1024 * 1024,
+      code: 0, //定义成功的标志码
+      type: 'image', //文件选择的类型
+      extension: ['*'], //后缀过滤。
+      responseStu: {
+        code: 'code', //服务器返回的码的字段名称
+        data: 'data', //服务上传成功后返回 的数据字段名称
+        msg: 'msg' //服务器响应信息的字段名称。
+      } }, (_arguments$ =
+    arguments[0]) !== null && _arguments$ !== void 0 ? _arguments$ : {});
+    var ots = {
+      name: 'file', header: {} };
+    //配置{name: 'file', // 上传时的文件key名。默认file,header: {}, // 上传的头部参数。}
+    this.config = {
+      maxfile: arg.maxfile,
+      uploadUrl: arg.uploadUrl,
+      opts: _objectSpread(_objectSpread({}, ots), arg.opts),
+      file_list: arg.file_list, //默认提供的图片.
+      maxsize: arg.maxsize,
+      code: arg.code,
+      isAuto: arg.isAuto, //自动上传
+      type: arg.type, //文件选择的类型
+      extension: arg.extension, //后缀过滤。
+      responseStu: _objectSpread(_objectSpread({}, arg.responseStu), responseStu || {}) };
+
+  }
+  /**
+     * 成功后返回选择后的图片列表。
+     */_createClass(uploadfile, [{ key: "chooesefile", value: function () {var _chooesefile = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var t;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+
+                t = this;return _context.abrupt("return",
+                new Promise(function (rs, rj) {
+
+                  uni.chooseImage({
+                    count: t.config.maxfile,
+                    type: t.config.type,
+                    extension: t.config.extension,
+                    fail: function fail(e) {
+                      console.error(e);
+                      uni.$tm.toast("已取消选择");
+                      rj(e);
+                    },
+                    success: function success(res) {var _t$filelist;
+                      console.log(res);
+                      if (res.tempFilePaths.length == 0) {
+                        uni.$tm.toast("未选择");
+                        return;
+                      }
+                      console.log(res);
+                      var imgarray = res.tempFilePaths;
+                      var fielist = res.tempFiles;
+                      var jgsk = [];
+                      //0待上传，1上传中，2上传失败，3上传成功。4超过大小限制
+                      imgarray.forEach(function (item, index) {
+                        var isMaxsize = fielist[index].size > t.config.maxsize ? true : false;
+                        jgsk.push({
+                          url: item,
+                          status: isMaxsize ? '超过大小' : "待上传",
+                          progress: isMaxsize ? 100 : 0,
+                          fileId: (0, _guid.default)(),
+                          statusCode: isMaxsize ? 4 : 0,
+                          data: null //上传成功后的回调数据。
+                        });
+                      });
+                      (_t$filelist = t.filelist).push.apply(_t$filelist, jgsk);
+
+                      t.selected(t.filelist);
+                      if (t.config.isAuto) {
+                        t.start();
+                      }
+
+                      rs(t.filelist);
+                    } });
+
+
+                }));case 2:case "end":return _context.stop();}}}, _callee, this);}));function chooesefile() {return _chooesefile.apply(this, arguments);}return chooesefile;}() }, { key: "chooseMPH5weixinFile", value: function () {var _chooseMPH5weixinFile = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var t;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+
+
+                t = this;return _context2.abrupt("return",
+                new Promise(function (rs, rj) {var _t$config$extension;
+                  var fs = uni.chooseFile;
+
+                  fs = uni.chooseMessageFile;
+
+                  var config = {
+                    count: t.config.maxfile,
+                    type: t.config.type,
+                    extension: t.config.extension };
+
+                  if (!t.config.extension || !Array.isArray(t.config.extension) || ((_t$config$extension = t.config.extension) === null || _t$config$extension === void 0 ? void 0 : _t$config$extension.length) == 0) {
+                    delete config.extension;
+                  }
+                  fs(_objectSpread(_objectSpread({},
+                  config), {}, {
+                    fail: function fail(e) {
+                      console.error(e);
+                      uni.$tm.toast("已取消选择");
+                      rj(e);
+                    },
+                    success: function success(res) {var _t$filelist2;
+                      if (res.tempFiles.length == 0) {
+                        uni.$tm.toast("未选择");
+                        return;
+                      }
+                      var fielist = res.tempFiles;
+                      var jgsk = [];
+                      //0待上传，1上传中，2上传失败，3上传成功。4超过大小限制
+                      fielist.forEach(function (item, index) {
+                        var isMaxsize = fielist[index].size > t.config.maxsize ? true : false;
+                        var ftype = item.name || "";
+                        if (ftype) {
+                          ftype = ftype.substr(ftype.lastIndexOf(".") + 1).toLocaleLowerCase();
+                        }
+                        jgsk.push({
+                          url: item.path,
+                          name: item.name || '默认文件名称',
+                          type: ftype,
+                          status: isMaxsize ? '超过大小' : "待上传",
+                          progress: isMaxsize ? 100 : 0,
+                          fileId: (0, _guid.default)(),
+                          statusCode: isMaxsize ? 4 : 0,
+                          data: null //上传成功后的回调数据。
+                        });
+                      });
+                      (_t$filelist2 = t.filelist).push.apply(_t$filelist2, jgsk);
+
+                      t.selected(t.filelist);
+                      if (t.config.isAuto) {
+                        t.start();
+                      }
+
+                      rs(t.filelist);
+                    } }));
+
+
+                }));case 2:case "end":return _context2.stop();}}}, _callee2, this);}));function chooseMPH5weixinFile() {return _chooseMPH5weixinFile.apply(this, arguments);}return chooseMPH5weixinFile;}() }, { key: "setConfig", value: function setConfig(_ref2)
+
+    {var maxfile = _ref2.maxfile,uploadUrl = _ref2.uploadUrl,opts = _ref2.opts,file_list = _ref2.file_list,isAuto = _ref2.isAuto,responseStu = _ref2.responseStu;
+      var arg = arguments.length == 0 ? {} : arguments[0];
+      this.config = _objectSpread(_objectSpread({}, this.config), arg);
+    }
+    // 动态加入预上传的文件。
+    /**
+     * 动态加入文件
+     * @param {Object} filelist
+     */ }, { key: "addfile", value: function addfile(
+    filelist) {var _this$filelist;
+      if (typeof filelist !== 'object' && !Array.isArray(filelist)) return;
+      (_this$filelist = this.filelist).push.apply(_this$filelist, _toConsumableArray(filelist));
+    }
+    // 选择图片成功后触发。返回选择后的图片。
+  }, { key: "selected", value: function selected(filelist) {}
+    // 进度。
+  }, { key: "progress", value: function progress(item) {}
+    // 失败
+  }, { key: "fail", value: function fail(item) {}
+    // 成功
+  }, { key: "success", value: function success(item) {}
+    // 完成。
+  }, { key: "complete", value: function complete(filelist) {}
+    // 开始上传。
+  }, { key: "start", value: function start() {
+      if (this.filelist.length <= 0) {
+        uni.$tm.toast("未选择图片");
+        return;
+      }
+      var t = this;
+      // t重新开始上传从头开始。
+      this.index = 0;
+      this.isStop = false;
+      function startupload() {var _t$config$opts$name, _t$config$opts, _t$config$opts$header, _t$config$opts2;
+        if (t.isStop) return;
+        var item = t.filelist[t.index];
+        if (!item || typeof item === 'undefined') {
+          // 文件不存在。直接结束。
+          t.complete(t.filelist);
+
+          return;
+        }
+
+        if (item.statusCode == 3 || item.statusCode == 1 || item.statusCode == 4) {
+          // 直接跳过。至下一个文件。
+          t.index++;
+          startupload();
+          return;
+        }
+
+        var upObj = uni.uploadFile({
+          url: t.config.uploadUrl,
+          name: (_t$config$opts$name = (_t$config$opts = t.config.opts) === null || _t$config$opts === void 0 ? void 0 : _t$config$opts.name) !== null && _t$config$opts$name !== void 0 ? _t$config$opts$name : 'file',
+          header: (_t$config$opts$header = (_t$config$opts2 = t.config.opts) === null || _t$config$opts2 === void 0 ? void 0 : _t$config$opts2.header) !== null && _t$config$opts$header !== void 0 ? _t$config$opts$header : {},
+          filePath: item.url,
+          formData: { file_name: item.name },
+          success: function success(res) {
+            if (res.statusCode != 200) {
+              item.statusCode = 2;
+              item.status = "上传失败";
+              uni.$tm.toast(String(res.statusCode));
+              t.fail(item);
+              t.index++;
+              return;
+            }
+            var jsd = {};
+            var isOk = true;
+            // 是否从服务器返回的是json。如果不是则表示fasle为string.
+            var isJsonCallbackData = true;
+
+            try {
+              jsd = JSON.parse(res.data);
+            } catch (e) {
+              isJsonCallbackData = false;
+              jsd = res.data;
+              item.data = res.data;
+            }
+
+            if (isJsonCallbackData) {
+              try {
+                item.data = jsd[t.config.responseStu.data];
+                if (typeof item.data == 'object') {
+                  item.data['name'] = item.name;
+                  item.data['id'] = item['id'] || "";
+                }
+                var itecode = jsd[t.config.responseStu.code];
+                if (itecode !== t.config.code) {
+                  isOk = false;
+                }
+              } catch (e) {
+                isOk = false;
+              }
+            }
+
+
+            if (!isOk) {
+              uni.$tm.toast(jsd[t.config.responseStu.msg] || "失败");
+              item.statusCode = 2;
+              item.status = "上传失败";
+              t.fail(item);
+              t.index++;
+              return;
+            }
+
+            // 上传成功。
+            item.statusCode = 3;
+            item.status = "上传成功";
+            uni.$tm.toast("上传成功");
+            // t.filelist[t.index] = item;
+            // t.filelist.splice(t.index,1,item)
+
+            t.success(item);
+
+          },
+          fail: function fail(res) {
+
+            uni.$tm.toast(res.errMsg);
+            item.statusCode = 2;
+            item.status = "上传失败";
+            // t.filelist[t.index] = item;
+            t.fail(item);
+            t.index++;
+          },
+          complete: function complete(res) {
+            // 直接下一个文件。
+
+            startupload();
+          } });
+
+        if (upObj) {
+          upObj.onProgressUpdate(function (res) {
+            t.filelist[t.index].statusCode = 1;
+            t.filelist[t.index].status = "上传中";
+            t.filelist[t.index].progress = res.progress;
+            // t.filelist[t.index] = item;
+            t.progress(item);
+
+          });
+        }
+
+      }
+      startupload();
+    }
+    // 停止上传
+  }, { key: "stop", value: function stop() {
+      this.isStop = true;
+    } }]);return uploadfile;}();
+
+
+
+/**
+                                  * 上传文件。
+                                  * 作者：tmzdy
+                                  * 时间：‎2021‎年‎7‎月‎28‎日，‏‎9:14:53
+                                  * 联系：zhongjihan@sina.com
+                                  * 选择图片上传，相册或者拍照。
+                                  * @param {Number} maxfile 最大上传的文件数量，默认为 9 ;
+                                  * @param {String} uploadUrl -- ""
+                                  * @param {Object} opts -- {}
+                                  * @param {Function} progress  {} --上传中调用
+                                  * @param {Function} success  {} --上传成功才会调用。
+                                  * @param {Function} selected  {} --选完图片待上传调用。
+                                  * @param {Function} fail  {} --上传失败时调用，返回文件相关
+                                  * @param {Function} complete  {} -- 完成上传时触发，失败与成功都触发。
+                                  */
+function chooseImgUpload() {var maxfile = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9;var uploadUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};var progress = arguments.length > 3 ? arguments[3] : undefined;var _success = arguments.length > 4 ? arguments[4] : undefined;var selected = arguments.length > 5 ? arguments[5] : undefined;var _fail = arguments.length > 6 ? arguments[6] : undefined;var complete = arguments.length > 7 ? arguments[7] : undefined;
+  uni.chooseImage({
+    count: maxfile,
+    fail: function fail(e) {
+      uni.$tm.toast("用户取消选择图片");
+    },
+    success: function success(res) {
+
+      if (res.tempFilePaths.length == 0) {
+        uni.$tm.toast("未选择图片");
+        return;
+      }
+      var imgarray = res.tempFilePaths;
+      var jgsk = [];
+      //0待上传，1上传中，2上传失败，3上传成功。
+      imgarray.forEach(function (item, index) {
+        jgsk.push({
+          url: item,
+          status: "待上传",
+          progress: 0,
+          fileId: (0, _guid.default)(),
+          statusCode: 0,
+          data: null //上传成功后的回调数据。
+        });
+      });
+      if (selected) {
+        selected(jgsk);
+      }
+
+      var index = 0;
+      function startupload() {var _opts$name, _opts$header;
+        var item = jgsk[index];
+        if (!item) {
+          // 文件不存在。直接结束。
+          if (complete) {
+            complete(jgsk);
+          }
+          return;
+        }
+        if (item.statusCode == 2 || item.statusCode == 1) {
+          // 直接跳过。至下一个文件。
+          index++;
+          startupload();
+        }
+
+        var upObj = uni.uploadFile({
+          url: uploadUrl,
+          name: (_opts$name = opts === null || opts === void 0 ? void 0 : opts.name) !== null && _opts$name !== void 0 ? _opts$name : 'file',
+          header: (_opts$header = opts === null || opts === void 0 ? void 0 : opts.header) !== null && _opts$header !== void 0 ? _opts$header : {},
+          filePath: item.url,
+          success: function success(res) {
+            if (res.statusCode != 200) {
+              item.statusCode = 2;
+              item.status = "上传失败";
+              uni.$tm.toast(res.errMsg);
+              if (_fail) {
+                _fail(item);
+              }
+              return;
+            }
+            try {
+              item.data = JSON.parse(res.data).data;
+            } catch (e) {
+              item.statusCode = 2;
+              item.status = "上传失败";
+              uni.$tm.toast(res.errMsg);
+              if (_fail) {
+                _fail(item);
+              }
+              return;
+            }
+
+            // 上传成功。
+            item.statusCode = 3;
+            item.status = "上传成功";
+            item.data = JSON.parse(res.data).data;
+            uni.$tm.toast("上传成功");
+            if (_success) {
+              _success(item);
+            }
+
+          },
+          fail: function fail(res) {
+
+            uni.$tm.toast(res.errMsg);
+            item.statusCode = 2;
+            item.status = "上传失败";
+            if (_fail) {
+              _fail(item);
+            }
+          },
+          complete: function complete(res) {
+            // 直接下一个文件。
+            index++;
+            startupload();
+          } });
+
+        if (upObj) {
+          upObj.onProgressUpdate(function (res) {
+            item.statusCode = 1;
+            item.status = "上传中";
+            item.progress = res.progress;
+            if (progress) {
+              progress(item);
+            }
+
+          });
+        }
+
+      }
+      startupload();
+    } });
+
+}var _default =
+
+{
+  chooseImgUpload: chooseImgUpload, uploadfile: uploadfile };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 160 */
+/*!*******************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/objToString.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// 把对象转换为string，提供对象 和 分割符。
+function objToString(obj) {var split = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ';';
+  if (typeof obj !== "object") return '';
+  var a = '';
+  for (var i in obj) {
+    a += i + ':' + obj[i] + split;
+  }
+  return a;
+}
+
+module.exports.objToString = objToString;
+
+/***/ }),
+/* 161 */
+/*!****************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/calendar.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * 日历库
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * 作者：tmzdy
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * 时间：2021-7-27
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * 联系：zhongjihan@sina.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             */var
+calendar = /*#__PURE__*/function () {
+
+
+
+
+
+  /**
+                                      * value:初始化时间
+                                      * start:开始始间 ，提供了后，会在返回的日历上标记每个日期是否是在start 和 end之间。
+                                      * end:结束时间 
+                                      */
+  function calendar(_ref) {var value = _ref.value,start = _ref.start,end = _ref.end;_classCallCheck(this, calendar);_defineProperty(this, "value", new Date());_defineProperty(this, "now_day_month", new Date());_defineProperty(this, "start_time", new Date(1900, 0, 1));_defineProperty(this, "end_time", new Date(2100, 11, 31));_defineProperty(this, "txtdateArray", []);
+    if (arguments.length === 1) {
+      var arg = arguments[0];
+
+      if (arg === null || arg === void 0 ? void 0 : arg.value) {
+        value = value.replace(/-/g, '/');
+        var dobj = new Date(value);
+        this.value = new Date(dobj.getFullYear(), dobj.getMonth(), dobj.getDate());
+
+        this.now_day_month = this.value;
+      }
+      if (arg === null || arg === void 0 ? void 0 : arg.start) {
+        var sv = start;
+        if (typeof sv === 'string') {
+          sv = new Date(sv.replace(/-/g, '/'));
+        } else if (typeof sv === 'object') {
+          sv = new Date(sv);
+        }
+        this.start_time = sv;
+      }
+      if (arg === null || arg === void 0 ? void 0 : arg.end) {
+        var _sv = end;
+        if (typeof _sv === 'string') {
+          _sv = new Date(_sv.replace(/-/g, '/'));
+        } else if (typeof _sv === 'object') {
+          _sv = new Date(_sv);
+        }
+        this.end_time = _sv;
+      }
+    }
+
+  }
+  /**
+    * 日期转化为字符串， 4位年+2位月+2位日
+    */_createClass(calendar, [{ key: "getDateStr", value: function getDateStr(
+    date) {
+      var _year = date.getFullYear();
+      var _month = date.getMonth(); // 月从0开始计数
+      var _d = date.getDate();
+
+      _month = _month > 9 ? "" + _month : "0" + _month;
+      _d = _d > 9 ? "" + _d : "0" + _d;
+      return _year + _month + _d;
+    }
+    // 设置当前计算的日历的时间 。格式为时间 格式。
+  }, { key: "setValue", value: function setValue(value) {
+      if (value) {
+        var dobj = new Date();
+        if (typeof value === 'object') {
+          dobj = new Date(value);
+        } else {
+          value = value.replace(/-/g, '/');
+          dobj = new Date(value);
+        }
+
+        this.value = new Date(dobj.getFullYear(), dobj.getMonth(), dobj.getDate());
+        this.now_day_month = this.value;
+      }
+      return this;
+    }
+    // 未设置
+  }, { key: "setStart", value: function setStart(start) {
+      var sv = start;
+      if (typeof sv === 'string') {
+        sv = new Date(sv.replace(/-/g, '/'));
+      } else if (typeof sv === 'object') {
+        sv = new Date(sv);
+      }
+
+      this.start_time = sv;
+      return this;
+    } }, { key: "setEnd", value: function setEnd(
+    end) {
+      var sv = end;
+      if (typeof sv === 'string') {
+        sv = new Date(sv.replace(/-/g, '/'));
+      } else if (typeof sv === 'object') {
+        sv = new Date(sv);
+      }
+
+      this.end_time = sv;
+
+      return this;
+    }
+    // 设置文本数据。携带在对象 中。
+  }, { key: "setTimeArrayText", value: function setTimeArrayText(textArray) {
+      if (!Array.isArray(textArray)) return;
+      /**
+                                              * textArray
+                                              * {date:"2021-7-1",text:"你好"}
+                                              */
+      this.txtdateArray = textArray;
+      return this;
+    } }, { key: "monthDay", value: function monthDay(
+
+    year, month) {
+      var date = new Date(year, month, 1, 0, 0, 0);
+      var yesterDay = new Date(date - 1000);
+      return yesterDay.getDate();
+    } }, { key: "nongli", value: function nongli(
+    year, month, day) {
+      var calendarobj = {
+        gregorianYear: null, //公历年
+        gregorianMonth: null, //公历月
+        gregorianDay: null, //公历日
+        weekday: null, //星期
+        hours: null,
+        minutes: null,
+        seconds: null,
+
+        lunarYear: null, //农历年
+        lunarMonth: null, //农历月
+        lunarDay: null, //农历日
+
+        lunarYearCn: '', //农历天干地支纪年
+        lunarMonthCn: '', //农历中文月
+        lunarDayCn: '', //农历中文日
+        zodiacYear: '', //农历生肖年
+
+        solarTerm: '', //节气
+        gregorianFestival: '', //公历节日
+        lunarFestival: '' //农历节日
+      };
+
+      var lunarInfo = [
+      0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
+      0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,
+      0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970,
+      0x06566, 0x0d4a0, 0x0ea50, 0x06e95, 0x05ad0, 0x02b60, 0x186e3, 0x092e0, 0x1c8d7, 0x0c950,
+      0x0d4a0, 0x1d8a6, 0x0b550, 0x056a0, 0x1a5b4, 0x025d0, 0x092d0, 0x0d2b2, 0x0a950, 0x0b557,
+      0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5d0, 0x14573, 0x052d0, 0x0a9a8, 0x0e950, 0x06aa0,
+      0x0aea6, 0x0ab50, 0x04b60, 0x0aae4, 0x0a570, 0x05260, 0x0f263, 0x0d950, 0x05b57, 0x056a0,
+      0x096d0, 0x04dd5, 0x04ad0, 0x0a4d0, 0x0d4d4, 0x0d250, 0x0d558, 0x0b540, 0x0b5a0, 0x195a6,
+      0x095b0, 0x049b0, 0x0a974, 0x0a4b0, 0x0b27a, 0x06a50, 0x06d40, 0x0af46, 0x0ab60, 0x09570,
+      0x04af5, 0x04970, 0x064b0, 0x074a3, 0x0ea50, 0x06b58, 0x055c0, 0x0ab60, 0x096d5, 0x092e0,
+      0x0c960, 0x0d954, 0x0d4a0, 0x0da50, 0x07552, 0x056a0, 0x0abb7, 0x025d0, 0x092d0, 0x0cab5,
+      0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930,
+      0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530,
+      0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
+      0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0];
+
+      var zodiacs = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+      var Gan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+      var Zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+      var weekday = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+      var now = new Date();
+
+      //用于计算农历年月日的数据
+      var GY = year;
+      var GM = month;
+      var GD = day;
+
+
+      //==== 传入 offset 传回干支, 0=甲子
+      function cyclical(num) {
+        return Gan[num % 10] + Zhi[num % 12];
+      }
+
+      //==== 传回农历 year年的总天数
+      function lYearDays(year) {
+        var i,sum = 348;
+        for (i = 0x8000; i > 0x8; i >>= 1) {
+          sum += lunarInfo[year - 1900] & i ? 1 : 0;
+        }
+        return sum + leapDays(year);
+      }
+
+      //==== 传回农历 year年闰月的天数
+      function leapDays(year) {
+        if (leapMonth(year)) {
+          return lunarInfo[year - 1900] & 0x10000 ? 30 : 29;
+        } else
+        {
+          return 0;
+        }
+      }
+
+      //==== 传回农历 year年闰哪个月 1-12 , 没闰传回 0
+      function leapMonth(year) {
+        return lunarInfo[year - 1900] & 0xf;
+      }
+
+      //==== 传回农历 year年month月的总天数
+      function monthDays(year, month) {
+        return lunarInfo[year - 1900] & 0x10000 >> month ? 30 : 29;
+      }
+
+      //==== 算出农历, 传入日期对象, 传回农历日期对象
+      //     该对象属性有 农历年year 农历月month 农历日day 是否闰年isLeap yearCyl dayCyl monCyl
+      function Lunar(objDate) {
+        var i,temp = 0;
+        var baseDate = new Date(1900, 0, 31);
+        var offset = Math.floor((objDate - baseDate) / 86400000);
+
+        var dayCyl = offset + 40;
+        var monCyl = 14;
+
+        for (i = 1900; i < 2050 && offset > 0; i++) {
+          temp = lYearDays(i);
+          offset -= temp;
+          monCyl += 12;
+        }
+        if (offset < 0) {
+          offset += temp;
+          i--;
+          monCyl -= 12;
+        }
+        //农历年
+        var year = i;
+        var yearCyl = i - 1864;
+
+        var leap = leapMonth(i); //闰哪个月
+        var isLeap = false; //是否闰年
+
+        for (i = 1; i < 13 && offset > 0; i++) {
+          //闰月
+          if (leap > 0 && i === leap + 1 && isLeap === false) {
+            --i;isLeap = true;temp = leapDays(year);
+          } else
+          {
+            temp = monthDays(year, i);
+          }
+
+          //解除闰月
+          if (isLeap === true && i === leap + 1) {
+            isLeap = false;
+          }
+
+          offset -= temp;
+          if (isLeap === false) {
+            monCyl++;
+          }
+        }
+
+        if (offset === 0 && leap > 0 && i === leap + 1)
+        if (isLeap) {
+          isLeap = false;
+        } else
+        {
+          isLeap = true;
+          --i;
+          --monCyl;
+        }
+
+        if (offset < 0) {
+          offset += temp;
+          --i;
+          --monCyl;
+        }
+        //农历月
+        var month = i;
+        //农历日
+        var day = offset + 1;
+
+        return {
+          year: year,
+          month: month,
+          day: day,
+          isLeap: isLeap,
+          leap: leap,
+          yearCyl: yearCyl,
+          dayCyl: dayCyl,
+          monCyl: monCyl };
+
+      }
+
+      //==== 中文日期 m为传入月份，d为传入日期
+      function cDay(m, d) {
+        var nStr1 = ['日', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+        var nStr2 = ['初', '十', '廿', '卅', ''];
+        //农历中文月
+        var lunarMonthCn;
+        //农历中文日
+        var lunarDayCn;
+        if (m > 10) {
+          lunarMonthCn = '十' + nStr1[m - 10];
+        } else {
+          lunarMonthCn = nStr1[m];
+        }
+        lunarMonthCn += '月';
+
+        switch (d) {
+          case 10:lunarDayCn = '初十';break;
+          case 20:lunarDayCn = '二十';break;
+          case 30:lunarDayCn = '三十';break;
+          default:lunarDayCn = nStr2[Math.floor(d / 10)] + nStr1[d % 10];}
+
+        return {
+          lunarMonthCn: lunarMonthCn,
+          lunarDayCn: lunarDayCn };
+
+      }
+
+      //节气
+      function getSolarTerm() {
+        var sTermInfo = [
+        0, 21208, 42467, 63836, 85337, 107014,
+        128867, 150921, 173149, 195551, 218072, 240693,
+        263343, 285989, 308563, 331033, 353350, 375494,
+        397447, 419210, 440795, 462224, 483532, 504758];
+
+        var solarTerm = [
+        '小寒', '大寒', '立春', '雨水', '惊蛰', '春分',
+        '清明', '谷雨', '立夏', '小满', '芒种', '夏至',
+        '小暑', '大暑', '立秋', '处暑', '白露', '秋分',
+        '寒露', '霜降', '立冬', '小雪', '大雪', '冬至'];
+
+
+        var solarTerms = '';
+        var tmp1 = new Date(
+        31556925974.7 * (GY - 1900) + sTermInfo[(GM - 1) * 2 + 1] * 60000 + Date.UTC(1900, 0, 6, 2, 5));
+
+        var tmp2 = tmp1.getUTCDate();
+        if (tmp2 === GD) solarTerms = solarTerm[(GM - 1) * 2 + 1];
+        tmp1 = new Date(
+        31556925974.7 * (GY - 1900) + sTermInfo[(GM - 1) * 2] * 60000 + Date.UTC(1900, 0, 6, 2, 5));
+
+        tmp2 = tmp1.getUTCDate();
+        if (tmp2 === GD) solarTerms = solarTerm[(GM - 1) * 2];
+
+        return solarTerms;
+      }
+
+      //==== 中文日期 m为传入月份，d为传入日期
+      function cDay(m, d) {
+        var nStr1 = ['日', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+        var nStr2 = ['初', '十', '廿', '卅', ''];
+        //农历中文月
+        var lunarMonthCn;
+        //农历中文日
+        var lunarDayCn;
+        if (m > 10) {
+          lunarMonthCn = '十' + nStr1[m - 10];
+        } else {
+          lunarMonthCn = nStr1[m];
+        }
+        lunarMonthCn += '月';
+
+        switch (d) {
+          case 10:lunarDayCn = '初十';break;
+          case 20:lunarDayCn = '二十';break;
+          case 30:lunarDayCn = '三十';break;
+          default:lunarDayCn = nStr2[Math.floor(d / 10)] + nStr1[d % 10];}
+
+        return {
+          lunarMonthCn: lunarMonthCn,
+          lunarDayCn: lunarDayCn };
+
+      }
+      //去掉时分秒的日期
+      var sDObj = new Date(GY, GM - 1, GD);
+      var lDObj = new Lunar(sDObj);
+
+
+      //节气
+      // calendar.solarTerm = getSolarTerm()
+      var n = cDay(lDObj.month, lDObj.day);
+      var y = cyclical(GY - 1900 + 36);
+      return {
+        year: y,
+        month: n.lunarMonthCn,
+        day: n.lunarDayCn,
+        shengxiao: zodiacs[(GY - 4) % 12],
+        jieqi: getSolarTerm() };
+
+    }
+    //下个月，可以一直操作
+  }, { key: "nextMonth", value: function nextMonth() {
+      this.value = new Date(this.value.getFullYear(), this.value.getMonth() + 1, 1);
+      return this;
+    }
+    //上个月，可以一直操作
+  }, { key: "prevMonth", value: function prevMonth() {
+      this.value = new Date(this.value.getFullYear(), this.value.getMonth() - 1, 1);
+      return this;
+    }
+    //下一年
+  }, { key: "nexYear", value: function nexYear() {
+      this.value = new Date(this.value.getFullYear() + 1, this.value.getMonth(), this.value.getDate());
+      return this;
+    }
+    //上一年
+  }, { key: "prevYear", value: function prevYear() {
+      this.value = new Date(this.value.getFullYear() - 1, this.value.getMonth(), this.value.getDate());
+      return this;
+    }
+    // 把之前设置的上一年，下一年，上一月下一月等数据清除，恢复 到最原始的月份年份数据。
+  }, { key: "setInit", value: function setInit() {
+      this.value = this.now_day_month;
+      return this;
+    }
+    // 返回初始化时的月份
+  }, { key: "getNowData", value: function getNowData() {
+      // 当前时间 。
+      var week = [7, 1, 2, 3, 4, 5, 6];
+      var text_week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      var _thisdateStr = this.now_day_month.toLocaleString();
+      var _thisMothn = this.now_day_month.getMonth(); //当前月
+      var _thisDay = this.now_day_month.getDate(); //当前日
+      var _thisYear = this.now_day_month.getFullYear(); //当前年
+      var _thisWeek = this.now_day_month.getDay(); //当前周
+      var _thisMothn_day = new Date(_thisYear, _thisMothn, 1); ///当月第一天数据。
+      var _thisDayDate = new Date(_thisYear, _thisMothn, _thisDay);
+      var months = [31, this.monthDay(_thisYear, _thisMothn), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      var _thisMothn_lastDay = new Date(_thisYear, _thisMothn, months[_thisMothn]); ///当月最后数据。
+      var dateArray = []; //当前日历表数据。
+      var llineDate = []; //行数据。
+      var j = 1;
+      var ishs = true; //如果第一排没有本月数据需要切换模式。把本月放第一位。
+      for (var i = 1; i < 8; i++) {
+        var tdy = new Date(_thisYear, _thisMothn, i - 6 - _thisMothn_day.getDay()); //当前循环日期。
+        if (i == 7) {
+
+          var tf = tdy.getTime() >= _thisMothn_day.getTime() && tdy.getTime() <= _thisMothn_lastDay.getTime() ? true : false;
+          if (!tf) {
+            ishs = false;
+            break;
+          }
+        }
+      }
+      for (var _i = 1; _i < 43; _i++) {
+        var Day = null;
+        if (!ishs) {
+          Day = new Date(_thisYear, _thisMothn, _i + 1 - _thisMothn_day.getDay()); //当前循环日期。
+        } else {
+          Day = new Date(_thisYear, _thisMothn, _i - 6 - _thisMothn_day.getDay()); //当前循环日期。
+        }
+        dateArray.push({
+          year: Day.getFullYear(), //年
+          month: Day.getMonth() + 1, //月1-12
+          week: week[Day.getDay()], //周的数字1~7
+          week_text: text_week[Day.getDay()], //周的中文
+          day: Day.getDate(), //几号
+          prevMoth: Day.getTime() < _thisMothn_day.getTime() ? true : false, //是否是上月。
+          nowMonth: Day.getTime() >= _thisMothn_day.getTime() && Day.getTime() <= _thisMothn_lastDay.getTime() ? true : false, //是否当月
+          nowDay: Day.getTime() == _thisDayDate.getTime() ? true : false, //是否是当天。
+          nowYear: 0, //是否当年
+          nextMoth: Day.getTime() > _thisMothn_lastDay.getTime() ? true : false, //是否下月
+          beginEnd: Day.getTime() >= this.start_time.getTime() && Day.getTime() <= this.end_time.getTime() ? true : false, //是否在开始和结束区间范围内。
+          nongli: this.nongli(Day.getFullYear(), Day.getMonth() + 1, Day.getDate()) });
+
+
+      }
+
+      return dateArray;
+    }
+    // 返回当前选中月的日历数组。如果你不设置value和数据getNowData和getData相等。
+    /**
+     * 返回当前月数据。
+     * @return {
+    	 beginEnd: false,//是否在规定范围时间内
+    	 day: 16,//日
+    	 month: 7,//月
+    	 nextMoth: false,//是否下月
+    	 nowDay: false,//是否当天
+    	 nowMonth: true,//是否当月
+    	 prevMoth: false,/是否下月
+    	 week: 5,//周1-7
+    	 week_text: "周五",//同上
+    	 year: 2021,//年
+    	 nongli:{ //农历
+    		 day: "初七",//日
+    		 jieqi: "",//节气
+    		 month: "六月",//月
+    		 shengxiao: "牛",//生肖
+    		 year: "辛丑" //农历年
+    	 }
+     }
+     */ }, { key: "getData", value: function getData()
+    {var _this = this;
+      // 当前时间 。
+      var week = [7, 1, 2, 3, 4, 5, 6];
+      var text_week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      var _thisdateStr = this.value.toLocaleString();
+      var _thisMothn = this.value.getMonth(); //当前月
+      var _thisDay = this.value.getDate(); //当前日
+      var _thisYear = this.value.getFullYear(); //当前年
+      var _thisWeek = this.value.getDay(); //当前周
+      var _thisMothn_day = new Date(_thisYear, _thisMothn, 1); ///当月第一天数据。
+      var _thisDayDate = new Date(_thisYear, _thisMothn, _thisDay);
+      var months = [31, this.monthDay(_thisYear, _thisMothn), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      var _thisMothn_lastDay = new Date(_thisYear, _thisMothn, months[_thisMothn]); ///当月最后数据。
+      var dateArray = []; //当前日历表数据。
+      var llineDate = []; //行数据。
+      var j = 1;
+      var ishs = true; //如果第一排没有本月数据需要切换模式。把本月放第一位。
+      for (var i = 1; i < 8; i++) {
+        var tdy = new Date(_thisYear, _thisMothn, i - 6 - _thisMothn_day.getDay()); //当前循环日期。
+        if (i == 7) {
+
+          var tf = tdy.getTime() >= _thisMothn_day.getTime() && tdy.getTime() <= _thisMothn_lastDay.getTime() ? true : false;
+          if (!tf) {
+            ishs = false;
+            break;
+          }
+        }
+      }var _loop = function _loop(
+
+      _i2) {
+        Day = null;
+        if (!ishs) {
+          Day = new Date(_thisYear, _thisMothn, _i2 + 1 - _thisMothn_day.getDay()); //当前循环日期。
+        } else {
+          Day = new Date(_thisYear, _thisMothn, _i2 - 6 - _thisMothn_day.getDay()); //当前循环日期。
+        }
+        var dstr = Day.getFullYear() + "-" + (Day.getMonth() + 1) + "-" + Day.getDate();
+        var TxtIndex = _this.txtdateArray.findIndex(function (item) {
+
+          return item.date == dstr;
+        });
+
+
+        dateArray.push({
+          year: Day.getFullYear(), //年
+          month: Day.getMonth() + 1, //月1-12
+          week: week[Day.getDay()], //周的数字1~7
+          week_text: text_week[Day.getDay()], //周的中文
+          day: Day.getDate(), //几号
+          prevMoth: Day.getTime() < _thisMothn_day.getTime() ? true : false, //是否是上月。
+          nowMonth: Day.getTime() >= _thisMothn_day.getTime() && Day.getTime() <= _thisMothn_lastDay.getTime() ? true : false, //是否当月
+          nowDay: Day.getTime() == _thisDayDate.getTime() ? true : false, //是否是当天。
+          nextMoth: Day.getTime() > _thisMothn_lastDay.getTime() ? true : false, //是否下月
+          beginEnd: Day.getTime() >= _this.start_time.getTime() && Day.getTime() <= _this.end_time.getTime() ? true : false, //是否在开始和结束区间范围内。
+          nongli: _this.nongli(Day.getFullYear(), Day.getMonth() + 1, Day.getDate()),
+          text: TxtIndex > -1 ? _this.txtdateArray[TxtIndex]['text'] : "" });};for (var _i2 = 1; _i2 < 43; _i2++) {var Day;_loop(_i2);
+
+
+      }
+
+      return dateArray;
+    } }]);return calendar;}();var _default =
+
+
+
+
+calendar;exports.default = _default;
+
+/***/ }),
+/* 162 */
+/*!*****************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/signBoard.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 签名版，钢笔效果
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 源参考：https://www.cnblogs.com/fangsmile/p/14324460.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */var
+
+
+
+Point =
+function Point(x, y, time) {_classCallCheck(this, Point);
+  this.x = x;
+  this.y = y;
+  this.isControl = false;
+  this.time = Date.now();
+  this.lineWidth = 0;
+  this.isAdd = false;
+};var
+
+
+Line =
+function Line() {_classCallCheck(this, Line);
+  this.points = new Array();
+  this.changeWidthCount = 0;
+  this.lineWidth = 10;
+};var
+
+HandwritingSelf = /*#__PURE__*/function () {
+
+  function HandwritingSelf(canvas, w, h) {var line_w = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 8;var line_color = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '#ff0000';_classCallCheck(this, HandwritingSelf);
+
+    this.canvas = { width: w, height: h };
+    this.ctx = canvas;
+    var context = this.ctx;
+    this.ctx.ellipse = function (x, y, a, b) {
+
+    } // ----
+    // this.points = new Array();
+    ;this.line = new Line();
+    this.pointLines = new Array(); //Line数组
+    this.k = 0.5;
+    this.begin = null;
+    this.middle = null;
+    this.end = null;
+    this.preTime = null;
+    this.lineWidth = line_w;
+    this.lineColor = line_color;
+    this.isDown = false;
+  }_createClass(HandwritingSelf, [{ key: "down", value: function down(
+    x, y) {
+      this.isDown = true;
+      this.line = new Line();
+      this.line.lineWidth = this.lineWidth;
+      var currentPoint = new Point(x, y, Date.now());
+      this.addPoint(currentPoint);
+
+      this.preTime = Date.now();
+    } }, { key: "move", value: function move(
+    x, y) {
+      // console.log("move:",x,y)
+      if (this.isDown) {
+        var currentPoint = new Point(x, y, Date.now());
+        this.addPoint(currentPoint);
+        this.draw();
+      }
+    } }, { key: "up", value: function up(
+    x, y) {
+      // if (e.touches.length > 0) {
+      var currentPoint = new Point(x, y, Date.now());
+      this.addPoint(currentPoint);
+      // }
+      this.draw(true);
+
+      this.pointLines.push(this.line);
+
+      this.begin = null;
+      this.middle = null;
+      this.end = null;
+      this.isDown = false;
+    } }, { key: "draw", value: function draw()
+    {var _this = this;var isUp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.setStrokeStyle(this.lineColor);
+
+
+      //绘制不包含this.line的线条
+      this.pointLines.forEach(function (line, index) {
+        var points = line.points;
+        _this.ctx.beginPath();
+        _this.ctx.ellipse(points[0].x - 1.5, points[0].y, 6, 3, Math.PI / 4, 0, Math.PI * 2);
+        _this.ctx.fill();
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(points[0].x, points[0].y);
+        var lastW = line.lineWidth;
+        _this.ctx.setLineWidth(line.lineWidth);
+        _this.ctx.setLineJoin("round");
+        _this.ctx.setLineCap("round");
+        var minLineW = line.lineWidth / 4;
+        var isChangeW = false;
+
+        var changeWidthCount = line.changeWidthCount;
+        for (var _i = 1; _i <= points.length; _i++) {
+          if (_i == points.length) {
+            _this.ctx.stroke();
+            break;
+          }
+          if (_i > points.length - changeWidthCount) {
+            if (!isChangeW) {
+              _this.ctx.stroke(); //将之前的线条不变的path绘制完
+              isChangeW = true;
+              if (_i > 1 && points[_i - 1].isControl)
+              continue;
+            }
+            var w = (lastW - minLineW) / changeWidthCount * (points.length - _i) + minLineW;
+            points[_i - 1].lineWidth = w;
+            _this.ctx.beginPath(); //为了开启新的路径 否则每次stroke 都会把之前的路径在描一遍
+            // this.ctx.strokeStyle = "rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+",1)";
+            _this.ctx.setLineWidth(w);
+            _this.ctx.moveTo(points[_i - 1].x, points[_i - 1].y); //移动到之前的点
+            _this.ctx.lineTo(points[_i].x, points[_i].y);
+            _this.ctx.stroke(); //将之前的线条不变的path绘制完
+          } else {
+            if (points[_i].isControl && points[_i + 1]) {
+              _this.ctx.quadraticCurveTo(points[_i].x, points[_i].y, points[_i + 1].x, points[_i + 1].y);
+            } else if (_i >= 1 && points[_i - 1].isControl) {//上一个是控制点 当前点已经被绘制
+            } else
+            _this.ctx.lineTo(points[_i].x, points[_i].y);
+          }
+        }
+      });
+
+      //绘制this.line线条
+      var points;
+      if (isUp)
+      points = this.line.points;else
+
+      points = _toConsumableArray(this.line.points);
+      //当前绘制的线条最后几个补点 贝塞尔方式增加点
+      var count = 0;
+      var insertCount = 0;
+      var i = points.length - 1;
+      var endPoint = points[i];
+      var controlPoint;
+      var startPoint;
+      while (i >= 0) {
+        if (points[i].isControl == true) {
+          controlPoint = points[i];
+          count++;
+        } else {
+          startPoint = points[i];
+        }
+        if (startPoint && controlPoint && endPoint) {//使用贝塞尔计算补点
+          var dis = this.z_distance(startPoint, controlPoint) + this.z_distance(controlPoint, endPoint);
+          var insertPoints = this.BezierCalculate([startPoint, controlPoint, endPoint], Math.floor(dis / 6) + 1);
+          insertCount += insertPoints.length;
+          var index = i; //插入位置
+          // 把insertPoints 变成一个适合splice的数组（包含splice前2个参数的数组） 
+          insertPoints.unshift(index, 1);
+          Array.prototype.splice.apply(points, insertPoints);
+
+          //补完点后
+          endPoint = startPoint;
+          startPoint = null;
+        }
+        if (count >= 6)
+        break;
+        i--;
+      }
+      //确定最后线宽变化的点数
+      var changeWidthCount = count + insertCount;
+      if (isUp)
+      this.line.changeWidthCount = changeWidthCount;
+
+      //制造椭圆头
+      this.ctx.fillStyle = "rgba(255,20,87,1)";
+      this.ctx.beginPath();
+      this.ctx.ellipse(points[0].x - 1.5, points[0].y, 6, 3, Math.PI / 4, 0, Math.PI * 2);
+      this.ctx.fill();
+      this.ctx.draw(true);
+
+      this.ctx.beginPath();
+      this.ctx.moveTo(points[0].x, points[0].y);
+      var lastW = this.line.lineWidth;
+      this.ctx.setLineWidth(this.line.lineWidth);
+      this.ctx.setLineJoin("round");
+      this.ctx.setLineCap("round");
+      var minLineW = this.line.lineWidth / 4;
+      var isChangeW = false;
+      for (var _i2 = 1; _i2 <= points.length; _i2++) {
+        if (_i2 == points.length) {
+          this.ctx.stroke();
+          break;
+        }
+        //最后的一些点线宽变细
+        if (_i2 > points.length - changeWidthCount) {
+          if (!isChangeW) {
+            this.ctx.stroke(); //将之前的线条不变的path绘制完
+            isChangeW = true;
+            if (_i2 > 1 && points[_i2 - 1].isControl)
+            continue;
+          }
+
+          //计算线宽
+          var w = (lastW - minLineW) / changeWidthCount * (points.length - _i2) + minLineW;
+          points[_i2 - 1].lineWidth = w;
+          this.ctx.beginPath(); //为了开启新的路径 否则每次stroke 都会把之前的路径在描一遍
+          // this.ctx.strokeStyle = "rgba(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ",0.5)";
+          this.ctx.setLineWidth(w);
+          this.ctx.moveTo(points[_i2 - 1].x, points[_i2 - 1].y); //移动到之前的点
+          this.ctx.lineTo(points[_i2].x, points[_i2].y);
+          this.ctx.stroke(); //将之前的线条不变的path绘制完
+        } else {
+          if (points[_i2].isControl && points[_i2 + 1]) {
+            this.ctx.quadraticCurveTo(points[_i2].x, points[_i2].y, points[_i2 + 1].x, points[_i2 + 1].y);
+          } else if (_i2 >= 1 && points[_i2 - 1].isControl) {//上一个是控制点 当前点已经被绘制
+          } else
+          this.ctx.lineTo(points[_i2].x, points[_i2].y);
+        }
+      }
+      this.ctx.draw(true);
+    } }, { key: "addPoint", value: function addPoint(
+
+    p) {
+      if (this.line.points.length >= 1) {
+        var last_point = this.line.points[this.line.points.length - 1];
+        var distance = this.z_distance(p, last_point);
+        if (distance < 10) {
+          return;
+        }
+      }
+
+      if (this.line.points.length == 0) {
+        this.begin = p;
+        p.isControl = true;
+        this.pushPoint(p);
+      } else {
+        this.middle = p;
+        var controlPs = this.computeControlPoints(this.k, this.begin, this.middle, null);
+        this.pushPoint(controlPs.first);
+        this.pushPoint(p);
+        p.isControl = true;
+
+        this.begin = this.middle;
+      }
+    } }, { key: "addOtherPoint", value: function addOtherPoint(
+
+    p1, p2, w1, w2) {
+
+      var otherPoints = new Array();
+      var dis = this.z_distance(p1, p2);
+      if (dis >= 25) {
+        otherPoints.push(p1);
+        var insertPCount = Math.floor(dis / 20);
+        for (var j = 0; j < insertPCount; j++) {
+          var insertP = new Point(p1.x + (j + 1) / (insertPCount + 1) * (p2.x - p1.x), p1.y + (j + 1) / (insertPCount + 1) * (p2.y - p1.y));
+          insertP.isAdd = true;
+          otherPoints.push(insertP);
+        }
+        otherPoints.push(p2);
+      }
+      var count = otherPoints.length;
+      if (count > 0) {
+        console.log("addOtherPoint");
+        debugger;
+        var diffW = (w2 - w1) / (count - 1);
+        for (var i = 1; i < count; i++) {
+          var w = w1 + diffW * i;
+          this.ctx.beginPath();
+          this.ctx.setLineWidth(w);
+          this.ctx.moveTo(otherPoints[i - 1].x, otherPoints[i - 1].y);
+          this.ctx.lineTo(otherPoints[i].x, otherPoints[i].y);
+          this.ctx.stroke();
+        }
+      }
+      return otherPoints;
+    } }, { key: "pushPoint", value: function pushPoint(
+    p) {
+      //排除重复点
+      if (this.line.points.length >= 1 && this.line.points[this.line.points.length - 1].x == p.x && this.line.points[this.line.points.length - 1].y == p.y)
+      return;
+      this.line.points.push(p);
+    } }, { key: "computeControlPoints", value: function computeControlPoints(
+    k, begin, middle, end) {
+      if (k > 0.5 || k <= 0)
+      return;
+
+      var diff1 = new Point(middle.x - begin.x, middle.y - begin.y);
+      var diff2 = null;
+      if (end)
+      diff2 = new Point(end.x - middle.x, end.y - middle.y);
+
+      // let l1 = (diff1.x ** 2 + diff1.y ** 2) ** (1 / 2)
+      // let l2 = (diff2.x ** 2 + diff2.y ** 2) ** (1 / 2)
+
+      var first = new Point(middle.x - k * diff1.x, middle.y - k * diff1.y);
+      var second = null;
+      if (diff2)
+      second = new Point(middle.x + k * diff2.x, middle.y + k * diff2.y);
+      return { first: first, second: second };
+    }
+    // W_current = 
+    // 　　W_previous + min( abs(k*s - W_previous), distance * K_width_unit_change) (k * s-W_previous) >= 0
+    // 　　W_previous - min( abs(k*s - W_previous), distance * K_width_unit_change) (k * s-W_previous) < 0
+    // 　　W_current 　　　　  当前线段的宽度
+    // 　　W_previous　　　　与当前线条相邻的前一条线段的宽度
+    // 　　distance 　　	　　    当前线条的长度
+    // 　　w_k 　　　　　　　	设定的一个固定阈值,表示:单位距离内, 笔迹的线条宽度可以变化的最大量. 
+    // 　　distance * w_k 　　  即为当前线段的长度内, 笔宽可以相对于前一条线段笔宽的基础上, 最多能够变宽或者可以变窄多少.
+  }, { key: "z_linewidth", value: function z_linewidth(b, e, bwidth, step) {
+
+      if (e.time == b.time)
+      return bwidth;
+
+      var max_speed = 2.0;
+      var d = this.z_distance(b, e);
+      var s = d / (e.time - b.time); //计算速度
+      console.log("s", e.time - b.time, s);
+      s = s > max_speed ? max_speed : s;
+
+      // let w = (max_speed - s) / max_speed;
+      var w = 0.5 / s;
+
+      var max_dif = d * step;
+      console.log(w, bwidth, max_dif);
+      if (w < 0.05) w = 0.05;
+      if (Math.abs(w - bwidth) > max_dif) {
+        if (w > bwidth)
+        w = bwidth + max_dif;else
+
+        w = bwidth - max_dif;
+      }
+      // printf("d:%.4f, time_diff:%lld, speed:%.4f, width:%.4f\n", d, e.t-b.t, s, w);
+      return w;
+    } }, { key: "z_distance", value: function z_distance(
+    b, e) {
+      return Math.sqrt(Math.pow(e.x - b.x, 2) + Math.pow(e.y - b.y, 2));
+    } }, { key: "BezierCalculate", value: function BezierCalculate(
+    poss, precision) {
+
+      //维度，坐标轴数（二维坐标，三维坐标...）
+      var dimersion = 2;
+
+      //贝塞尔曲线控制点数（阶数）
+      var number = poss.length;
+
+      //控制点数不小于 2 ，至少为二维坐标系
+      if (number < 2 || dimersion < 2)
+      return null;
+
+      var result = new Array();
+
+      //计算杨辉三角
+      var mi = new Array();
+      mi[0] = mi[1] = 1;
+      for (var i = 3; i <= number; i++) {
+
+        var t = new Array();
+        for (var j = 0; j < i - 1; j++) {
+          t[j] = mi[j];
+        }
+
+        mi[0] = mi[i - 1] = 1;
+        for (var _j = 0; _j < i - 2; _j++) {
+          mi[_j + 1] = t[_j] + t[_j + 1];
+        }
+      }
+
+      //计算坐标点
+      for (var _i3 = 0; _i3 < precision; _i3++) {
+        var _t = _i3 / precision;
+        var p = new Point(0, 0);
+        p.isAdd = true;
+        result.push(p);
+        for (var _j2 = 0; _j2 < dimersion; _j2++) {
+          var temp = 0.0;
+          for (var k = 0; k < number; k++) {
+            temp += Math.pow(1 - _t, number - k - 1) * (_j2 == 0 ? poss[k].x : poss[k].y) * Math.pow(_t, k) * mi[k];
+          }
+          _j2 == 0 ? p.x = temp : p.y = temp;
+        }
+      }
+
+      return result;
+    } }]);return HandwritingSelf;}();var _default =
+
+
+
+HandwritingSelf;exports.default = _default;
+
+/***/ }),
+/* 163 */
+/*!**********************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/choujianggailv.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function choujiang(prizes) {
+  var prizeList = []; //按照权重分解后的奖品数组
+  prizes.map(function (item) {
+    prizeList.push(_objectSpread({},
+
+    item));
+
+    for (var i = 0; i < item.gailv; i++) {
+      prizeList.push(_objectSpread({},
+
+      item));
+
+    }
+  });
+  prizeList = reset(prizeList);
+  // 范围随机数
+  function randomFrom(lowerValue, upperValue) {
+    return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
+  };
+  // 随机打乱数组
+  function reset(arr) {
+    var eachArr = arr.concat([]);
+    var lastArr = [];
+    function deepEach(deepArr) {
+      if (deepArr.length) {
+        var randomIndex = randomFrom(0, eachArr.length - 1);
+        lastArr.push(eachArr[randomIndex]);
+        eachArr.splice(randomIndex, 1);
+        deepEach(eachArr);
+      }
+    }
+    deepEach(eachArr);
+    return lastArr;
+  }
+  this.getResult = function () {
+    var random = randomFrom(0, prizeList.length - 1);
+    return prizeList[random];
+  };
+}var _default =
+
+choujiang;exports.default = _default;
+
+/***/ }),
+/* 164 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/config/config.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 创建时间：2021年7月2日11:24:23
+                                                                                                      * 作者：tmzdy
+                                                                                                      */
+var ver = '2.0.0';var _default =
+{
+  v: ver,
+  version: ver,
+  V: ver,
+  ver: ver };exports.default = _default;
+
+/***/ }),
+/* 165 */
+/*!***************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/store/tm-vuetify.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 166));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+_vue.default.use(_vuex.default);
+
+var moduleTrue = {};
+// 为了兼容如果用户，不按规范创建，或者不使用vuex时就可略过导入用户的模块。
+try {
+  var modulesList = !(function webpackMissingModule() { var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
+  if (typeof modulesList === 'function' && typeof modulesList !== 'undefined') {
+    // 加载modules目录下所有文件(分模块)
+    var modules = modulesList.keys().reduce(function (modules, modulePath) {
+      var moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1');
+      var value = modulesList(modulePath);
+      modules[moduleName] = _objectSpread({ namespaced: true }, value.default);
+
+      return modules;
+
+    }, {});
+    moduleTrue = modules;
+  }
+
+} catch (e) {
+  //TODO handle the exception
+  // console.warn('tmui提醒：用户未使用vuex')
+  console.error('如果未使用vuex，不用理会，如果使用了vuex报错请检错误信息：', e);
+}
+var pdefault_cookies_color = uni.getStorageSync('setTmVuetifyColor');
+var pdefault_cookies_black = uni.getStorageSync('setTmVuetifyBlack');
+
+
+
+var store = new _vuex.default.Store({
+  modules: _objectSpread({},
+  moduleTrue),
+
+  state: {
+    tmVuetify: {
+      color: typeof pdefault_cookies_color === 'string' ? pdefault_cookies_color : '',
+      black: typeof pdefault_cookies_black === 'boolean' ? pdefault_cookies_black : false,
+      tmVueTifly_pages: '',
+      tmVueTifly_pagesIndex: '',
+      //这里是微信小程序和微信H5的配置资料。
+      wxshareConfig_miniMp: {
+        title: '', // 分享标题
+        desc: '', // 描述
+        imageUrl: '', // 分享图片
+        path: '', // 分享路径
+        copyLink: '', // 复制链接
+        query: {} // 分享参数
+      } } },
+
+
+  getters: {
+    // $tm:state=>{
+    // 	return $tm;
+    // }
+  },
+  mutations: {
+    setTmVuetifyColor: function setTmVuetifyColor(state, color) {
+      _vue.default.set(state.tmVuetify, 'color', color);
+    },
+    setPageNow: function setPageNow(state, url) {
+      _vue.default.set(state.tmVuetify, 'tmVueTifly_pages', url);
+    },
+    setPageNowIndex: function setPageNowIndex(state, index) {
+      _vue.default.set(state.tmVuetify, 'tmVueTifly_pagesIndex', index);
+    },
+    setTmVuetifyBlack: function setTmVuetifyBlack(state, black) {
+      _vue.default.set(state.tmVuetify, 'black', black);
+      if (black === true) {
+        uni.setTabBarStyle({
+          backgroundColor: "#212121" });
+
+      } else {
+        uni.setTabBarStyle({
+          backgroundColor: "#FFFFFF" });
+
+      }
+    },
+    setWxShare: function setWxShare(state, cfg) {
+
+      var pcf = cfg || {};
+      if (typeof pcf !== 'object' || Array.isArray(cfg)) pcf = {};
+      _vue.default.set(state.tmVuetify, 'wxshareConfig_miniMp', _objectSpread(_objectSpread({}, state.tmVuetify.wxshareConfig_miniMp), pcf));
+
+    } } });var _default =
+
+
+
+store;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 166 */
+/*!**************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
+ */
+
+
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+    ? global
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  }, { prepend: true });
+
+  store.subscribeAction(function (action, state) {
+    devtoolHook.emit('vuex:action', action, state);
+  }, { prepend: true });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+function find (list, f) {
+  return list.filter(f)[0]
+}
+
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+function deepCopy (obj, cache) {
+  if ( cache === void 0 ) cache = [];
+
+  // just return if obj is immutable value
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  // if obj is hit, it is in circular structure
+  var hit = find(cache, function (c) { return c.original === obj; });
+  if (hit) {
+    return hit.copy
+  }
+
+  var copy = Array.isArray(obj) ? [] : {};
+  // put the copy into cache at first
+  // because we want to refer it in recursive deepCopy
+  cache.push({
+    original: obj,
+    copy: copy
+  });
+
+  Object.keys(obj).forEach(function (key) {
+    copy[key] = deepCopy(obj[key], cache);
+  });
+
+  return copy
+}
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.hasChild = function hasChild (key) {
+  return key in this._children
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if ((true)) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  var child = parent.getChild(key);
+
+  if (!child) {
+    if ((true)) {
+      console.warn(
+        "[vuex] trying to unregister module '" + key + "', which is " +
+        "not registered"
+      );
+    }
+    return
+  }
+
+  if (!child.runtime) {
+    return
+  }
+
+  parent.removeChild(key);
+};
+
+ModuleCollection.prototype.isRegistered = function isRegistered (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+
+  if (parent) {
+    return parent.hasChild(key)
+  }
+
+  return false
+};
+
+function update (path, targetModule, newModule) {
+  if ((true)) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if ((true)) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if ((true)) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+  this._makeLocalGettersCache = Object.create(null);
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if ((true)) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+
+  this._subscribers
+    .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+    .forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    ( true) &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if ((true)) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return new Promise(function (resolve, reject) {
+    result.then(function (res) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.after; })
+          .forEach(function (sub) { return sub.after(action, this$1.state); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in after action subscribers: ");
+          console.error(e);
+        }
+      }
+      resolve(res);
+    }, function (error) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.error; })
+          .forEach(function (sub) { return sub.error(action, this$1.state, error); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in error action subscribers: ");
+          console.error(e);
+        }
+      }
+      reject(error);
+    });
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn, options) {
+  return genericSubscribe(fn, this._subscribers, options)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn, options) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers, options)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if ((true)) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hasModule = function hasModule (path) {
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  return this._modules.isRegistered(path)
+};
+
+Store.prototype[[104,111,116,85,112,100,97,116,101].map(function (item) {return String.fromCharCode(item)}).join('')] = function (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs, options) {
+  if (subs.indexOf(fn) < 0) {
+    options && options.prepend
+      ? subs.unshift(fn)
+      : subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  // reset local getters cache
+  store._makeLocalGettersCache = Object.create(null);
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure environment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    if (store._modulesNamespaceMap[namespace] && ("development" !== 'production')) {
+      console.error(("[vuex] duplicate namespace " + namespace + " for the namespaced module " + (path.join('/'))));
+    }
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      if ((true)) {
+        if (moduleName in parentState) {
+          console.warn(
+            ("[vuex] state field \"" + moduleName + "\" was overridden by a module with the same name at \"" + (path.join('.')) + "\"")
+          );
+        }
+      }
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  if (!store._makeLocalGettersCache[namespace]) {
+    var gettersProxy = {};
+    var splitPos = namespace.length;
+    Object.keys(store.getters).forEach(function (type) {
+      // skip if the target getter is not match this namespace
+      if (type.slice(0, splitPos) !== namespace) { return }
+
+      // extract local getter type
+      var localType = type.slice(splitPos);
+
+      // Add a port to the getters proxy.
+      // Define as getter property because
+      // we do not want to evaluate the getters in this time.
+      Object.defineProperty(gettersProxy, localType, {
+        get: function () { return store.getters[type]; },
+        enumerable: true
+      });
+    });
+    store._makeLocalGettersCache[namespace] = gettersProxy;
+  }
+
+  return store._makeLocalGettersCache[namespace]
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if ((true)) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if ((true)) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.reduce(function (state, key) { return state[key]; }, state)
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if ((true)) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if ((true)) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  if (( true) && !isValidMap(states)) {
+    console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept another params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  if (( true) && !isValidMap(mutations)) {
+    console.error('[vuex] mapMutations: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  if (( true) && !isValidMap(getters)) {
+    console.error('[vuex] mapGetters: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if (( true) && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  if (( true) && !isValidMap(actions)) {
+    console.error('[vuex] mapActions: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  if (!isValidMap(map)) {
+    return []
+  }
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Validate whether given map is valid or not
+ * @param {*} map
+ * @return {Boolean}
+ */
+function isValidMap (map) {
+  return Array.isArray(map) || isObject(map)
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if (( true) && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+// Credits: borrowed code from fcomb/redux-logger
+
+function createLogger (ref) {
+  if ( ref === void 0 ) ref = {};
+  var collapsed = ref.collapsed; if ( collapsed === void 0 ) collapsed = true;
+  var filter = ref.filter; if ( filter === void 0 ) filter = function (mutation, stateBefore, stateAfter) { return true; };
+  var transformer = ref.transformer; if ( transformer === void 0 ) transformer = function (state) { return state; };
+  var mutationTransformer = ref.mutationTransformer; if ( mutationTransformer === void 0 ) mutationTransformer = function (mut) { return mut; };
+  var actionFilter = ref.actionFilter; if ( actionFilter === void 0 ) actionFilter = function (action, state) { return true; };
+  var actionTransformer = ref.actionTransformer; if ( actionTransformer === void 0 ) actionTransformer = function (act) { return act; };
+  var logMutations = ref.logMutations; if ( logMutations === void 0 ) logMutations = true;
+  var logActions = ref.logActions; if ( logActions === void 0 ) logActions = true;
+  var logger = ref.logger; if ( logger === void 0 ) logger = console;
+
+  return function (store) {
+    var prevState = deepCopy(store.state);
+
+    if (typeof logger === 'undefined') {
+      return
+    }
+
+    if (logMutations) {
+      store.subscribe(function (mutation, state) {
+        var nextState = deepCopy(state);
+
+        if (filter(mutation, prevState, nextState)) {
+          var formattedTime = getFormattedTime();
+          var formattedMutation = mutationTransformer(mutation);
+          var message = "mutation " + (mutation.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c prev state', 'color: #9E9E9E; font-weight: bold', transformer(prevState));
+          logger.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
+          logger.log('%c next state', 'color: #4CAF50; font-weight: bold', transformer(nextState));
+          endMessage(logger);
+        }
+
+        prevState = nextState;
+      });
+    }
+
+    if (logActions) {
+      store.subscribeAction(function (action, state) {
+        if (actionFilter(action, state)) {
+          var formattedTime = getFormattedTime();
+          var formattedAction = actionTransformer(action);
+          var message = "action " + (action.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c action', 'color: #03A9F4; font-weight: bold', formattedAction);
+          endMessage(logger);
+        }
+      });
+    }
+  }
+}
+
+function startMessage (logger, message, collapsed) {
+  var startMessage = collapsed
+    ? logger.groupCollapsed
+    : logger.group;
+
+  // render
+  try {
+    startMessage.call(logger, message);
+  } catch (e) {
+    logger.log(message);
+  }
+}
+
+function endMessage (logger) {
+  try {
+    logger.groupEnd();
+  } catch (e) {
+    logger.log('—— log end ——');
+  }
+}
+
+function getFormattedTime () {
+  var time = new Date();
+  return (" @ " + (pad(time.getHours(), 2)) + ":" + (pad(time.getMinutes(), 2)) + ":" + (pad(time.getSeconds(), 2)) + "." + (pad(time.getMilliseconds(), 3)))
+}
+
+function repeat (str, times) {
+  return (new Array(times + 1)).join(str)
+}
+
+function pad (num, maxLength) {
+  return repeat('0', maxLength - num.toString().length) + num
+}
+
+var index_cjs = {
+  Store: Store,
+  install: install,
+  version: '3.6.2',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers,
+  createLogger: createLogger
+};
+
+module.exports = index_cjs;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 2)))
+
+/***/ }),
+/* 167 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/vuex.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 操作全局Vuex。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 作者：tmzdy
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 时间：‎2021‎年‎10‎月‎14‎日
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 联系：zhongjihan@sina.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */var
+
+vuex = /*#__PURE__*/function () {
+  function vuex(store) {_classCallCheck(this, vuex);
+    this.store = store;
+  }
+  //链式调用
+  _createClass(vuex, [{ key: "state", value: function state() {
+      return this.store.state;
+    }
+    //链式调用
+  }, { key: "getters", value: function getters() {
+      var t = this;
+      var g = this.store.getters;
+      var keys = Object.keys(g);
+
+      var k = keys.map(function (el, index) {
+        var f = el.split('/');
+        var tst = {};
+        if (f.length == 1) {
+          tst[el] = g[el];
+        } else {
+
+          tst[f[0]] = {};
+          tst[f[0]][f[1]] = g[el];
+
+        }
+        return tst;
+      });
+      var rulst = {};
+      k.forEach(function (el) {
+        rulst = _objectSpread(_objectSpread({}, rulst), el);
+      });
+      return rulst;
+    } }, { key: "commit", value: function commit(
+    funName, arg) {
+      try {
+        this.store.commit(funName, arg);
+      } catch (e) {
+        console.error("未发现函数方法:" + funName);
+      }
+    } }, { key: "actions", value: function actions(
+    funName, arg) {
+      try {
+        return this.store.dispatch(funName, arg);
+      } catch (e) {
+        console.error("未发现函数方法:" + funName);
+      }
+    }
+    //获得原始vuex对象。
+  }, { key: "getVuex", value: function getVuex() {
+      return this.store;
+    } }]);return vuex;}();var _default =
+
+
+
+vuex;exports.default = _default;
+
+/***/ }),
+/* 168 */
+/*!*************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/function/theme.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var theme = {
+  getTheme: function getTheme() {
+    return {
+      color: uni.$tm.vx.state().tmVuetify.color,
+      black: uni.$tm.vx.state().tmVuetify.black };
+
+  },
+  setBlack: function setBlack(arg) {
+    var p = arg;
+    if (typeof arg !== 'undefined') {
+      uni.$tm.vx.commit("setTmVuetifyBlack", arg);
+    } else {
+      p = !uni.$tm.vx.state().tmVuetify.black;
+      uni.$tm.vx.commit("setTmVuetifyBlack", !uni.$tm.vx.state().tmVuetify.black);
+
+    }
+    uni.setStorageSync('setTmVuetifyBlack', p);
+
+  },
+  setTheme: function setTheme(arg) {
+    var p = arg || "primary";
+    uni.$tm.vx.commit("setTmVuetifyColor", p);
+    uni.setStorageSync('setTmVuetifyColor', p);
+  },
+  clear: function clear() {
+    uni.$tm.vx.commit("setTmVuetifyColor", '');
+    uni.removeStorageSync('setTmVuetifyColor');
+  } };var _default =
+
+
+theme;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 169 */
+/*!************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/tm-vuetify/tool/request/index.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../function/deepMerge */ 151));
+var _test = _interopRequireDefault(__webpack_require__(/*! ../function/test */ 152));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
+Request = /*#__PURE__*/function () {_createClass(Request, [{ key: "setConfig",
+    // 设置全局默认配置
+    value: function setConfig(customConfig) {
+      // 深度合并对象，否则会造成对象深层属性丢失
+      this.config = (0, _deepMerge.default)(this.config, customConfig);
+    }
+
+    // 主要请求部分
+  }, { key: "request", value: function request() {var _this = this;var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      // 检查请求拦截
+      if (this.interceptor.request && typeof this.interceptor.request === 'function') {
+        var tmpConfig = {};
+        var interceptorRequest = this.interceptor.request(options);
+        if (interceptorRequest === false) {
+          // 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
+          return new Promise(function () {});
+        }
+        this.options = interceptorRequest;
+      }
+      options.dataType = options.dataType || this.config.dataType;
+      options.responseType = options.responseType || this.config.responseType;
+      options.url = options.url || '';
+      options.params = options.params || {};
+      options.header = Object.assign({}, this.config.header, options.header);
+      options.method = options.method || this.config.method;
+
+      return new Promise(function (resolve, reject) {
+        options.complete = function (response) {
+          // 请求返回后，隐藏loading(如果请求返回快的话，可能会没有loading)
+          uni.hideLoading();
+          // 清除定时器，如果请求回来了，就无需loading
+          clearTimeout(_this.config.timer);
+          _this.config.timer = null;
+          // 判断用户对拦截返回数据的要求，如果originalData为true，返回所有的数据(response)到拦截器，否则只返回response.data
+          if (_this.config.originalData) {
+            // 判断是否存在拦截器
+            if (_this.interceptor.response && typeof _this.interceptor.response === 'function') {
+              var resInterceptors = _this.interceptor.response(response);
+              // 如果拦截器不返回false，就将拦截器返回的内容给this.$u.post的then回调
+              if (resInterceptors !== false) {
+                resolve(resInterceptors);
+              } else {
+                // 如果拦截器返回false，意味着拦截器定义者认为返回有问题，直接接入catch回调
+                reject(response);
+              }
+            } else {
+              // 如果要求返回原始数据，就算没有拦截器，也返回最原始的数据
+              resolve(response);
+            }
+          } else {
+            if (response.statusCode == 200) {
+              if (_this.interceptor.response && typeof _this.interceptor.response === 'function') {
+                var _resInterceptors = _this.interceptor.response(response.data);
+                if (_resInterceptors !== false) {
+                  resolve(_resInterceptors);
+                } else {
+                  reject(response.data);
+                }
+              } else {
+                // 如果不是返回原始数据(originalData=false)，且没有拦截器的情况下，返回纯数据给then回调
+                resolve(response.data);
+              }
+            } else {
+              // 不返回原始数据的情况下，服务器状态码不为200，modal弹框提示
+              // if(response.errMsg) {
+              // 	uni.showModal({
+              // 		title: response.errMsg
+              // 	});
+              // }
+              reject(response);
+            }
+          }
+        };
+
+        // 判断用户传递的URL是否/开头,如果不是,加上/，这里使用了uView的test.js验证库的url()方法
+        options.url = _test.default.url(options.url) ? options.url : _this.config.baseUrl + (options.url.indexOf('/') == 0 ?
+        options.url : '/' + options.url);
+
+        // 是否显示loading
+        // 加一个是否已有timer定时器的判断，否则有两个同时请求的时候，后者会清除前者的定时器id
+        // 而没有清除前者的定时器，导致前者超时，一直显示loading
+        if (_this.config.showLoading && !_this.config.timer) {
+          _this.config.timer = setTimeout(function () {
+            uni.showLoading({
+              title: _this.config.loadingText,
+              mask: _this.config.loadingMask });
+
+            _this.config.timer = null;
+          }, _this.config.loadingTime);
+        }
+        uni.request(options);
+      });
+      // .catch(res => {
+      // 	// 如果返回reject()，不让其进入this.$u.post().then().catch()后面的catct()
+      // 	// 因为很多人都会忘了写后面的catch()，导致报错捕获不到catch
+      // 	return new Promise(()=>{});
+      // })
+    } }]);
+
+  function Request() {var _this2 = this;_classCallCheck(this, Request);
+    this.config = {
+      baseUrl: '', // 请求的根域名
+      // 默认的请求头
+      header: {},
+      method: 'POST',
+      // 设置为json，返回后uni.request会对数据进行一次JSON.parse
+      dataType: 'json',
+      // 此参数无需处理，因为5+和支付宝小程序不支持，默认为text即可
+      responseType: 'text',
+      showLoading: true, // 是否显示请求中的loading
+      loadingText: '请求中...',
+      loadingTime: 800, // 在此时间内，请求还没回来的话，就显示加载中动画，单位ms
+      timer: null, // 定时器
+      originalData: false, // 是否在拦截器中返回服务端的原始数据，见文档说明
+      loadingMask: true // 展示loading的时候，是否给一个透明的蒙层，防止触摸穿透
+    };
+
+    // 拦截器
+    this.interceptor = {
+      // 请求前的拦截
+      request: null,
+      // 请求后的拦截
+      response: null };
+
+
+    // get请求
+    this.get = function (url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var header = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return _this2.request({
+        method: 'GET',
+        url: url,
+        header: header,
+        data: data });
+
+    };
+
+    // post请求
+    this.post = function (url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var header = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return _this2.request({
+        url: url,
+        method: 'POST',
+        header: header,
+        data: data });
+
+    };
+
+    // put请求，不支持支付宝小程序(HX2.6.15)
+    this.put = function (url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var header = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return _this2.request({
+        url: url,
+        method: 'PUT',
+        header: header,
+        data: data });
+
+    };
+
+    // delete请求，不支持支付宝和头条小程序(HX2.6.15)
+    this.delete = function (url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var header = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return _this2.request({
+        url: url,
+        method: 'DELETE',
+        header: header,
+        data: data });
+
+    };
+  }return Request;}();var _default =
+
+new Request();exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
 /* 170 */,
 /* 171 */,
 /* 172 */,
@@ -18006,7 +22802,6 @@ platform;exports.default = _default;
 /* 244 */,
 /* 245 */,
 /* 246 */,
-<<<<<<< HEAD
 /* 247 */,
 /* 248 */,
 /* 249 */,
@@ -18017,16 +22812,549 @@ platform;exports.default = _default;
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */
+/*!*************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/utils/weapp-qrcode.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Core code comes from https://github.com/davidshimjs/qrcodejs
+var QRCode;
+
+(function () {
+  /**
+                   * Get the type by string length
+                   * 
+                   * @private
+                   * @param {String} sText
+                   * @param {Number} nCorrectLevel
+                   * @return {Number} type
+                   */
+  function _getTypeNumber(sText, nCorrectLevel) {
+    var nType = 1;
+    var length = _getUTF8Length(sText);
+
+    for (var i = 0, len = QRCodeLimitLength.length; i <= len; i++) {
+      var nLimit = 0;
+
+      switch (nCorrectLevel) {
+        case QRErrorCorrectLevel.L:
+          nLimit = QRCodeLimitLength[i][0];
+          break;
+        case QRErrorCorrectLevel.M:
+          nLimit = QRCodeLimitLength[i][1];
+          break;
+        case QRErrorCorrectLevel.Q:
+          nLimit = QRCodeLimitLength[i][2];
+          break;
+        case QRErrorCorrectLevel.H:
+          nLimit = QRCodeLimitLength[i][3];
+          break;}
+
+
+      if (length <= nLimit) {
+        break;
+      } else {
+        nType++;
+      }
+    }
+
+    if (nType > QRCodeLimitLength.length) {
+      throw new Error("Too long data");
+    }
+
+    return nType;
+  }
+
+  function _getUTF8Length(sText) {
+    var replacedText = encodeURI(sText).toString().replace(/\%[0-9a-fA-F]{2}/g, 'a');
+    return replacedText.length + (replacedText.length != sText ? 3 : 0);
+  }
+
+  function QR8bitByte(data) {
+    this.mode = QRMode.MODE_8BIT_BYTE;
+    this.data = data;
+    this.parsedData = [];
+
+    // Added to support UTF-8 Characters
+    for (var i = 0, l = this.data.length; i < l; i++) {
+      var byteArray = [];
+      var code = this.data.charCodeAt(i);
+
+      if (code > 0x10000) {
+        byteArray[0] = 0xF0 | (code & 0x1C0000) >>> 18;
+        byteArray[1] = 0x80 | (code & 0x3F000) >>> 12;
+        byteArray[2] = 0x80 | (code & 0xFC0) >>> 6;
+        byteArray[3] = 0x80 | code & 0x3F;
+      } else if (code > 0x800) {
+        byteArray[0] = 0xE0 | (code & 0xF000) >>> 12;
+        byteArray[1] = 0x80 | (code & 0xFC0) >>> 6;
+        byteArray[2] = 0x80 | code & 0x3F;
+      } else if (code > 0x80) {
+        byteArray[0] = 0xC0 | (code & 0x7C0) >>> 6;
+        byteArray[1] = 0x80 | code & 0x3F;
+      } else {
+        byteArray[0] = code;
+      }
+
+      this.parsedData.push(byteArray);
+    }
+
+    this.parsedData = Array.prototype.concat.apply([], this.parsedData);
+
+    if (this.parsedData.length != this.data.length) {
+      this.parsedData.unshift(191);
+      this.parsedData.unshift(187);
+      this.parsedData.unshift(239);
+    }
+  }
+
+  QR8bitByte.prototype = {
+    getLength: function getLength(buffer) {
+      return this.parsedData.length;
+    },
+    write: function write(buffer) {
+      for (var i = 0, l = this.parsedData.length; i < l; i++) {
+        buffer.put(this.parsedData[i], 8);
+      }
+    } };
+
+
+
+  // QRCodeModel
+  function QRCodeModel(typeNumber, errorCorrectLevel) {
+    this.typeNumber = typeNumber;
+    this.errorCorrectLevel = errorCorrectLevel;
+    this.modules = null;
+    this.moduleCount = 0;
+    this.dataCache = null;
+    this.dataList = [];
+  }
+  QRCodeModel.prototype = {
+    addData: function addData(data) {var newData = new QR8bitByte(data);this.dataList.push(newData);this.dataCache = null;}, isDark: function isDark(row, col) {
+      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {throw new Error(row + "," + col);}
+      return this.modules[row][col];
+    }, getModuleCount: function getModuleCount() {return this.moduleCount;}, make: function make() {this.makeImpl(false, this.getBestMaskPattern());}, makeImpl: function makeImpl(test, maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;this.modules = new Array(this.moduleCount);for (var row = 0; row < this.moduleCount; row++) {this.modules[row] = new Array(this.moduleCount);for (var col = 0; col < this.moduleCount; col++) {this.modules[row][col] = null;}}
+      this.setupPositionProbePattern(0, 0);this.setupPositionProbePattern(this.moduleCount - 7, 0);this.setupPositionProbePattern(0, this.moduleCount - 7);this.setupPositionAdjustPattern();this.setupTimingPattern();this.setupTypeInfo(test, maskPattern);if (this.typeNumber >= 7) {this.setupTypeNumber(test);}
+      if (this.dataCache == null) {this.dataCache = QRCodeModel.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);}
+      this.mapData(this.dataCache, maskPattern);
+    }, setupPositionProbePattern: function setupPositionProbePattern(row, col) {for (var r = -1; r <= 7; r++) {if (row + r <= -1 || this.moduleCount <= row + r) continue;for (var c = -1; c <= 7; c++) {if (col + c <= -1 || this.moduleCount <= col + c) continue;if (0 <= r && r <= 6 && (c == 0 || c == 6) || 0 <= c && c <= 6 && (r == 0 || r == 6) || 2 <= r && r <= 4 && 2 <= c && c <= 4) {this.modules[row + r][col + c] = true;} else {this.modules[row + r][col + c] = false;}}}}, getBestMaskPattern: function getBestMaskPattern() {
+      var minLostPoint = 0;var pattern = 0;for (var i = 0; i < 8; i++) {this.makeImpl(true, i);var lostPoint = QRUtil.getLostPoint(this);if (i == 0 || minLostPoint > lostPoint) {minLostPoint = lostPoint;pattern = i;}}
+      return pattern;
+    }, createMovieClip: function createMovieClip(target_mc, instance_name, depth) {
+      var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);var cs = 1;this.make();for (var row = 0; row < this.modules.length; row++) {var y = row * cs;for (var col = 0; col < this.modules[row].length; col++) {var x = col * cs;var dark = this.modules[row][col];if (dark) {qr_mc.beginFill(0, 100);qr_mc.moveTo(x, y);qr_mc.lineTo(x + cs, y);qr_mc.lineTo(x + cs, y + cs);qr_mc.lineTo(x, y + cs);qr_mc.endFill();}}}
+      return qr_mc;
+    }, setupTimingPattern: function setupTimingPattern() {
+      for (var r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) {continue;}
+        this.modules[r][6] = r % 2 == 0;
+      }
+      for (var c = 8; c < this.moduleCount - 8; c++) {
+        if (this.modules[6][c] != null) {continue;}
+        this.modules[6][c] = c % 2 == 0;
+      }
+    }, setupPositionAdjustPattern: function setupPositionAdjustPattern() {
+      var pos = QRUtil.getPatternPosition(this.typeNumber);for (var i = 0; i < pos.length; i++) {
+        for (var j = 0; j < pos.length; j++) {
+          var row = pos[i];var col = pos[j];if (this.modules[row][col] != null) {continue;}
+          for (var r = -2; r <= 2; r++) {for (var c = -2; c <= 2; c++) {if (r == -2 || r == 2 || c == -2 || c == 2 || r == 0 && c == 0) {this.modules[row + r][col + c] = true;} else {this.modules[row + r][col + c] = false;}}}
+        }
+      }
+    }, setupTypeNumber: function setupTypeNumber(test) {
+      var bits = QRUtil.getBCHTypeNumber(this.typeNumber);for (var i = 0; i < 18; i++) {var mod = !test && (bits >> i & 1) == 1;this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;}
+      for (var i = 0; i < 18; i++) {var mod = !test && (bits >> i & 1) == 1;this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;}
+    }, setupTypeInfo: function setupTypeInfo(test, maskPattern) {
+      var data = this.errorCorrectLevel << 3 | maskPattern;var bits = QRUtil.getBCHTypeInfo(data);for (var i = 0; i < 15; i++) {var mod = !test && (bits >> i & 1) == 1;if (i < 6) {this.modules[i][8] = mod;} else if (i < 8) {this.modules[i + 1][8] = mod;} else {this.modules[this.moduleCount - 15 + i][8] = mod;}}
+      for (var i = 0; i < 15; i++) {var mod = !test && (bits >> i & 1) == 1;if (i < 8) {this.modules[8][this.moduleCount - i - 1] = mod;} else if (i < 9) {this.modules[8][15 - i - 1 + 1] = mod;} else {this.modules[8][15 - i - 1] = mod;}}
+      this.modules[this.moduleCount - 8][8] = !test;
+    }, mapData: function mapData(data, maskPattern) {
+      var inc = -1;var row = this.moduleCount - 1;var bitIndex = 7;var byteIndex = 0;for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6) col--;while (true) {
+          for (var c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              var dark = false;if (byteIndex < data.length) {dark = (data[byteIndex] >>> bitIndex & 1) == 1;}
+              var mask = QRUtil.getMask(maskPattern, row, col - c);if (mask) {dark = !dark;}
+              this.modules[row][col - c] = dark;bitIndex--;if (bitIndex == -1) {byteIndex++;bitIndex = 7;}
+            }
+          }
+          row += inc;if (row < 0 || this.moduleCount <= row) {row -= inc;inc = -inc;break;}
+        }
+      }
+    } };
+
+  QRCodeModel.PAD0 = 0xEC;
+  QRCodeModel.PAD1 = 0x11;
+  QRCodeModel.createData = function (typeNumber, errorCorrectLevel, dataList) {
+    var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);var buffer = new QRBitBuffer();for (var i = 0; i < dataList.length; i++) {var data = dataList[i];buffer.put(data.mode, 4);buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));data.write(buffer);}
+    var totalDataCount = 0;for (var i = 0; i < rsBlocks.length; i++) {totalDataCount += rsBlocks[i].dataCount;}
+    if (buffer.getLengthInBits() > totalDataCount * 8) {
+      throw new Error("code length overflow. (" +
+      buffer.getLengthInBits() +
+      ">" +
+      totalDataCount * 8 +
+      ")");
+    }
+    if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {buffer.put(0, 4);}
+    while (buffer.getLengthInBits() % 8 != 0) {buffer.putBit(false);}
+    while (true) {
+      if (buffer.getLengthInBits() >= totalDataCount * 8) {break;}
+      buffer.put(QRCodeModel.PAD0, 8);if (buffer.getLengthInBits() >= totalDataCount * 8) {break;}
+      buffer.put(QRCodeModel.PAD1, 8);
+    }
+    return QRCodeModel.createBytes(buffer, rsBlocks);
+  };
+  QRCodeModel.createBytes = function (buffer, rsBlocks) {
+    var offset = 0;var maxDcCount = 0;var maxEcCount = 0;var dcdata = new Array(rsBlocks.length);var ecdata = new Array(rsBlocks.length);for (var r = 0; r < rsBlocks.length; r++) {
+      var dcCount = rsBlocks[r].dataCount;var ecCount = rsBlocks[r].totalCount - dcCount;maxDcCount = Math.max(maxDcCount, dcCount);maxEcCount = Math.max(maxEcCount, ecCount);dcdata[r] = new Array(dcCount);for (var i = 0; i < dcdata[r].length; i++) {dcdata[r][i] = 0xff & buffer.buffer[i + offset];}
+      offset += dcCount;var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);var modPoly = rawPoly.mod(rsPoly);ecdata[r] = new Array(rsPoly.getLength() - 1);for (var i = 0; i < ecdata[r].length; i++) {var modIndex = i + modPoly.getLength() - ecdata[r].length;ecdata[r][i] = modIndex >= 0 ? modPoly.get(modIndex) : 0;}
+    }
+    var totalCodeCount = 0;for (var i = 0; i < rsBlocks.length; i++) {totalCodeCount += rsBlocks[i].totalCount;}
+    var data = new Array(totalCodeCount);var index = 0;for (var i = 0; i < maxDcCount; i++) {for (var r = 0; r < rsBlocks.length; r++) {if (i < dcdata[r].length) {data[index++] = dcdata[r][i];}}}
+    for (var i = 0; i < maxEcCount; i++) {for (var r = 0; r < rsBlocks.length; r++) {if (i < ecdata[r].length) {data[index++] = ecdata[r][i];}}}
+    return data;
+  };
+  var QRMode = { MODE_NUMBER: 1 << 0, MODE_ALPHA_NUM: 1 << 1, MODE_8BIT_BYTE: 1 << 2, MODE_KANJI: 1 << 3 };
+  var QRErrorCorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
+  var QRMaskPattern = { PATTERN000: 0, PATTERN001: 1, PATTERN010: 2, PATTERN011: 3, PATTERN100: 4, PATTERN101: 5, PATTERN110: 6, PATTERN111: 7 };
+  var QRUtil = {
+    PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]], G15: 1 << 10 | 1 << 8 | 1 << 5 | 1 << 4 | 1 << 2 | 1 << 1 | 1 << 0, G18: 1 << 12 | 1 << 11 | 1 << 10 | 1 << 9 | 1 << 8 | 1 << 5 | 1 << 2 | 1 << 0, G15_MASK: 1 << 14 | 1 << 12 | 1 << 10 | 1 << 4 | 1 << 1, getBCHTypeInfo: function getBCHTypeInfo(data) {
+      var d = data << 10;while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {d ^= QRUtil.G15 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15);}
+      return (data << 10 | d) ^ QRUtil.G15_MASK;
+    }, getBCHTypeNumber: function getBCHTypeNumber(data) {
+      var d = data << 12;while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {d ^= QRUtil.G18 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18);}
+      return data << 12 | d;
+    }, getBCHDigit: function getBCHDigit(data) {
+      var digit = 0;while (data != 0) {digit++;data >>>= 1;}
+      return digit;
+    }, getPatternPosition: function getPatternPosition(typeNumber) {return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];}, getMask: function getMask(maskPattern, i, j) {switch (maskPattern) {case QRMaskPattern.PATTERN000:return (i + j) % 2 == 0;case QRMaskPattern.PATTERN001:return i % 2 == 0;case QRMaskPattern.PATTERN010:return j % 3 == 0;case QRMaskPattern.PATTERN011:return (i + j) % 3 == 0;case QRMaskPattern.PATTERN100:return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;case QRMaskPattern.PATTERN101:return i * j % 2 + i * j % 3 == 0;case QRMaskPattern.PATTERN110:return (i * j % 2 + i * j % 3) % 2 == 0;case QRMaskPattern.PATTERN111:return (i * j % 3 + (i + j) % 2) % 2 == 0;default:throw new Error("bad maskPattern:" + maskPattern);}}, getErrorCorrectPolynomial: function getErrorCorrectPolynomial(errorCorrectLength) {
+      var a = new QRPolynomial([1], 0);for (var i = 0; i < errorCorrectLength; i++) {a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));}
+      return a;
+    }, getLengthInBits: function getLengthInBits(mode, type) {if (1 <= type && type < 10) {switch (mode) {case QRMode.MODE_NUMBER:return 10;case QRMode.MODE_ALPHA_NUM:return 9;case QRMode.MODE_8BIT_BYTE:return 8;case QRMode.MODE_KANJI:return 8;default:throw new Error("mode:" + mode);}} else if (type < 27) {switch (mode) {case QRMode.MODE_NUMBER:return 12;case QRMode.MODE_ALPHA_NUM:return 11;case QRMode.MODE_8BIT_BYTE:return 16;case QRMode.MODE_KANJI:return 10;default:throw new Error("mode:" + mode);}} else if (type < 41) {switch (mode) {case QRMode.MODE_NUMBER:return 14;case QRMode.MODE_ALPHA_NUM:return 13;case QRMode.MODE_8BIT_BYTE:return 16;case QRMode.MODE_KANJI:return 12;default:throw new Error("mode:" + mode);}} else {throw new Error("type:" + type);}}, getLostPoint: function getLostPoint(qrCode) {
+      var moduleCount = qrCode.getModuleCount();var lostPoint = 0;for (var row = 0; row < moduleCount; row++) {
+        for (var col = 0; col < moduleCount; col++) {
+          var sameCount = 0;var dark = qrCode.isDark(row, col);for (var r = -1; r <= 1; r++) {
+            if (row + r < 0 || moduleCount <= row + r) {continue;}
+            for (var c = -1; c <= 1; c++) {
+              if (col + c < 0 || moduleCount <= col + c) {continue;}
+              if (r == 0 && c == 0) {continue;}
+              if (dark == qrCode.isDark(row + r, col + c)) {sameCount++;}
+            }
+          }
+          if (sameCount > 5) {lostPoint += 3 + sameCount - 5;}
+        }
+      }
+      for (var row = 0; row < moduleCount - 1; row++) {for (var col = 0; col < moduleCount - 1; col++) {var count = 0;if (qrCode.isDark(row, col)) count++;if (qrCode.isDark(row + 1, col)) count++;if (qrCode.isDark(row, col + 1)) count++;if (qrCode.isDark(row + 1, col + 1)) count++;if (count == 0 || count == 4) {lostPoint += 3;}}}
+      for (var row = 0; row < moduleCount; row++) {for (var col = 0; col < moduleCount - 6; col++) {if (qrCode.isDark(row, col) && !qrCode.isDark(row, col + 1) && qrCode.isDark(row, col + 2) && qrCode.isDark(row, col + 3) && qrCode.isDark(row, col + 4) && !qrCode.isDark(row, col + 5) && qrCode.isDark(row, col + 6)) {lostPoint += 40;}}}
+      for (var col = 0; col < moduleCount; col++) {for (var row = 0; row < moduleCount - 6; row++) {if (qrCode.isDark(row, col) && !qrCode.isDark(row + 1, col) && qrCode.isDark(row + 2, col) && qrCode.isDark(row + 3, col) && qrCode.isDark(row + 4, col) && !qrCode.isDark(row + 5, col) && qrCode.isDark(row + 6, col)) {lostPoint += 40;}}}
+      var darkCount = 0;for (var col = 0; col < moduleCount; col++) {for (var row = 0; row < moduleCount; row++) {if (qrCode.isDark(row, col)) {darkCount++;}}}
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;lostPoint += ratio * 10;return lostPoint;
+    } };
+
+  var QRMath = {
+    glog: function glog(n) {
+      if (n < 1) {throw new Error("glog(" + n + ")");}
+      return QRMath.LOG_TABLE[n];
+    }, gexp: function gexp(n) {
+      while (n < 0) {n += 255;}
+      while (n >= 256) {n -= 255;}
+      return QRMath.EXP_TABLE[n];
+    }, EXP_TABLE: new Array(256), LOG_TABLE: new Array(256) };
+  for (var i = 0; i < 8; i++) {QRMath.EXP_TABLE[i] = 1 << i;}
+  for (var i = 8; i < 256; i++) {QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];}
+  for (var i = 0; i < 255; i++) {QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;}
+  function QRPolynomial(num, shift) {
+    if (num.length == undefined) {throw new Error(num.length + "/" + shift);}
+    var offset = 0;while (offset < num.length && num[offset] == 0) {offset++;}
+    this.num = new Array(num.length - offset + shift);for (var i = 0; i < num.length - offset; i++) {this.num[i] = num[i + offset];}
+  }
+  QRPolynomial.prototype = {
+    get: function get(index) {return this.num[index];}, getLength: function getLength() {return this.num.length;}, multiply: function multiply(e) {
+      var num = new Array(this.getLength() + e.getLength() - 1);for (var i = 0; i < this.getLength(); i++) {for (var j = 0; j < e.getLength(); j++) {num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));}}
+      return new QRPolynomial(num, 0);
+    }, mod: function mod(e) {
+      if (this.getLength() - e.getLength() < 0) {return this;}
+      var ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));var num = new Array(this.getLength());for (var i = 0; i < this.getLength(); i++) {num[i] = this.get(i);}
+      for (var i = 0; i < e.getLength(); i++) {num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);}
+      return new QRPolynomial(num, 0).mod(e);
+    } };
+
+  function QRRSBlock(totalCount, dataCount) {this.totalCount = totalCount;this.dataCount = dataCount;}
+  QRRSBlock.RS_BLOCK_TABLE = [[1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9], [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16], [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13], [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9], [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12], [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15], [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14], [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15], [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13], [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16], [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13], [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15], [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12], [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13], [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12], [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16], [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15], [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15], [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14], [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16], [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17], [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13], [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16], [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17], [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16], [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17], [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16], [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16], [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16], [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16], [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16], [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16], [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16], [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17], [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16], [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16], [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16], [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16], [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16], [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]];
+  QRRSBlock.getRSBlocks = function (typeNumber, errorCorrectLevel) {
+    var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);if (rsBlock == undefined) {throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);}
+    var length = rsBlock.length / 3;var list = [];for (var i = 0; i < length; i++) {var count = rsBlock[i * 3 + 0];var totalCount = rsBlock[i * 3 + 1];var dataCount = rsBlock[i * 3 + 2];for (var j = 0; j < count; j++) {list.push(new QRRSBlock(totalCount, dataCount));}}
+    return list;
+  };
+  QRRSBlock.getRsBlockTable = function (typeNumber, errorCorrectLevel) {switch (errorCorrectLevel) {case QRErrorCorrectLevel.L:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];case QRErrorCorrectLevel.M:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];case QRErrorCorrectLevel.Q:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];case QRErrorCorrectLevel.H:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];default:return undefined;}};
+  function QRBitBuffer() {this.buffer = [];this.length = 0;}
+  QRBitBuffer.prototype = {
+    get: function get(index) {var bufIndex = Math.floor(index / 8);return (this.buffer[bufIndex] >>> 7 - index % 8 & 1) == 1;}, put: function put(num, length) {for (var i = 0; i < length; i++) {this.putBit((num >>> length - i - 1 & 1) == 1);}}, getLengthInBits: function getLengthInBits() {return this.length;}, putBit: function putBit(bit) {
+      var bufIndex = Math.floor(this.length / 8);if (this.buffer.length <= bufIndex) {this.buffer.push(0);}
+      if (bit) {this.buffer[bufIndex] |= 0x80 >>> this.length % 8;}
+      this.length++;
+    } };
+
+  var QRCodeLimitLength = [[17, 14, 11, 7], [32, 26, 20, 14], [53, 42, 32, 24], [78, 62, 46, 34], [106, 84, 60, 44], [134, 106, 74, 58], [154, 122, 86, 64], [192, 152, 108, 84], [230, 180, 130, 98], [271, 213, 151, 119], [321, 251, 177, 137], [367, 287, 203, 155], [425, 331, 241, 177], [458, 362, 258, 194], [520, 412, 292, 220], [586, 450, 322, 250], [644, 504, 364, 280], [718, 560, 394, 310], [792, 624, 442, 338], [858, 666, 482, 382], [929, 711, 509, 403], [1003, 779, 565, 439], [1091, 857, 611, 461], [1171, 911, 661, 511], [1273, 997, 715, 535], [1367, 1059, 751, 593], [1465, 1125, 805, 625], [1528, 1190, 868, 658], [1628, 1264, 908, 698], [1732, 1370, 982, 742], [1840, 1452, 1030, 790], [1952, 1538, 1112, 842], [2068, 1628, 1168, 898], [2188, 1722, 1228, 958], [2303, 1809, 1283, 983], [2431, 1911, 1351, 1051], [2563, 1989, 1423, 1093], [2699, 2099, 1499, 1139], [2809, 2213, 1579, 1219], [2953, 2331, 1663, 1273]];
+
+  // QRCode object
+  QRCode = function QRCode(canvasId, vOption) {
+    this._htOption = {
+      width: 256,
+      height: 256,
+      typeNumber: 4,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRErrorCorrectLevel.H };
+
+
+    if (typeof vOption === 'string') {
+      vOption = {
+        text: vOption };
+
+    }
+
+    // Overwrites options
+    if (vOption) {
+      for (var i in vOption) {
+        this._htOption[i] = vOption[i];
+      }
+    }
+
+    this._oQRCode = null;
+    this.canvasId = canvasId;
+
+    if (this._htOption.text && this.canvasId) {
+      this.makeCode(this._htOption.text);
+    }
+  };
+
+  QRCode.prototype.makeCode = function (sText) {
+    this._oQRCode = new QRCodeModel(_getTypeNumber(sText, this._htOption.correctLevel), this._htOption.correctLevel);
+    this._oQRCode.addData(sText);
+    this._oQRCode.make();
+    this.makeImage();
+  };
+
+  QRCode.prototype.makeImage = function () {var _this = this;
+    var _oContext;
+    if (this._htOption.usingIn) {
+      _oContext = wx.createCanvasContext(this.canvasId, this._htOption.usingIn);
+    } else
+    {
+      _oContext = wx.createCanvasContext(this.canvasId);
+    }
+    var _htOption = this._htOption;
+    var oQRCode = this._oQRCode;
+
+    var nCount = oQRCode.getModuleCount();
+    var nWidth = _htOption.padding ? (_htOption.width - 2 * _htOption.padding) / nCount : _htOption.width / nCount;
+    var nHeight = _htOption.padding ? (_htOption.height - 2 * _htOption.padding) / nCount : _htOption.height / nCount;
+    var nRoundedHeight = Math.round(nHeight);
+    var nRoundedWidth = Math.round(nWidth);
+
+    if (_htOption.image && _htOption.image != '') {
+      _oContext.drawImage(_htOption.image, 0, 0, _htOption.width, _htOption.height);
+    }
+    _oContext.setFillStyle('#fff');
+    _oContext.fillRect(0, 0, _htOption.width, _htOption.height);
+    _oContext.save();
+    for (var row = 0; row < nCount; row++) {
+      for (var col = 0; col < nCount; col++) {
+        var bIsDark = oQRCode.isDark(row, col);
+        var nLeft = _htOption.padding ? col * nWidth + _htOption.padding : col * nWidth;
+        var nTop = _htOption.padding ? row * nHeight + _htOption.padding : row * nHeight;
+        _oContext.setStrokeStyle(bIsDark ? _htOption.colorDark : _htOption.colorLight);
+        // _oContext.setStrokeStyle('red')
+        _oContext.setLineWidth(1);
+        _oContext.setFillStyle(bIsDark ? _htOption.colorDark : _htOption.colorLight);
+        // _oContext.setFillStyle('red')
+        // if (bIsDark) {
+        _oContext.fillRect(nLeft, nTop, nWidth, nHeight);
+        // }
+
+        // 안티 앨리어싱 방지 처리
+        // if (bIsDark) {
+        _oContext.strokeRect(
+        Math.floor(nLeft) + 0.5,
+        Math.floor(nTop) + 0.5,
+        nRoundedHeight);
+
+
+        _oContext.strokeRect(
+        Math.ceil(nLeft) - 0.5,
+        Math.ceil(nTop) - 0.5,
+        nRoundedWidth,
+        nRoundedHeight);
+
+        // }
+        // _oContext.fillRect(
+        //     Math.floor(nLeft) + 0.5,
+        //     Math.floor(nTop) + 0.5,
+        //     nRoundedWidth,
+        //     nRoundedHeight
+        // );
+        // _oContext.fillRect(
+        //     Math.ceil(nLeft) - 0.5,
+        //     Math.ceil(nTop) - 0.5,
+        //     nRoundedWidth,
+        //     nRoundedHeight
+        // );
+        // _oContext.clearRect(
+        //     Math.floor(nLeft) + 0.5,
+        //     Math.floor(nTop) + 0.5,
+        //     nRoundedWidth,
+        //     nRoundedHeight
+        // );
+        // _oContext.clearRect(
+        //     Math.ceil(nLeft) - 0.5,
+        //     Math.ceil(nTop) - 0.5,
+        //     nRoundedWidth,
+        //     nRoundedHeight
+        // );
+      }
+    }
+
+    _oContext.draw(false, function () {
+      setTimeout(function () {
+        _this.exportImage();
+      }, 800);
+    });
+  };
+
+  // 保存为图片，将临时路径传给回调
+  QRCode.prototype.exportImage = function (callback) {var _this2 = this;
+    if (this._htOption.callback && typeof this._htOption.callback === 'function') {
+      wx.canvasToTempFilePath({
+        x: 0,
+        y: 0,
+        width: this._htOption.width,
+        height: this._htOption.height,
+        destWidth: this._htOption.width,
+        destHeight: this._htOption.height,
+        canvasId: this.canvasId,
+        success: function success(res) {
+          _this2._htOption.callback({ path: res.tempFilePath });
+        } });
+
+    }
+  };
+
+  QRCode.CorrectLevel = QRErrorCorrectLevel;
+})();
+
+module.exports = QRCode;
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-avatar/props.js ***!
   \*****************************************************************************************************************/
-=======
-/* 247 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-avatar/props.js ***!
-  \********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18109,44 +23437,24 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-=======
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
->>>>>>> front-end
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-<<<<<<< HEAD
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */
 /*!****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-popup/props.js ***!
   \****************************************************************************************************************/
-=======
-/* 262 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-popup/props.js ***!
-  \*******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18230,31 +23538,17 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */
 /*!****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-input/props.js ***!
   \****************************************************************************************************************/
-=======
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-input/props.js ***!
-  \*******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18441,27 +23735,15 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */
 /*!**************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
   \**************************************************************************************************************************/
-=======
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
-  \*****************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18582,17 +23864,10 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 287 */
+/* 392 */
 /*!*******************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/dayjs.js ***!
   \*******************************************************************************************************/
-=======
-/* 277 */
-/*!**********************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/util/dayjs.js ***!
-  \**********************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18905,31 +24180,17 @@ platform;exports.default = _default;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-picker/props.js ***!
   \*****************************************************************************************************************/
-=======
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-picker/props.js ***!
-  \********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19018,31 +24279,17 @@ platform;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */
 /*!*********************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/button.js ***!
   \*********************************************************************************************************/
-=======
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */
-/*!************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/button.js ***!
-  \************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19060,17 +24307,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     openType: String } };exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 304 */
+/* 409 */
 /*!***********************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/openType.js ***!
   \***********************************************************************************************************/
-=======
-/* 294 */
-/*!**************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/libs/mixin/openType.js ***!
-  \**************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19100,17 +24340,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     } } };exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 305 */
+/* 410 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-button/props.js ***!
   \*****************************************************************************************************************/
-=======
-/* 295 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-button/props.js ***!
-  \********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19276,31 +24509,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 306 */,
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \***************************************************************************************************************/
-=======
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/icons.js ***!
-  \******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19520,17 +24739,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'uicon-en': "\uE692" };exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 314 */
+/* 419 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/props.js ***!
   \***************************************************************************************************************/
-=======
-/* 304 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-icon/props.js ***!
-  \******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19624,52 +24836,29 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */
 /*!**************************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpwxs.js ***!
   \**************************************************************************************************************************************/
-=======
-/* 305 */,
-/* 306 */,
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */
-/*!*****************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpwxs.js ***!
-  \*****************************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-<<<<<<< HEAD
-var _isPC = __webpack_require__(/*! ./isPC */ 328);var mpMixins = {};
-=======
-var _isPC = __webpack_require__(/*! ./isPC */ 318);var mpMixins = {};
->>>>>>> front-end
+var _isPC = __webpack_require__(/*! ./isPC */ 433);var mpMixins = {};
 
 
 mpMixins = {
@@ -19751,17 +24940,10 @@ mpMixins = {
 mpMixins;exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 328 */
+/* 433 */
 /*!*************************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/isPC.js ***!
   \*************************************************************************************************************************************/
-=======
-/* 318 */
-/*!****************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/isPC.js ***!
-  \****************************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19780,17 +24962,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.isPC = isP
 }
 
 /***/ }),
-<<<<<<< HEAD
-/* 329 */
+/* 434 */
 /*!*****************************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/bindingx.js ***!
   \*****************************************************************************************************************************************/
-=======
-/* 319 */
-/*!********************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/bindingx.js ***!
-  \********************************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20097,17 +25272,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 bindIngXMixins;exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 330 */
+/* 435 */
 /*!****************************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpother.js ***!
   \****************************************************************************************************************************************/
-=======
-/* 320 */
-/*!*******************************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpother.js ***!
-  \*******************************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20371,35 +25539,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 otherMixins;exports.default = _default;
 
 /***/ }),
-<<<<<<< HEAD
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/value.js ***!
   \***************************************************************************************************************/
-=======
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/value.js ***!
-  \******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20490,17 +25642,10 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 341 */
+/* 446 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/props.js ***!
   \***************************************************************************************************************/
-=======
-/* 331 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-text/props.js ***!
-  \******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20615,41 +25760,22 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-navbar/props.js ***!
   \*****************************************************************************************************************/
-=======
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */
-/*!********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-navbar/props.js ***!
-  \********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20738,31 +25864,17 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-tabs/props.js ***!
   \***************************************************************************************************************/
-=======
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-tabs/props.js ***!
-  \******************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20826,38 +25938,24 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */
 /*!****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-album/props.js ***!
   \****************************************************************************************************************/
-=======
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-overlay/props.js ***!
-  \*********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20884,27 +25982,10 @@ otherMixins;exports.default = _default;
       type: [String, Number],
       default: uni.$u.props.album.multipleSize },
 
-<<<<<<< HEAD
     // 多图时，图片水平和垂直之间的间隔
     space: {
       type: [String, Number],
       default: uni.$u.props.album.space },
-=======
-/***/ }),
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/props.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> front-end
 
     // 单图时，图片缩放裁剪的模式
     singleMode: {
@@ -20938,31 +26019,24 @@ otherMixins;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 378 */,
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */,
-/* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/utils.js ***!
   \*****************************************************************************************************************/
-=======
-/* 369 */
-/*!*****************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/transition.js ***!
-  \*****************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20988,11 +26062,6 @@ function formatImage(res) {
       thumb: item.path,
       size: item.size });});
 
-<<<<<<< HEAD
-=======
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 370));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
-var nextTick = function nextTick() {return new Promise(function (resolve) {return setTimeout(resolve, 1000 / 50);});}; // nvue动画模块实现细节抽离在外部文件
->>>>>>> front-end
 
 
 
@@ -21126,7 +26195,7 @@ function chooseFile(_ref)
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 393 */
+/* 498 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/mixin.js ***!
   \*****************************************************************************************************************/
@@ -21154,7 +26223,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       } } } };exports.default = _default;
 
 /***/ }),
-/* 394 */
+/* 499 */
 /*!*****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-upload/props.js ***!
   \*****************************************************************************************************************/
@@ -21286,24 +26355,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */
 /*!*******************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-textarea/props.js ***!
   \*******************************************************************************************************************/
-=======
-/* 370 */
-/*!*******************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
-  \*******************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21365,27 +26427,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: Boolean,
       default: uni.$u.props.textarea.fixed },
 
-<<<<<<< HEAD
     // 指定光标与键盘的距离
     cursorSpacing: {
       type: Number,
       default: uni.$u.props.textarea.cursorSpacing },
-=======
-/***/ }),
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */,
-/* 378 */
-/*!************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-status-bar/props.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> front-end
 
     // 指定focus时的光标位置
     cursor: {
@@ -21439,36 +26484,275 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 403 */,
-/* 404 */,
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */,
-/* 411 */,
-/* 412 */,
-/* 413 */,
-/* 414 */,
-/* 415 */
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-notice-bar/props.js ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 显示的内容，数组
+    text: {
+      type: [Array, String],
+      default: uni.$u.props.noticeBar.text },
+
+    // 通告滚动模式，row-横向滚动，column-竖向滚动
+    direction: {
+      type: String,
+      default: uni.$u.props.noticeBar.direction },
+
+    // direction = row时，是否使用步进形式滚动
+    step: {
+      type: Boolean,
+      default: uni.$u.props.noticeBar.step },
+
+    // 是否显示左侧的音量图标
+    icon: {
+      type: String,
+      default: uni.$u.props.noticeBar.icon },
+
+    // 通告模式，link-显示右箭头，closable-显示右侧关闭图标
+    mode: {
+      type: String,
+      default: uni.$u.props.noticeBar.mode },
+
+    // 文字颜色，各图标也会使用文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.noticeBar.color },
+
+    // 背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.noticeBar.bgColor },
+
+    // 水平滚动时的滚动速度，即每秒滚动多少px(px)，这有利于控制文字无论多少时，都能有一个恒定的速度
+    speed: {
+      type: [String, Number],
+      default: uni.$u.props.noticeBar.speed },
+
+    // 字体大小
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.noticeBar.fontSize },
+
+    // 滚动一个周期的时间长，单位ms
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.noticeBar.duration },
+
+    // 是否禁止用手滑动切换
+    // 目前HX2.6.11，只支持App 2.5.5+、H5 2.5.5+、支付宝小程序、字节跳动小程序
+    disableTouch: {
+      type: Boolean,
+      default: uni.$u.props.noticeBar.disableTouch },
+
+    // 跳转的页面路径
+    url: {
+      type: String,
+      default: uni.$u.props.noticeBar.url },
+
+    // 页面跳转的类型
+    linkType: {
+      type: String,
+      default: uni.$u.props.noticeBar.linkType } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */
+/*!***************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-list/props.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 控制是否出现滚动条，仅nvue有效
+    showScrollbar: {
+      type: Boolean,
+      default: uni.$u.props.list.showScrollbar },
+
+    // 距底部多少时触发scrolltolower事件
+    lowerThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.lowerThreshold },
+
+    // 距顶部多少时触发scrolltoupper事件，非nvue有效
+    upperThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.upperThreshold },
+
+    // 设置竖向滚动条位置
+    scrollTop: {
+      type: [String, Number],
+      default: uni.$u.props.list.scrollTop },
+
+    // 控制 onscroll 事件触发的频率，仅nvue有效
+    offsetAccuracy: {
+      type: [String, Number],
+      default: uni.$u.props.list.offsetAccuracy },
+
+    // 启用 flexbox 布局。开启后，当前节点声明了display: flex就会成为flex container，并作用于其孩子节点，仅微信小程序有效
+    enableFlex: {
+      type: Boolean,
+      default: uni.$u.props.list.enableFlex },
+
+    // 是否按分页模式显示List，默认值false
+    pagingEnabled: {
+      type: Boolean,
+      default: uni.$u.props.list.pagingEnabled },
+
+    // 是否允许List滚动
+    scrollable: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollable },
+
+    // 值应为某子元素id（id不能以数字开头）
+    scrollIntoView: {
+      type: String,
+      default: uni.$u.props.list.scrollIntoView },
+
+    // 在设置滚动条位置时使用动画过渡
+    scrollWithAnimation: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollWithAnimation },
+
+    // iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只对微信小程序有效
+    enableBackToTop: {
+      type: Boolean,
+      default: uni.$u.props.list.enableBackToTop },
+
+    // 列表的高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.list.height },
+
+    // 列表宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.list.width },
+
+    // 列表前后预渲染的屏数，1代表一个屏幕的高度，1.5代表1个半屏幕高度
+    preLoadScreen: {
+      type: [String, Number],
+      default: uni.$u.props.list.preLoadScreen }
+
+    // vue下，是否开启虚拟列表
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */
+/*!********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-list-item/props.js ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 用于滚动到指定item
+    anchor: {
+      type: [String, Number],
+      default: uni.$u.props.listItem.anchor } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */
 /*!******************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-overlay/props.js ***!
   \******************************************************************************************************************/
-=======
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */
-/*!*************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
-  \*************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21480,7 +26764,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: Boolean,
       default: uni.$u.props.overlay.show },
 
-<<<<<<< HEAD
     // 层级z-index
     zIndex: {
       type: [String, Number],
@@ -21498,38 +26781,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 416 */,
-/* 417 */,
-/* 418 */,
-/* 419 */,
-/* 420 */,
-/* 421 */,
-/* 422 */,
-/* 423 */
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */
 /*!*********************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/props.js ***!
   \*********************************************************************************************************************/
-=======
-/***/ }),
-/* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */
-/*!*********************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-toolbar/props.js ***!
-  \*********************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21558,24 +26820,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-<<<<<<< HEAD
-/* 424 */
+/* 605 */
 /*!**************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/transition.js ***!
   \**************************************************************************************************************************/
-=======
-/* 402 */,
-/* 403 */,
-/* 404 */,
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */
-/*!**************************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
-  \**************************************************************************************************/
->>>>>>> front-end
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21583,7 +26831,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
 
 
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 425));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 606));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {return new Promise(function (resolve) {return setTimeout(resolve, 1000 / 50);});}; // nvue动画模块实现细节抽离在外部文件
 
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
@@ -21600,23 +26848,6 @@ var getClassNames = function getClassNames(name) {return {
 
 
 
-<<<<<<< HEAD
-=======
-/***/ }),
-/* 410 */,
-/* 411 */,
-/* 412 */,
-/* 413 */,
-/* 414 */,
-/* 415 */,
-/* 416 */,
-/* 417 */
-/*!******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-link/props.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> front-end
 
 
 {
@@ -21659,7 +26890,6 @@ var getClassNames = function getClassNames(name) {return {
       // 获得类名
       this.classes = classNames.leave;
 
-<<<<<<< HEAD
       this.$nextTick(function () {
         // 标记动画已经结束了
         _this2.transitionEnded = false;
@@ -21668,22 +26898,6 @@ var getClassNames = function getClassNames(name) {return {
         _this2.classes = classNames['leave-to'];
       });
     },
-=======
-/***/ }),
-/* 418 */,
-/* 419 */,
-/* 420 */,
-/* 421 */,
-/* 422 */,
-/* 423 */,
-/* 424 */,
-/* 425 */
-/*!*******************************************************************************************!*\
-  !*** D:/SACR-APP/front-end/ALL IS READY/uni_modules/uview-ui/components/u-badge/props.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> front-end
 
 
 
@@ -21769,7 +26983,7 @@ var getClassNames = function getClassNames(name) {return {
     } } };exports.default = _default;
 
 /***/ }),
-/* 425 */
+/* 606 */
 /*!****************************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \****************************************************************************************************************************/
@@ -21845,14 +27059,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     'leave-to': { opacity: 0, transform: 'scale(0.95)' } } };exports.default = _default;
 
 /***/ }),
-/* 426 */,
-/* 427 */,
-/* 428 */,
-/* 429 */,
-/* 430 */,
-/* 431 */,
-/* 432 */,
-/* 433 */
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */,
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */
 /*!*********************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-status-bar/props.js ***!
   \*********************************************************************************************************************/
@@ -21868,14 +27082,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 434 */,
-/* 435 */,
-/* 436 */,
-/* 437 */,
-/* 438 */,
-/* 439 */,
-/* 440 */,
-/* 441 */
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */,
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */
 /*!**********************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
   \**********************************************************************************************************************/
@@ -21887,21 +27101,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   props: {} };exports.default = _default;
 
 /***/ }),
-/* 442 */,
-/* 443 */,
-/* 444 */,
-/* 445 */,
-/* 446 */,
-/* 447 */,
-/* 448 */,
-/* 449 */,
-/* 450 */,
-/* 451 */,
-/* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */,
+/* 627 */,
+/* 628 */,
+/* 629 */,
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */
 /*!******************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-toolbar/props.js ***!
   \******************************************************************************************************************/
@@ -21943,14 +27157,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 457 */,
-/* 458 */,
-/* 459 */,
-/* 460 */,
-/* 461 */,
-/* 462 */,
-/* 463 */,
-/* 464 */
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */
 /*!***********************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
   \***********************************************************************************************************************/
@@ -22017,14 +27231,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 465 */,
-/* 466 */,
-/* 467 */,
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */
 /*!***************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-link/props.js ***!
   \***************************************************************************************************************/
@@ -22071,14 +27285,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 473 */,
-/* 474 */,
-/* 475 */,
-/* 476 */,
-/* 477 */,
-/* 478 */,
-/* 479 */,
-/* 480 */
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */
 /*!****************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-badge/props.js ***!
   \****************************************************************************************************************/
@@ -22158,14 +27372,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 481 */,
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */
 /*!*******************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \*******************************************************************************************************************/
@@ -23341,14 +28555,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     "unicode_decimal": 58929 }] };exports.default = _default;
 
 /***/ }),
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */,
-/* 493 */,
-/* 494 */,
-/* 495 */,
-/* 496 */
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */
 /*!**************************************************************************************************************!*\
   !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-gap/props.js ***!
   \**************************************************************************************************************/
@@ -23377,6 +28591,144 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     marginBottom: {
       type: [String, Number],
       default: uni.$u.props.gap.marginBottom } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */
+/*!************************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-column-notice/props.js ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 显示的内容，字符串
+    text: {
+      type: [Array],
+      default: uni.$u.props.columnNotice.text },
+
+    // 是否显示左侧的音量图标
+    icon: {
+      type: String,
+      default: uni.$u.props.columnNotice.icon },
+
+    // 通告模式，link-显示右箭头，closable-显示右侧关闭图标
+    mode: {
+      type: String,
+      default: uni.$u.props.columnNotice.mode },
+
+    // 文字颜色，各图标也会使用文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.columnNotice.color },
+
+    // 背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.columnNotice.bgColor },
+
+    // 字体大小，单位px
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.columnNotice.fontSize },
+
+    // 水平滚动时的滚动速度，即每秒滚动多少px(px)，这有利于控制文字无论多少时，都能有一个恒定的速度
+    speed: {
+      type: [String, Number],
+      default: uni.$u.props.columnNotice.speed },
+
+    // direction = row时，是否使用步进形式滚动
+    step: {
+      type: Boolean,
+      default: uni.$u.props.columnNotice.step },
+
+    // 滚动一个周期的时间长，单位ms
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.columnNotice.duration },
+
+    // 是否禁止用手滑动切换
+    // 目前HX2.6.11，只支持App 2.5.5+、H5 2.5.5+、支付宝小程序、字节跳动小程序
+    disableTouch: {
+      type: Boolean,
+      default: uni.$u.props.columnNotice.disableTouch } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 700 */,
+/* 701 */,
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */
+/*!*********************************************************************************************************************!*\
+  !*** D:/Documents/GitHub/All-IS-READY/front-end/ALL IS READY/uni_modules/uview-ui/components/u-row-notice/props.js ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 显示的内容，字符串
+    text: {
+      type: String,
+      default: uni.$u.props.rowNotice.text },
+
+    // 是否显示左侧的音量图标
+    icon: {
+      type: String,
+      default: uni.$u.props.rowNotice.icon },
+
+    // 通告模式，link-显示右箭头，closable-显示右侧关闭图标
+    mode: {
+      type: String,
+      default: uni.$u.props.rowNotice.mode },
+
+    // 文字颜色，各图标也会使用文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.rowNotice.color },
+
+    // 背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.rowNotice.bgColor },
+
+    // 字体大小，单位px
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.rowNotice.fontSize },
+
+    // 水平滚动时的滚动速度，即每秒滚动多少px(rpx)，这有利于控制文字无论多少时，都能有一个恒定的速度
+    speed: {
+      type: [String, Number],
+      default: uni.$u.props.rowNotice.speed } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
