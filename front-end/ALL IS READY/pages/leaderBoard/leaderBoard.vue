@@ -8,9 +8,8 @@
 		</u-navbar>
 		
 		<view class="col" style=" margin-top: 150rpx;">
-			
 			<view class="top" style="margin-left: 60rpx;">
-				<u-avatar :src="data.data[1].header"
+				<u-avatar :src="header1"
 					size="90" 
 					shape="circle"></u-avatar>
 				<cover-view class="rank">
@@ -19,7 +18,7 @@
 			</view>
 				
 			<view class="top" style="margin-top: -10rpx;">
-				<u-avatar :src="data.data[0].header"
+				<u-avatar :src="header2"
 					size="100" 
 					shape="circle" 
 					></u-avatar>
@@ -29,7 +28,7 @@
 			</view>
 				
 			<view class="top" style="margin-top: 50rpx;">
-				<u-avatar :src="data.data[2].header"
+				<u-avatar :src="header3"
 					size="80" 
 					shape="circle"></u-avatar>
 				<cover-view class="rank">
@@ -102,6 +101,9 @@
 				}],
 				
 				data:'',
+				header1:'',
+				header2:'',
+				header3:'',
 			}
 		},
 		methods: {
@@ -138,7 +140,10 @@
 			this.useMsg = await this.getToken()	//获取用户数据
 			
 			this.data = await this.getleaderBoard()
-			// console.log(this.data.data[0].Uname)
+			this.header1 = this.data.data[0].header
+			this.header2 = this.data.data[1].header
+			this.header3 = this.data.data[2].header
+			console.log(this.data.data[0].header)
 		}
 	}
 </script>

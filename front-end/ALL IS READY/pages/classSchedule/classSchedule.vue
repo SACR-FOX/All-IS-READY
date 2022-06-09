@@ -152,11 +152,17 @@
 				content:'',
 				
 				content1: [{
-						iconPath: '../../static/Class.png',
-						selectedIconPath: '../../static/Class.png',
+						iconPath: '../../static/add1.png',
+						selectedIconPath: '../../static/add1.png',
 						text: '导入课程',
 						active: false
-					}
+					},
+					{
+						iconPath: '../../static/add2.png',
+						selectedIconPath: '../../static/add2.png',
+						text: '创建课程',
+						active: false
+					},
 				]
 			}
 				
@@ -176,44 +182,61 @@
 				// console.log(e)
 				let that = this
 				this.content[e.index].active = !e.item.active
-				uni.showModal({
-					title: '提示',
-					content:'确认要组织批量导入课程吗',
-					success: function(res) {
-						
-						if (res.confirm) {
-							// console.log('用户点击确定')
+				console.log(e.index)
+				if(e.index==0){
+					uni.showModal({
+						title: '提示',
+						content:'确认要组织批量导入课程吗',
+						success: function(res) {
 							
-							return new Promise((req,rej)=>{
-								uni.request({
-									url:'http://101.37.175.115/api/Schedule/GroupImport/?token=' + that.useMsg.token,
-									method:'POST',
-									data:{
-										OrgID:that.useMsg.OrgID
-									},
-									
-									success: (res) => {
-										req(res.data)
-										console.log('http://101.37.175.115/api/Schedule/GroupImport/?token=' + that.useMsg.token)
-									},
-									fail: (err) => {
-										console.log(err)
-										rej(err)
-									}
-									
+							if (res.confirm) {
+								// console.log('用户点击确定')
+								
+								return new Promise((req,rej)=>{
+									uni.request({
+										url:'http://101.37.175.115/api/Schedule/GroupImport/?token=' + that.useMsg.token,
+										method:'POST',
+										data:{
+											OrgID:that.useMsg.OrgID
+										},
+										
+										success: (res) => {
+											req(res.data)
+											console.log('http://101.37.175.115/api/Schedule/GroupImport/?token=' + that.useMsg.token)
+										},
+										fail: (err) => {
+											console.log(err)
+											rej(err)
+										}
+									})
 								})
-							})
-							
-							
-						} else if (res.cancel) {
-							// console.log('用户点击取消')
+							} else if (res.cancel) {
+								// console.log('用户点击取消')
+							}
 						}
-					}
-				})
+					})
+				}else if(e.index==1){
+					uni.showModal({
+						title: '提示',
+						content:'确认要创建课程吗',
+						
+						success: function(res) {
+							if(res.confirm){
+								uni.navigateTo({
+									url:'./addCourse'
+								})
+							}
+						}
+						
+					})
+					
+					
+				}
+				
 			},
 			leftClick(){
 				uni.navigateTo({
-					url:'./addCourse'
+					url:'../index/index'
 				})
 			},
 			getToken(){
