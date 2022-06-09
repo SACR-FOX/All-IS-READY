@@ -16,13 +16,27 @@
     "pages/community/createCommunity",
     "pages/communityTopic/createTopic",
     "pages/topic/createTopicPost",
+<<<<<<< HEAD
+=======
+    "pages/Organization/Organization",
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
     "pages/Organization/MyOrginization",
     "pages/Organization/TaskList",
     "pages/Organization/CreateTask",
     "pages/Organization/CreateOrg",
     "pages/Organization/TaskDetail",
     "pages/Login/register",
+<<<<<<< HEAD
     "pages/file/file_pdf"
+=======
+    "pages/Organization/Organization",
+    "pages/Organization/MyOrginization",
+    "pages/Organization/TaskList",
+    "pages/Organization/CreateTask",
+    "pages/Organization/CreateOrg",
+    "pages/Organization/TaskDetail",
+    "pages/classSchedule/addCourse"
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
   ],
   "subPackages": [],
   "window": {
@@ -32,6 +46,5 @@
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

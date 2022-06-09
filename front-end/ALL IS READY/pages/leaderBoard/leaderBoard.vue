@@ -10,7 +10,7 @@
 		<view class="col" style=" margin-top: 150rpx;">
 			
 			<view class="top" style="margin-left: 60rpx;">
-				<u-avatar src="../../static/avatar.jpg"
+				<u-avatar :src="data.data[1].header"
 					size="90" 
 					shape="circle"></u-avatar>
 				<cover-view class="rank">
@@ -19,7 +19,7 @@
 			</view>
 				
 			<view class="top" style="margin-top: -10rpx;">
-				<u-avatar src="../../static/avatar.jpg"
+				<u-avatar :src="data.data[0].header"
 					size="100" 
 					shape="circle" 
 					></u-avatar>
@@ -29,7 +29,7 @@
 			</view>
 				
 			<view class="top" style="margin-top: 50rpx;">
-				<u-avatar src="../../static/avatar.jpg"
+				<u-avatar :src="data.data[2].header"
 					size="80" 
 					shape="circle"></u-avatar>
 				<cover-view class="rank">
@@ -40,15 +40,15 @@
 		</view>
 		
 		<view class="rank2">
-			<view class="rank_item" v-for="(item,index) in list2">
-				<text class="rank_text">{{item.rank}}</text>
-				<u-avatar :src=item.Header
+			<view class="rank_item" v-for="(item,index) in data.data.slice(0,6)" >
+				<text class="rank_text">{{index+4}}</text>
+				<u-avatar :src="data.data[index+3].header"
 					size="40" 
 					shape="circle"
 					style="margin-top: 20rpx;
 					margin-left: 20rpx;"></u-avatar>
-				<text class="name_text">{{item.Uname}}</text>
-				<text class="exp_text">{{item.EXP}}</text>
+				<text class="name_text">{{data.data[index+3].Uname}}</text>
+				<text class="exp_text">{{data.data[index+3].Accumulation}}</text>
 			</view>
 		</view>
 	</view>
@@ -99,11 +99,46 @@
 					"Header":"../../static/avatar.jpg",
 					"Uname":"Bob",
 					"EXP":"36"
-				}]
+				}],
+				
+				data:'',
 			}
 		},
 		methods: {
-
+			getToken(){
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'userMsg',
+						success: function (res) {
+								req(res.data)
+							},
+					})
+				})
+			},
+			getleaderBoard(){
+				let that = this
+				return new Promise((req,rej)=>{
+					uni.request({
+						url:'http://101.37.175.115/api/Reward/Rank?token='+that.useMsg.token,
+						methods:'GET',
+						
+						success: (res) => {
+							req(res.data)
+							console.log('http://101.37.175.115/api/Reward/Rank?token='+that.useMsg.token)
+						},
+						fail: (err) => {
+							req(err)
+						}
+					})
+				})
+			}
+		},
+		
+		async onLoad(){
+			this.useMsg = await this.getToken()	//获取用户数据
+			
+			this.data = await this.getleaderBoard()
+			// console.log(this.data.data[0].Uname)
 		}
 	}
 </script>

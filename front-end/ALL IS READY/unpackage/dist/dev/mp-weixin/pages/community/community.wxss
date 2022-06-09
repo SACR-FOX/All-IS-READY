@@ -44,10 +44,10 @@
   padding: 5rpx;
 }
 .communityItem .description {
-  width: 560rpx;
+  width: 520rpx;
   padding: 5rpx;
   font-size: 18rpx;
-  color: #95afc0;
+  color: #e056fd;
 }
 .communityItem .renewal {
   padding: 5rpx;

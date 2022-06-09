@@ -34,9 +34,13 @@ view.data-v-27d76bae, scroll-view.data-v-27d76bae, swiper-item.data-v-27d76bae {
   align-content: flex-start;
 }
 .u-list.data-v-27d76bae {
+<<<<<<< HEAD
 
   display: flex;
 
+=======
+  display: flex;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
   flex-direction: column;
 }
 

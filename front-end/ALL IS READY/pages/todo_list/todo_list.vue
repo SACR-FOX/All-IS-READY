@@ -1,5 +1,12 @@
 <template>
 	<view class="background" >
+		
+		<u-navbar
+		    title="TodoList"
+		    @leftClick="rightClick()"
+		    :autoBack="true">
+		</u-navbar>
+		
 		<!-- 弹出组件 -->
 		
 		<u-popup @close="closePop()" @open="openPop()"
@@ -173,7 +180,11 @@
 			}
 		},
 		methods: {
-			
+			rightClick(){
+				uni.navigateTo({
+					url:"../index/index"
+				})
+			},
 			//显示时间选择器
 			datePickerShow(){
 				// this.getTimeNow()
