@@ -4,7 +4,7 @@
 		<u-navbar
 		           title="组织任务"
 		           @leftClick="leftClick"
-		           :autoBack="true"
+		           
 		       >
 		       </u-navbar>
 			   <view class="topBlock"></view>
@@ -15,14 +15,17 @@
 		
 		<u-list
 					@scrolltolower="scrolltolower"
-					:height=200
+					:height=400
 				>
 					<u-list-item
-						v-for="(item, index) in indexList"
+						v-for="(item, index) in TaskList"
 						:key="index"
 					>
-						<tm-listitem :value="item.due" :round="24" :shadow="12" :title="item.name" left-icon="../../static/TimeStart.png" show-left-icon left-icon-color="pink" :show-right-icon=false
-						@click="seeDetail(item.name)"
+						<tm-listitem v-if="item.Status" :disabled= false :value="item.TimeDue" :round="24" :shadow="12" :title="item.TaskName" left-icon="../../static/fabu.png" show-left-icon left-icon-color="pink" :show-right-icon=false
+						@click="seeDetail(item.TaskID)"
+						></tm-listitem>
+						<tm-listitem v-if="!item.Status" :disabled= true :value="item.TimeDue" :round="24" :shadow="12" :title="item.TaskName" left-icon="../../static/fabu.png" show-left-icon left-icon-color="pink" :show-right-icon=false
+						@click="seeDetail(item.TaskID)"
 						></tm-listitem>
 					</u-list-item>
 				</u-list>
@@ -37,8 +40,14 @@
 		components: {tmListitem,},
 		data() {
 			return {
+				prefix:"http://101.37.175.115/api/",
+				page:1,
+				userInfo:{},
 				 text1: '最新任务',
-				 indexList: [{name:"task1",due:"3000"},{name:"task2",due:"4000"},{name:"task3",due:"6000"}],
+				 TaskList: [],
+				 next:false,
+				 previous:false,
+				 count:0,
 			}
 		},
 		methods: {
@@ -51,13 +60,30 @@
 							this.loadmore()
 						},
 				loadmore() {
+					var that=this
 					console.log("loadmore")
+					if (this.$data.next==true){
+						this.$data.page=this.$data.page+1
+							uni.request({
+								url: that.prefix + 'Organization/Task/All' + '?token=' + that.usrInfo.token+'&page='+that.page,
+								method:'GET',
+								
+								success: (res) => {
+									that.$data.TaskList=that.$data.TaskList.push.apply(that.$data.TaskList,res.data.data)  
+									that.$data.next=res.data.next
+									that.$data.previous=res.data.previous
+									that.$data.count=res.data.count
+									
+								},		
+								
+							})
+						}
 					}
 					,
 					seeDetail(id){
 						console.log(id)
 						uni.navigateTo({
-							url:"./TaskDetail"
+							url:"./TaskDetail?TaskID="+id
 						})
 					},
 					getUserInfo(){
@@ -70,15 +96,38 @@
 							})
 						})
 					},
-			},
-			async onLoad() {
-				this.usrInfo = await this.getUserInfo()
-				console.log(this.usrInfo.token)
-				await this.getOrgInfo()
+					
+					getTaskList(){
+						var that=this;
+						return new Promise((req,rej)=>{
+							uni.request({
+								url: that.prefix + 'Organization/Task/All' + '?token=' + that.usrInfo.token+'&page='+that.page,
+								method:'GET',
+								
+								success: (res) => {
+									that.$data.TaskList=res.data.data
+									that.$data.next=res.data.next
+									that.$data.previous=res.data.previous
+									that.$data.count=res.data.count
+									that.$data.text1="最新任务："+res.data.data[0].TaskName
+									
+								},		
+								
+							})
+							
+						})
+					},
+					
+					},
+					async onLoad() {
+						this.usrInfo = await this.getUserInfo()
+						console.log(this.usrInfo.token)
+						await this.getTaskList()
+						
+					},
+			}
 				
-			},
-		
-	}
+	
 </script>
 
 <style>

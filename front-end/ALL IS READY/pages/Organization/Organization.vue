@@ -4,7 +4,7 @@
 		    <u-navbar
 		            title="我的组织"
 		            @leftClick="leftClick"
-		            :autoBack="true"
+
 					
 		        >
 		        </u-navbar>
@@ -53,19 +53,11 @@
 	<view class="block1">
 	   <text class="inner_text">最近任务</text>
 	   
-	   <view class="Record_field">
-	          <view class="record">
-	            <text >taskRecord_1</text>
+	   <view class="Record_field" >
+	          <view class="record" v-for="(item, index) in TaskList.slice(0,4)">
+	            <text >{{item.TaskName}}</text>
 	          </view>
-	          <view class="record">
-	            <text>taskRecord_2</text>
-	          </view>
-	          <view class="record">
-	            <text>taskRecord_3</text>
-	          </view>
-	          <view class="record">
-	            <text>taskRecord_4</text>
-	          </view>
+	         
 	   </view>
 	</view>
 	
@@ -74,17 +66,9 @@
 	  
 	  <view class="Record_field">
 	            <view class="record">
-	              <text>submitRecord_1</text>
+	              <text>暂无事项</text>
 	            </view>
-	            <view class="record">
-	              <text>submitRecord_2</text>
-	            </view>
-	            <view class="record">
-	              <text>submitRecord_3</text>
-	            </view>
-	            <view class="record">
-	              <text>submitRecord_4</text>
-	            </view>
+	           
 	  </view>
 	  
 	</view>
@@ -95,7 +79,7 @@
 			<text>扫码更换组织</text>
 		</view>
 			
-	
+	<tm-dialog title="提 示" :showCancel=false v-model="scanSuccess" content="重新登陆以切换组织" @confirm="logout()"></tm-dialog>
 	</view>
         
 	
@@ -106,9 +90,44 @@
 		data() {
 			return {
 				codeInfo:0,
+				scanSuccess:false,
+				TaskList:[],
+				userInfo:{},
+				prefix:"http://101.37.175.115/api/",
 			}
 		},
 		methods: {
+			switchOrg(){
+				var that=this;
+				uni.request({
+					url: that.prefix + 'User/Detail/InfoModify/' + '?token=' + that.usrInfo.token,
+					method:'PUT',
+					data:{
+						OrgID:that.$data.codeInfo,
+						
+					},
+					success: (res) => {
+						console.log(res.data)
+						that.scanSuccess=true
+					},		
+					
+				}) 
+				uni.navigateTo({
+					url:"../Login/Login"
+				})
+			},
+			logout(){
+				uni.removeStorage({
+					key:"userMsg",
+					success: (res) => {
+						console.log(res)
+						uni.navigateTo({
+							url:"../Login/Login"
+						})
+					}
+				})
+			},
+			
 			leftClick(){
 				uni.navigateTo({
 					url:'../index/index'
@@ -133,17 +152,53 @@
 				uni.navigateTo({
 					url:'./TaskList'
 				})
-			}
-			,
+			},
+			getTaskList(){
+				var that=this;
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: that.prefix + 'Organization/Task/All' + '?token=' + that.usrInfo.token+'&page=1',
+						method:'GET',
+						
+						success: (res) => {
+							
+							that.$data.TaskList=res.data.data
+							
+							
+							
+						},		
+						
+					})
+					
+				})
+			},
+			getUserInfo(){
+				return new Promise((req,rej)=>{
+					uni.getStorage({
+						key: 'userMsg',
+						success: function (res) {
+								req(res.data)
+							},
+					})
+				})
+			},
 			scan(){
 				uni.scanCode({
 					success: function (res) {
 						console.log('条码内容：' + res.result);
 						this.codeInfo=res.result
+						this.switchOrg()
 					}
 				});
 			}
-		}
+		},
+		async onLoad() {
+			this.usrInfo = await this.getUserInfo()
+			console.log(this.usrInfo.token)
+			await this.getTaskList()
+			
+		},
+		
 	}
 </script>
 

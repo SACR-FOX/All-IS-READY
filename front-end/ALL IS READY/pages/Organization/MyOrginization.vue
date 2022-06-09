@@ -3,7 +3,7 @@
 			 <u-navbar
 			            title="组织信息"
 			            @leftClick="leftClick"
-			            :autoBack="true"
+			         
 			        >
 			        </u-navbar>
 					<view class="block"></view>
@@ -87,21 +87,23 @@
 						key: 'userMsg',
 						success: function (res) {
 								req(res.data)
+								
 							},
 					})
 				})
 			},
 			getOrgInfo(){
 				var that=this
-			
+				
 				return new Promise((req,rej)=>{
 				uni.request({
 					url: that.prefix + 'Organization/Info' + '?token=' + that.usrInfo.token+'&OrgID='+that.usrInfo.OrgID,
 					method:'GET',
 					data:{
-						OrgID:"1"
+						OrgID:String(that.usrInfo.OrgID)
 					},
 					success: (res) => {
+						console.log(res.data)
 						that.$data.OrgInfo=res.data
 						that.genCode()
 					},
@@ -109,9 +111,7 @@
 					
 				})
 				})
-				
-				
-				
+
 				
 			}
 		},

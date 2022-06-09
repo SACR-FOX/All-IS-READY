@@ -69,7 +69,7 @@ class UserLogin(APIView):  #登录
 
         token=tokenCreator.create(usr,1440)
 
-        return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID},status=status.HTTP_200_OK)
+        return Response({'result':'check passed','code':status.HTTP_200_OK,'token':token,'UID':usr.UID,'OrgID':usr.OrgID,'Uname':usr.Uname},status=status.HTTP_200_OK)
 
 
 # class Rank(APIView):
