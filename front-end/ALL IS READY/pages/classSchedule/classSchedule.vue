@@ -4,7 +4,6 @@
 		    <u-navbar
 		        title="课程表"
 		        @leftClick="rightClick()"
-		        :autoBack="true"
 		    >
 				<view
 				    class="u-nav-slot"
