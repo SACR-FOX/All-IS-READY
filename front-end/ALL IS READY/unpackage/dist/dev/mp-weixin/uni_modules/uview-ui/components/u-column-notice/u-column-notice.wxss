@@ -34,7 +34,12 @@ view.data-v-3bda0f19, scroll-view.data-v-3bda0f19, swiper-item.data-v-3bda0f19 {
   align-content: flex-start;
 }
 .u-notice.data-v-3bda0f19 {
+<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-column-notice/u-column-notice.wxss
+
+=======
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/pages/text/text.wxss
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -49,13 +54,25 @@ view.data-v-3bda0f19, scroll-view.data-v-3bda0f19, swiper-item.data-v-3bda0f19 {
 }
 .u-notice__swiper.data-v-3bda0f19 {
   height: 16px;
+<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-column-notice/u-column-notice.wxss
+
   display: flex;
+
+=======
+  display: flex;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/pages/text/text.wxss
   flex-direction: row;
   align-items: center;
   flex: 1;
 }
 .u-notice__swiper__item.data-v-3bda0f19 {
+<<<<<<< HEAD:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/uni_modules/uview-ui/components/u-column-notice/u-column-notice.wxss
+
   display: flex;
+
+=======
+  display: flex;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26:front-end/ALL IS READY/unpackage/dist/dev/mp-weixin/pages/text/text.wxss
   flex-direction: row;
   align-items: center;
   overflow: hidden;

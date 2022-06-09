@@ -38,7 +38,11 @@
 .page {
   padding: 10rpx;
   margin-top: 70rpx;
+<<<<<<< HEAD
+  background-color: #F1F1F1;
+=======
   background-color: #dcdde1;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
 }
 .row {
   display: flex;
@@ -69,7 +73,9 @@
   font-size: 30rpx;
 }
 .album {
+
   display: flex;
+
   flex-direction: row;
   align-items: flex-start;
 }

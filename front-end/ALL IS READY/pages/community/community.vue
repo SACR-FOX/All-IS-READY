@@ -3,7 +3,7 @@
 		
 		<u-navbar
 		    title="社区广场"
-		    @rightClick="rightClick"
+		    @leftClick="rightClick()"
 		    :autoBack="true">
 		</u-navbar>
 		
@@ -72,7 +72,16 @@
 			}
 		},
 		methods: {
+
+			rightClick(){
+				uni.navigateTo({
+					url:"../index/index"
+				})
+			},
+			
+
 			textFix(text,length){	//社区描述长度限制
+
 				if(text.length <= length){
 					return text
 				}else{

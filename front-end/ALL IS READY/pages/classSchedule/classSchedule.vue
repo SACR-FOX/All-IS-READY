@@ -3,7 +3,7 @@
 		<view>
 		    <u-navbar
 		        title="课程表"
-		        @rightClick="rightClick"
+		        @leftClick="rightClick()"
 		        :autoBack="true"
 		    >
 				<view
@@ -19,7 +19,8 @@
 		
 		<u-tabs :list="list1"
 			style="margin-top: 70rpx;"
-			@click="change":current="0"
+			@click="change"
+			:current="today"
 			>
 		</u-tabs>
 	
@@ -139,6 +140,8 @@
 					currentIndex:6,
                 }],
 
+
+				today:0,
 					
 				Tags:["rgba(246, 229, 141,1.0)","rgba(255, 190, 118,1.0)","rgba(186, 220, 88,1.0)","rgba(255, 121, 121,1.0)","rgba(255, 121, 121,1.0)","rgba(106, 176, 76,1.0)"],
 					
@@ -242,8 +245,17 @@
 					})
 				})
 			},
+		rightClick(){
+				uni.navigateTo({
+					url:"../index/index"
+				})
+			},
 		},
 		async onLoad(){ 
+			
+			let dat = new Date
+			this.today = dat.getDay()
+			
 			this.useMsg = await this.getToken()
 			console.log(this.useMsg.token)
 			

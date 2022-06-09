@@ -34,7 +34,13 @@ view.data-v-9adf94ee, scroll-view.data-v-9adf94ee, swiper-item.data-v-9adf94ee {
   align-content: flex-start;
 }
 .u-notice.data-v-9adf94ee {
+<<<<<<< HEAD
+
   display: flex;
+
+=======
+  display: flex;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -50,7 +56,13 @@ view.data-v-9adf94ee, scroll-view.data-v-9adf94ee, swiper-item.data-v-9adf94ee {
 .u-notice__content.data-v-9adf94ee {
   text-align: right;
   flex: 1;
+<<<<<<< HEAD
+
   display: flex;
+
+=======
+  display: flex;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
   flex-direction: row;
   flex-wrap: nowrap;
   overflow: hidden;
