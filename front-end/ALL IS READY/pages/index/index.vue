@@ -93,19 +93,23 @@
 			<view class="col">
 				
 				<view class="card" style="align-items: center;justify-content: center;" @click="j()">
-					<view>
-
+					<view style="display: flex; flex-direction: column; font-weight: bold; font-size: 50rpx; align-items: center;justify-content: center;">
+						<image style="height: 100rpx; width: 100rpx;" src="../../static/com.png"></image>
+						<text>班级社区</text>
 					</view>
 				</view>
 				
-				<view class="card" @click="toOrg()">
-					
+				<view class="card"  style="align-items: center;justify-content: center;" @click="toOrg()">
+					<view style="display: flex; flex-direction: column; font-weight: bold; font-size: 50rpx; align-items: center;justify-content: center;">
+						<image style="height: 100rpx; width: 100rpx;" src="../../static/org.png"></image>
+						<text>群组</text>
+					</view>
 				</view>
 				
 			</view>
 		</view>
 		
-		<button @click="logout()"  style="background-color: #ffa4a4; margin-left: 15rpx;margin-right: 15rpx;">退出登录</button>
+		<button @click="logout()"  style="background-color: #ffa4a4; margin-left: 15rpx;margin-right: 15rpx; font-weight: bold; color: #F1F1F1;">退出登录</button>
 
 	</view>
 </template>

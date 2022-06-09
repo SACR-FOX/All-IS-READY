@@ -4,7 +4,7 @@
 		<u-navbar
 		    title="TodoList"
 		    @leftClick="rightClick()"
-		    :autoBack="true">
+		>
 		</u-navbar>
 		
 		<!-- 弹出组件 -->
