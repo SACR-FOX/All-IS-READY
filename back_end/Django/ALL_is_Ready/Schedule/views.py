@@ -1,7 +1,5 @@
 import json
-import time
 
-import requests
 from django.db.models import Q
 
 from models.models import Schedule,User
@@ -14,7 +12,6 @@ from rest_framework.views import APIView
 from datetime import datetime
 from tools.timeTool import switcher
 from django.core.cache import cache
-import uuid
 
 
 class Schedule_byday(APIView):
@@ -100,7 +97,7 @@ class GroupImport(APIView):  #按组织批量导入
 
     def post(self,request):
 
-        orgID = request.data.get("OrgID")
+        orgID = request.user['OrgID']
         UID = request.user['UID']
         try:
             sc=Schedule.objects.filter(Q(OrgID__exact=orgID),Q(UID__exact=-1))
