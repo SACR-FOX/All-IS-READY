@@ -41,7 +41,8 @@
 <<<<<<< HEAD
   background-color: #F1F1F1;
 =======
->>>>>>> front-end
+  background-color: #dcdde1;
+>>>>>>> cb1d8e5b3cbb5a012755476d8c462efb16afaa26
 }
 .row {
   display: flex;
@@ -71,9 +72,10 @@
 .content {
   font-size: 30rpx;
 }
-<<<<<<< HEAD
 .album {
+
   display: flex;
+
   flex-direction: row;
   align-items: flex-start;
 }
@@ -89,12 +91,11 @@
 .card {
   background-color: #F1F1F1;
   margin: 10rpx;
+  margin-top: 20rpx;
 }
 .star {
   margin-top: 1rpx;
   height: 50rpx;
   width: 50rpx;
 }
-=======
->>>>>>> front-end
 

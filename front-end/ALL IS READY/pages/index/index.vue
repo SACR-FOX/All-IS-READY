@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="card_top" style="display: flex; ">
-			<view style="display: flex;flex-direction: row;margin-top: 50rpx;">
+			<view style="display: flex;flex-direction: row;margin-top: 20rpx;">
 				<u-avatar src="../../static/avatar.jpg" :src="user.Header" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
 				<view style="">
 					<view style="text-align: right; margin-left: 170px;display: flex;">
@@ -21,7 +21,10 @@
 				<view class="card" @click="toTodolist()">
 					<view style="display: flex; flex-direction: column; margin-left: 55rpx;margin-top: 50rpx;">
 						<text style="font-size: 30rpx; font-weight: bold; color: #E43D33;margin-left: 10rpx;">{{week[date.week]}}</text>
-						<text style="font-size: 75rpx; font-weight: bold; margin-top: 10rpx;">{{date.day}}</text>
+						<view>
+							<text style="font-size: 75rpx; font-weight: bold; margin-top: 10rpx;">{{date.day}}</text>
+							<text style="font-size: 30rpx; font-weight: bold; margin-top: 10rpx; margin-left: 20rpx;">{{mon[date.mon]}}.</text>
+						</view>
 						<text style="font-size: 40rpx; font-weight: bold; margin-top: 30rpx;margin-left: 0rpx;">{{textFix(todoList,6)}}</text>
 					</view>
 				</view>
@@ -77,10 +80,31 @@
 			</scroll-view>
 		</view>
 		<!-- <button @click="j">11</button> -->
-		<view @click="j"
-		style="background-color: #F1F1F1;height: 200rpx; margin: 20rpx; border-radius: 15rpx;"> 
-			
+		<!-- <view style="display: flex; flex-direction: column;">
+			<view @click="j"
+			style="background-color: #0d0d0d;height: 200rpx; margin: 20rpx; border-radius: 15rpx;"> 
+				
+			</view>
+			<view style="background-color: #F1F1F1;height: 200rpx; margin: 20rpx; border-radius: 15rpx;">
+				
+			</view>
+		</view> -->
+		<view class="content">
+			<view class="col">
+				
+				<view class="card" style="align-items: center;justify-content: center;" @click="j()">
+					<view>
+
+					</view>
+				</view>
+				
+				<view class="card" @click="toOrg()">
+					
+				</view>
+				
+			</view>
 		</view>
+		
 		<button @click="logout()"  style="background-color: #ffa4a4; margin-left: 15rpx;margin-right: 15rpx;">退出登录</button>
 
 	</view>
@@ -118,6 +142,9 @@
 						
 						//学习时间
 						learnTime : 6,
+						
+						//Jan、二月Feb、三月Mar、四月Apr、五月May、六月Jun、七月Jul、八月Aug、九月Sept、十月Oct、十一月Nov、十二月Dec。”
+						mon : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
 						
 						//classSchedule
 						classSch : {
@@ -159,6 +186,11 @@
 			j(){
 				uni.navigateTo({
 					url:'../community/community'
+				})
+			},
+			toOrg(){
+				uni.navigateTo({
+					url:"../Organization/Organization"
 				})
 			},
 			toTodolist(){
@@ -432,7 +464,7 @@
 		
 		background-color: rgba(241, 238, 236, 0.8);
 		border-radius: 30rpx;
-		height: 200rpx;
+		height: 160rpx;
 	}
 	.card_bottom{
 		width: 700rpx;

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-navbar": "/uni_modules/uview-ui/components/u-navbar/u-navbar",
+    "tm-form": "/tm-vuetify/components/tm-form/tm-form",
+    "tm-input": "/tm-vuetify/components/tm-input/tm-input",
+    "tm-button": "/tm-vuetify/components/tm-button/tm-button",
+    "tm-listitem": "/tm-vuetify/components/tm-listitem/tm-listitem"
+  }
+}

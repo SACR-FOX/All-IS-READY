@@ -11,33 +11,14 @@
 			</view>
 		
 		<view class="row">
-			<!-- <u--input
-				v-model="c1"
-			    placeholder="请输入社区名字"
-			    border="bottom"
-			    clearable
-				autoHeight
-				style=""
-			  ></u--input> -->
 			  
 		</view>
 		  
-		<u--textarea v-model="c1" placeholder="请输入社区描述" autoHeight style="height: 300rpx;"></u--textarea>
-		
-		<!-- <u-upload
-				:fileList="fileList1"
-				@afterRead="afterRead"
-				@delete="deletePic"
-				name="1"
-				multiple
-				:maxCount="9"
-			></u-upload> -->
+		  <robby-image-upload v-model="imageData" @delete="deleteImage" @add="addImage" :limit="limitNumber"></robby-image-upload>
 		  
-		<view>
-			<button @click="uploadFilePromise()">11</button>
-		</view>
+		<u--textarea v-model="c1" placeholder="请输入话题描述" autoHeight style="height: 200rpx;"></u--textarea>
 		
-		<robby-image-upload v-model="imageData" @delete="deleteImage" @add="addImage" :limit="limitNumber"></robby-image-upload>
+		
 	</view>
 </template>
 
@@ -63,6 +44,47 @@
 			};
 		},
 		methods:{
+			rightClick(){
+				let that = this
+					var tmplist=[]
+					let len=this.imageData.length
+					console.log(len)
+					for(let i=0;i<len;++i){
+						var obj={
+							'name':'PostPic',
+							'uri':this.imageData[i]
+						}	
+						tmplist.push(obj)
+					}
+					console.log(tmplist)
+					return new Promise((resolve, reject) => {
+						uni.uploadFile({
+							url: 'http://101.37.175.115/api/Community/Post/Create/'+'?token='+that.useMsg.token, // 仅为示例，非真实的接口地址
+							files: tmplist,
+							formData: {
+								TopicID : this.TopicID,
+								HasImage : 'True',
+								Content	: this.c1,
+								
+							},
+							success: (res) => {
+								setTimeout(() => {
+									resolve(res.data)
+								}, 1000)
+								console.log(res.data)
+								uni.navigateTo({
+									url:'./topic'
+								})
+							},
+							fail: (err) => {
+								console.log(this.TopicID)
+								console.log(this.c1)
+								console.log('fail')
+								console.log(err)
+							}
+						});
+					})
+				},
 			deleteImage: function(e){
                 console.log(e)
             },
@@ -90,106 +112,6 @@
 					})
 				})
 			},
-			// // 删除图片
-			// deletePic(event) {
-			// 	this[`fileList${event.name}`].splice(event.index, 1)
-			// },
-			// // 新增图片
-			// afterRead(event) {
-			// 	let lists = [].concat(event.file)
-			// 	lists.map((item) => {
-			// 		this[`fileList${event.name}`].push({
-			// 			...item,
-			// 		})
-			// 	})
-			// 	this.tempimage = event.file.url
-			// 	// console.log(this.tempimage)
-
-			// },
-			uploadFilePromise() {	//POST上传
-				let that = this
-				var tmplist=[]
-				let len=this.imageData.length
-				console.log(len)
-				for(let i=0;i<len;++i){
-					var obj={
-						'name':'PostPic',
-						'uri':this.imageData[i]
-					}	
-					tmplist.push(obj)
-					
-				}
-				console.log(tmplist)
-				return new Promise((resolve, reject) => {
-					uni.uploadFile({
-						url: 'http://101.37.175.115/api/Community/Post/Create/'+'?token='+that.useMsg.token, // 仅为示例，非真实的接口地址
-						files: tmplist,
-						formData: {
-							TopicID : this.TopicID,
-							HasImage : 'True',
-							Content	: this.c1,
-							
-						},
-						success: (res) => {
-							setTimeout(() => {
-								resolve(res.data)
-							}, 1000)
-							console.log(res.data)
-							uni.navigateTo({
-								url:'./topic'
-							})
-						},
-						fail: (err) => {
-							console.log(this.TopicID)
-							console.log(this.c1)
-							console.log('fail')
-							console.log(err)
-						}
-					});
-				})
-			},
-			// uploadFilePromise() {	//POST上传
-			// 	let that = this
-			// 	var tmplist=[]
-			// 	let len=this.imageData.length
-			// 	console.log(len)
-			// 	for(let i=0;i<len;++i){
-			// 		var obj={
-			// 			'name':'PostPic',
-			// 			'uri':this.imageData[i]
-			// 		}	
-			// 		tmplist.push(obj)
-					
-			// 	}
-			// 	console.log(tmplist)
-			// 	return new Promise((resolve, reject) => {
-			// 		uni.uploadFile({
-			// 			url: 'http://hcl.free.svipss.top/api/Community/Post/Create/'+'?token='+that.useMsg.token, // 仅为示例，非真实的接口地址
-			// 			files: tmplist,
-			// 			formData: {
-			// 				TopicID : this.TopicID,
-			// 				HasImage : 'True',
-			// 				Content	: this.c1,
-							
-			// 			},
-			// 			success: (res) => {
-			// 				setTimeout(() => {
-			// 					resolve(res.data)
-			// 				}, 1000)
-			// 				console.log(res.data)
-			// 				uni.navigateTo({
-			// 					url:'./topic'
-			// 				})
-			// 			},
-			// 			fail: (err) => {
-			// 				console.log(this.TopicID)
-			// 				console.log(this.c1)
-			// 				console.log('fail')
-			// 				console.log(err)
-			// 			}
-			// 		});
-			// 	})
-			// },
 		},
 		async onLoad() {
 			this.useMsg = await this.getToken()
