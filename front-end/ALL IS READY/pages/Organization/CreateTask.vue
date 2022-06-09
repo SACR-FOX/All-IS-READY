@@ -90,22 +90,26 @@
 			},
 			timeFormat(val){
 	
-				var date = new Date(val);
-				var result=date.getTime()
+				
+				var date= new Date(val.year,val.month,val.day,val.hour,val.min)
+				console.log(date)
+				var result=date.getTime()/1000
 				return result;
 			},
 			
-			dateSe_1(e){
+			dateSe_1(e){ 
 				
 				var tmp= e.year+'-'+e.month + '-' + e.day+' '+e.hour+':'+e.min;
 				this.tmpTimeShowStart =tmp;
-				this.$data.newTask.TimeStart=this.timeFormat(tmp)
+				console.log(tmp)
+				this.$data.newTask.TimeStart=this.timeFormat(e)
 				console.log(this.$data.newTask.TimeStart)
 			},
 			dateSe_2(e){
+				console.log(e)
 				var tmp= e.year+'-'+e.month + '-' + e.day+' '+e.hour+':'+e.min;
 				this.tmpTimeShowDue =tmp;
-				this.$data.newTask.TimeDue=this.timeFormat(tmp)
+				this.$data.newTask.TimeDue=this.timeFormat(e)
 				console.log(this.$data.newTask.TimeDue)
 			},
 			getUserInfo(){
@@ -121,9 +125,10 @@
 			},
 			submit(){
 				
-				var now=new Date().getTime()
+				var now=new Date().getTime()/1000
 				if(this.$data.newTask.TimeStart>this.$data.newTask.TimeDue ||this.$data.newTask.TimeDue < now)
 				{
+					
 					this.$data.failed=true
 				}else{
 					var that=this;
@@ -134,12 +139,12 @@
 							
 							"OrgID":that.$data.newTask.OrgID,
 							"CID":0,
-							"TimeStart":(this.$data.newTask.TimeStart/1000),
-							"TimeDue":(this.$data.newTask.TimeDue/1000),
+							"TimeStart":that.$data.newTask.TimeStart,
+							"TimeDue":that.$data.newTask.TimeDue,
 							
-							"Description":this.$data.newTask.Description,
-							"TaskName":this.$data.newTask.TaskName,
-							"Creator":this.$data.newTask.Creator,
+							"Description":that.$data.newTask.Description,
+							"TaskName":that.$data.newTask.TaskName,
+							"Creator":that.$data.newTask.Creator,
 						
 						},
 						success: (res) => {

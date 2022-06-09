@@ -303,7 +303,7 @@ var render = function() {
               staticStyle: {
                 display: "flex",
                 "flex-direction": "row",
-                "margin-top": "20rpx"
+                "margin-top": "60rpx"
               },
               attrs: { _i: 2 }
             },
@@ -2822,7 +2822,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 16);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n.content {\n  width: 100%;\n  height: auto;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin: 0;\n  padding: 0 20rpx;\n  box-sizing: border-box;\n}\n.col {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-top: 8px;\n}\n.card {\n  width: 350rpx;\n  height: 350rpx;\n  margin: 5px;\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 15px;\n  display: flex;\n  flex-direction: column;\n}\n.card_top {\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 30rpx;\n  height: 160rpx;\n}\n.card_bottom {\n  width: 700rpx;\n  height: 300rpx;\n  margin: 10px;\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 15px;\n}\n.card_doc {\n  width: 260rpx;\n  height: 260rpx;\n  margin-top: 25rpx;\n  margin-left: 25rpx;\n  display: inline-block;\n  background-color: rgba(255, 255, 255, 0.8);\n  border-radius: 30rpx;\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n.content {\n  width: 100%;\n  height: auto;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin: 0;\n  padding: 0 20rpx;\n  box-sizing: border-box;\n}\n.col {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-top: 8px;\n}\n.card {\n  width: 350rpx;\n  height: 350rpx;\n  margin: 5px;\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 15px;\n  display: flex;\n  flex-direction: column;\n}\n.card_top {\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 30rpx;\n  height: 200rpx;\n}\n.card_bottom {\n  width: 700rpx;\n  height: 300rpx;\n  margin: 10px;\n  background-color: rgba(241, 238, 236, 0.8);\n  border-radius: 15px;\n}\n.card_doc {\n  width: 260rpx;\n  height: 260rpx;\n  margin-top: 25rpx;\n  margin-left: 25rpx;\n  display: inline-block;\n  background-color: rgba(255, 255, 255, 0.8);\n  border-radius: 30rpx;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -16019,7 +16019,7 @@ var render = function() {
           staticStyle: {
             position: "absolute",
             bottom: "80rpx",
-            left: "36%",
+            left: "38%",
             display: "flex",
             "flex-direction": "column",
             "justify-content": "center",
