@@ -178,7 +178,8 @@
 		async onLoad(){
 			this.useMsg = await this.getToken()
 			this.newCur.UID = this.useMsg.UID
-			this.UUID = await this.uuid()
+			this.newCur.UUID = await this.uuid()
+			console.log(this.UUID)
 			// console.log(this.uuid)
 			}
 	}
