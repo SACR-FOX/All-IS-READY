@@ -3167,19 +3167,19 @@ var render = function() {
                 {
                   staticStyle: {
                     "font-size": "17px",
-                    "margin-right": "200px",
+                    "margin-right": "120rpx",
                     "font-weight": "bold"
                   },
                   attrs: { _i: 29 }
                 },
-                [_vm._v("My List")]
+                [_vm._v("待办事项")]
               ),
               _c(
                 "uni-view",
                 {
                   staticStyle: {
-                    "margin-right": "10rpx",
-                    width: "140rpx",
+                    "margin-right": "40rpx",
+                    width: "300rpx",
                     "border-radius": "10rpx",
                     display: "flex",
                     "align-items": "center",
@@ -3199,12 +3199,24 @@ var render = function() {
                       }
                     },
                     [_vm._v("批量导入")]
+                  ),
+                  _c(
+                    "tm-button",
+                    {
+                      attrs: { _i: 32 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("添加事项")]
                   )
                 ],
                 1
               ),
               _c("u-icon", {
-                attrs: { _i: 32 },
+                attrs: { _i: 33 },
                 on: {
                   click: function($event) {
                     return _vm.$handleViewEvent($event)
@@ -3222,31 +3234,31 @@ var render = function() {
                 "flex-direction": "column",
                 "justify-content": "center"
               },
-              attrs: { _i: 33 }
+              attrs: { _i: 34 }
             },
             [
               _c(
                 "v-uni-scroll-view",
                 {
                   staticStyle: { height: "615px" },
-                  attrs: { "scroll-y": "true", _i: 34 }
+                  attrs: { "scroll-y": "true", _i: 35 }
                 },
                 [
                   _c(
                     "uni-swipe-action",
                     {
                       staticStyle: { "margin-left": "0px", height: "615px" },
-                      attrs: { _i: 35 }
+                      attrs: { _i: 36 }
                     },
                     [
-                      _vm._l(_vm._$g(36, "f"), function(item, index, $20, $30) {
-                        return _vm._$g("36-" + $30, "i")
+                      _vm._l(_vm._$g(37, "f"), function(item, index, $20, $30) {
+                        return _vm._$g("37-" + $30, "i")
                           ? _c(
                               "uni-swipe-action-item",
                               {
                                 key: item,
-                                staticClass: _vm._$g("36-" + $30, "sc"),
-                                attrs: { _i: "36-" + $30 },
+                                staticClass: _vm._$g("37-" + $30, "sc"),
+                                attrs: { _i: "37-" + $30 },
                                 on: {
                                   click: function($event) {
                                     return _vm.$handleViewEvent($event)
@@ -3257,8 +3269,8 @@ var render = function() {
                                 _c(
                                   "uni-view",
                                   {
-                                    staticClass: _vm._$g("37-" + $30, "sc"),
-                                    attrs: { _i: "37-" + $30 },
+                                    staticClass: _vm._$g("38-" + $30, "sc"),
+                                    attrs: { _i: "38-" + $30 },
                                     on: {
                                       click: function($event) {
                                         return _vm.$handleViewEvent($event)
@@ -3266,40 +3278,40 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _vm._$g("38-" + $30, "i")
-                                      ? _c("uni-view", {
-                                          staticClass: _vm._$g(
-                                            "38-" + $30,
-                                            "sc"
-                                          ),
-                                          staticStyle: {
-                                            "background-color": "#3C9CFF"
-                                          },
-                                          attrs: { _i: "38-" + $30 }
-                                        })
-                                      : _vm._$g("39-" + $30, "e")
+                                    _vm._$g("39-" + $30, "i")
                                       ? _c("uni-view", {
                                           staticClass: _vm._$g(
                                             "39-" + $30,
                                             "sc"
                                           ),
                                           staticStyle: {
-                                            "background-color": "#F0AD4E"
+                                            "background-color": "#3C9CFF"
                                           },
                                           attrs: { _i: "39-" + $30 }
                                         })
-                                      : _c("uni-view", {
+                                      : _vm._$g("40-" + $30, "e")
+                                      ? _c("uni-view", {
                                           staticClass: _vm._$g(
                                             "40-" + $30,
                                             "sc"
                                           ),
                                           staticStyle: {
-                                            "background-color": "#DD524D"
+                                            "background-color": "#F0AD4E"
                                           },
                                           attrs: { _i: "40-" + $30 }
+                                        })
+                                      : _c("uni-view", {
+                                          staticClass: _vm._$g(
+                                            "41-" + $30,
+                                            "sc"
+                                          ),
+                                          staticStyle: {
+                                            "background-color": "#DD524D"
+                                          },
+                                          attrs: { _i: "41-" + $30 }
                                         }),
                                     _c("u-text", {
-                                      attrs: { _i: "41-" + $30 }
+                                      attrs: { _i: "42-" + $30 }
                                     }),
                                     _c("uni-view", {
                                       staticStyle: {
@@ -3309,7 +3321,7 @@ var render = function() {
                                         "margin-right": "15px",
                                         "border-radius": "90%"
                                       },
-                                      attrs: { _i: "42-" + $30 }
+                                      attrs: { _i: "43-" + $30 }
                                     })
                                   ],
                                   1
@@ -3319,14 +3331,14 @@ var render = function() {
                             )
                           : _vm._e()
                       }),
-                      _vm._l(_vm._$g(43, "f"), function(item, index, $21, $31) {
-                        return _vm._$g("43-" + $31, "i")
+                      _vm._l(_vm._$g(44, "f"), function(item, index, $21, $31) {
+                        return _vm._$g("44-" + $31, "i")
                           ? _c(
                               "uni-swipe-action-item",
                               {
                                 key: item,
-                                staticClass: _vm._$g("43-" + $31, "sc"),
-                                attrs: { _i: "43-" + $31 },
+                                staticClass: _vm._$g("44-" + $31, "sc"),
+                                attrs: { _i: "44-" + $31 },
                                 on: {
                                   click: function($event) {
                                     return _vm.$handleViewEvent($event)
@@ -3337,8 +3349,8 @@ var render = function() {
                                 _c(
                                   "uni-view",
                                   {
-                                    staticClass: _vm._$g("44-" + $31, "sc"),
-                                    attrs: { _i: "44-" + $31 },
+                                    staticClass: _vm._$g("45-" + $31, "sc"),
+                                    attrs: { _i: "45-" + $31 },
                                     on: {
                                       click: function($event) {
                                         return _vm.$handleViewEvent($event)
@@ -3346,42 +3358,42 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _vm._$g("45-" + $31, "i")
-                                      ? _c("uni-view", {
-                                          staticClass: _vm._$g(
-                                            "45-" + $31,
-                                            "sc"
-                                          ),
-                                          staticStyle: {
-                                            "background-color": "#3C9CFF"
-                                          },
-                                          attrs: { _i: "45-" + $31 }
-                                        })
-                                      : _vm._$g("46-" + $31, "e")
+                                    _vm._$g("46-" + $31, "i")
                                       ? _c("uni-view", {
                                           staticClass: _vm._$g(
                                             "46-" + $31,
                                             "sc"
                                           ),
                                           staticStyle: {
-                                            "background-color": "#F0AD4E"
+                                            "background-color": "#3C9CFF"
                                           },
                                           attrs: { _i: "46-" + $31 }
                                         })
-                                      : _c("uni-view", {
+                                      : _vm._$g("47-" + $31, "e")
+                                      ? _c("uni-view", {
                                           staticClass: _vm._$g(
                                             "47-" + $31,
                                             "sc"
                                           ),
                                           staticStyle: {
-                                            "background-color": "#DD524D"
+                                            "background-color": "#F0AD4E"
                                           },
                                           attrs: { _i: "47-" + $31 }
+                                        })
+                                      : _c("uni-view", {
+                                          staticClass: _vm._$g(
+                                            "48-" + $31,
+                                            "sc"
+                                          ),
+                                          staticStyle: {
+                                            "background-color": "#DD524D"
+                                          },
+                                          attrs: { _i: "48-" + $31 }
                                         }),
                                     _c("u-text", {
-                                      attrs: { _i: "48-" + $31 }
+                                      attrs: { _i: "49-" + $31 }
                                     }),
-                                    _vm._$g("49-" + $31, "i")
+                                    _vm._$g("50-" + $31, "i")
                                       ? _c("uni-view", {
                                           staticStyle: {
                                             "background-color": "#F56C6C",
@@ -3390,7 +3402,7 @@ var render = function() {
                                             "margin-right": "15px",
                                             "border-radius": "90%"
                                           },
-                                          attrs: { _i: "49-" + $31 }
+                                          attrs: { _i: "50-" + $31 }
                                         })
                                       : _vm._e()
                                   ],
@@ -3409,35 +3421,6 @@ var render = function() {
               )
             ],
             1
-          )
-        ],
-        1
-      ),
-      _c(
-        "uni-view",
-        { staticClass: _vm._$g(50, "sc"), attrs: { _i: 50 } },
-        [
-          _c(
-            "v-uni-button",
-            {
-              staticStyle: {
-                width: "360px",
-                height: "55px",
-                "align-items": "center"
-              },
-              attrs: {
-                type: "default",
-                size: "200px",
-                loading: _vm._$g(51, "a-loading"),
-                _i: 51
-              },
-              on: {
-                click: function($event) {
-                  return _vm.$handleViewEvent($event)
-                }
-              }
-            },
-            [_vm._v("添加事项")]
           )
         ],
         1
@@ -7962,7 +7945,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 16);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.topBarNum{\n\tfont-size: 20px;\n\tfont-weight: bold;\n\tcolor: #BBBCBE;\n\tmargin-left: 80px;\n\tmargin-top: 10px;\n}\n.topBarText{\n\tfont-size: 18px;\n\tfont-weight: bold;\n\tposition: relative;\n\tleft: 15px;\n\tbottom: 7px;\n}\n.input_item{\n\theight: 50px;\n\twidth: 350px;\n\tmargin-top: 20px;\n\t/* margin-bottom: 20px; */\n}\n.date_picker{\n\tdisplay: flex;\n\tflex-direction: row;\n\theight: 50px;\n\twidth: 350px;\n\tmargin-top: 20px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.popBac{\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 300px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.input{\n\twidth: 150px;\n}\n.background{\n\theight: 100%;\n\twidth: 100%;\n\tbackground-color: #F1F1F1 ;\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n.topbar{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-top: 40px;\n}\n.top_button{\n\theight: 80px;\n\twidth: 180px;\n\tbackground-color: #FFFFFF;\n\tmargin: 10px;\n\tborder-radius: 10px;\n\tdisplay: flex;\n\tflex-direction: column;\n}\n.icon_bac{\n\twidth: 30px;\n\theight: 30px;\n\tborder-radius: 90%;\n\tmargin: 17px;\n\tmargin-top: 10px;\n\talign-items: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n.topB_icon{\n\tdisplay: flex;\n\tflex-direction: row;\n}\n.list{\n}\n.center_top{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tmargin-bottom: 15px;\n\tjustify-content: center;\n}\n.list_item{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tbackground-color: #FFFFFF;\n\twidth: 370px;\n\theight: 60px;\n\tborder-radius: 10px;\n\tmargin-top: 5px;\n\tmargin-bottom: 5px;\n}\n.tag{\n\tbackground-color: #3C9CFF;\n\theight: 26px;\n\twidth: 26px;\n\tmargin: 10px;\n\tmargin-left: 15px;\n\tborder-radius: 90%;\n\tborder: 3px solid #F1F1F1;\n}\n.buttom{\n\theight: 90px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\n.topBarNum{\n\tfont-size: 20px;\n\tfont-weight: bold;\n\tcolor: #BBBCBE;\n\tmargin-left: 80px;\n\tmargin-top: 10px;\n}\n.topBarText{\n\tfont-size: 18px;\n\tfont-weight: bold;\n\tposition: relative;\n\tleft: 15px;\n\tbottom: 7px;\n}\n.input_item{\n\theight: 50px;\n\twidth: 350px;\n\tmargin-top: 20px;\n\t/* margin-bottom: 20px; */\n}\n.date_picker{\n\tdisplay: flex;\n\tflex-direction: row;\n\theight: 50px;\n\twidth: 350px;\n\tmargin-top: 20px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.popBac{\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 300px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.input{\n\twidth: 150px;\n}\n.background{\n\theight: 100%;\n\twidth: 100%;\n\tbackground-color: #F1F1F1 ;\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n.topbar{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-top: 40px;\n}\n.top_button{\n\theight: 80px;\n\twidth: 180px;\n\tbackground-color: #FFFFFF;\n\tmargin: 10px;\n\tborder-radius: 10px;\n\tdisplay: flex;\n\tflex-direction: column;\n}\n.icon_bac{\n\twidth: 30px;\n\theight: 30px;\n\tborder-radius: 90%;\n\tmargin: 17px;\n\tmargin-top: 10px;\n\talign-items: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n.topB_icon{\n\tdisplay: flex;\n\tflex-direction: row;\n}\n.list{\n}\n.center_top{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tmargin-bottom: 15px;\n\tjustify-content: center;\n}\n.list_item{\n\tdisplay: flex;\n\tflex-direction: row;\n\talign-items: center;\n\tbackground-color: #FFFFFF;\n\twidth: 370px;\n\theight: 60px;\n\tborder-radius: 10px;\n\tmargin-top: 5px;\n\tmargin-bottom: 5px;\n}\n.tag{\n\tbackground-color: #3C9CFF;\n\theight: 26px;\n\twidth: 26px;\n\tmargin: 10px;\n\tmargin-left: 15px;\n\tborder-radius: 90%;\n\tborder: 3px solid #F1F1F1;\n}\n.buttom{\n\theight: 90px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: 120rpx;\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 

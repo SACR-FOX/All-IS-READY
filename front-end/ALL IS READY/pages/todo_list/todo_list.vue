@@ -58,12 +58,13 @@
 		<!-- todoList 主体 -->
 		<view class="list">
 			<view class="center_top">
-				<text style="font-size: 17px;margin-right:200px; font-weight: bold;">My List</text>
-				<view style="margin-right: 10rpx; width: 140rpx;
+				<text style="font-size: 17px;margin-right:120rpx; font-weight: bold;">待办事项</text>
+				<view style="margin-right: 40rpx; width: 300rpx;
 							  border-radius: 10rpx; display: flex; align-items: center;justify-content: center;"
 							 >
 							<!-- <button  @click="inputByOrg()" style=" font-size: 10rpx;" >批量导入</button> -->
 							<tm-button theme="green" size="m"  @click="inputByOrg()">批量导入 </tm-button>
+							<tm-button theme="primary" size="m"  @click="showPopup()">添加事项</tm-button>
 							 </view>
 				<u-icon name="list" style="" size="25px" bold @click="classify()" ></u-icon>
 			</view>
@@ -109,16 +110,13 @@
 			</view>
 		</view>
 		<!-- 添加按钮 -->
-		<view class="buttom" >
-<!-- 			<u-button text="添加事项" plain="" shape="circle" 
-			style="width: 360px; height: 55px;" size="250px"
-			@click="addItem()"
-			></u-button> -->
+	<!-- 	<view class="buttom" >
+
 			<button type="default"
 			style="width: 360px; height: 55px; align-items: center;" size="200px"
 			@click="showPopup()" :loading="load" >添加事项</button>
 			
-		</view>
+		</view> -->
 	</view>
 	
 	
@@ -655,7 +653,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 10px;
+		margin-bottom: 120rpx;
 	}
 	
 </style>
