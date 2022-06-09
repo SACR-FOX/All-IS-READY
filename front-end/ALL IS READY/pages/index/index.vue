@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="card_top" style="display: flex; ">
-			<view style="display: flex;flex-direction: row;margin-top: 20rpx;">
+			<view style="display: flex;flex-direction: row;margin-top: 60rpx;">
 				<u-avatar src="../../static/avatar.jpg" :src="user.Header" style="margin-left: 50rpx; margin-top: 15rpx;" size="50"></u-avatar>
 				<view style="">
 					<view style="text-align: right; margin-left: 170px;display: flex;">
@@ -468,7 +468,7 @@
 		
 		background-color: rgba(241, 238, 236, 0.8);
 		border-radius: 30rpx;
-		height: 160rpx;
+		height: 200rpx;
 	}
 	.card_bottom{
 		width: 700rpx;
