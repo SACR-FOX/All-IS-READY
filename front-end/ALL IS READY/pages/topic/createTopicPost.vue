@@ -11,15 +11,16 @@
 		  <robby-image-upload v-model="imageData" @delete="deleteImage" @add="addImage" :limit="limitNumber"></robby-image-upload>
 		  
 		<u--textarea v-model="c1" placeholder="请输入话题描述" autoHeight style="height: 200rpx;"></u--textarea>
-		
+		<tm-button  theme="bg-gradient-orange-accent" :round="24" block style="margin-top: 30rpx;" @click="rightClick">创 建</tm-button>
 		
 	</view>
 </template>
 
 <script>
-	import robbyImageUpload from '@/components/robby-image-upload/robby-image-upload.vue'
+	import robbyImageUpload from '@/components/robby-image-upload/robby-image-upload.vue';
+	import tmButton from '@/tm-vuetify/components/tm-button/tm-button.vue';
 	export default {
-		components: {robbyImageUpload},
+		components: {robbyImageUpload,tmButton},
 		data() {
 			return {
 				c1:'',
@@ -120,6 +121,6 @@
 	.row{
 		display: flex;
 		flex-direction: row;
-		margin-top: 100rpx;
+		margin-top: 15rpx;
 	}
 </style>

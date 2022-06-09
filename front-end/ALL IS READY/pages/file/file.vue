@@ -204,14 +204,14 @@
 		width: 250rpx;
 		height: 1400rpx;
 		margin: 5px;
-		margin-top: 80rpx;
+		margin-top: 15rpx;
 		background-color: rgba(241, 238, 236, 0.8);
 		border-radius: 15px;
 	}
 	.card_file{
 		width: 450rpx;
 		height: 1400rpx;
-		margin-top: 80rpx;
+		margin-top: 15rpx;
 		background-color: rgba(241, 238, 236, 0.8);
 		border-radius: 15px;
 	}

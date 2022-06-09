@@ -290,7 +290,7 @@
 	}
 	.page{
 		padding: 10rpx;
-		margin-top: 70rpx;
+		margin-top: 15rpx;
 		background-color: #dcdde1;
 	}
 	.row{

@@ -1,8 +1,6 @@
 <template>
 	<view>
 		<view>
-		      
-				<!-- <u-icon name="checkbox-mark" size="19"></u-icon> -->
 			</view>
 		
 		<view class="row">
@@ -25,13 +23,17 @@
 			  	></u-upload>
 		</view>
 		  
-		  <u--textarea v-model="c2" placeholder="请输入社区描述" autoHeight style="height: 150rpx;"></u--textarea>
+		<u--textarea v-model="c2" placeholder="请输入社区描述" autoHeight style="height: 80rpx;"></u--textarea>
+		
+		<tm-button  theme="bg-gradient-orange-accent" :round="24" block style="margin-top: 30rpx;" @click="rightClick">创 建</tm-button>
 		
 	</view>
 </template>
 
 <script>
+	import tmButton from '@/tm-vuetify/components/tm-button/tm-button.vue';
 	export default {
+		components: {tmButton},
 		data() {
 			return {
 				fileList1: [],
@@ -98,58 +100,7 @@
 				// console.log(lists[0].url)
 				// console.log(this.useMsg.UID)
 			},
-			// uploadFilePromise() {
-			// 	let that = this
-			// 	return new Promise((resolve, reject) => {
-			// 		uni.uploadFile({
-			// 			url: 'http://101.37.175.115/api/Community/Action/'+'?token='+that.useMsg.token, // 仅为示例，非真实的接口地址
-			// 			filePath: this.tempimage,
-			// 			name: 'Poster',
-			// 			formData: {
-			// 				CommunityName:that.c1,
-			// 				AdministratorID:that.useMsg.UID,
-			// 				Description:that.c2,
-			// 			},
-			// 			success: (res) => {
-			// 				setTimeout(() => {
-			// 					resolve(res.data.data)
-			// 				}, 1000)
-			// 				console.log(res.data)
-			// 				uni.navigateTo({
-			// 					url:'./community'
-			// 				})
-			// 			},
-			// 			fail: (rej) => {
-			// 				console.log('fail')
-			// 			}
-			// 		});
-			// 	})
-			// },
-			
-			// uploadFilePromise() {
-			// 	let that = this
-			// 	return new Promise((resolve, reject) => {
-			// 		uni.uploadFile({
-			// 			url: 'http://hcl.free.svipss.top/api/Community/Action/'+'?token='+that.useMsg.token, // 仅为示例，非真实的接口地址
-			// 			filePath: this.tempimage,
-			// 			name: 'Poster',
-			// 			formData: {
-			// 				CommunityName:that.c1,
-			// 				AdministratorID:that.useMsg.UID,
-			// 				Description:that.c2,
-			// 			},
-			// 			success: (res) => {
-			// 				setTimeout(() => {
-			// 					resolve(res.data.data)
-			// 				}, 1000)
-			// 				console.log(res.data)
-			// 			},
-			// 			fail: (rej) => {
-			// 				console.log('fail')
-			// 			}
-			// 		});
-			// 	})
-			// },
+
 		},
 			
 			async onLoad() {
@@ -164,6 +115,6 @@
 	.row{
 		display: flex;
 		flex-direction: row;
-		margin-top: 100rpx;
+		margin-top: 15rpx;
 	}
 </style>

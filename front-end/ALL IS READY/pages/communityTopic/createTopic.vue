@@ -11,7 +11,7 @@
 			name="1"
 			multiple
 			:maxCount="1"
-						style="margin-left: 300rpx;margin-top: 150rpx;"
+						style="margin-left: 300rpx;margin-top: 15rpx;"
 		></u-upload>
 		
 		<view class="row">
@@ -25,13 +25,16 @@
 			  ></u--input>
 			  
 		</view>
+		<tm-button  theme="bg-gradient-orange-accent" :round="24" block style="margin-top: 30rpx;" @click="rightClick">创 建</tm-button>
 		  
 		
 	</view>
 </template>
 
 <script>
+	import tmButton from '@/tm-vuetify/components/tm-button/tm-button.vue';
 	export default {
+		components: {tmButton},
 		data() {
 			return {
 				fileList1: [],

@@ -219,7 +219,7 @@
 	}
 	.head{
 		padding: 10rpx;
-		margin-top: 90rpx;
+		margin-top: 15rpx;
 		
 		background-color: #badc58;
 		.community_image{

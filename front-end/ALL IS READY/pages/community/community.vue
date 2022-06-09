@@ -1,9 +1,7 @@
 <template>
 	<view>
-		
-		
-		
-		<view style="margin-top: 80rpx;"></view>
+
+		<view style="margin-top: 15rpx;"></view>
 		
 		<view v-for='i in count'>
 			<view class="communityItem" @click="jump(results[i-1].CommunityID,
