@@ -7,7 +7,7 @@
 	        >
 	        </u-navbar>
 		</view>
-	<view style="height: 70rpx;"></view>
+	<view style="height: 170rpx;"></view>
 		
 		<view class="page">
 			<text class="title" @click="showToast()">{{Title}}</text>

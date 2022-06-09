@@ -8,7 +8,7 @@
 		        >
 		        </u-navbar>
 			</view>
-		<view style="height: 70rpx;"></view>
+		<view style="height: 170rpx;"></view>
 		
 		<view class="head">
 			<!-- <view class="bg-colore"></view> -->
