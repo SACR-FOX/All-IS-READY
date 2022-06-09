@@ -1,11 +1,6 @@
 <template>
 	<view >
-		<u-navbar
-		           title="创建课程表项"
-		           @leftClick="leftClick()"
-		           :autoBack="true"
-		       >
-		       </u-navbar>
+		
 			
 			   <view class="topBlock"></view>
 			   

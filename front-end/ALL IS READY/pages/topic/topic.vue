@@ -1,11 +1,7 @@
 <template>
 	
 	<view class="back">
-		<u-navbar
-		    title="话题帖子"
-		    @rightClick="rightClick"
-		    :autoBack="true">
-		</u-navbar>
+	
 		
 		<view class="page">
 			<text class="title" @click="showToast()">{{Title}}</text>

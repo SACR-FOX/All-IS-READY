@@ -1,11 +1,6 @@
 <template>
 	<view>
-		<u-navbar
-		           title="任务详情"
-		           @leftClick="leftClick"
-		         
-		       >
-		       </u-navbar>
+		
 			    <view class="topBlock"></view>
 				
 			   <tm-grouplist title="任务信息" title-theme="blue text" :shadow="24" :round="10" :padding="[42, 42]">

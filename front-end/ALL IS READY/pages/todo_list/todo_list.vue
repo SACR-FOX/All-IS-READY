@@ -1,11 +1,7 @@
 <template>
 	<view class="background" >
 		
-		<u-navbar
-		    title="TodoList"
-		    @leftClick="rightClick()"
-		>
-		</u-navbar>
+		
 		
 		<!-- 弹出组件 -->
 		
@@ -63,10 +59,11 @@
 		<view class="list">
 			<view class="center_top">
 				<text style="font-size: 17px;margin-right:200px; font-weight: bold;">My List</text>
-				<view style="margin-right: 10rpx; background-color: #ffffff;width: 140rpx;
+				<view style="margin-right: 10rpx; width: 140rpx;
 							  border-radius: 10rpx; display: flex; align-items: center;justify-content: center;"
 							 >
-							<button  @click="inputByOrg()" style=" font-size: 10rpx;" >批量导入</button>
+							<!-- <button  @click="inputByOrg()" style=" font-size: 10rpx;" >批量导入</button> -->
+							<tm-button theme="green" size="m"  @click="inputByOrg()">批量导入 </tm-button>
 							 </view>
 				<u-icon name="list" style="" size="25px" bold @click="classify()" ></u-icon>
 			</view>
@@ -128,7 +125,10 @@
 </template>
 
 <script>
+	import tmButton from '@/tm-vuetify/components/tm-button/tm-button.vue';
+	
 	export default {
+		components: {tmButton},
 		data() {
 			return {
 				"today" : 10,
@@ -175,7 +175,7 @@
 				"picker_tag" : 0,
 				
 				//用户信息
-				userMsg : [],
+				userMsg : {},
 				Url : "http://101.37.175.115/api/",
 			}
 		},
@@ -255,7 +255,20 @@
 					}
 				});
 			},
-			
+			getCount(){
+				console.log(this.userMsg.token)
+				return new Promise((req,rej)=>{
+					uni.request({
+						url:"http://101.37.175.115/api/ToDoList/Statistics?token=" + this.userMsg.token,
+							success: (res) => {
+								console.log(res.data)
+								this.today = res.data.today
+								this.order = res.data.all_in_plan
+								req("success")
+							}
+					})
+				})
+			},
 			//获取UUID
 			getUUID() {
 				return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -270,9 +283,7 @@
 			//点击跳转
 			showDetial(UID){
 				let that = this
-				uni.navigateTo({
-					url:"./list_detial?id=" + UID.toString()
-				})
+				
 			},
 			
 			
@@ -476,6 +487,7 @@
 			let that = this;
 			
 			await that.getUserMsg()
+			await this.getCount()
 			that.list = await that.getList()
 			console.log(that.userMsg.OrgID)
 			// for(var i = 1;i <= 10 ; i++){
@@ -537,8 +549,9 @@
 	.topBarText{
 		font-size: 18px;
 		font-weight: bold;
-		margin-left: 13px;
-		margin-bottom: 7px;
+		position: relative;
+		left: 15px;
+		bottom: 7px;
 	}
 		
 	.input_item{

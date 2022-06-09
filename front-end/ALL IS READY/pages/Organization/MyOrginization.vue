@@ -1,12 +1,7 @@
 <template>
 		<view>
-			 <u-navbar
-			            title="组织信息"
-			            @leftClick="leftClick"
-			         
-			        >
-			        </u-navbar>
-					<view class="block"></view>
+			
+				
 			<view class="orgName">
 				<text>{{OrgInfo.OrgName}} 组织信息</text>
 			</view>
