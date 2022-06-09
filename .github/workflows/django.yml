@@ -26,26 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: 3306
-        # The port of container
-        container port: 3306
-        # --character-set-server - The character set of MySQL server
-        character set server: utf8mb4
-        # --collation-server - The character collation of MySQL server
-        collation server: utf8mb4_general_ci
-        # Version of MySQL to use
-        mysql version: 5.7#假如你的nysql版本号不一样的话可以修改
-        # MYSQL_ROOT_PASSWORD - root superuser password
-        mysql root password: 20010831 
-        # MYSQL_DATABASE - name for the default database that is created
-        mysql database: ALL_IS_READY
-        # MYSQL_USER - create the specified user with superuser power for created database
-        mysql user: lishengdi
-        # MYSQL_PASSWORD - specified superuser password which user is power for created database
-        mysql password: Hn123456 
+   
 
 
     
