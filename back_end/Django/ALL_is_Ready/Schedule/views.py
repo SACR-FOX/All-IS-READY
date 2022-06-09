@@ -1,7 +1,5 @@
 import json
-import time
 
-import requests
 from django.db.models import Q
 
 from models.models import Schedule,User
@@ -14,7 +12,6 @@ from rest_framework.views import APIView
 from datetime import datetime
 from tools.timeTool import switcher
 from django.core.cache import cache
-import uuid
 
 
 class Schedule_byday(APIView):
