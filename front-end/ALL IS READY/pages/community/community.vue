@@ -3,7 +3,7 @@
 		
 		<u-navbar
 		    title="社区广场"
-		    @rightClick="rightClick"
+		    @leftClick="rightClick()"
 		    :autoBack="true">
 		</u-navbar>
 		
@@ -78,6 +78,13 @@
 			}
 		},
 		methods: {
+			
+			rightClick(){
+				uni.navigateTo({
+					url:"../index/index"
+				})
+			},
+			
 			textFix(text,length){
 				if(text.length <= length){
 					return text

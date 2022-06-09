@@ -37,7 +37,9 @@ view.data-v-09988a29, scroll-view.data-v-09988a29, swiper-item.data-v-09988a29 {
   border-radius: 4px;
   background-color: #fff;
   position: relative;
+
   display: flex;
+
   flex-direction: row;
   flex: 1;
   padding: 9px;

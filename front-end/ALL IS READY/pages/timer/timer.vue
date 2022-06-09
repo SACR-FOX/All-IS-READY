@@ -1,6 +1,19 @@
  <template>
 	<view>
+
+		<u-popup :show="show" closeOnClickOverlay @close="show = false">
+			<u-input v-model="tmpName"  placeholder="请输入项目名称"></u-input>
+			<view style="display: flex; align-items: center; justify-content: center; height: 200rpx;">
+				<text @click="timePickerShow = true" style="font-weight: bold; font-size: 50rpx;">{{tmpTime}}</text>
+			</view>
+			<u-datetime-picker :show="timePickerShow" mode="time" v-model="tmpTime" 
+								@cancel="timePickerShow = false" @confirm="timePickerShow = false"></u-datetime-picker>
+								
+			<button @click="add()">确认</button>					
+		</u-popup>
+		
 		<view class="top">
+			
 			<circle-progress-bar :pro="poject_now.percent/100" 
 								  :size="500" :border_width = "30"
 								  border_color = "#faa200" border_back_color="#fae9ca"
@@ -24,7 +37,7 @@
 		</view>
 		<view class="mention">
 			<text style="font-size: 20px; font-weight: bold; margin: 10px;">今天已完成</text>
-			<text style="font-size: 30px; font-weight:bold ;" :style="{'color' : '#55aaff'}">{{learning_time}}</text>
+			<text style="font-size: 30px; font-weight:bold ;" :style="{'color' : '#55aaff'}">{{Math.floor(learning_time/3600)}}</text>
 			<text  style="font-size: 20px; font-weight: bold;  margin: 10px;">小时</text>
 			<!-- <u--text :text = "'今天已完成' + learning_time + '小时'" bold size = "25" style="margin-left:110px;"></u--text> -->
 		</view>
@@ -44,6 +57,7 @@
 					</view>
 				</scroll-view>
 		</view>
+		<button @click="addWork()">添加任务</button>
 	</view>
 </template>
 
@@ -53,43 +67,39 @@
 	export default {
 		data() {
 			return {
-				"learning_time" : 0,
-				"history_list" : [{
-					"name" : "阅读 Passsage 1",
-					"date" : 1500,
-					"percent" : 100,
-					"color" : 0,
-				},{
-					"name" : "口语 Part 1",
-					"date" : 1500,
-					"percent" : 100,
-					"color" : 1,
-				},{
-					"name" : "阅读 Passsage 1",
-					"date" : 120,
-					"percent" : 100,
-					"color" : 2,
-				},{
-					"name" : "阅读 Passsage 1",
-					"date" : 3600,
-					"percent" : 100,
-					"color" : 1,
-				},{
-					"name" : "阅读 Passsage 1",
-					"date" : 4200,
-					"percent" : 100,
-					"color" : 0,
-				},{
-					"name" : "阅读 Passsage 1",
-					"date" : 60,
-					"percent" : 100,
-					"color" : 2,
-				},{
-					"name" : "阅读 Passsage 1",
-					"date" : 5,
-					"percent" : 100,
-					"color" : 2,
-				}],
+				
+				"show" : false,
+				timePickerShow : false,
+				
+				tmpTime : 0,
+				tmpName : "",
+				
+				"learning_time" : 7200,
+				"history_list" : [
+					{
+						"name" : "Test1",
+						"date" : 3600,
+						"percent" : 100,
+						"color" : 1,
+					},
+					{
+						"name" : "Test2",
+						"date" : 1800,
+						"percent" : 100,
+						"color" : 0,
+					},
+					{
+						"name" : "Test3",
+						"date" : 1600,
+						"percent" : 100,
+						"color" : 1,
+					},{
+						"name" : "Test4",
+						"date" : 200,
+						"percent" : 100,
+						"color" : 2,
+					},
+					],
 				
 				//显示当前的计划
 				"poject_now" : {
@@ -116,9 +126,12 @@
 				//
 				"timer_color" : {},
 				
+				count : 0,
 				
 				//开始按钮控制
-				starButton : true
+				starButton : true,
+				
+				userMsg : {}
 			}
 		},
 		methods: {
@@ -138,23 +151,85 @@
 				
 			},
 			
+			addWork(){
+				let that = this
+				that.show =true
+				that.tmpName = ""
+				that.tmpTime = "请选择时间"
+			},
+			
+				
+			add(){
+				if(this.tmpName != "" && this.tmpTime != "请选择时间"){
+					let data ={
+						"name" : this.tmpName,
+						"date" : this.strToTime(this.tmpTime),
+						"percent" : 100,
+						"color" : Math.floor((Math.random()*3)),
+					}
+					this.history_list.push(data)
+					console.log(data.date)
+					
+					this.show = false
+				}else{
+					uni.showToast({
+						title: "请输入",
+						icon: "error"
+					})
+				}
+				
+			},
+			
+			strToTime(time){
+				let tmp = time.split(":")
+				return parseInt(tmp[0]*3600)+parseInt(tmp[1]*60)
+			},
+			
 			//倒计时
-			counter(){
+			async counter(){
 				this.date = this.poject_now.date/(this.poject_now.percent/100)
-				console.log(this.date)
+				// console.log(this.date)
 				let that = this
 				let per = that.poject_now.percent
-				console.log(per)
+				// console.log(per)
 				// console.log(this.poject_now.date)
 				if(that.poject_now.date == 0 || !that.timer_flag){
 					this.work_flag = false
+					console.log(this.count)
+					await this.sendEXP(this.count)
+					this.count = 0
+					console.log("end")
 					clearTimeout(this.timer)
 				}else{
 					
 					this.poject_now.date = this.poject_now.date -1
 					this.poject_now.percent = Math.round((this.poject_now.date/(that.date))*100)
+					this.count+=1
+					this.learning_time +=1
+					console.log(this.count)
 					setTimeout(that.counter,1000)
 				}
+			},
+			
+			sendEXP(time){
+				return new Promise((req,rej)=>{
+					uni.request({
+						url: "http://101.37.175.115/api/Reward/Add/?token="+this.userMsg.token,
+						method:"POST",
+						data:{
+							ItemName : "Timer",
+							Durations : time.toString(),
+						},
+						success: (res) => {
+							console.log(res.data)
+							req("success")
+						},
+						fail: (err) => {
+							console.log(err)
+							rej("err")
+						}
+					})
+				})
 			},
 			
 			counterStart(){
@@ -189,8 +264,6 @@
 					this.timer_flag = false
 					this.icon_flag = 1
 					this.starButton = true
-					// clearTimeout(this.timer)
-					
 					this.timer = null
 					
 				}else{
@@ -241,11 +314,32 @@
 					timeC = hour + ":"+ min + ":" + sec
 					return timeC
 				}
-			}
-		},
-		onLoad() {
+			},
 			
-			//
+			getUserMsg(){
+				return new Promise((req,rej) =>{
+					uni.getStorage({
+						key:"userMsg",
+						success:(res)=>{
+							console.log("success")
+							this.userMsg = res.data
+							req("success")
+						},
+						fail: (err) => {
+							console.log("err")
+							uni.reLaunch({
+								url:"../Login/Login"
+							})
+						}
+					})
+				})
+			},
+		},
+		async onLoad() {
+			this.strToTime("02:00")
+			await this.getUserMsg()
+			console.log(this.userMsg.token)
+			
 			
 		},
 		
@@ -305,7 +399,7 @@
 	
 	.history{
 		background-color: #F1F1F1;
-		height: 325px;
+		height: 275px;
 	}
 	.tabbar{
 		margin: 20px;

@@ -144,15 +144,7 @@
                 "enablePullDownRefresh": false
             }
             
-        },{
-      "path" : "pages/Organization/Organization",
-      "style" :                                                                                    
-      {
-          "navigationStyle": "custom" ,// 隐藏系统导航栏
-    "navigationBarTextStyle": "black" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
-      }
-      
-  }
+        }
         ,{
             "path" : "pages/Organization/MyOrginization",
             "style" :                                                                                    
@@ -162,6 +154,15 @@
             }
             
         }
+		,{
+		    "path" : "pages/Organization/Organization",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/Organization/TaskList",
             "style" :                                                                                    
@@ -207,63 +208,16 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-		{
-		      "path" : "pages/Organization/Organization",
-		      "style" :                                                                                    
-		      {
-		          "navigationStyle": "custom" ,// 隐藏系统导航栏
-		    "navigationBarTextStyle": "black" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
-		      }
-		      
-		  }
-		        ,{
-		            "path" : "pages/Organization/MyOrginization",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/TaskList",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/CreateTask",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/CreateOrg",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		       
-		        ,{
-		            "path" : "pages/Organization/TaskDetail",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		
+        }
+        ,{
+            "path" : "pages/file/file_pdf",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

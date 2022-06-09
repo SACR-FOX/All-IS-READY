@@ -38,10 +38,7 @@
 .page {
   padding: 10rpx;
   margin-top: 70rpx;
-<<<<<<< HEAD
   background-color: #F1F1F1;
-=======
->>>>>>> front-end
 }
 .row {
   display: flex;
@@ -71,9 +68,10 @@
 .content {
   font-size: 30rpx;
 }
-<<<<<<< HEAD
 .album {
+
   display: flex;
+
   flex-direction: row;
   align-items: flex-start;
 }
@@ -95,6 +93,4 @@
   height: 50rpx;
   width: 50rpx;
 }
-=======
->>>>>>> front-end
 

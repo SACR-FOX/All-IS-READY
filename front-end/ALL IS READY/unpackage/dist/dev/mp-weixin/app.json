@@ -7,19 +7,22 @@
     "pages/timer/timer",
     "pages/classSchedule/classSchedule",
     "pages/file/file",
+    "pages/file/file_detial",
     "pages/leaderBoard/leaderBoard",
     "pages/community/community",
     "pages/topic/topic",
     "pages/communityTopic/communityTopic",
     "pages/Login/Login",
-<<<<<<< HEAD
     "pages/community/createCommunity",
     "pages/communityTopic/createTopic",
-    "pages/topic/createTopicPost"
-=======
-    "pages/file/file_detial",
-    "pages/Login/register"
->>>>>>> front-end
+    "pages/topic/createTopicPost",
+    "pages/Organization/MyOrginization",
+    "pages/Organization/TaskList",
+    "pages/Organization/CreateTask",
+    "pages/Organization/CreateOrg",
+    "pages/Organization/TaskDetail",
+    "pages/Login/register",
+    "pages/file/file_pdf"
   ],
   "subPackages": [],
   "window": {
