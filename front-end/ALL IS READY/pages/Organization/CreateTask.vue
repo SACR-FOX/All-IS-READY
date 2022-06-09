@@ -1,11 +1,6 @@
 <template>
 	<view >
-		<u-navbar
-		           title="创建组织任务"
-		           @leftClick="leftClick"
-		          
-		       >
-		       </u-navbar>
+		
 			
 			   <view class="topBlock"></view>
 			   

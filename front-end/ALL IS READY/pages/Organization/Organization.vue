@@ -1,13 +1,7 @@
 <template>
 	<view>
 		
-		    <u-navbar
-		            title="我的组织"
-		            @leftClick="leftClick"
-
-					
-		        >
-		        </u-navbar>
+		   
 		
 		
 		<view class="radius">
@@ -183,11 +177,12 @@
 				})
 			},
 			scan(){
+				var that=this
 				uni.scanCode({
 					success: function (res) {
 						console.log('条码内容：' + res.result);
-						this.codeInfo=res.result
-						this.switchOrg()
+						that.codeInfo=res.result
+						that.switchOrg()
 					}
 				});
 			}
@@ -214,7 +209,7 @@
 	 top: 0rpx;left: 0rpx;
 }
 .icons{
-	margin-top: 18%;
+	margin-top: 13%;
 	height:140rpx;
 	display: flex;
 	flex-direction: row;

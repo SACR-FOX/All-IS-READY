@@ -1,13 +1,7 @@
 <template>
 	<view>
 		<view>
-		        <u-navbar
-		            title="创建话题"
-		            @rightClick="rightClick"
-		            :autoBack="true"
-					rightText="发布"
-		        >
-		        </u-navbar>
+		        
 			</view>
 		
 		<u-upload

@@ -1,23 +1,9 @@
 <template>
 	<view>
-		<view>
-		    <u-navbar
-		        title="课程表"
-		        @leftClick="rightClick()"
-		    >
-				<view
-				    class="u-nav-slot"
-				    slot="right">
-				    <u-icon
-				        name="../../static/add_icon.png"
-				        size="24"
-				        ></u-icon>
-				</view>
-		    </u-navbar>
-		</view>
+	
 		
 		<u-tabs :list="list1"
-			style="margin-top: 70rpx;"
+			style="margin-top: 10rpx;"
 			@click="change"
 			:current="today"
 			>
@@ -210,7 +196,7 @@
 					}
 				})
 			},
-			rightClick(){
+			leftClick(){
 				uni.navigateTo({
 					url:'./addCourse'
 				})
@@ -246,7 +232,7 @@
 			},
 		rightClick(){
 				uni.navigateTo({
-					url:"../index/index"
+					url:"./addCourse"
 				})
 			},
 		},

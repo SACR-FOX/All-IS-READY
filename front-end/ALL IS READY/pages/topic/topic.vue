@@ -1,11 +1,7 @@
 <template>
 	
 	<view class="back">
-		<u-navbar
-		    title="话题帖子"
-		    @rightClick="rightClick"
-		    :autoBack="true">
-		</u-navbar>
+	
 		
 		<view class="page">
 			<text class="title" @click="showToast()">{{Title}}</text>
@@ -316,6 +312,7 @@
 		display: flex;
 		align-items: center;
 		color: #95afc0;
+		margin-left:80rpx;
 	}
 	.topicSrc{
 		width: 400rpx;

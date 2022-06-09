@@ -1,11 +1,6 @@
 <template>
 	<view>
-		<u-navbar
-		           title="创建组织"
-		           @leftClick="leftClick"
-		     
-		       >
-		</u-navbar>
+		
 			    <view class="topBlock"></view>
 				<view style="display: flex;justify-content: center;">
 					<view class="bottomLayer">
