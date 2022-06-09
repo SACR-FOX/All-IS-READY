@@ -66,7 +66,7 @@
 	  </view>
 	  
 	</view>
-		<view class="scan" style=" position: absolute;bottom: 80rpx; left: 36%; display: flex;flex-direction: column;justify-content: center;align-items: center;
+		<view class="scan" style=" position: absolute;bottom: 80rpx; left: 38%; display: flex;flex-direction: column;justify-content: center;align-items: center;
 		" @click="scan">
 			
 			<u-icon name="scan" size=120rpx></u-icon>
