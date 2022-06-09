@@ -1,13 +1,7 @@
 <template>
 	<view>
 		<view>
-		        <u-navbar
-		            title="发帖"
-		            @rightClick="rightClick"
-		            :autoBack="true"
-					rightText="发布"
-		        >
-		        </u-navbar>
+		       
 			</view>
 		
 		<view class="row">

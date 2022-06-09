@@ -1,24 +1,9 @@
 <template>
 	<view>
-		<view>
-		    <u-navbar
-		        title="课程表"
-		        @leftClick="leftClick()"
-				@rightClick="rightClick"
-		    >
-				<view
-				    class="u-nav-slot"
-				    slot="right">
-				    <u-icon
-				        name="../../static/add_icon.png"
-				        size="24"
-				        ></u-icon>
-				</view>
-		    </u-navbar>
-		</view>
+	
 		
 		<u-tabs :list="list1"
-			style="margin-top: 70rpx;"
+			style="margin-top: 10rpx;"
 			@click="change"
 			:current="today"
 			>

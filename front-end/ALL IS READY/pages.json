@@ -16,35 +16,18 @@
             "path" : "pages/todo_list/todo_list",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "待办事项",
                 "enablePullDownRefresh": false
             }
             
         }
         
-        ,{
-            "path" : "pages/text/text",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/todo_list/list_detial",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        
         ,{
             "path" : "pages/timer/timer",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "学习定时器",
                 "enablePullDownRefresh": false
             }
             
@@ -54,7 +37,7 @@
 			"path":"pages/classSchedule/classSchedule",
 			"style" :
 			{
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "课程表",
 			    "enablePullDownRefresh": false
 			}
 		},
@@ -62,7 +45,7 @@
 			"path":"pages/file/file",
 			"style" :
 			{
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "我的文件夹",
 			    "enablePullDownRefresh": false
 			}
 		},
@@ -70,7 +53,7 @@
 			"path":"pages/file/file_detial",
 			"style" :
 			{
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "文件预览",
 			    "enablePullDownRefresh": false
 			}
 		},
@@ -78,7 +61,7 @@
 			"path":"pages/leaderBoard/leaderBoard",
 			"style" :
 			{
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "学习排行榜",
 			    "enablePullDownRefresh": false
 			}
 		},
@@ -86,7 +69,7 @@
 			"path":"pages/community/community",
 			"style" :
 			{
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "课程社区",
 			    "enablePullDownRefresh": false
 			}
 		}
@@ -94,7 +77,7 @@
             "path" : "pages/topic/topic",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "主题帖子",
                 "enablePullDownRefresh": false
             }
             
@@ -103,7 +86,7 @@
             "path" : "pages/communityTopic/communityTopic",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "主题",
                 "enablePullDownRefresh": false
             }
             
@@ -113,7 +96,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }
@@ -122,7 +106,7 @@
             "path" : "pages/community/createCommunity",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "创建社区",
                 "enablePullDownRefresh": false
             }
             
@@ -131,7 +115,7 @@
             "path" : "pages/communityTopic/createTopic",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "创建话题",
                 "enablePullDownRefresh": false
             }
             
@@ -140,7 +124,7 @@
             "path" : "pages/topic/createTopicPost",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "话题帖子",
                 "enablePullDownRefresh": false
             }
             
@@ -149,7 +133,7 @@
             "path" : "pages/Organization/MyOrginization",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "组织信息",
                 "enablePullDownRefresh": false
             }
             
@@ -158,7 +142,7 @@
 		    "path" : "pages/Organization/Organization",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "",
+		        "navigationBarTitleText": "我的组织",
 		        "enablePullDownRefresh": false
 		    }
 		    
@@ -167,7 +151,7 @@
             "path" : "pages/Organization/TaskList",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "组织任务",
                 "enablePullDownRefresh": false
             }
             
@@ -176,7 +160,7 @@
             "path" : "pages/Organization/CreateTask",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "创建组织任务",
                 "enablePullDownRefresh": false
             }
             
@@ -185,7 +169,7 @@
             "path" : "pages/Organization/CreateOrg",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "创建组织",
                 "enablePullDownRefresh": false
             }
             
@@ -195,8 +179,9 @@
             "path" : "pages/Organization/TaskDetail",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "任务详情",
                 "enablePullDownRefresh": false
+				
             }
             
         }
@@ -205,7 +190,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
 
@@ -218,68 +204,14 @@
 			    "enablePullDownRefresh": false
 			}
 			
-        },
-		{
-		      "path" : "pages/Organization/Organization",
-		      "style" :                                                                                    
-		      {
-		          "navigationStyle": "custom" ,// 隐藏系统导航栏
-		    "navigationBarTextStyle": "black" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
-		      }
-		      
-		  }
-		        ,{
-		            "path" : "pages/Organization/MyOrginization",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/TaskList",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/CreateTask",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		        ,{
-		            "path" : "pages/Organization/CreateOrg",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
-		       
-		        ,{
-		            "path" : "pages/Organization/TaskDetail",
-		            "style" :                                                                                    
-		            {
-		                "navigationBarTitleText": "",
-		                "enablePullDownRefresh": false
-		            }
-		            
-		        }
+        }
+		
 		
         ,{
             "path" : "pages/classSchedule/addCourse",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "添加课程",
                 "enablePullDownRefresh": false
             }
             
@@ -290,6 +222,6 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
-		"navigationStyle":"custom"
+		"navigationStyle":"default"
 	}
 }

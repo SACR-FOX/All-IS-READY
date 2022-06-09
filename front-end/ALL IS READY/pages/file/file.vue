@@ -4,18 +4,11 @@
 		
 		
 		<view>
-		   <u-navbar
-		        title="文件资料管理"
-		        @rightClick="rightClick"
-		        :autoBack="true"
-		    >
+		
 				<view
 				    class="u-nav-slot"
 				    slot="right">
-				    <u-icon
-				        name="../../static/upload_icon.png"
-				        size="24"
-				        ></u-icon>
+
 				</view>
 		    </u-navbar>
 		</view>

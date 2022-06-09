@@ -1,13 +1,8 @@
 <template>
 	
 	<view>
-		<u-navbar
-		           title="组织任务"
-		           @leftClick="leftClick"
-		           
-		       >
-		       </u-navbar>
-			   <view class="topBlock"></view>
+		
+			  
 		<u-notice-bar :text="text1"></u-notice-bar>
 		<view class="img">
 			<image src="../../static/TaskList-img.png" style="height: 200rpx;margin-top: 20rpx;margin-bottom: 20rpx;"></image>

@@ -1,11 +1,7 @@
 <template>
 	<view>
 		
-		<u-navbar
-		    title="社区广场"
-		    @leftClick="rightClick()"
-		    >
-		</u-navbar>
+		
 		
 		<view style="margin-top: 80rpx;"></view>
 		

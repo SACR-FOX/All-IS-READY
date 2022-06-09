@@ -1,10 +1,6 @@
 <template>
 	<view>
-		<u-navbar
-		    title="话题广场"
-		    @rightClick="rightClick"
-			:autoBack="true">
-		</u-navbar>
+
 		
 		<view class="head">
 			<!-- <view class="bg-colore"></view> -->

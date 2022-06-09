@@ -1,11 +1,6 @@
 <template>
 	<view style="background-color: #F1F1F1">
-		<u-navbar
-		    title="学习排行榜"
-		    @rightClick="rightClick"
-		    :autoBack="true"
-		>
-		</u-navbar>
+		
 		
 		<view class="col" style=" margin-top: 150rpx;">
 			<view class="top" style="margin-left: 60rpx;">

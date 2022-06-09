@@ -1,13 +1,7 @@
 <template>
 	<view>
 		<view>
-		        <u-navbar
-		            title="创建社区"
-		            @rightClick="rightClick"
-		            :autoBack="true"
-					rightText="发布"
-		        >
-		        </u-navbar>
+		      
 				<!-- <u-icon name="checkbox-mark" size="19"></u-icon> -->
 			</view>
 		

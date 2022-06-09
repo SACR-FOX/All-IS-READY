@@ -1,11 +1,7 @@
  <template>
 	<view>
 		
-		<u-navbar
-		    title="计时器"
-		    @leftClick="rightClick()"
-		    :autoBack="true">
-		</u-navbar>
+		
 		<u-popup :show="show" closeOnClickOverlay @close="show = false">
 			<u-input v-model="tmpName"  placeholder="请输入项目名称"></u-input>
 			<view style="display: flex; align-items: center; justify-content: center; height: 200rpx;">
