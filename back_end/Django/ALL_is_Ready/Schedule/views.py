@@ -100,7 +100,7 @@ class GroupImport(APIView):  #按组织批量导入
 
     def post(self,request):
 
-        orgID = request.data.get("OrgID")
+        orgID = request.user['OrgID']
         UID = request.user['UID']
         try:
             sc=Schedule.objects.filter(Q(OrgID__exact=orgID),Q(UID__exact=-1))
