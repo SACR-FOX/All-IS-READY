@@ -106,9 +106,7 @@
 					},		
 					
 				}) 
-				uni.navigateTo({
-					url:"../Login/Login"
-				})
+				that.logout()
 			},
 			logout(){
 				uni.removeStorage({

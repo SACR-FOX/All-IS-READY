@@ -225,12 +225,18 @@
 				})
 			},
 			getToken(){
+				console.log('aaa')
 				return new Promise((req,rej)=>{
 					uni.getStorage({
 						key: 'userMsg',
 						success: function (res) {
+							console.log('aaaa')
 								req(res.data)
-							},
+								
+						},
+						fail(err) {
+								rej(err)
+							}
 					})
 				})
 			},
@@ -243,10 +249,11 @@
 						success: (res) => {
 							
 							req(res.data)
-							console.log('http://101.37.175.115/api/Schedule/byDay/?token=' + that.useMsg.token + '&Day=' + this.currentIndex)
+							//console.log('http://101.37.175.115/api/Schedule/byDay/?token=' + that.useMsg.token + '&Day=' + this.currentIndex)
 							// console.log(res.data.content[0].Tag)
 						},
 						fail: (err) => {
+							
 							rej(err)
 							// console.log(1)
 						},
@@ -261,14 +268,15 @@
 		},
 		async onLoad(){ 
 			
-			let dat = new Date
+			let dat = new Date()
 			this.today = dat.getDay()
-			
+			this.currentIndex = this.today
+			console.log(dat)
 			this.useMsg = await this.getToken()
 			console.log(this.useMsg.token)
 			
 			this.class = await this.getClass()
-			if(this.class.content[0]!=undefined){
+			if(this.class.content[0]!=null){
 				this.content = this.class.content
 				// console.log(this.content[0].Tag)
 			}else{
